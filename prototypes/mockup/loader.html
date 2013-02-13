@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <script type="text/javascript" src="lib/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="lib/underscore.js"></script>
+    <script type="text/javascript" src="lib/backbone.js"></script>
+    <script type="text/javascript" src="lib/backbone.paginator.js"></script>
+    <script type="text/javascript" src="lib/bootstrap.js"></script>
+
+    <script type="text/javascript" src="lib/spin.js"></script>
+    <script type="text/javascript" src="lib/jquery.spin.js"></script>
+    <script type="text/javascript" src="loader.js"></script>
+    <style type="text/css">
+    .spinner-holder {
+        width: 20px;
+        height: 20px;
+    }
+    .spinme {
+        /*top: 10px;*/
+        /*left: 10px;*/
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <hr>
+        <button class="search-btn btn">Search</button>
+    </div>
+    <div class="modal search-me fade hide">
+        <div class="modal-body">
+            <span>Searching...</span><i class="icon-globe"></i>
+            <div class="progress progress-striped active">
+                <div class="bar" style="width: 40%;"></div>
+            </div>
+            <div class="spinner-holder"><span class="spinme"></span></div>
+        </div>
+    </div>
+
+</body>
+</html>

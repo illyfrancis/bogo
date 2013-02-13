@@ -1,0 +1,42 @@
+What we have now
+
+JSF -> jQuery == messy, not maint..., cannot test easily, not modular,
+
+Framework, why?
+
+Requirements
+
+Eplored various JS MV* Framework
+
+- Backbone, Underscrore, jQuery
+
+why?
+
+Bootstrap - CSS, Components
+
+Require.js -> modular
+
+r.js -> Optimaztion
+
+-------------------------------------------
+Requirements?
+
+Multiple search criteria
+
+I had assumed a bunch of scenarios based on current app + some new idea from CO's Grid 2.0 concepts
+
+
+-------------------------------------------
+
+Design
+
+
+JavaScript on browser + WebService
+
+diff to JSF
+
+-------------------------------------------
+
+Looking at ways to unit test & with requirejs
+
+Jasmine

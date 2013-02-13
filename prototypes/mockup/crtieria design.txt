@@ -1,0 +1,58 @@
+
+SearchCriteria = [ReportCriteria...]
+
+AccountCriteria
+TransactionCriteria
+SecurityCriteria
+
+ReportCriteria
+- name
+- title
+- isApplied
+- restrictions
++ hydrate(json)
++ lyophilize: json
++ criteria: // search criteria
+
+Q:
+what is the name of the underlying member, the "actual" object that represents the selection etc.
+
+Q:
+do I really need it named? after all it's all available globally within the name scope anyway?
+
+AccountCriteria:
+> this.criteria = app.accounts
++ hydrate(json): 
+    apply the selection (json) to the underlying accounts
++ lyophilize: 
+    update the actual instance (this - which would be ReportCriteria) with the latest selections, nothing to return as such (app.accounts.selected.json() or pluck)
+
+SecurityCriteria:
++ hydrate(json):
+    // don't have preloaded list. what do we do?
+    // json has security key, use it to load security model
+
+    for each key
+        load security
+        add to app.securities collection
+
+    return app.securities
+
++ lyophilize:
+    set this with app.securities.json() or pluck
+
+
+TransactionCriteria:
+...
+
+=============================================================
+Preserve / lyophilize
+=============================================================
+
+when preserving, should it actually call save() on each model rather than just returning JSON?
+
+which sort of makes more sense. need further consideration...
+
+how about preserve() sets all internal state, then a separate call to save() on entire collection? 
+
+[sounds ok]

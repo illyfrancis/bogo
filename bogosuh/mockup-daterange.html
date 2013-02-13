@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <!-- 
+    <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.9.0.custom.css" />    
+-->
+    <style type="text/css">
+    </style>
+    <script type="text/javascript" src="lib/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="lib/jquery-ui-1.9.0.custom.js"></script>
+    <script type="text/javascript" src="lib/underscore.js"></script>
+    <script type="text/javascript" src="lib/backbone.js"></script>
+    <script type="text/javascript" src="lib/backbone.paginator.js"></script>
+    <script type="text/javascript" src="lib/bootstrap.js"></script>
+    <script type="text/javascript" src="lib/moment.js"></script>
+
+    <!-- templates -->
+    <script type="text/template" id="tpl-date-range-filter">
+            <form class="form-horizontal">
+                <div class="control-group">
+                    <div class="controls">
+                    <select style="width: auto">
+                        <option value="today">Today</option>
+                        <option value="yesterday">Yesterday</option>
+                        <option value="last7days">Last 7 Days</option>
+                        <option value="lastweek">Previous Week (Mon-Fri)</option>
+                        <option value="lastmonth">Previous Month</option>
+                        <option value="customdate">Custom Date</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="control-label">
+                        <label>From</label>
+                    </div>
+                    <div class="controls">
+                        <input class="fromDate span2" type="text">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">
+                        <label>To</label>
+                    </div>
+                    <div class="controls">
+                        <input class="toDate span2" type="text">
+                    </div>
+                </div>
+            </form>
+    </script>
+
+    <script type="text/javascript" src="mock-daterange.js"></script>
+</head>
+<body>
+    <div class="content-fluid date-filters">
+
+    </div>
+
+    <div class="filter-bar">
+        <div class="btn-group">
+            <a class="btn btn-info btn-mini">Account</a>
+            <a class="btn btn-info btn-mini"><i class="icon-remove-circle icon-white"></i></a>
+        </div>
+        <span><a class="btn btn-primary btn-mini add-filters"><i class="icon-filter icon-white"></i> Add Filter</a></span>
+    </div>    
+    <hr>
+    <div class="filter-bar">
+        <div class="btn-group">
+            <a class="btn btn-info btn-mini show-filter" rel="tooltip" title="Show filter values">Account</a>
+            <a class="btn btn-info btn-mini remove-filter" rel="tooltip" title="Remove this filter"><em>&times;</em></a>
+        </div>
+        <span><a class="btn btn-primary btn-mini add-filters"><i class="icon-filter icon-white"></i> Add Filter</a></span>
+    </div>  
+    <hr>
+
+    <div class="filter-bar">
+        <div class="btn-group">
+            <a class="btn btn-info btn-mini" rel="tooltip" data-original-title="Show filter values">Transaction Types</a>
+            <a class="btn btn-info btn-mini" rel="tooltip" data-original-title="Remove this filter"><em>&times;</em></a>
+        </div>
+        <div class="btn-group">
+            <a class="btn btn-info btn-mini" rel="tooltip" data-original-title="Show filter values">Account</a>
+            <a class="btn btn-info btn-mini" rel="tooltip" data-original-title="Remove this filter"><em>&times;</em></a>
+        </div>
+        <span><a class="btn btn-primary btn-mini add-filters"><i class="icon-filter icon-white"></i> Add Filter</a></span>
+    </div>
+</body>
+</html>

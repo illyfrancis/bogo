@@ -1,0 +1,79 @@
+===============================================================================
+About orders in which the models are loaded
+===============================================================================
+
+I think that:
+
+1. each search criteria should be loaded (e.g. AccountCriteria, SecurityCriteria etc)
+    Note: the service should provide a default response if one doesn't exist
+2. also report schema should be loaded
+    Note: again the service should provide a default response if one doesn't exist
+
+Question about underlying criteria themselves:-
+
+1. For account criteria when should "paginated accounts" be loaded?
+
+2. For security criteria when should "securities" be loaded?
+
+3. For transaction type criteria (or composite transaction criteira) when should the "types" be loaded?
+
+Commonalities for each question are:
+- The underlying criteria is needed to render each corresponding filter view.
+- the full set of "raw" underlying criteria (i.e. that is not part of ReportCriteria selection)
+  maybe needed to render but other times it is not feasible/desirable to do so.
+  (e.g. For accounts, we need the full set, For security we don't)
+- but for the cases where the full set is "not" needed (e.g. security filters) when the ReportCriteria is
+  loaded, only the "selected" security should be displayed in the filter
+
+Perhaps, one solution is to pre-load the full set of "row" underlying crtieria with "reset" much like the 
+example from (http://backbonejs.org/#FAQ-nested) as shown below.
+
+<script>
+  var Accounts = new Backbone.Collection;
+  Accounts.reset(<%= @accounts.to_json %>);
+  var Projects = new Backbone.Collection;
+  Projects.reset(<%= @projects.to_json(:collaborators => true) %>);
+</script>
+
+Then it's matter of associating those models with each criteria.
+
+
+===============================================================================
+About search criteria
+===============================================================================
+
+SearchCriteria is a collection of ReportCriteria.
+
+ReportCriteria has
+- name
+- isApplied
+- criteria object (which may be a collection or a model)
+
+Assuming JSON representation of SearchCriteria is like below:
+
+[{
+    name: "AccountCriteria",
+    isApplied: true,
+    criteria: {
+        accountNumbers: [
+            "001", "002", "003", "004"
+        ]
+    }
+}, {
+    name: "SecurityCriteria",
+    isApplied: false,   // I suppose there's no point in storing a criteria that is not applied?!?
+    criteria: {
+        securities: [
+            // this could be a single sec id (if it is unique across the board)
+            // or an object (e.g. {id:1223, type:ISIN})
+        ]
+    }
+}, {
+    name: "TransactionCriteria",
+    isApplied: true,
+    criteria: {
+        types: [
+            "RVP", "REC"
+        ]
+    }
+}]

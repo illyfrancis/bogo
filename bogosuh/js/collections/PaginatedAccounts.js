@@ -1,0 +1,117 @@
+var app = app || {};
+
+// collections
+app.collections = app.collections || {};
+
+app.collections.PaginatedAccounts = Backbone.Paginator.clientPager.extend({
+
+	model: app.models.Account,
+
+	paginator_core: {
+		// the type of the request (GET by default)
+		type: "GET",
+
+		// the type of reply (jsonp by default)
+		dataType: "json",
+
+		// the URL (or base URL) for the service
+		url: "http://localhost:9000/accounts"
+		// url: "/accounts"
+	},
+
+	paginator_ui: {
+		// the lowest page index your API allows to be accessed
+		firstPage: 1,
+
+		// which page should the paginator start from
+		// (also, the actual page the paginator is on)
+		currentPage: 1,
+
+		// how many items per page should be shown
+		perPage: 10,
+
+		// a default number of total pages to query in case the API or
+		// service you are using does not support providing the total
+		// number of pages for us.
+		// 10 as a default in case your service doesn't return the total
+		totalPages: 10
+	},
+	server_api: {
+		/*
+		// the query field in the request
+		'$filter': 'substringof(\'america\',Name)',
+
+		// number of items to return per request/page
+		'$top': function() {
+			return this.totalPages * this.perPage;
+		},
+
+		// how many results the request should skip ahead to
+		// customize as needed. For the Netflix API, skipping ahead based on
+		// page * number of results per page was necessary.
+		'$skip': function() {
+			return this.totalPages * this.perPage;
+		},
+
+		// field to sort by
+		'orderby': 'ReleaseYear',
+
+		// what format would you like to request results in?
+		'$format': 'json',
+
+		// custom parameters
+		'$inlinecount': 'allpages'
+		,
+		'$callback': '?'
+*/
+	},
+	parse: function(response) {
+		// Be sure to change this based on how your results
+		// are structured
+		//		var tags = response.d.results;
+		console.log("parse");
+		var tags = response.values;
+		return tags;
+		// return response;
+	},
+
+	// collection logic
+	selectAll: function(state) {
+		// debugger;
+		_.each(this.sortedAndFilteredModels, function(account) {
+			account.set({
+				selected: state
+			}, {
+				silent: true
+			});
+		});
+	},
+
+	hasSelection: function() {
+		return _.any(this.origModels, function(account) {
+			return account.get("selected");
+		}, this);
+	},
+
+	selectedAccountNumbers: function() {
+		var selected = [];
+		_.each(this.origModels, function(account) {
+			if (account.get("selected")) {
+				selected.push(account.get("number"));
+			}
+		});
+		return selected;
+	},
+
+	selectBy: function(accountNumbers) {
+		console.log("> paginated Account: selectBy" + JSON.stringify(accountNumbers) + "");
+
+		_.each(this.origModels, function(account) {
+			var index = _.indexOf(accountNumbers, account.get("number"));
+			if (index >= 0) {
+				account.set("selected", true);
+			}
+		});
+	}
+
+});

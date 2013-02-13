@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="accounts.css">
+</head>
+<body>
+	<div class="container">
+		<h1>Hello</h1>
+		<a class="btn btn-small"><i class="icon-star icon-white"></i></a>
+
+
+		<div class="account-filter form-inline">
+			<h3>Filters</h3>
+			<input class="account-name" type="text" placeholder="Account name"/>
+			<input class="account-number" type="text" placeholder="Account number"/>
+			<label class="checkbox">
+				<input class="account-selected" type="checkbox"/> Selected
+			</label>
+			<a class="btn btn-primary apply-filter"><i class="icon-filter icon-white"></i> Apply</a>
+		</div>
+
+		<div class="account-selection">
+			<h3>Multi-select</h3>
+			<a class="btn select-all"><i class="icon-ok"></i> All</a>
+			<a class="btn select-none"><i class="icon-remove"></i> None</a>
+		</div>
+
+		<div class="account-list">
+			<h3>Accounts</h3>
+			<div class="scrollable">
+				<table class="table">
+					<thead>
+						<tr><th>Number</th><th>Name</th><th>Selected</th></tr>
+					</thead>
+					<tbody>
+						<tr><td>1234</td><td>ABC Carpet</td><td><input type="checkbox"/></td></tr>
+						<tr><td>1234</td><td>ABC Carpet</td><td><input type="checkbox"/></td></tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="account-pagination">
+			<div class="pagination pagination-centered">
+				<ul>
+					<li><a href="#">Prev</a></li>
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><select class="span1">
+						<option>4</option>
+						<option>4</option>
+						<option selected="selected">6</option>
+						<option>4</option>
+						<option>4</option>
+					</select></li>
+					<li><a href="#">Next</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

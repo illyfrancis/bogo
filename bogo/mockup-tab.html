@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <script type="text/javascript" src="lib/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="lib/underscore.js"></script>
+    <script type="text/javascript" src="lib/backbone.js"></script>
+    <script type="text/javascript" src="lib/backbone.paginator.js"></script>
+    <script type="text/javascript" src="lib/bootstrap.js"></script>
+
+</head>
+<body>
+    <div class="hero-unit">
+        <h1>Tab</h1>
+        <div>
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+                <li><a href="#profile" data-toggle="tab">Profile</a></li>
+                <li><a href="#messages" data-toggle="tab">Messages</a></li>
+                <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#foo" data-toggle="tab">Foo foo</a></li>
+                        <li><a href="#bar" data-toggle="tab">Bar bar</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="home">
+                <p style="height:300px">Home</p>
+            </div>
+            <div class="tab-pane fade" id="profile">profile</div>
+            <div class="tab-pane fade" id="messages">messages</div>
+            <div class="tab-pane fade" id="settings">settings</div>
+            <div class="tab-pane fade" id="foo">Foo foo foo</div>
+            <div class="tab-pane fade" id="bar">bar bar bar ...</div>
+        </div>
+    </div>
+</body>
+</html>

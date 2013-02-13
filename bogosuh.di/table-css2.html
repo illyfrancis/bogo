@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <script type="text/javascript" src="lib/jquery-1.8.2.js"></script>
+  <script type="text/javascript" src="lib/underscore.js"></script>
+  <script type="text/javascript" src="lib/backbone.js"></script>
+  <script type="text/javascript" src="lib/backbone.paginator.js"></script>
+  <script type="text/javascript" src="lib/bootstrap.js"></script>
+
+  <style type="text/css">
+  .cash-table {
+    table-layout: fixed;
+  }
+  .cash-table-wrapper {
+    height: 232px;
+    overflow-y: auto;
+    overflow-x: auto;
+    /*zoom: 1;*/
+  }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="foo">
+      <table class="cash-table table table-condensed">
+        <thead>
+          <tr>
+            <th>account nubmer</th>
+            <th>transaction type</th>
+            <th>code</th>
+            <th>some bogus long header with stuff</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="cash-table-wrapper">
+      <table class="cash-table table table-condensed">
+        <tbody>
+          <tr><td>2345678901122434</td><td>2122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>2122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>2122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>2122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>2122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>2122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>2122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>2122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>2122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>2122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>2122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>2122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>2122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>2122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>2122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>2122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script type="text/javascript">
+
+    var adjust = function() {
+      var outer = $("div.foo").width();
+      var t1 = $("table:first");
+      t1.width(outer - 17);
+    };
+
+    $(function() {
+      adjust();
+      $(window).resize(function() {
+        adjust();
+      });
+    });
+    </script>
+
+</body>
+</html>
+

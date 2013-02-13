@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Accounts - Jasmine Spec Runner</title>
+
+  <link rel="shortcut icon" type="image/png" href="../lib/jasmine-1.2.0/jasmine_favicon.png">
+  <link rel="stylesheet" type="text/css" href="../lib/jasmine-1.2.0/jasmine.css">
+  <script type="text/javascript" src="../lib/jasmine-1.2.0/jasmine.js"></script>
+  <script type="text/javascript" src="../lib/jasmine-1.2.0/jasmine-html.js"></script>
+  <script type="text/javascript" src="../lib/sinon/sinon-1.4.2.js"></script>
+
+  <!-- include dependent js -->
+  <script type="text/javascript" src="../lib/jquery-1.8.2.js"></script>
+  <script type="text/javascript" src="../lib/underscore.js"></script>
+  <script type="text/javascript" src="../lib/backbone.js"></script>
+  <script type="text/javascript" src="../lib/backbone.paginator.js"></script>
+
+  <!-- include Sinon response fixtures 
+  <script type="text/javascript" src="spec/accounts.response.fixture.js"></script>
+  -->
+
+  <!-- include spec helpers -->
+  <script type="text/javascript" src="spec/spec.helpers.js"></script>
+
+  <!-- include spec files here... -->
+  <script type="text/javascript" src="spec/models/Account.spec.js"></script>
+  <script type="text/javascript" src="spec/models/AccountCriteria.spec.js"></script>
+  <script type="text/javascript" src="spec/collections/SearchCriteria.spec.js"></script>
+
+  <!-- include source files here... -->
+  <script type="text/javascript" src="../js/models/Account.js"></script>
+  <script type="text/javascript" src="../js/models/ReportCriteria.js"></script>
+  <script type="text/javascript" src="../js/models/AccountCriteria.js"></script>
+  <script type="text/javascript" src="../js/models/SecurityCriteria.js"></script>
+  <script type="text/javascript" src="../js/collections/PaginatedAccounts.js"></script>
+  <script type="text/javascript" src="../js/collections/SearchCriteria.js"></script>
+
+  <script type="text/javascript">
+    (function() {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var htmlReporter = new jasmine.HtmlReporter();
+
+      jasmineEnv.addReporter(htmlReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return htmlReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+      }
+
+    })();
+  </script>
+
+</head>
+
+<body>
+</body>
+</html>

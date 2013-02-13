@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+	<script type="text/javascript" src="../lib/jquery-1.8.2.js"></script>
+	<script type="text/javascript" src="../lib/underscore.js"></script>
+	<script type="text/javascript" src="../lib/backbone.js"></script>
+
+	<!-- bootstrap -->
+	<script type="text/javascript" src="../lib/bootstrap.js"></script>
+</head>
+<body>
+<div id="my-modal" class="modal hide fade">
+  <div class="modal-header">
+    <a href="#" class="close">&times;</a>
+    <h3>Modal Heading</h3>
+  </div>
+    
+  <div class="modal-body">
+    <p style="height:150px">Modal body</p>
+  </div>
+    
+  <div class="modal-footer">
+    <a href="#" data-dismiss="modal" class="btn primary">Primary</a>
+    <a href="#" class="btn secondary">Secondary</a>
+  </div>
+</div>
+
+<a class="btn" data-toggle="modal" href="#my-modal" data-backdrop="static" >Launch Modal</a>
+
+<button class="btn" id="foo">Open</button>
+
+<div class="hide">
+<div class="bbh-tab">
+    <div>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+        <li><a href="#profile" data-toggle="tab">Profile</a></li>
+        <li><a href="#messages" data-toggle="tab">Messages</a></li>
+        <li><a href="#settings" data-toggle="tab">Settings</a></li>
+        <li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown<b class="caret"></b></a>
+		    <ul class="dropdown-menu">
+		        <li><a href="#foo" data-toggle="tab">Foo foo</a></li>
+		        <li><a href="#bar" data-toggle="tab">Bar bar</a></li>
+		    </ul>
+		</li>
+      </ul>
+    </div>
+    <div class="tab-content">
+      <div class="tab-pane fade active in" id="home">
+      	<p style="height:300px">Home</p>
+      </div>
+      <div class="tab-pane fade" id="profile">profile</div>
+      <div class="tab-pane fade" id="messages">messages</div>
+      <div class="tab-pane fade" id="settings">settings</div>
+      <div class="tab-pane fade" id="foo">Foo foo foo</div>
+      <div class="tab-pane fade" id="bar">bar bar bar ...</div>
+    </div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+// define console for IE8
+if (window.console === undefined) {
+	window.console = {};
+	window.console.log = function(msg) { alert(msg); };
+}
+
+
+$(function() {
+
+//$('#myTab a:last').tab('show');
+/*
+$('#my-modal').modal({
+    show: false,
+    keyboard: true
+});
+
+$('#my-modal').on('hidden', function() {
+    window.alert('hidden event fired!');
+});
+*/
+
+var MainView = Backbone.View.extend({
+    el: $("#foo"),
+    initialize: function() {
+        this.modalView = this.options.modalView;
+    },
+    events: {
+        "click": "render"
+    },
+    render: function() {
+        this.modalView.show();
+    }
+});
+
+var TabView = Backbone.View.extend({
+    el: ".bbh-tab",
+    /*
+    */
+    events: {
+    	"show": "showFoo",
+    	"shown a": "shownFoo"
+    },
+    showFoo: function() {
+    	console.log("show tab");
+    },
+    shownFoo: function() {
+    	console.log("shown tab");	
+    },
+    render: function() {
+    	// this.delegateEvents();
+        return this;
+    }
+});
+
+var MyModal = Backbone.View.extend({
+    el: $("#my-modal"),
+    initialize: function() {
+        this.tabView = new TabView();
+        this.$el.find(".modal-body").append(this.tabView.render().$el);
+    },
+    events: {
+        // backbone view respond to bootstrap components!
+/*
+        "show": "showFoo",
+        "hide": "hideFoo",
+        "shown": "shownFoo",
+        */
+        "hidden": "hiddenFoo"
+    },
+    hiddenFoo: function() {
+        alert("hidden");
+    },
+    showFoo: function() {
+        alert("show");
+    },
+    hideFoo: function() {
+        alert("hide");
+    },
+    shownFoo: function() {
+        alert("shown");
+    },
+    show: function() {
+        this.$el.modal();
+    }
+});
+var myModal = new MyModal();
+var view = new MainView({
+    modalView: myModal
+});
+/*
+
+debugger;
+
+var tab = new TabView();
+tab.render();
+$("body").append(tab.$el);
+//$('a[data-toggle="tab"]').on('shown', function(e) {
+tab.$el.find("a[data-toggle='tab']").on("shown", function() {
+	console.log("here");
+});
+debugger;
+*/
+
+    $(".bbh-tab").find("a:first").tab("show");
+
+});
+</script>
+</body>
+</html>

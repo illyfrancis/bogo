@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <script type="text/javascript" src="lib/jquery-1.8.2.js"></script>
+  <script type="text/javascript" src="lib/underscore.js"></script>
+  <script type="text/javascript" src="lib/backbone.js"></script>
+  <script type="text/javascript" src="lib/backbone.paginator.js"></script>
+  <script type="text/javascript" src="lib/bootstrap.js"></script>
+
+  <style type="text/css">
+  .cash-table {
+    table-layout: fixed;
+  }
+  .cash-table-wrapper {
+    height: 232px;
+    overflow-y: auto;
+    /*overflow-x: auto;*/
+    /*zoom: 1;*/
+  }
+  </style>
+</head>
+<body>
+  <div>
+    <div>
+      <table class="cash-table table table-condensed">
+        <thead>
+          <tr>
+            <th>a</th>
+            <th>b</th>
+            <th>c</th>
+            <th>d</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="cash-table-wrapper">
+      <table class="table table-condensed">
+        <tbody>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div>
+    <div>
+      <table class="cash-table table table-condensed">
+        <thead>
+          <tr>
+            <th>a</th>
+            <th>b</th>
+            <th>c</th>
+            <th>d</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="cash-table-wrapper">
+      <table class="table table-condensed">
+        <tbody>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+          <tr><td>2345678901122434</td><td>1212121212122</td><td>3324dfs32sd df3w3</td><td>4aaq QWcdsd 33</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  // define console for IE8
+  if (window.console === undefined) {
+    window.console = {};
+    window.console.log = function(e) { /*alert(e);*/ };
+  }
+
+  $(function() {
+
+    return;
+
+    var h1 = $("thead:first th:first");
+    var b1 = $("tbody:first");
+
+    var cells = b1.find("tr:first td");
+    var cell = cells.first();
+    var rowWidth = b1.find("tr:first").width();
+    var width, perc;
+
+    console.log("row width : " + rowWidth);
+
+    do {
+      width = cell.width();
+      perc = (width/rowWidth) * 100.0;
+      console.log("> " + cell.text() + " - width : "
+        + width + " - perc : " + perc);
+
+      // cell.width(perc + "%");
+      cell.width(width);
+      // debugger;
+      if (h1.next().length > 0) {
+        h1.width(width);
+      }
+
+      cell = cell.next();
+      h1 = h1.next();
+    } while (cell.length > 0);
+
+    $(window).resize(function() {
+      var h1 = $("thead:first th:first");
+      var b1 = $("tbody:first");
+
+      var cells = b1.find("tr:first td");
+      var cell = cells.first();
+      var rowWidth = b1.find("tr:first").width();
+      var width, perc;
+
+      do {
+        width = cell.width();
+        perc = (width/rowWidth) * 100.0;
+        console.log("> " + cell.text() + " - width : "
+          + width + " - perc : " + perc);
+
+        // cell.width(perc + "%");
+        cell.width(width);
+        // debugger;
+        if (h1.next().length > 0) {
+          h1.width(width);
+        }
+
+        cell = cell.next();
+        h1 = h1.next();
+      } while (cell.length > 0);
+
+    });
+
+  });
+
+  </script>
+
+</body>
+</html>
+

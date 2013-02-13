@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <script type="text/javascript" src="lib/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="lib/underscore.js"></script>
+    <script type="text/javascript" src="lib/backbone.js"></script>
+    <script type="text/javascript" src="lib/backbone.paginator.js"></script>
+    <script type="text/javascript" src="lib/bootstrap.js"></script>
+    <script type="text/javascript" src="filter-popup.js"></script>
+</head>
+<body>
+    <div class="container">
+        <section>
+            <div class="row">
+                <div class="well span4">
+                    <div class="filter-type">
+                        <select class="span4">
+                            <option selected="selected" value="account">Account</option>
+                            <option value="security">Security</option>
+                            <option disabled="disabled" value="transaction">Transaction Type</option>
+                            <option value="transaction date">Transaction Date</option>
+                        </select>
+                    </div>
+                    <div class="filter-content">
+                        <div>
+                            <h1>Default section</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="span4">
+                    <p>Another content in a well</p>
+                </div>
+            </div>
+        </section>
+        <div class="modal search-criteria">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Search Filters Heading</h3>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <div class="filter-type">
+                        <select class="span3">
+                            <option selected="selected" value="account">Account</option>
+                            <option value="security">Security</option>
+                            <option disabled="disabled" value="transaction">Transaction Type</option>
+                            <option value="transaction date">Transaction Date</option>
+                        </select>
+                    </div>
+                    <div class="filter-content">
+                        <div class="">
+                            <h1>Default section</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn filter"><i class="icon-filter"></i> <span>Remove Filter</span></a>
+                <button class="btn btn-primary"><i class="icon-search icon-white"></i> Search</button>
+            </div>
+        </div>    
+    </div>
+
+</body>
+</html>

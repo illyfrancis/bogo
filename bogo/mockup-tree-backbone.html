@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <script type="text/javascript" src="lib/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="lib/underscore.js"></script>
+    <script type="text/javascript" src="lib/backbone.js"></script>
+    <script type="text/javascript" src="lib/backbone.paginator.js"></script>
+    <script type="text/javascript" src="lib/bootstrap.js"></script>
+    <style type="text/css">
+    .caret-right {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        vertical-align: top;
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+        border-left: 4px solid #000000;
+        content: "";
+    }
+
+    li label {
+        display: inline-block;
+    }
+
+    li span {
+        margin-right: 6px;
+        vertical-align: middle;
+    }
+
+    li span.caret-right, li span.caret, li span.caron {
+        vertical-align: middle;
+    }
+
+    </style>
+    <script type="text/javascript">
+    if (window.console === undefined) {
+        window.console = {};
+        window.console.log = function(e) { /*alert(e);*/ };
+    }
+    </script>
+</head>
+<body>
+    <div class="navbar navbar-static-top">
+        <div class="navbar-inner">
+            <a class="brand">Bogo</a>
+            <div class="pull-right">
+                <div class="btn-group">
+                    <button type="button" class="btn add-columns"><i class="icon-time"></i></button>
+                    <button type="button" class="btn remove-columns"><i class="icon-download-alt"></i></button>
+                    <button type="button" class="btn reset-columns"><i class="icon-edit"></i></button>
+                </div>
+                <button class="btn report-search"><i class="icon-search"></i> Search</button>
+                <button class="btn report-settings"><i class="icon-wrench"></i> Settings</button>
+
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="modal">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Search Filter</h3>
+            </div>
+            <div class="modal-body">
+                <select>
+                    <option>Account</option>
+                    <option>Security</option>
+                    <option selected>Transaction</option>
+                </select>
+                <label><h4>Transaction Type</h4></label>
+                <div class="tree"></div>
+            </div>
+
+            <div class="modal-footer">
+                <a href="#" class="btn"><i class="icon-refresh"></i> Reset to default</a>
+                <a href="#" class="btn btn-primary"><i class="icon-search icon-white"></i> Search</a>
+            </div>
+        </div>
+    </div>                
+
+
+    <script type="text/javascript">
+
+        var Item = Backbone.Model.extend({
+
+            defaults: {
+                name: "default name",
+                selected: false
+            },
+
+            initialize: function() {
+                // replace the list with collection.
+                this.subItems = new ItemCollection(this.get("list"));
+                // set itself as parent on the subItems.
+                this.subItems.invoke("setParent", this);
+            },
+
+            toggle: function() {
+                this.set("selected", !this.get("selected"));
+            },
+
+            setParent: function(parent) {
+                if (parent) {
+                    this.parent = parent;
+                }
+            },
+
+            isLeaf: function() {
+                return this.subItems.length === 0;
+            },
+
+            parents: function(ancestor) {
+                if (ancestor === undefined) {
+                    ancestor = [];
+                }
+
+                if (this.parent) {
+                    ancestor.push(this.parent);
+                    this.parent.parents(ancestor);
+                }
+                return ancestor;
+            },
+
+            // TODO - rename children to decendents (it is all children & its children etc)
+            descendants: function(offspring) {
+                if (offspring === undefined) {
+                    offspring = [];
+                }
+
+                this.subItems.each(function(item) {
+                    offspring.push(item);
+                    item.descendants(offspring);
+                });
+                return offspring;
+            },
+
+            allDescendantsSelected: function() {
+                return _.all(this.descendants(), function(item) {
+                    return item.get("selected");
+                });
+            },
+
+            anyDescendantsSelected: function() {
+                return _.any(this.descendants(), function(item) {
+                    return item.get("selected");
+                });
+            }
+
+        });
+
+        var ItemCollection = Backbone.Collection.extend({
+            model: Item,
+
+            leaves: function(nodes) {
+                if (nodes === undefined) {
+                    nodes = [];
+                }
+
+                this.each(function(item) {
+                    if (item.isLeaf()) {
+                        nodes.push(item);
+                    } else {
+                        item.subItems.leaves(nodes);
+                    }
+                });
+                return nodes;
+            }
+        });
+
+        // Item model
+        var ItemView = Backbone.View.extend({
+
+            tagName: "li",
+
+            // template: _.template("<span class='caron'></span><i class='icon-plus-sign'></i><label class='checkbox'><input type='checkbox'><%= name %></label>"),
+            template: _.template("<span><i class='icon-folder-close'></i></span><label class='checkbox'><input type='checkbox'><%= name %></label>"),
+
+            events: {
+                "click input:checkbox": "onClick",
+                "click span": "foo"
+            },
+
+            foo: function() {
+                if (!this.model.isLeaf()) {
+                    this.$el.next("ul:first").toggle("hide");
+
+                    var $e = this.$el.find("span i");
+                    if ($e.data("expanded")) {
+                        $e.removeClass().addClass("icon-folder-close").data("expanded", false);
+                    } else {
+                        $e.removeClass().addClass("icon-folder-open").data("expanded", true);
+                    }
+                }
+            },
+
+            initialize: function() {
+                this.model.on("change:selected", this.onSelfChange, this);
+                this.model.subItems.on("childChange", this.onChildrenChange, this);
+            },
+
+            notifyParent: function() {
+                this.model.trigger("childChange");
+            },
+
+            onClick: function(e) {
+                console.log("onClick : " + this.model.get("name"));
+
+                this.model.toggle();
+                // for events to trickle up.
+                this.notifyParent();
+            },
+
+            appendTo: function(parent) {
+                // render self
+                this.$el.html(this.template(this.model.toJSON()));
+                this.setCheckbox(this.model.get("selected"), false);
+                parent.$el.append(this.el);
+
+                // node icon.
+                if (this.model.isLeaf()) {
+                    this.$el.find("span i").removeClass().addClass("icon-file");
+                }
+
+                // render subitems
+                if (!this.model.isLeaf()) {
+                    var subListView = new ListView({collection: this.model.subItems});
+                    parent.$el.append(subListView.render().el);
+                    // collapse when first appended
+                    subListView.collapse();
+                }
+            },
+
+            onSelfChange: function() {
+                var selected = this.model.get("selected");
+                this.setCheckbox(selected, false);
+                console.log("i am [" + this.model.get("name") + "] onSelfChange : " + selected);
+
+                // update self & descendants to the new selected state, the change event in descendants will cause themselves to redraw.
+                _.each(this.model.descendants(), function(item) {
+                    item.set({selected: selected});
+                });
+            },
+
+            onChildrenChange: function() {
+                console.log("i am [" + this.model.get("name") + "] onChildrenChange : ");
+
+                var selected, indeterminate;
+
+                if (this.model.allDescendantsSelected()) {
+                    selected = true;
+                    indeterminate = false;
+                } else if (this.model.anyDescendantsSelected()) {
+                    selected = false;
+                    indeterminate = true;
+                } else {
+                    selected = false;
+                    indeterminate = false;
+                }
+
+                this.setCheckbox(selected, indeterminate);
+                this.model.set({selected: selected}, {silent: true});
+                this.notifyParent();
+            },
+
+            setCheckbox: function(selected, indeterminate) {
+                this.$el.find("input:checkbox").prop("checked", selected).prop("indeterminate", indeterminate);
+            }
+
+        });
+
+        var ListView = Backbone.View.extend({
+
+            tagName: "ul",
+
+            className: "nav nav-list",
+
+            render: function() {
+                // the collection is ItemCollection, which is children of the model
+                this.collection.each(this.appendItem, this);
+                return this;
+            },
+
+            appendItem: function(item) {
+                var itemView = new ItemView({model:item});
+                itemView.appendTo(this);
+            },
+
+            refresh: function() {
+                // trigger child change event to force redraw on parents.
+                _.each(this.collection.leaves(), function(item) {
+                    item.trigger("childChange");
+                });
+            },
+
+            collapse: function() {
+                this.$el.addClass("hide");
+            }
+        });
+
+        var itemCollection;
+        $(function() {
+            itemCollection = new ItemCollection();
+            itemCollection.reset([{
+                name: "TRADE",
+                list: [{
+                    name: "RECEIVE",
+                    list: [
+                        {name: "RECEIVE VS PAYMENT (RVP)", value: "RVP", selected: true},
+                        {name: "RECEIVE FREE (REC)", value: "REC", selected: true},
+                        {name: "PURCHASE (PUR)", value: "PUR", selected: true},
+                        {name: "MUTUAL FUND PURCHASE (MTP)", value: "MTP", selected: true},
+                        {name: "RETURN DELIVER (RTD)", value: "RTD", selected: true},
+                        {name: "RECEIVE NO S F (RCW)", value: "RCW", selected: true},
+                        {name: "SELL REVERSAL (SRV)", value: "SRV", selected: true}
+                    ]},{
+                    name: "DELIVER",
+                    list: [
+                        {name: "DELIVER VS PAYMENT (DVP)", value: "DVP", selected: true},
+                        {name: "DELIVER FREE (DEL)", value: "DEL", selected: true},
+                        {name: "SELL (SEL)", value: "SEL", selected: true},
+                        {name: "MUTUAL FUND REDEMPTION (MTR)", value: "MTR", selected: true},
+                        {name: "RETURN RECEIVE (RTR)", value: "RTR", selected: true},
+                        {name: "DELIVER NO S F (DLW)", value: "DLW", selected: true},
+                        {name: "DELIVER VS PAYMENT NO S F (DVW)", value: "DVW", selected: true},
+                        {name: "RETURN DELIVER NO S F (RWD)", value: "RWD", selected: true},
+                        {name: "PURCHASE REVERSAL (PRV)", value: "PRV", selected: true}
+                    ]}
+                ]},{
+                name: "CORPORATE ACTIONS",
+                list: [
+                    {name: "CONVERSION (CON)", value: "CON", selected: false},
+                    {name: "DIVIDEND REINVESTMENT (DRV)", value: "DRV", selected: false},
+                    {name: "REV DIVIDEND REINVESTMENT (DRR)", value: "DRR", selected: false},
+                    {name: "EXCHANGE (EXC)", value: "EXC", selected: false},
+                    {name: "LIQUIDATION (LIQ)", value: "LIQ", selected: false},
+                    {name: "MERGER (MER)", value: "MER", selected: false},
+                    {name: "NAME CHANGE (NAM)", value: "NAM", selected: false},
+                    {name: "REDEMPTION (RED)", value: "RED", selected: false},
+                    {name: "RIGHTS (RTS)", value: "RTS", selected: false},
+                    {name: "STOCK DIVIDEND (SDV)", value: "SDV", selected: false},
+                    {name: "SUBSCRIPTION (SUB)", value: "SUB", selected: false},
+                    {name: "TENDER (TEN)", value: "TEN", selected: false}
+                ]},{   
+                name: "MISCELLANEOUS",
+                list: [
+                    {name: "ADJUST (ADJ)", value: "ADJ", selected: false},
+                    {name: "EQUALIZATION (EQL)", value: "EQL", selected: false},
+                    {name: "FROZEN CALL BOND (FCB)", value: "FCB", selected: false},
+                    {name: "MISCELLANEOUS (LPA)", value: "LPA", selected: false}
+                ]
+            }]);
+
+            var listView = new ListView({collection:itemCollection});
+            $(".tree").append(listView.render().el);
+            listView.refresh();
+
+        });
+    </script>
+</body>
+</html>

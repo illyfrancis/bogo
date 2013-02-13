@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Search Account</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="search.css" rel="stylesheet">
+
+    <script src="lib/jquery-1.8.2.js"></script>
+    <script src="lib/underscore.js"></script>
+    <script src="lib/backbone.js"></script>
+    <script src="lib/backbone.paginator.js"></script>
+
+    <script type="text/template" id="template-account">
+        <td><%= number%></td><td><%= name%></td><td><input class="toggle" type="checkbox" <%= selected ? 'checked="checked"' : '' %> /></td>
+    </script>
+    
+    <script src="accounts.js"></script>
+    <script src="accounts-view.js"></script>
+    <script src="response.js"></script>
+</head>
+
+<body>
+    <div class="container search-accounts">
+        <h1>Search by Accounts</h1>
+        <div class="filter form-inline">
+            <h3>Filters</h3>
+            <input class="span2 account-name" type="text" placeholder="number">
+            <input class="span2 account-number" type="text" placeholder="name">
+            <label class="checkbox">
+                <input class="account-selected" type="checkbox"> Selected
+            </label>
+            <a class="btn apply">Apply</a>
+        </div>
+
+        <div class="select-accounts">
+            <h3>Select Accounts</h3>
+            <a class="btn all"><i class="icon-ok"></i> All</a>
+            <a class="btn none"><i class="icon-remove"></i> None</a>
+        </div>
+
+        <div class="account-list">
+            <h3>Accounts</h3>
+            <div class="scrollable">
+                <table class="table table-condensed table-hover table-striped">
+                    <thead>
+                        <tr><th>Number</th><th>Name</th><th>Selected</th></tr> 
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="accounts.css">
+	<script type="text/javascript" src="../lib/jquery-1.8.2.js"></script>
+	<script type="text/javascript" src="../lib/underscore.js"></script>
+	<script type="text/javascript" src="../lib/backbone.js"></script>
+	<script type="text/javascript" src="../lib/backbone.paginator.js"></script>
+
+	<!-- bootstrap -->
+	<script type="text/javascript" src="../lib/bootstrap.js"></script>
+
+	<!-- templates -->
+	<script type="text/template" id="tpl-account-row">
+		<td><%= number %></td><td><%= name %></td><td><input type="checkbox" <%= selected ? 'checked="checked"' : '' %>/></td>
+	</script>
+	<script type="text/template" id="tpl-account-paginator">
+		<div class="pagination pagination-centered">
+			<ul>
+				<li><a class="prev" href="#">Prev</a></li>
+				<li><a class="next" href="#">Next</a></li>
+			</ul>
+		</div>
+		<span>
+		currentPage:<%=currentPage%>, 
+		lastPage:<%=lastPage%>, 
+		next: <%=next%>,
+		previous:<%=previous%>, 
+		totalPages: <%=totalPages%>,
+		totalUnfilteredRecords:<%=totalUnfilteredRecords%>, 
+		startRecord: <%=startRecord%>,
+		</span>
+		<span>
+		<label>
+		Page 
+		<select class="span2 pageNumber">
+		<% var i; for (i=1; i <= totalPages; i++) { %>
+			<% if (currentPage === i) { %>
+				<option selected="selected"><%= i%></option>
+			<% } else { %>
+				<option><%= i%></option>
+			<% } %>
+		<% } %>
+		</select>
+		of <%= totalPages %>
+		</label>
+		</span>
+	</script>
+
+	<script type="text/javascript" src="js/models/Account.js"></script>
+	<script type="text/javascript" src="js/collections/PaginatedAccounts.js"></script>
+	<script type="text/javascript" src="js/views/AccountRow.js"></script>
+	<script type="text/javascript" src="js/views/AccountSearchFilter.js"></script>
+	<script type="text/javascript" src="js/views/AccountPaginator.js"></script>
+	<script type="text/javascript" src="js/views/AccountSearch.js"></script>
+
+	<script type="text/javascript" src="js/response.js"></script>
+	<script type="text/javascript" src="js/App.js"></script>
+</head>
+<body>
+	<div class="container account-search">
+
+		<div class="account-filter form-inline">
+			<h3>Filters</h3>
+			<input class="account-number" type="text" placeholder="Account number"/>
+			<input class="account-name" type="text" placeholder="Account name"/>
+			<div class="btn-group account-xxx" data-toggle="buttons-radio">
+				<button type="button" class="btn account-selection"><i class="icon-ok"></i></button>
+				<button type="button" class="btn account-none active"><i class="icon-remove"></i></button>
+			</div>
+			<a class="btn btn-primary apply-filter"><i class="icon-filter icon-white"></i> Apply</a>
+		</div>
+
+		<div class="account-selection">
+			<h3>Multi-select</h3>
+			<a class="btn select-all"><i class="icon-ok"></i> All</a>
+			<a class="btn select-none"><i class="icon-remove"></i> None</a>
+		</div>
+
+		<div class="account-list">
+			<h3>Accounts</h3>
+			<div class="scrollable">
+				<table class="table table-condensed table-hover table-striped">
+					<thead>
+						<tr><th>Number</th><th>Name</th><th>Selected</th></tr>
+					</thead>
+					<tbody>
+						<tr><td>1234</td><td>ABC Carpet</td><td><input type="checkbox"/></td></tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="account-pagination">
+		</div>
+	</div>
+</body>
+</html>

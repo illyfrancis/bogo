@@ -1,0 +1,52 @@
+=========================================
+ BogoApp
+=========================================
+
+=========================================
+ Views
+=========================================
+
++ FilterStatusBar
+    - has "Add Filter" button
+    - has filter status badges
++ FilterStatusBadge
++ SearchFilterPopup
++ SearchFilterTab
++ AccountFilter (a view for AccountCriteria)
++ SecurityFilter
+
+TransactionTypeFilter
+StatusFilter
+SomeSortOfDateFilter
+Report
+ReportRow
+ReportColumnHeader - has ReportColumn with which you can get to underlying ReportCriteria, then set up event handler with it.
+
+// need views to handle 
+
+=========================================
+ Models
+=========================================
+
++ ReportCriteria
++ AccountCriteria
++ SecurityCriteria
+
+TransactionTypeCriteria
+InstructionDateCriteria
+
+ReportColumn - has ReportCriteria's uid (unique id)
+
+=========================================
+ Collections
+=========================================
+
++ SearchCriteria : collection of various criteria
+
+ReportSchema - collection of ReportColumn(s), reponsible for data API (fetch, save etc)
+
+=========================================
+ Routers
+=========================================
+
+Nothing yet

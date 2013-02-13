@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <script type="text/javascript" src="lib/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="lib/underscore.js"></script>
+    <script type="text/javascript" src="lib/backbone.js"></script>
+    <script type="text/javascript" src="lib/backbone.paginator.js"></script>
+    <script type="text/javascript" src="lib/bootstrap.js"></script>
+    <script type="text/javascript" src="column-header.js"></script>
+    <style type="text/css">
+        .caret-right {
+          display: inline-block;
+          width: 0;
+          height: 0;
+          border-left: 4px solid #000000;
+          border-right: 0;
+          border-top: 4px solid transparent;
+          border-bottom: 4px solid transparent;
+        }
+        .caret-top {
+          display: inline-block;
+          width: 0;
+          height: 0;
+          vertical-align: top;
+          border-bottom: 4px solid #000000;
+          border-right: 4px solid transparent;
+          border-left: 4px solid transparent;
+          content: "";
+        }
+        .caret-both {
+          display: inline-block;
+          width: 0;
+          height: 0;
+          vertical-align: top;
+          border-top: 4px solid #000000;
+          border-bottom: 4px solid #000000;
+          border-right: 4px solid transparent;
+          border-left: 4px solid transparent;
+          content: "";
+        }
+
+
+        /*
+        .caret {
+          display: inline-block;
+          width: 0;
+          height: 0;
+          vertical-align: top;
+          border-top: 4px solid #000000;
+          border-right: 4px solid transparent;
+          border-left: 4px solid transparent;
+          content: "";
+        }
+        */
+
+        /*
+        Got it from http://tablesorter.com/docs/
+        The table structure is 
+        <table class='tablesorter' ...>
+            <thead>
+                <tr>
+                    <th class='header'>First</th>
+                    <th class='header headerSortUp'>First</th>
+                    <th class='header'>First</th>
+
+        */
+        table.tablesorter thead tr .header {
+            background-image: url(img/bg.gif);
+            background-repeat: no-repeat;
+            background-position: center right;
+            /*cursor: pointer;*/
+        }
+
+        table.tablesorter thead tr .headerSortUp {
+            background-image: url(img/asc.gif);
+        }
+
+        table.tablesorter thead tr .headerSortDown {
+            background-image: url(img/desc.gif);
+        }
+
+        table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+            /*background-color: #8DBDD8;*/
+        }
+
+        table i {
+            cursor: pointer;
+        }
+
+        table thead tr {
+            /*background-color: #08c;*/
+            background-color: #d4d4d4;
+        }
+
+        span.dummy {
+          display: inline-block;
+          width: 0;
+          height: 0;
+          vertical-align: top;
+          border-top: 4px solid #000000;
+          border-right: 4px solid transparent;
+          border-left: 4px solid transparent;
+          content: "";
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section>
+            <div class="row">
+                <div class="span12 well">
+                    <table class="table">
+                        <captuion><h4>Using images in span</h4></caption>
+                        <thead>
+                            <tr class="info">
+                                <th><i class="icon-filter"></i> Account Sort up<i class="icon-arrow-up pull-right"></i></th>
+                                <th><i class="icon-filter icon-white"></i> Account Sort down<i class="icon-chevron-down pull-right"></i></th>
+                                <th><i class="icon-filter"></i> Account Sort <i class="icon-arrow-down pull-right"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="info">
+                                <td>One</td>
+                                <td>Two</td>
+                                <td>Two</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <section id="test-table">
+            <div class="row">
+                <div class="span12 well">
+                    <table class="table tablesorter">
+                        <captuion><h4>Test Table with images</h4></caption>
+                        <thead>
+                            <tr>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="row">
+                <div class="span12 well">
+                    <table class="table tablesorter">
+                        <captuion><h4>Using images</h4></caption>
+                        <thead>
+                            <tr>
+                                <th class="header headerSortUp">Account Sort up 
+                                    <a><i class="icon-filter"></i></a></th>
+                                <th class="header headerSortDown">Account Sort down <i class="icon-filter"></i><span class="dummy pull-right"></span></th>
+                                <th class="header">Account Sort both <i class="icon-filter"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>One</td>
+                                <td>Two</td>
+                                <td>Two</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="row">
+                <div class="span12 well">
+                    <table class="table">
+                        <captuion><h4>Using border / caret</h4></caption>
+                        <thead>
+                            <tr>
+                                <th>Account Number <i class="icon-filter"></i><span class="caret pull-right"></span></th>
+                                <th>Account Number <i class="icon-filter"></i><span class="caret-top"></span></th>
+                                <th>Account Number <i class="icon-filter"></i><span class="caret-both"></span></th>
+                                <th>Account Name <button class="btn btn-small"><i class="icon-filter icon-white"></i></button><span class="caret-right"></span></th>
+                                <th>Security Id <i class="icon-filter icon-white"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>One</td>
+                                <td>One</td>
+                                <td>One</td>
+                                <td>Two</td>
+                                <td>Two</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>

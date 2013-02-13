@@ -1,0 +1,23 @@
+### Start Mongo ###
+
+- mongod.exe -dbpath ..\..\data\db
+- where \data\db is the database location
+
+### Start Mongo client ###
+
+- mongo.exe (connects to test by default) ???
+
+### Start Tomcat embedded ###
+
+- mvn tomcat7:run
+
+### Run Jasmine tests ###
+
+- http://localhost:9090/test/jasmine/ (before running optimizer)
+- or file:///D:/Repository/git/francis-trial/bogosuh.di/test/jasmine/index.html
+
+### Run r.js ###
+
+- node r.js -o build.js
+- where build.js is the build profile settings
+- I have a build directory /build

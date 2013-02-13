@@ -1,0 +1,89 @@
+===============================================================================
+Thoughts on criteria
+===============================================================================
+
+1.
+The relationship between ReportColumn and ReportCriteria is many-to-one.
+e.g. Both the AccountNumber and the AccountName ReportColumns are map to one AccountCriteria.
+
+But there could be many ReportColumns that may only be in one-to-one with ReportCriteira.
+e.g. ClientRefId would be mapped to one ClientCriteria (or maybe not)
+
+2.
+Based on statement above, the both ReportColumn and ReportCriteria cannot be folded into one and must be kept as a separate entity.
+
+3.
+Question is how to keep the relationship between the two, so that it can refer to each other when needed.
+
+One option is to have a string field (as I have now in ReportColumn.criteria) but is it enough?
+
+Work through uses cases to see if the design hold true whereby ColumnHeader view has ReportColumn
+
+ColumnHeader
++ ReportColumn
+
+ReportColumn
++ title
++ name (JSON)
++ criteriaName
+
+ReportCriteria
++ name
++ filters
++ sorts (name of sort field and its direction)
+
+Use case 1: user clicks on filter icon on a column header.
+Flow: The view (ColumnHeader) can determine which Filter view to show from criteriaName.
+
+Use case 2: user clicks on column header to sort.
+Flow: The view can update the sorts in ReportCriteria and submit a new search
+
+######## OR MAYBE IT SHOULDN'T ########
+
+Instead the sort order is with the ReportColumn and only relevant if the column is displayed.
+so it's the responsibility of ReportSchema to manage sorting, something like 
+
+    var column is a ReportColumn;
+    reportSchema.setSort(column, direction);
+    -> set the sort field in a column with "direction" and unset all other columns with ""
+
+    when removing a column (from ReportColumnSelector), also remove sort for that column
+    via column.removeSort();
+
+Search Use case:
+Need two things, (1) filters & sort and (2) display fields
+(1) For all "applied" filters get filter values & sort values, but each filter must be associated with a ReportColumn name.
+But how?
+
+(2) display fields can be gathered from ReportColumns (i.e. ReportSchema). If sorts aren't defined in Criteria use the first column and assign the sort as default.
+
+
+===============================================================================
+Thoughts on default sort order
+===============================================================================
+
+1.
+Use the first ReportColumn as the default sort field and asc
+
+
+===============================================================================
+Thoughts on session tracking
+===============================================================================
+
+1. how do you know if the user is authenticated? Do we just pass on userId in the request?
+
+or maybe the cookie values are passed in the header -> check jqeury ajax() usage
+
+> for post, use type: post, data: { ... }, processDate: false, contentType: application/json (or something along those lines)
+
+===============================================================================
+Thoughts on persisting filters
+===============================================================================
+
+Need to lyophilize & hydrate a model. 
+
+* Usecase for AccountCriteria (not including AccountGroup).
+
+AccountCriteria has criteria which is PaginatedAccounts.
+When a Criteria is persisted (or lyophilized) its isApplied state and selection state
+(check out how save works on nested models or model > collection > model)

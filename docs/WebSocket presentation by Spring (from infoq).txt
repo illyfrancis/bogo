@@ -1,0 +1,157 @@
+WebSocket presentation by Spring (from infoq)
+
+The problem
+    - some web apps need two-way communication /rapid updates
+    - ajax and comet
+    - too many connections
+    - too much overhead
+    - too great a burden on the client
+
+Kind of apps / usual suspects
+    - trading
+    - chat
+    - gaming
+    - collaboration
+    - visualization
+
+The Goal
+    - provide a mechanisom for browser-based application that need two-way communication with servers that does not rely on opening multiple HTTP connections (RFC 6455 The WebSocket protocol)
+
+The Approach
+    - Two way messaging over a single connection
+    - Layer on TCP
+    - Not HTTP but uses HTTP to bootstrap
+    - Extremely low-overhead
+
+The WebSocket HTTP Handshake
+    GET /chat HTTP/1.1
+    Host: server.example.com
+    Upgrade: websocket
+    Connection: Upgrade
+
+    HTTP/1.1 101 Switching Protocols
+    Upgrade: websocket
+    Connection: Upgrade
+
+Demo
+    bitcoinmonitor.com
+    vs
+    bitcoin-rt
+    so, websockets instead of long polling
+    d3.js instead of jquery ui
+    mongodb for persistence
+
+bitcoin-rt implementations
+    Node.js
+    Node.js + SockJS
+    Java + Tomcat native WebSocket API
+    Java + Atmosphere
+    Java + Vert.x
+
+Why still using long-polling instead of websockets?
+    e.g. Asana still uses long-polling
+    - lack of browser support
+    - according to ** Stat counter (website) 50%  uses IE (don't support websocket)
+    - in china over 90% uses IE
+
+HTTP Proxies
+    - content caching, internet connectivity, filtering
+    - can monitor or close connections, buffer unencrypted traffic
+    - designed for HTTP based document transfer (not for websocket)
+
+Proxy Issues (listed in infoQ articel)
+    - refer to link in the presentation
+
+Keeping connections aliave
+    - internet inherently unreliable
+    - both server and client can go away
+    - wireless connection may fade out
+
+A new set of challenges
+    Keep-alive (ping)
+    Hearbeat (I'm still here)
+    Message delivery guarantee
+    buffering
+
+Comet (is not websocket)
+    - event driven server push
+
+WebSocket protocol details
+    - TCP-based protocol
+    - HTTP used solely for upgrade request (status code 101)
+    - Bi-directional, full-duplex
+    - Data frames can be Text (UTF-8) or arbitrary Binary data
+
+Webs control frames
+    - Close frame
+        Terminates websocket connections
+    - Ping + Pong frame
+        serves as keepalive (ping followed by pong)
+        check whether the remote endpoint is still responsive
+        can be sent at any time
+        just pongs
+    - Extensions (not finalized)
+    - Sub-protocols,
+        IANA registry
+        http://www.iana.org/assignments/websocket/websocket.xml
+
+HTML5 WebSockets = W3C API + IETF protocol
+
+The WebSocket API
+    W3C candidate recommendation 20 Sep 2012
+    http://www.w3.org/TR/websockets
+    browser client-side API
+    binary data supported: blob or ArrayBuffer format
+    etc (refer to slides)
+
+
+** Non-Java websocket solutions
+
+Node.js
+    - websocket package
+    - Socket.IO
+    - SockJS
+
+More than just WebSockets
+    (fallback options provided by stuff like Socket.IO)
+    - XHR streaming
+    - XHR long polling
+    - Hidden iframe
+    - Flash socket
+    - Polling
+
+Socket.IO vs SockJS
+    Socket.IO more popular
+    SockJS focused on transports, horizontal scalability
+    (refer to slide)
+
+*** IN Java land 
+** JSR 356: Java API for WebSocket
+
+Tomcat
+    WebSocketServlet
+    Since 7.0.27
+
+    Tomcat demo (refer to slide/presntation)
+
+Jetty
+    Since Jetty 7.x (early adoption, complex)
+    Revised in Jetty 9
+    Builds on Java 7, messages not frames, annotations
+
+Glassfish
+    Since 3.1
+    Exposes frames, server side only
+Others
+    Atmosphere
+    jWebSocket
+    Netty
+    vert.x
+    Grizzly
+
+Client Side
+    AsyncHttpClient
+    Jetty
+    Netty
+    vert.x
+    Grizzly

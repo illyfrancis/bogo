@@ -1,0 +1,92 @@
+===============================================================================
+View manager?
+===============================================================================
+
+Should it be responsible for creation & disposal?
+
+Q: what are the list of views known?
+-------------------------------------------------------------------------------
+BogoApp
+  AppMenu
+
+FilterStatusBar
+  FilterStatusBadge
+
+SearchFilters (<- SearchFilterPopup)
+  SearchFilterSelector (<- SearchFilterType)
+
+  AccountFilter
+    AccountPaginator
+    AccountRow
+    AccountGroupFilter*
+
+  SecurityFilter*
+    SecurityLookup*
+
+  TransactionFilter*
+    TransactionType
+
+ReportSettings
+  ReportColumnSelector
+    ReportColumnItem
+
+
+SearchContent
+  Search Error?
+
+  SearchResult (<- SearchResult & ReportView)
+    NoReport ?
+    ReportColumnHeader
+    ReportRow (<- ResultRow)
+      ReportDetail
+
+// --- commands ---
+
+SearchCommand
+ExportCommand
+ScheduleCommand
+
+  OR
+
+SearchReport
+ExportRerpot
+ScheduleReport
+
+-------------------------------------------------------------------------------
+Q: of those which should be managed by ViewManager?
+-------------------------------------------------------------------------------
+All the first level views from above list.
+
+-------------------------------------------------------------------------------
+Q: what's the interface?
+-------------------------------------------------------------------------------
+ViewManager = {
+  views: [],
+  appMenu: function() {
+    var appMenu = this._find("appMenu");
+    if (appMenu not found) {
+      appMenu = new AppMenu({collection: app.data.searchCriteria});
+      this.views.push({"name": "appMenu", view: appMenu})
+    }
+    return appMenu;
+  },
+  _find: function(name) {
+    var found = _.find(this.views, function(view) {
+      return view.name === name;
+    });
+    if (found) {
+      found = found.view; // the view obj
+    }
+    return found;
+  }
+};
+
+app.view.viewManager = new ViewManager();
+
+// then to get a menu.
+var menu = app.view.viewManager.appMenu();
+
+
+-------------------------------------------------------------------------------
+Q: is it really a factory? not a manager?
+-------------------------------------------------------------------------------

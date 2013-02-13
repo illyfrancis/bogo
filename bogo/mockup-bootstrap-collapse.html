@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <script type="text/javascript" src="lib/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="lib/underscore.js"></script>
+    <script type="text/javascript" src="lib/backbone.js"></script>
+    <script type="text/javascript" src="lib/backbone.paginator.js"></script>
+    <script type="text/javascript" src="lib/bootstrap.js"></script>
+    <style type="text/css">
+    .filter-bar {
+        padding: 5px 20px;
+        margin: 5px 0;
+/*        background-color: #f5f5f5;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+*/    }
+    th .caret {
+        margin: 5px 0 0;
+    }
+    .aaa {
+        float: left;
+    }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-static-top">
+        <div class="navbar-inner">
+            <a class="brand">Bogo</a>
+            <div class="pull-right">
+                <div class="btn-group">
+                    <button type="button" class="btn add-columns"><i class="icon-time"></i></button>
+                    <button type="button" class="btn remove-columns"><i class="icon-download-alt"></i></button>
+                    <button type="button" class="btn reset-columns"><i class="icon-edit"></i></button>
+                </div>
+                <button class="btn report-search"><i class="icon-search"></i> Search</button>
+                <button class="btn report-settings"><i class="icon-wrench"></i> Settings</button>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="accordion" id="accordion2">
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                        Collapsible Group Item #1
+                    </a>
+                </div>
+                <div id="collapseOne" class="accordion-body collapse in">
+                    <div class="accordion-inner">
+                        Anim pariatur cliche...
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-group">
+                <div class="accordion-heading">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                        Collapsible Group Item #2
+                    </a>
+                </div>
+                <div id="collapseTwo" class="accordion-body collapse">
+                    <div class="accordion-inner">
+                        Anim pariatur cliche...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <ul id="top">
+            <li  class="accordion-group" data-toggle="collapse" data-parent="#top" href="#group1body">group one</li>
+            <ul id="group1body">
+                <li>one</li>
+                <li>two</li>
+            </ul>
+            <li  class="accordion-group" data-toggle="collapse" data-parent="#top" href="#group2body">group two</li>
+            <ul id="group2body">
+                <li>111</li>
+                <li>222</li>
+            </ul>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        $(function() {
+
+/*            var $li = $("li");
+            _.each($li, function(li) {
+
+                if ($(li).next().is("ul")) {
+                    $(li).click(function(e) {
+                        // e.preventDefault();
+                        $(this).next().toggle("hide");
+                        e.stopPropagation();
+                    });
+                }
+            })
+*/
+        });
+    </script>
+</body>
+</html>

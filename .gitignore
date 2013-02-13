@@ -46,4 +46,8 @@ Thumbs.db
 Desktop.ini
 
 
+####################################
+## Sublime project and workspace
+####################################
 
+*.sublime-*

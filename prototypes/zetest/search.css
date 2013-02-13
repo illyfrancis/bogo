@@ -1,0 +1,11 @@
+.scrollable {
+    height: 200px !important;
+    overflow: auto;
+}
+
+.filter {
+}
+
+.filter input[type=text] {
+//    display: block;
+}

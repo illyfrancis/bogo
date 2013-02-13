@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <style type="text/css">
+    .caron {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        vertical-align: top;
+        border-bottom: 4px solid #000000;
+        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
+        content: "";
+    }
+    </style>
+    <script type="text/javascript" src="lib/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="lib/underscore.js"></script>
+    <script type="text/javascript" src="lib/backbone.js"></script>
+    <script type="text/javascript" src="lib/backbone.paginator.js"></script>
+    <script type="text/javascript" src="lib/bootstrap.js"></script>
+
+    <!-- templates -->
+    <script type="text/template" id="tpl-report-filter-status-bar">
+        <span class="label label-info open-filters"><i class="icon-filter icon-white"></i> Add Filter <i class="icon-plus-sign icon-white"></i></span>        
+    </script>
+    <script type="text/template" id="tpl-report-filter-badge">
+        <span class="label"><%= title %> <a><i class="icon-remove-sign icon-white"></i></a></span>
+    </script>
+    <script type="text/template" id="tpl-search-criteria">
+        <div class="modal hide fade search-criteria">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Search Filters Heading</h3>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="filter-type">
+                        <select class="span3"></select>
+                    </div>
+                    <div class="filter-content">
+                        <div class="">
+                            <h1>Default section</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn toggle-filter"><i class="icon-filter"></i> <span>Filter</span></a>
+                <button class="btn btn-primary search-report"><i class="icon-search icon-white"></i> Search</button>
+            </div>
+        </div>    
+    </script>
+    <script type="text/template" id="tpl-search-criteria-tab">
+        <a href=".search-criteria-content" data-toggle="tab"><%= name %></a>
+    </script>
+    <script type="text/template" id="tpl-alert">
+        <div class="alert fade in">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <span><%= message %></span>
+        </div>
+    </script>
+
+    <!-- templates for account filter -->
+
+    <script type="text/template" id="tpl-account-row">
+        <td><%= number %></td><td><%= name %></td><td><input type="checkbox" <%= selected ? 'checked="checked"' : '' %>/></td>
+    </script>
+    <script type="text/template" id="tpl-account-paginator">
+        <div class="pagination pagination-centered">
+            <ul>
+                <li><a class="prev"><i class="icon-backward"></i></a></li>
+                <li><a class="next"><i class="icon-forward"></i></a></li>
+            </ul>
+        </div>
+        <span>
+            currentPage:<%=currentPage%>, 
+            lastPage:<%=lastPage%>, 
+            next: <%=next%>,
+            previous:<%=previous%>, 
+            totalPages: <%=totalPages%>,
+            totalUnfilteredRecords:<%=totalUnfilteredRecords%>, 
+            startRecord: <%=startRecord%>,
+        </span>
+        <span>
+            <label>Page 
+            <select class="span2 pageNumber">
+            <% var i; for (i=1; i <= totalPages; i++) { %>
+                <% if (currentPage === i) { %>
+                    <option selected="selected"><%= i%></option>
+                <% } else { %>
+                    <option><%= i%></option>
+                <% } %>
+            <% } %>
+            </select>
+            of <%= totalPages %>
+            </label>
+        </span>
+    </script>
+    <script type="text/template" id="tpl-account-search">
+        <div class="account-selection">
+            <span><strong>Select : </strong></span>
+            <a class="select-all">All</a> |
+            <a class="select-none">None</a>
+        </div>
+        <div class="account-filter form-inline">
+            <input class="account-number span2" type="text" placeholder="Account number"/>
+            <input class="account-name span2" type="text" placeholder="Account name"/>
+            <div class="btn-group account-xxx" data-toggle="buttons-radio">
+                <button type="button" class="btn account-selection"><i class="icon-ok"></i></button>
+                <button type="button" class="btn account-none active"><i class="icon-remove"></i></button>
+            </div>
+            <a class="btn btn-primary filter"><i class="icon-filter icon-white"></i> Apply</a>
+        </div>
+        <div class="account-list">
+            <div class="scrollable">
+                <table class="table table-condensed table-hover table-striped">
+                    <thead>
+                        <tr><th>Number</th><th>Name</th><th>Selected</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1234</td><td>ABC Carpet</td><td><input type="checkbox"/></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="account-pagination">
+        </div>
+    </script>
+
+    <!-- template for Report column selection -->
+
+    <script type="text/template" id="tpl-report-column-selector">
+        <div class="row">
+            <select class="report-column-available" multiple="multiple" size="8">
+            </select>
+            <div class="btn-group btn-group-vertical">
+                <button type="button" class="btn add-columns"><i class="icon-arrow-right"></i></button>
+                <button type="button" class="btn remove-columns"><i class="icon-arrow-left"></i></button>
+                <button type="button" class="btn reset-columns"><i class="icon-refresh"></i></button>
+            </div>
+            <select class="report-column-selected" multiple="multiple" size="8">
+            </select>
+            <div class="btn-group btn-group-vertical">
+                <button type="button" class="btn move-up"><i class="icon-arrow-up"></i></button>
+                <button type="button" class="btn move-down"><i class="icon-arrow-down"></i></button>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="tpl-report-column-item">
+        <%- title %>
+    </script>
+
+    <!-- template for Search Results -->
+    <script type="text/template" id="tpl-search-result">
+        <thead>
+            <tr class="info"></tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </script>
+
+    <!-- fake response etc -->
+    <script type="text/javascript" src="js/fake/response.js"></script>
+
+    <!-- models, collections, etc -->
+    <script type="text/javascript" src="js/models/Account.js"></script>
+    <script type="text/javascript" src="js/models/ReportCriteria.js"></script>
+    <script type="text/javascript" src="js/models/AccountCriteria.js"></script>
+    <script type="text/javascript" src="js/models/SecurityCriteria.js"></script>
+    <script type="text/javascript" src="js/models/ReportCriteria.js"></script>
+    <script type="text/javascript" src="js/models/ReportColumn.js"></script>
+    <script type="text/javascript" src="js/models/ReportItem.js"></script>
+    <script type="text/javascript" src="js/collections/SearchCriteria.js"></script>
+    <script type="text/javascript" src="js/collections/PaginatedAccounts.js"></script>
+    <script type="text/javascript" src="js/collections/ReportSchema.js"></script>
+    <script type="text/javascript" src="js/collections/Report.js"></script>
+    <script type="text/javascript" src="js/views/AccountFilter.js"></script>
+    <script type="text/javascript" src="js/views/SecurityFilter.js"></script>
+    <script type="text/javascript" src="js/views/SearchFilterType.js"></script>
+    <script type="text/javascript" src="js/views/SearchFilterPopup.js"></script>
+    <script type="text/javascript" src="js/views/FilterStatusBar.js"></script>
+    <script type="text/javascript" src="js/views/FilterStatusBadge.js"></script>
+    <script type="text/javascript" src="js/views/ReportColumnItem.js"></script>
+    <script type="text/javascript" src="js/views/ReportColumnSelector.js"></script>
+    <script type="text/javascript" src="js/views/AccountRow.js"></script>
+    <script type="text/javascript" src="js/views/AccountPaginator.js"></script>
+    <script type="text/javascript" src="js/views/ColumnHeader.js"></script>
+    <script type="text/javascript" src="js/views/ResultRow.js"></script>
+    <script type="text/javascript" src="js/views/SearchResult.js"></script>
+    <script type="text/javascript" src="js/views/ReportView.js"></script>
+
+    <script type="text/javascript" src="js/views/BogoAppMenu.js"></script>
+    <script type="text/javascript" src="js/views/BogoApp.js"></script>
+</head>
+<body>
+    <div id="report-app" class="container">
+        <div class="navbar navbar-static-top navbar-inverse">
+            <div class="navbar-inner">
+                <a class="brand">Bogo</a>
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-inverse report-settings"><i class="icon-cog icon-white"></i> Settings</button>
+                </div>
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-inverse report-search"><i class="icon-search icon-white"></i> Search</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-unit">
+            <h1>Bogo!</h1>
+            <p>
+                <div>
+                    <p class="status">what's going on?</p>
+                </div>
+            </p>
+        </div>
+        <div class="well search-result">
+        </div>
+        <div class="well search-status">
+            Nothing to report...
+        </div>
+        <div class="well">
+            <strong>Things to do</strong>
+            <ul>
+                <li>menu bar?</li>
+                    <ul>
+                        <li>place report schema button there?</li>
+                        <li>also fav & sub in?</li>
+                    </ul>
+                <li>Submit search request to data API</li>
+                <li>Work on report schema</li>
+                    <ul>
+                        <li>will it be a popup / modal?</li>
+                    </ul>
+                <li>Report column header</li>
+                    <ul>
+                        <li>should have filter icon (enable/disable) that 
+                            respond to click and launch respectable search popup</li>
+                        <li>sort direction icon - click should kick off search</li>
+                    </ul>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

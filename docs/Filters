@@ -1,0 +1,26 @@
+Filters
+
+Text filters
+- equals
+- does not equal
+- begins with
+- does not begin with
+- contains
+- does not contain
+- ends with
+- does not end with
+
+Number filters
+- equals
+- does not equal
+- less than
+- greater than
+- between
+
+Date filters
+- equals
+- does not equal
+- before
+- after
+- between
+
