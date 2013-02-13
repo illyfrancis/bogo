@@ -1,0 +1,18 @@
+### OpenBBH database details ###
+
+db name: openbbh
+collections:
+	accounts
+	securities
+	etc
+
+### How to Import / Export ###
+
+Refer to https://github.com/illyfrancis/francis-trial/issues/55
+
+Mongo manual
+
+http://docs.mongodb.org/manual/administration/import-export/
+
+mongoexport --db sales --collection contacts
+mongoimport --db users --collection contacts --type csv --file /opt/backups/contacts.csv
