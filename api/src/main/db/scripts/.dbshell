@@ -1,0 +1,5 @@
+db.reportschema.find()
+
+
+# showing list of collections
+show collections

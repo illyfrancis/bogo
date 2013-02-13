@@ -1,0 +1,1 @@
+mongoimport --db openbbh --collection reportschema --jsonArray --type json --file ../data/reportschema.json
