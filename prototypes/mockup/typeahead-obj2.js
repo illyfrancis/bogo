@@ -9,64 +9,86 @@ var SecurityCollection = Backbone.Collection.extend({
     model: Security
 });
 
+var SecurityRow = Backbone.View.extend({
+    tagName: "tr",
+
+    template: _.template('<td><%= securityId %></td><td class="right-align"><i class="icon-remove-sign remove-security"></i></td>'),
+
+    events: {
+        "click .remove-security": "remove"
+    },
+
+    initialize: function () {
+        // this.model.on("change", this.render, this);
+    },
+
+    render: function () {
+        console.log("SecurityList: render");
+
+        this.$el.empty(); // needed?
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
+    },
+
+    remove: function () {
+        console.log("remove " + this.model.get("securityId"));
+        this.collection.remove(this.model);
+    }
+});
+
 var SecurityView = Backbone.View.extend({
     el: "#lookahead",
 
     events: {
-        "change input": "onChange",
-        "click .add-security": "addSecurity",
-        "click .remove-security": "removeSecurity"
+        "click .add-security": "addSecurity"
+    },
+
+    initialize: function () {
+        this.collection.on("add", this.renderSecurities, this);
+        this.collection.on("remove", this.renderSecurities, this);
     },
 
     removeSecurity: function(e) {
-        alert("remove");
-
+        console.log("remove");
     },
 
     addSecurity: function() {
         // validate input value (
         // e.g. (a) it must be 3 chars or longer,
-        // (b) this.collection must be valid
-        // (c) the val must be found in the collection
-        console.log("here");
+        // (b) this.securities must be valid
+        // (c) the val must be found in the securities
+        console.log("addSecurity");
 
-        var $typeahead = this.$el.find("input.lookup");
-
-        if ($typeahead.val().length < 3) {
-            console.log("cannot add security");
-            return;
-        }
-
-        if (this.collection) {
-            var security = this.collection.find(function(item) {
-                return item.get("name") === $typeahead.val();
-            });
-
-            if (security) {
-                console.log("found security : " + security);
-            } else {
-                console.log("no security found");
-            }
+        var selected = this.selectedSecurity();
+        if (!_.isUndefined(selected)) {
+            // check for duplicates?
+            this.collection.add(selected);
+            this.selected = null;
+            this.$el.find("input.lookup").val("");
         }
     },
 
-    onChange: function(e) {
-        // debugger;
-        console.log("change : " + e.eventPhase + " : " + e.target);
+    selectedSecurity: function () {
+        var security;
 
-        if (!_.isUndefined(this.selected)) {
-            var security = this.collection.find(function (item) {
+        if (this.$el.find("input.lookup").val() === "") {
+            this.selected = null;
+        }
+
+        if (!(_.isUndefined(this.selected) || _.isNull(this.selected))) {
+            security = this.securities.find(function (item) {
                 return item.get("name") === this.selected;
             }, this);
-
             console.log("selected : " + this.selected + ", obj : " + JSON.stringify(security));
         }
+
+        return security;
     },
 
     lookupSecurity: function(query, process) {
         // debugger;
         // async response $.ajax(...) on success invoke process with data items.
-        this.options.self.collection = new SecurityCollection([{
+        this.options.self.securities = new SecurityCollection([{
                 name: "Hello",
                 securityId: "001",
                 securityIdType: "isin"
@@ -88,7 +110,7 @@ var SecurityView = Backbone.View.extend({
                 securityIdType: "zulu"
         }]);
 
-        process(this.options.self.collection.pluck("name"));
+        process(this.options.self.securities.pluck("name"));
     },
 
     updater: function (item) {
@@ -101,16 +123,40 @@ var SecurityView = Backbone.View.extend({
             source: this.lookupSecurity,
             updater: this.updater,
             minLength: 1,
-            self: this
+            self: this  // the security
         });
 
+        this.renderSecurities();
+
         return this;
+    },
+
+    renderSecurities: function () {
+        this.$table = this.$el.find("table tbody");
+        // dispose previous rows
+        this.$table.empty();
+        this.collection.each(this.appendSecurity, this);
+        return this;
+    },
+
+    appendSecurity: function (security) {
+        console.log("append");
+        var securityRow = new SecurityRow({
+            model: security,
+            collection: this.collection
+        });
+
+        this.$table.append(securityRow.render().el);
     }
 });
 
 $(function() {
-
-    var view = new SecurityView();
+    var securities = new SecurityCollection([{
+            securityId: "1234", securityIdType: "isin"
+        }, {
+            securityId: "C201", securityIdType: "sedol"
+    }]);
+    var view = new SecurityView({collection: securities});
     $("body").append(view.render().el);
     $("[rel='tooltip']").tooltip();
 });
