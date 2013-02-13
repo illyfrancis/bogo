@@ -15,7 +15,7 @@ var SecurityRow = Backbone.View.extend({
     template: _.template('<td><%= securityId %></td><td class="right-align"><i class="icon-remove-sign remove-security"></i></td>'),
 
     events: {
-        "click .remove-security": "remove"
+        "click .remove-security": "removeSecurity"
     },
 
     initialize: function () {
@@ -30,7 +30,7 @@ var SecurityRow = Backbone.View.extend({
         return this;
     },
 
-    remove: function () {
+    removeSecurity: function () {
         console.log("remove " + this.model.get("securityId"));
         this.collection.remove(this.model);
     }

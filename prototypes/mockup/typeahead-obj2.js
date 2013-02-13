@@ -15,11 +15,12 @@ var SecurityRow = Backbone.View.extend({
     template: _.template('<td><%= securityId %></td><td class="right-align"><i class="icon-remove-sign remove-security"></i></td>'),
 
     events: {
-        "click .remove-security": "remove"
+        "click .remove-security": "removeSecurity"
     },
 
     initialize: function () {
         // this.model.on("change", this.render, this);
+
     },
 
     render: function () {
@@ -30,7 +31,7 @@ var SecurityRow = Backbone.View.extend({
         return this;
     },
 
-    remove: function () {
+    removeSecurity: function () {
         console.log("remove " + this.model.get("securityId"));
         this.collection.remove(this.model);
     }
@@ -44,8 +45,15 @@ var SecurityView = Backbone.View.extend({
     },
 
     initialize: function () {
-        this.collection.on("add", this.renderSecurities, this);
-        this.collection.on("remove", this.renderSecurities, this);
+        // old ways
+        // this.collection.on("add", this.renderSecurities, this);
+        // this.collection.on("remove", this.renderSecurities, this);
+        // new ways
+        this.listenTo(this.collection, "add", this.renderSecurities);
+        this.listenTo(this.collection, "remove", this.renderSecurities);
+
+        // keeps track of nested views (SecurityRow)
+        this._securityRows = [];
     },
 
     removeSecurity: function(e) {
@@ -134,19 +142,42 @@ var SecurityView = Backbone.View.extend({
     renderSecurities: function () {
         this.$table = this.$el.find("table tbody");
         // dispose previous rows
-        this.$table.empty();
-        this.collection.each(this.appendSecurity, this);
+
+        // 1. this is one way, using empty() but may leave event handlers behind if the nested view
+        // has any models or collection listening on an event
+        // this.$table.empty();
+
+        // 2. another way: using a list of nested views and call remove() on them
+        this.disposeSecurityRows();
+        this.collection.each(this.appendSecurityRow, this);
+
         return this;
     },
 
-    appendSecurity: function (security) {
-        console.log("append");
+    disposeSecurityRows: function () {
+        // clean up
+        _.each(this._securityRows, function (row) {
+            row.remove();
+        });
+
+        this._securityRows = [];
+    },
+
+    appendSecurityRow: function (security) {
         var securityRow = new SecurityRow({
             model: security,
             collection: this.collection
         });
 
+        this._securityRows.push(securityRow);
+
         this.$table.append(securityRow.render().el);
+    },
+
+    // override remove
+    remove: function () {
+        this.disposeSecurityRows();
+        return Backbone.View.prototype.remove.call(this);
     }
 });
 
@@ -158,5 +189,17 @@ $(function() {
     }]);
     var view = new SecurityView({collection: securities});
     $("body").append(view.render().el);
+
+    $(".remove-view").click(function() {
+        view.remove();
+    });
+
+    $(".add-collection").click(function() {
+        securities.add({
+            securityId: "abc",
+            securityIdType: "xyzs"
+        });
+    });
+
     $("[rel='tooltip']").tooltip();
 });
