@@ -3,6 +3,12 @@ define(["collections/PaginatedAccounts"], function (PaginatedAccounts) {
 
     var AccountCriteria = {
 
+        hydrate: function (selections) {
+            // apply restrictions to accounts
+            var accountNumbers = selections.accountNumbers;
+            this.paginatedAccounts().selectBy(accountNumbers);
+        },
+
         paginatedAccounts: function () {
             if (this.accounts === undefined) {
                 this.accounts = new PaginatedAccounts();
@@ -16,12 +22,6 @@ define(["collections/PaginatedAccounts"], function (PaginatedAccounts) {
             }
 
             return this.accounts;
-        },
-
-        hydrate: function (selections) {
-            // apply restrictions to accounts
-            var accountNumbers = selections.accountNumbers;
-            this.paginatedAccounts().selectBy(accountNumbers);
         },
 
         preserve: function () {

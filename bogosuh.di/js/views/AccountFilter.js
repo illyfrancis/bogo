@@ -136,10 +136,6 @@ define([
             return this;
         },
 
-        appendAccountRow: function (account) {
-            this.$table.append(this.createAccountRow(account).render().el);
-        },
-
         disposeAccountRows: function () {
             // clean up
             _.each(this._accountRows, function (row) {
@@ -148,6 +144,10 @@ define([
 
             this._accountRows = [];
             // this._accountRows.length = 0; // http://stackoverflow.com/questions/1232040/how-to-empty-an-array-in-javascript
+        },
+
+        appendAccountRow: function (account) {
+            this.$table.append(this.createAccountRow(account).render().el);
         },
 
         createAccountRow: function (account) {
