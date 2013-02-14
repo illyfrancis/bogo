@@ -1,0 +1,11 @@
+2013-02-13 14:32:01,840 INFO Notes Thread com.synaptris.fewclix.NotesIndexer  - Notes directory C:\Documents and Settings\cy4y423\Local Settings\Application Data\Lotus\Notes\Data
+2013-02-13 14:32:01,934 INFO main com.synaptris.fewclix.bundle.VersionVerifier  - Build version 1.6.0
+2013-02-13 14:32:01,934 INFO main com.synaptris.fewclix.bundle.VersionVerifier  - Installed version 1.6.0
+2013-02-13 14:32:02,168 INFO main Internationalizer  - Inside Loading locale specific messages 
+2013-02-13 14:32:02,168 INFO main Internationalizer  - Successfully Loaded locale specific messages 
+2013-02-13 14:32:02,168 INFO main Internationalizer  - Inside Loading locale specific messages 
+2013-02-13 14:32:02,184 INFO main Internationalizer  - Successfully Loaded locale specific messages 
+2013-02-13 15:02:24,934 INFO main com.synaptris.fewclix.bundle.VersionVerifier  - Build version 1.6.0
+2013-02-13 15:02:24,934 INFO main com.synaptris.fewclix.bundle.VersionVerifier  - Installed version 1.6.0
+2013-02-13 15:02:24,965 INFO main Internationalizer  - Inside Loading locale specific messages 
+2013-02-13 15:02:24,981 INFO main Internationalizer  - Successfully Loaded locale specific messages 

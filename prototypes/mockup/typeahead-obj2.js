@@ -10,9 +10,13 @@ var SecurityCollection = Backbone.Collection.extend({
 });
 
 var SecurityRow = Backbone.View.extend({
+    // tagName: "li",
     tagName: "tr",
 
+    className: "bobo",
+
     template: _.template('<td><%= securityId %></td><td class="right-align"><i class="icon-remove-sign remove-security"></i></td>'),
+    // template: _.template('<%= securityId %>'),
 
     events: {
         "click .remove-security": "removeSecurity"
@@ -33,8 +37,19 @@ var SecurityRow = Backbone.View.extend({
 
     removeSecurity: function () {
         console.log("remove " + this.model.get("securityId"));
-        this.collection.remove(this.model);
+        this.collection.remove(this.model, {silent: true});
+        this.remove();
+    },
+
+    remove: function () {
+        Backbone.View.prototype.remove.call(this);
+        // this.$el.empty();
+        // delete this.$el;
+        // delete this.el;
+        return this;
     }
+
+
 });
 
 var SecurityView = Backbone.View.extend({
@@ -158,6 +173,7 @@ var SecurityView = Backbone.View.extend({
         // clean up
         _.each(this._securityRows, function (row) {
             row.remove();
+            // row.dispose();
         });
 
         this._securityRows = [];
@@ -169,7 +185,7 @@ var SecurityView = Backbone.View.extend({
             collection: this.collection
         });
 
-        this._securityRows.push(securityRow);
+        // this._securityRows.push(securityRow);
 
         this.$table.append(securityRow.render().el);
     },
