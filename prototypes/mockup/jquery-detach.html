@@ -8,7 +8,7 @@
     <script type="text/javascript" src="lib/backbone-0.9.10.js"></script>
     <script type="text/javascript" src="lib/backbone.paginator.js"></script>
     <script type="text/javascript" src="lib/bootstrap.js"></script>
-    <script type="text/javascript" src="typeahead-obj2.js"></script>
+    <script type="text/javascript" src="jquery-detach.js"></script>
     <style type="text/css">
     td.right-align {
       text-align: right;
@@ -23,22 +23,13 @@
         <button class="btn remove-view" type="button">Remove</button>
         <button class="btn add-collection" type="button">Add to collection</button>
     </div>
-    <div id="lookahead" class="container-fluid">
 
-      <hr>
-
-      <div class="input-append">
-        <input class="lookup" type="text" placeholder="Search for security" rel="tooltip" title="Enter security id to search">
-        <button class="btn add-security" type="button" rel="tooltip" title="first tooltip"><i class="icon-plus"></i></button>
-      </div>
-      <br>
-      <div class="">
-        <table class="table table-hover table-condensed">
-            <tbody id="bar">
-            </tbody>
-        </table>
-      </div>
-
+    <div class="">
+      <table class="table table-hover table-condensed">
+          <tbody id="bar">
+            <tr><td class="foo">cell</td></tr>
+          </tbody>
+      </table>
     </div>
 
 

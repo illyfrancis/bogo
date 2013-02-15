@@ -15,11 +15,13 @@ var SecurityRow = Backbone.View.extend({
 
     className: "bobo",
 
-    template: _.template('<td><%= securityId %></td><td class="right-align"><i class="icon-remove-sign remove-security"></i></td>'),
-    // template: _.template('<%= securityId %>'),
+    template: _.template('<td class="foo"><%= securityId %></td><td class="right-align"><i class="icon-remove-sign remove-security"></i><button>here</button></td>'),
+    // template: _.template('<td><%= securityId %></td>'),
 
     events: {
-        "click .remove-security": "removeSecurity"
+        // "click .remove-security": "removeSecurity"
+        // "click td": "removeSecurity"
+        // "click button": "removeSecurity"
     },
 
     initialize: function () {
@@ -35,20 +37,22 @@ var SecurityRow = Backbone.View.extend({
         return this;
     },
 
-    removeSecurity: function () {
+    removeSecurity: function (e) {
         console.log("remove " + this.model.get("securityId"));
         this.collection.remove(this.model, {silent: true});
+        // this.undelegateEvents();
+        this.$el.off('.delegateEvents' + this.cid);
+        this.$el.off('.delegateEvents' + this.cid, 'button');
         this.remove();
     },
 
     remove: function () {
-        Backbone.View.prototype.remove.call(this);
         // this.$el.empty();
+        Backbone.View.prototype.remove.call(this);
         // delete this.$el;
         // delete this.el;
         return this;
     }
-
 
 });
 
@@ -56,7 +60,8 @@ var SecurityView = Backbone.View.extend({
     el: "#lookahead",
 
     events: {
-        "click .add-security": "addSecurity"
+        "click .add-security": "addSecurity",
+        "click button": "removeSecurity"
     },
 
     initialize: function () {
@@ -155,7 +160,8 @@ var SecurityView = Backbone.View.extend({
     },
 
     renderSecurities: function () {
-        this.$table = this.$el.find("table tbody");
+        // this.$table = this.$el.find("table tbody");
+        this.$table = this.$el.find("#bar");
         // dispose previous rows
 
         // 1. this is one way, using empty() but may leave event handlers behind if the nested view

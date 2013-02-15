@@ -44,7 +44,7 @@ var ItemView = Backbone.View.extend({
   className: 'item',
   tagName: 'li',
   events: {
-    'click' : 'remove'
+    'click .foo' : 'remove'
   },
   initialize: function () {
     // this.model.on('change:name', this.updateName, this);
@@ -55,8 +55,14 @@ var ItemView = Backbone.View.extend({
     this.$el.html(this.model.get('name') + "<a href='#'>yo</a>");
   },
   render: function () {
-    this.$el.html(this.model.get('name') + "<a href='#'>yo</a>");
+    this.$el.html(this.model.get('name') + "<a class='foo' href='#'>yo</a>");
     // this.$el.html(this.model.get('name'));
+    return this;
+  },
+
+  remove: function () {
+    this.$el.empty();
+    Backbone.View.prototype.remove.call(this);
     return this;
   }
 
