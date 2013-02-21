@@ -17,7 +17,7 @@ define([
         },
 
         initialize: function () {
-            this.model.on("change", this.render, this);
+            // this.model.on("change", this.render, this);
             this.model.on("destroy", function () {
                 console.log("> model destroy !!!!");
             }, this);
@@ -37,6 +37,8 @@ define([
 
         toggle: function () {
             this.model.toggle();
+            // this.model.set("selected", !this.model.get("selected"), {silent: true});
+            this.$('i').toggleClass('icon-ok');
         },
 
         // dispose
