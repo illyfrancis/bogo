@@ -148,7 +148,7 @@
   </build>
   <properties>
   	<jersey-version>1.16</jersey-version>
-  	<warDirectory>${basedir}/../bogosuh.di</warDirectory>
+  	<warDirectory>${basedir}/../bogosuh.latest</warDirectory>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 </project>

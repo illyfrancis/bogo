@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <script type="text/javascript" src="lib/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="lib/moment.js"></script>
+    <!--
+    <script type="text/javascript" src="lib/underscore.js"></script>
+    <script type="text/javascript" src="lib/backbone.js"></script>
+    <script type="text/javascript" src="lib/backbone.paginator.js"></script>
+    <script type="text/javascript" src="lib/bootstrap.js"></script>
+    -->
+</head>
+<body>
+<div id="output">
+</div>
+
+<script type="text/javascript">
+var logger = function(msg) {
+    $("#output").append("<p>" + msg + "</p>");
+}
+
+$(function() {
+    var now = new Date();
+    logger("> toString: " + now.toString());
+    // logger("> toISOString: " + now.toISOString());  // fail in IE8-
+    logger("> toGMTString: " + now.toGMTString());
+});
+
+/*
+
+
+Fri Nov 30 2012 14:55:16 GMT-0500 (Eastern Standard Time)
+now.toISOString()
+"2012-11-30T19:55:16.123Z"
+now.toGMTString()
+"Fri, 30 Nov 2012 19:55:16 GMT"
+before = new Date("2012-11-30T19:55:16.123Z")
+Fri Nov 30 2012 14:55:16 GMT-0500 (Eastern Standard Time)
+new Date()
+Fri Nov 30 2012 14:59:28 GMT-0500 (Eastern Standard Time)
+now.toJSON
+function toJSON() { [native code] }
+now.toJSON()
+"2012-11-30T19:55:16.123Z"
+Date
+function Date() { [native code] }
+now.toString()
+"Fri Nov 30 2012 14:55:16 GMT-0500 (Eastern Standard Time)"
+*/
+
+</script>
+
+</body>

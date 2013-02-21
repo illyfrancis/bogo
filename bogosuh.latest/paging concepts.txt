@@ -1,0 +1,53 @@
+Given:
+- Server Pager : perPage: 100, totalRecords: 956
+- Client Pager: perPage: 18
+
+When rendered first, there should be pages:
+[1] (1-18) 
+[2] (19-36) 
+[3] (37-54) 
+[4] (55-72) 
+[5] (73-90) 
+[6*] (91-100, missing 101-108) 
+[7*] 
+... 
+[53*] (937-954) 
+[54*] (955-956)
+
+Then when click on any pages between [1] - [5] does not fetch any more data from server.
+
+<<usecase 1>>
+
+But when click on [6], it should:
+1. fetch another page worth (100)
+2. on successful fetch, discard all existing records except for ???
+
+
+<<usecase 2>>
+
+click on [7],
+1. determine that no data available hence,
+2. fetch another page worth (100) starting from max(current_page - 2 | 1)
+    i.e. Page 5 = 4*18+1 = 73, therefore fetch a page (100) from 73. (73 - 173)
+3. but realise the current page is [7]
+
+  [3*]
+  [4*]
+  [5] (73-90) 
+  [6] (91-108) 
+  [7] (109-126)
+  [8] (127-144)
+  [9] (145-162)
+  [10*]
+  ... 
+  [53*] (937-954) 
+  [54*] (955-956)
+
+<<usecase 3>>
+
+click on 53 (second last page)
+1. no data yet so fetch
+2. curr page (53) sits near the edge, adjust like this:
+    
+
+Q: is the server page size fixed? so can it be adjusted per request?

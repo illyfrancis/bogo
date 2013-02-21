@@ -15,7 +15,7 @@ var ListView = Backbone.View.extend({
 
   addOne: function (item) {
     var view = new ItemView({model: item});
-    view.listenTo(this, 'clean_up', view.remove); // #3
+    // view.listenTo(this, 'clean_up', view.remove); // #3
     this.$el.append(view.render().el);
   },
 
@@ -44,11 +44,14 @@ var ItemView = Backbone.View.extend({
   className: 'item',
   tagName: 'li',
   events: {
-    'click .foo' : 'remove'
+    'click .foo' : 'close'
+    // 'click' : 'remove'
+    // 'click' : 'close'
   },
   initialize: function () {
     // this.model.on('change:name', this.updateName, this);
-    this.listenTo(this.model, 'change:name', this.updateName);
+    // this.listenTo(this.model, 'change:name', this.updateName);
+    this.listenTo(this, 'close', this.remove);
   },
   updateName: function () {
     console.log('updateName');
@@ -59,10 +62,17 @@ var ItemView = Backbone.View.extend({
     // this.$el.html(this.model.get('name'));
     return this;
   },
-
+  close: function () {
+    this.trigger('close');
+  },
   remove: function () {
-    this.$el.empty();
+    // this.$el.empty();
+    // this.off();
+    // this.undelegateEvents();
+    // this.$el.off('.delegateEvents' + this.cid, '.foo');
     Backbone.View.prototype.remove.call(this);
+    // delete this.$el;
+    // delete this.el;
     return this;
   }
 
