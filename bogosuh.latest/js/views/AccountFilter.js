@@ -117,7 +117,8 @@ define([
             this.renderAccountList();
 
             // account paginator
-            this.$(".account-pagination").append(this.paginator.render().el);
+            // this.$(".account-pagination").append(this.paginator.render().el);
+            this.paginator.setElement(this.$(".account-pagination")).render();
 
             return this;
         },
