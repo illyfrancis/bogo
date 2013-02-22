@@ -20,7 +20,7 @@ define([
 
         initialize: function() {
             // collection = SearchCriteria
-            this.collection.on("change:isApplied", this.updateView, this);
+            this.listenTo(this.collection, "change:isApplied", this.updateView);
         },
 
         updateView: function(reportCriteria) {

@@ -17,7 +17,7 @@ define([
 
         initialize: function () {
             // model = ReportCriteria
-            this.model.on("change:isApplied", this.remove, this);
+            this.listenTo(this.model, "change:isApplied", this.filterChange);
         },
 
         removeFilter: function () {
@@ -35,15 +35,13 @@ define([
             return this;
         },
 
-        remove: function () {
+        filterChange: function () {
             if (this.model.get("isApplied")) {
                 return;
             }
 
-            // TODO - below or this.dispose()
-            this.off();
-            this.model.off("change:isApplied", this.remove, this);
-            Backbone.View.prototype.remove.call(this);
+            // remove this view if filter is no longer applied.
+            this.remove();
         }
 
     });
