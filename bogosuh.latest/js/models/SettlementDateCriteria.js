@@ -11,6 +11,7 @@ define([
             console.log("SettlementDateCriteria: hydrate");
             if(_.isUndefined(this.settlementDates)) {
                 this.settlementDates = new DateRange();
+                this.settlementDates.lastweek();
             }
         },
 
