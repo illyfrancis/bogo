@@ -12,8 +12,6 @@ define(["jquery", "underscore", "backbone", "text!templates/AccountPaginator.htm
             this.collection.on("add", function () {
                 console.log("pagi : add");
             });
-
-            this.render();
         },
 
         events: {
@@ -56,7 +54,6 @@ define(["jquery", "underscore", "backbone", "text!templates/AccountPaginator.htm
             this.$el.empty(); // needed?
             this.$el.html(this.template(this.collection.info()));
             this.decoratePaginator();
-            this.delegateEvents(); // TODO - this delegation is needed, re-read the guide on managing subviews
             return this;
         },
 
