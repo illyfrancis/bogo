@@ -12,19 +12,15 @@ define([
         template: _.template(tpl),
 
         events: {
-            "click": "toggle"
+            "click": "toggleSelection"
         },
 
         initialize: function () {
-            // this.model.on("change", this.render, this);
             this.listenTo(this.model, "change", this.render);
         },
 
         render: function () {
-            console.log("AccountRow: render");
-
-            this.stopListening();
-            this.$el.empty(); // needed?
+            this.$el.empty();
             this.$el.html(this.template(this.model.toJSON()));
             return this;
         },
@@ -33,18 +29,10 @@ define([
             this.model.select(checked);
         },
 
-        toggle: function () {
+        toggleSelection: function () {
             this.model.toggle();
-            // this.model.set("selected", !this.model.get("selected"), {silent: true});
-            // this.$('i').toggleClass('icon-ok');
-        },
-
-        // dispose
-        dispose: function () {
-            this.remove();
-            this.off();
-            this.model.off("change", this.render);
         }
+
     });
 
     return AccountRow;

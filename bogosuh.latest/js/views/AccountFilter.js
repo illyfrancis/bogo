@@ -24,9 +24,6 @@ define([
             this.model.paginatedAccounts().on("reset", this.renderAccountList, this);
             this.model.paginatedAccounts().on("change:selected", this.filterChanged, this);
 
-            // keep track of account rows
-            this._accountRows = [];
-
             this.paginator = new AccountPaginator({
                 collection: this.model.paginatedAccounts()
             });
@@ -53,10 +50,7 @@ define([
 
         updateAccountSelection: function (checked) {
             // perceived performance improvement - rather than relying on collection to trigger change event then AccountRow to re-render, invoke on visible AccountRow(s) to update the model directly. The updates to the collection is silent so it will not trigger the change events.
-            _.each(this._accountRows, function (accountRow) {
-                accountRow.updateSelection(checked);
-            });
-
+            this.trigger("account-filter:update", checked);
             this.model.paginatedAccounts().selectAll(checked);
         },
 
@@ -137,13 +131,7 @@ define([
         },
 
         disposeAccountRows: function () {
-            // clean up
-            _.each(this._accountRows, function (row) {
-                row.dispose();
-            });
-
-            this._accountRows = [];
-            // this._accountRows.length = 0; // http://stackoverflow.com/questions/1232040/how-to-empty-an-array-in-javascript
+            this.trigger("account-filter:dispose");
         },
 
         appendAccountRow: function (account) {
@@ -154,7 +142,10 @@ define([
             var accountRow = new AccountRow({
                 model: account
             });
-            this._accountRows.push(accountRow);
+
+            // register the accountRow for filter:dispose event.
+            accountRow.listenTo(this, "account-filter:dispose", accountRow.remove);
+            accountRow.listenTo(this, "account-filter:update", accountRow.updateSelection);
             return accountRow;
         }
 
