@@ -16,7 +16,7 @@
             <label>From</label>
         </div>
         <div class="controls">
-            <input class="fromDate span2" type="text">
+            <input class="fromDate span2" type="text" value="<%= moment(fromDate).format('L') %>">
         </div>
     </div>
 
@@ -25,7 +25,7 @@
             <label>To</label>
         </div>
         <div class="controls">
-            <input class="toDate span2" type="text">
+            <input class="toDate span2" type="text" value="<%= moment(toDate).format('L') %>">
         </div>
     </div>
 </form>

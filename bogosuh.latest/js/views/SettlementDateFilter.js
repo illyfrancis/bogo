@@ -14,16 +14,15 @@ define([
         initialize: function () {
             // model = ReportCriteria (SettlementDateCriteria)
             // .settlementDates (DateRange)
-            // debugger;
             this.settlementDatesFilter = new DateRangeFilter({
                 model: this.model.settlementDates
             });
-            this.$el.empty().append(this.settlementDatesFilter.el);
         },
 
         render: function () {
             console.log("SettlementDateFilter: render");
             // this.$el.html(this.template());
+            this.$el.empty().append(this.settlementDatesFilter.render().el);
             return this;
         }
 

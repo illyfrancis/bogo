@@ -15,7 +15,6 @@ define([
         template: _.template(tpl),
 
         initialize: function () {
-            this.onInit();
             this.model.on("change", this.render, this);
         },
 
@@ -53,25 +52,24 @@ define([
             }
         },
 
-        onInit: function () {
-            this.$el.html(this.template());
-            this.render();
-            this.$el.find(".fromDate, .toDate").datepicker({
+        render: function () {
+            this.$el.empty();
+            this.$el.html(this.template(this.model.toJSON()));
+
+            // not the most efficient
+            this.$(".fromDate, .toDate").datepicker({
                 showOtherMonths: true,
                 selectOtherMonths: true
             });
-        },
-
-        render: function () {
-            var fromDate = this.model.get("fromDate");
-            this.$el.find(".fromDate").val(moment(fromDate).format("L"));
-
-            var toDate = this.model.get("toDate");
-            this.$el.find(".toDate").val(moment(toDate).format("L"));
 
             var type = this.model.get("type");
-            this.$el.find("select").val(type);
+            this.$("select").val(type).focus();
+
+            this.delegateEvents();
+
+            return this;
         }
+
     });
 
     return DateRangeFilter;
