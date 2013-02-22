@@ -21,21 +21,22 @@ define([
 
         initialize: function () {
             // model = ReportCriteria (AccountCriteria)
-            var paginatedAccounts = this.model.paginatedAccounts();
+            this.paginatedAccounts = this.model.paginatedAccounts();
 
-            this.listenTo(paginatedAccounts, "change:selected", this.filterChanged);
+            this.listenTo(this.paginatedAccounts, "change:selected", this.filterChanged);
+
             this.accountList = new AccountList({
-                collection: paginatedAccounts
+                collection: this.paginatedAccounts
             });
             this.paginator = new AccountPaginator({
-                collection: paginatedAccounts
+                collection: this.paginatedAccounts
             });
         },
 
         filterChanged: function () {
             // decide if filter value change should be tracked by SearchFilter, if so trigger "filter change" event.
-            if(this.model.get("isApplied")) {
-                if(!this.model.paginatedAccounts().hasSelection()) {
+            if (this.model.get("isApplied")) {
+                if (!this.paginatedAccounts.hasSelection()) {
                     app.EventBus.trigger("filter:remove");
                 } else {
                     app.EventBus.trigger("filter:change");
@@ -54,7 +55,7 @@ define([
         updateAccountSelection: function (checked) {
             // perceived performance improvement - rather than relying on collection to trigger change event then AccountRow to re-render, invoke on visible AccountRow(s) to update the model directly. The updates to the collection is silent so it will not trigger the change events.
             this.accountList.updateSelections(checked);
-            this.model.paginatedAccounts().selectAll(checked);
+            this.paginatedAccounts.selectAll(checked);
         },
 
         filterAccounts: function () {
@@ -104,7 +105,7 @@ define([
                 value: selected
             });
 
-            this.model.paginatedAccounts().setFieldFilter(fieldFilters);
+            this.paginatedAccounts.setFieldFilter(fieldFilters);
 
             // TODO - how to remove filter? the lib doesn't provide a function for this.
             // one way is to replace .models with .originalModels before starting..
