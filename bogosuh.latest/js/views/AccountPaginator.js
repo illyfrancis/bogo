@@ -5,13 +5,9 @@ define(["jquery", "underscore", "backbone", "text!templates/AccountPaginator.htm
         template: _.template(tpl),
 
         initialize: function () {
-            this.collection.on("reset", this.render, this);
-            this.collection.on("change", function () {
-                console.log("pagi : change");
-            });
-            this.collection.on("add", function () {
-                console.log("pagi : add");
-            });
+            this.listenTo(this.collection, "reset", this.render);
+            this.listenTo(this.collection, "change", function () { console.log("pagi: change"); });
+            this.listenTo(this.collection, "add", function () { console.log("pagi: add"); });
         },
 
         events: {
@@ -51,22 +47,22 @@ define(["jquery", "underscore", "backbone", "text!templates/AccountPaginator.htm
         },
 
         render: function () {
-            this.$el.empty(); // needed?
-            this.$el.html(this.template(this.collection.info()));
-            this.decoratePaginator();
+            var info = this.collection.info();
+            this.$el.empty();
+            this.$el.html(this.template(info));
+            this.decoratePaginator(info);
             return this;
         },
 
-        decoratePaginator: function () {
-            var info = this.collection.info();
-            if(info.previous === false) {
-                this.$el.find(".first, .prev").each(function (i, el) {
+        decoratePaginator: function (info) {
+            if (info.previous === false) {
+                this.$(".first, .prev").each(function (i, el) {
                     $(el).parent("li").addClass("disabled");
                 });
             }
 
-            if(info.next === false) {
-                this.$el.find(".next, .last").each(function (i, el) {
+            if (info.next === false) {
+                this.$(".next, .last").each(function (i, el) {
                     $(el).parent("li").addClass("disabled");
                 });
             }
