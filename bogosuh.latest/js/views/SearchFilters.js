@@ -184,7 +184,8 @@ define([
         },
 
         kill: function () {
-            var x = this.collection.at(0);  // should be Accounts
+            var index = this.$(".filter-index").val() || 0;
+            var x = this.collection.at(index);  // should be Accounts
             Helper.removeFilter(x);
         }
 
