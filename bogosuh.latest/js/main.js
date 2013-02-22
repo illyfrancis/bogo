@@ -2,7 +2,8 @@
 require.config({
     // baseUrl: ".",
     paths: {
-        "jquery": "../lib/jquery-1.9.1",
+        // "jquery": "../lib/jquery-1.9.1",
+        "jquery": "../lib/jquery-1.8.2",
         "jquery.ui": "../lib/jquery-ui-1.9.0.custom",
         "bootstrap": "../lib/bootstrap",
         "underscore": "../lib/underscore-1.4.4",
