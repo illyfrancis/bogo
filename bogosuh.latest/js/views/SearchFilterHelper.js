@@ -43,6 +43,23 @@ define([
             }
 
             return view;
+        },
+
+        removeFilter: function (reportCriteria) {
+            
+            var name = reportCriteria.get("name"),  // TODO - now that each XXX_Criteria has a propery "name", refactor this to be consistent
+                last = name.indexOf("Criteria"),
+                viewName = name.substr(0, last).concat("Filter"),
+                Filter,
+                view = this.views[viewName];
+
+            console.log("> view name [" + viewName + "]");
+            
+            if (view) {
+                view.remove();
+                delete this.views[viewName];
+            }
+
         }
     };
 

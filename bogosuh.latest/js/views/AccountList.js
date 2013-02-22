@@ -19,6 +19,12 @@ define([
             return this;
         },
 
+        remove: function () {
+            this.disposeAccountRows();
+            Backbone.View.prototype.remove.call(this);
+            return this;
+        },
+
         disposeAccountRows: function () {
             this.trigger("account-filter:dispose");
         },

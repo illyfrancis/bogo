@@ -33,6 +33,31 @@ define([
             });
         },
 
+        render: function () {
+            console.log("account search criteria");
+
+            this.$el.empty();
+            this.$el.html(this.template());
+            // TODO - need to hold on to filter values for re-render.
+            // consider splitting out "account search filter" into its own class?
+
+            // account list
+            this.accountList.setElement(this.$(".account-list table tbody")).render();
+
+            // account paginator
+            // this.$(".account-pagination").append(this.paginator.render().el);
+            this.paginator.setElement(this.$(".account-pagination")).render();
+
+            return this;
+        },
+
+        remove: function () {
+            this.accountList.remove();
+            this.paginator.remove();
+            Backbone.View.prototype.remove.call(this);
+            return this;
+        },
+
         filterChanged: function () {
             // decide if filter value change should be tracked by SearchFilter, if so trigger "filter change" event.
             if (this.model.get("isApplied")) {
@@ -109,24 +134,6 @@ define([
 
             // TODO - how to remove filter? the lib doesn't provide a function for this.
             // one way is to replace .models with .originalModels before starting..
-        },
-
-        render: function () {
-            console.log("account search criteria");
-
-            this.$el.empty();
-            this.$el.html(this.template());
-            // TODO - need to hold on to filter values for re-render.
-            // consider splitting out "account search filter" into its own class?
-
-            // account list
-            this.accountList.setElement(this.$(".account-list table tbody")).render();
-
-            // account paginator
-            // this.$(".account-pagination").append(this.paginator.render().el);
-            this.paginator.setElement(this.$(".account-pagination")).render();
-
-            return this;
         }
 
     });

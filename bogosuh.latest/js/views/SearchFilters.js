@@ -17,6 +17,7 @@ define([
 
         events: {
             "click .toggle-filter": "toggleFilter",
+            "click .filter-killer": "kill",
             "click .search-report": "searchReport",
             // "change .filter-type select": "onSelectChange",
             "change .filter-type": "onSelectChange",
@@ -180,6 +181,11 @@ define([
         onHidden: function () {
             console.log("hiding search criteria");
             this.dismissAlerts();
+        },
+
+        kill: function () {
+            var x = this.collection.at(0);  // should be Accounts
+            Helper.removeFilter(x);
         }
 
     });
