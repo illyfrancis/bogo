@@ -53,11 +53,12 @@ define([
                 Filter,
                 view = this.views[viewName];
 
-            console.log("> about to remove view [" + viewName + "]");
             
             if (view) {
+                console.log("> about to remove view [" + viewName + "]");
                 view.remove();
                 delete this.views[viewName];
+                console.log("> done removing view [" + viewName + "]");
             }
 
         }
