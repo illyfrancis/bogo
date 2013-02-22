@@ -21,8 +21,8 @@ define([
 
         initialize: function () {
             // model = TreeModel
-            this.model.on("change:selected", this.onSelfChange, this);
-            this.model.subItems.on("childChange", this.onChildrenChange, this);
+            this.listenTo(this.model, "change:selected", this.onSelfChange);
+            this.listenTo(this.model.subItems, "childChange", this.onChildrenChange);
         },
 
         onClick: function (e) {
@@ -68,6 +68,7 @@ define([
                 parent.$el.append(subTreeView.render().el);
                 // collapse when first appended
                 subTreeView.collapse();
+                subTreeView.listenTo(this, "treeitem:dispose", subTreeView.remove);
             }
         },
 
@@ -108,6 +109,13 @@ define([
 
         setCheckbox: function (selected, indeterminate) {
             this.$el.find("input:checkbox").prop("checked", selected).prop("indeterminate", indeterminate);
+        },
+
+        remove: function () {
+            console.log("remove - tree item");
+            this.trigger("treeitem:dispose");
+            Backbone.View.prototype.remove.call(this);
+            return this;
         }
 
     });

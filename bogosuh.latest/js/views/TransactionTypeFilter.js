@@ -9,14 +9,13 @@ define([
 
         initialize: function () {
             // model = ReportCriteria (TransactionTypeCriteria)
-            this.model.transactionTypes().on("childChange", this.filterChanged, this);
+            this.listenTo(this.model.transactionTypes(), "childChange", this.filterChanged);
 
             this.transactionTypes = new Tree({
                 collection: this.model.transactionTypes()
             });
 
-            this.$el.append(this.transactionTypes.render().el);
-            this.transactionTypes.refresh(); // this many need to be fired after render.
+            this._render();
         },
 
         filterChanged: function () {
@@ -30,8 +29,14 @@ define([
             }
         },
 
-        render: function () {
-            // this.transactionTypes.refresh(); // this many need to be fired after render.
+        _render: function () {
+            this.$el.append(this.transactionTypes.render().el);
+            this.transactionTypes.refresh(); // this many need to be fired after render.
+        },
+
+        remove: function () {
+            this.transactionTypes.remove();
+            Backbone.View.prototype.remove.call(this);
             return this;
         }
 

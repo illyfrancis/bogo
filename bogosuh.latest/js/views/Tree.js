@@ -23,6 +23,7 @@ define([
                 model: item
             });
             itemView.appendTo(this);
+            itemView.listenTo(this, "tree:dispose", itemView.remove);
         },
 
         refresh: function () {
@@ -34,6 +35,13 @@ define([
 
         collapse: function () {
             this.$el.addClass("hide");
+        },
+
+        remove: function () {
+            console.log("remove - tree");
+            this.trigger("tree:dispose");
+            Backbone.View.prototype.remove.call(this);
+            return this;
         }
     });
 
