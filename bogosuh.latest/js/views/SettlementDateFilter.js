@@ -24,6 +24,12 @@ define([
             // this.$el.html(this.template());
             this.$el.empty().append(this.settlementDatesFilter.render().el);
             return this;
+        },
+
+        remove: function () {
+            this.settlementDatesFilter.remove();
+            Backbone.View.prototype.remove.call(this);
+            return this;
         }
 
     });

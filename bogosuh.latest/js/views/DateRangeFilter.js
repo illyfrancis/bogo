@@ -15,7 +15,7 @@ define([
         template: _.template(tpl),
 
         initialize: function () {
-            this.model.on("change", this.render, this);
+            this.listenTo(this.model, "change", this.render);
         },
 
         events: {
@@ -67,6 +67,13 @@ define([
 
             this.delegateEvents();
 
+            return this;
+        },
+
+        remove: function () {
+            // need to destroy datepickers?
+            this.$(".fromDate, .toDate").datepicker("destroy");
+            Backbone.View.prototype.remove.call(this);
             return this;
         }
 
