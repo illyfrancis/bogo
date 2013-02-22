@@ -2,10 +2,10 @@ define([
     "jquery",
     "underscore",
     "backbone",
-    "views/AccountRow",
+    "views/AccountList",
     "views/AccountPaginator",
     "text!templates/AccountFilter.html"
-], function ($, _, Backbone, AccountRow, AccountPaginator, tpl) {
+], function ($, _, Backbone, AccountList, AccountPaginator, tpl) {
 
     var AccountFilter = Backbone.View.extend({
 
@@ -21,11 +21,14 @@ define([
 
         initialize: function () {
             // model = ReportCriteria (AccountCriteria)
-            this.model.paginatedAccounts().on("reset", this.renderAccountList, this);
-            this.model.paginatedAccounts().on("change:selected", this.filterChanged, this);
+            var paginatedAccounts = this.model.paginatedAccounts();
 
+            this.listenTo(paginatedAccounts, "change:selected", this.filterChanged);
+            this.accountList = new AccountList({
+                collection: paginatedAccounts
+            });
             this.paginator = new AccountPaginator({
-                collection: this.model.paginatedAccounts()
+                collection: paginatedAccounts
             });
         },
 
@@ -50,7 +53,7 @@ define([
 
         updateAccountSelection: function (checked) {
             // perceived performance improvement - rather than relying on collection to trigger change event then AccountRow to re-render, invoke on visible AccountRow(s) to update the model directly. The updates to the collection is silent so it will not trigger the change events.
-            this.trigger("account-filter:update", checked);
+            this.accountList.updateSelections(checked);
             this.model.paginatedAccounts().selectAll(checked);
         },
 
@@ -111,42 +114,18 @@ define([
             console.log("account search criteria");
 
             this.$el.empty();
-            this.$el.html(this.template()); // TODO - need to hold on to filter values for re-render. consider splitting out "account search filter" into its own class?
+            this.$el.html(this.template());
+            // TODO - need to hold on to filter values for re-render.
+            // consider splitting out "account search filter" into its own class?
+
             // account list
-            this.$table = this.$el.find(".account-list table tbody");
-            this.renderAccountList();
+            this.accountList.setElement(this.$(".account-list table tbody")).render();
 
             // account paginator
             // this.$(".account-pagination").append(this.paginator.render().el);
             this.paginator.setElement(this.$(".account-pagination")).render();
 
             return this;
-        },
-
-        renderAccountList: function () {
-            this.disposeAccountRows();
-            this.$table.empty();
-            this.model.paginatedAccounts().each(this.appendAccountRow, this);
-            return this;
-        },
-
-        disposeAccountRows: function () {
-            this.trigger("account-filter:dispose");
-        },
-
-        appendAccountRow: function (account) {
-            this.$table.append(this.createAccountRow(account).render().el);
-        },
-
-        createAccountRow: function (account) {
-            var accountRow = new AccountRow({
-                model: account
-            });
-
-            // register the accountRow for filter:dispose event.
-            accountRow.listenTo(this, "account-filter:dispose", accountRow.remove);
-            accountRow.listenTo(this, "account-filter:update", accountRow.updateSelection);
-            return accountRow;
         }
 
     });
