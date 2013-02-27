@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>File tests</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <style type="text/css">
+        .waiting {
+          padding: 10px 15px;
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          z-index: 1050;
+          width: 380px;
+          margin: -200px 0 0 -190px;
+          background-color: #ffffff;
+          border: 1px solid #999;
+          border: 1px solid rgba(0, 0, 0, 0.3);
+          *border: 1px solid #999;
+          /* IE6-7 */
+
+          -webkit-border-radius: 6px;
+          -moz-border-radius: 6px;
+          border-radius: 6px;
+          -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+          -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+          -webkit-background-clip: padding-box;
+          -moz-background-clip: padding-box;
+          background-clip: padding-box;
+          outline: none;
+        }
+        .waiting.fade {
+          -webkit-transition: opacity .3s linear, top .3s ease-out;
+          -moz-transition: opacity .3s linear, top .3s ease-out;
+          -o-transition: opacity .3s linear, top .3s ease-out;
+          transition: opacity .3s linear, top .3s ease-out;
+          top: -25%;
+        }
+        .waiting.fade.in {
+          top: 50%;
+        }        
+        .progress {
+            margin-bottom: 0px;
+        }
+
+    </style>
+    
+    <script type="text/javascript" src="lib/json2.js"></script>
+    <script data-main="js/config" src="lib/require/require.js"></script>
+
+    <!-- fake response etc 
+    <script type="text/javascript" src="js/fake/response.js"></script>
+    -->
+
+</head>
+<body>
+    <div class="navbar navbar-static-top">
+        <div class="navbar-inner">
+            <a class="brand">File Reader</a>
+            <div class="pull-right">
+                <div class="btn-group">
+                    <button type="button" class="btn" title="Inbox"><i class="icon-envelope"></i> <span class="badge badge-important" style="padding: 0 4px;">5</span></button>
+                    <button type="button" class="btn" title="User Guide"><i class="icon-question-sign"></i></button>
+                    <button type="button" class="btn" title="My Settings"><i class="icon-wrench"></i></button>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn" title=""><i class="icon-time"></i></button>
+                    <button type="button" class="btn" title="Export"><i class="icon-download-alt"></i></button>
+                    <button type="button" class="btn" title="Save"><i class="icon-star"></i></button>
+                    <button class="btn report-settings" title="Customize Results"><i class="icon-th-list"></i></button>
+                </div>
+                <button class="btn btn-info add-filters"><i class="icon-filter icon-white"></i> Add Filter</button>
+                <button class="btn btn-primary report-search"><i class="icon-search icon-white"></i> Search</button>
+            </div>
+        </div>
+    </div>
+    <div class="waiting fade">
+        <div class="progress">
+            <div class="bar" style="width: 0%;"></div>
+        </div>    
+    </div>
+</body>
+</html>
