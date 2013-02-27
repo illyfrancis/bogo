@@ -170,6 +170,8 @@ define([
             this.$el.find(".modal-body div.filter-content").prepend(this.templateAlert({
                 message: message
             }));
+
+            // if animating fade in, do this this.$(".alert").addClass("in"); and remove 'in' class from alert template
         },
 
         dismissAlerts: function () {
