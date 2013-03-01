@@ -3,12 +3,14 @@ define([
     "underscore",
     "backbone",
     "views/FormInputFileSelector",
-    "views/DragDropFileSelector"
-], function ($, _, Backbone, FormInputFileSelector, DragDropFileSelector) {
+    "views/DragDropFileSelector",
+    "models/Answers",
+    "data"
+], function ($, _, Backbone, FormInputFileSelector, DragDropFileSelector, Answers, data) {
 
     return Backbone.View.extend({
 
-        el: "body",
+        tagName: "div",
 
         initialize: function () {
             this.formInputFileSelector = new FormInputFileSelector();
@@ -91,40 +93,54 @@ define([
             this.$el.append("<h1>hello</h1>");
             this.$el.append(this.formInputFileSelector.render().el);
             this.$el.append(this.dragDropFileSelector.render().el);
+
+            return this;
         },
 
         parse: function (csv) {
             var cols,
+                answers = [],
                 lines = csv.split(/[\r\n|\n]+/);    // split data by line
+
             console.log("line counts: " + lines.length);
+
+
             for (var i = 0; i < lines.length; i++) {
-                // console.log(i + " : " + lines[i]);
-                // cols = lines[i].split(/,+/);
-                
-                // cols = lines[i].split(/".*?",|.*?,/);
-                // cols = lines[i].match(/".*?",|".*?\n|.*?,|\n/g);
-
-                // cols = lines[i].match(/".*?",|".*?\n|.*?,/g);
+                // extract elements separated by comma
                 cols = lines[i].match(/".*?",|".*?"$|.*?,/g);
-
-
                 if (cols) {
-                    // cols = /".*?",|.*?,/g.exec(lines[i]);
-
-                    // cols = lines[i].split(","); // don't use regex
                     console.log("col counts: " + cols.length);
 
-                    for (var j = 0; j < cols.length; j++) {
-                        console.log("index: " + j + " : " + cols[j]);
+                    // for (var j = 0; j < cols.length; j++) {
+                    //     console.log("index: " + j + " : " + cols[j]);
+                    // }
+
+                    if (i === 0) {
+                        data.questions = this.parseColumns(cols, data.questions);
+                    } else if (i === 1) {
+                        data.options =  this.parseColumns(cols, data.options);
+                    } else {
+                        answers.push(this.parseColumns(cols, new Answers()));
                     }
-                    
                 }
-
-
-                // ".*?",|.*?,
-
-                // ".*?",|".*?\n|.*?,
             }
+
+            if (answers.length) {
+                data.responses.reset(answers);
+            }
+
+            // console.log(JSON.stringify(this.questions));
+            // debugger;
+            this.trigger("loaded");
+        },
+
+        parseColumns: function (cols, model) {
+            for (var j = 0; j < cols.length; j++) {
+                var val = cols[j].replace(/,$/, "").replace(/^"/, "").replace(/"$/, "");
+                model.set("a"+j.toString(), val);
+            }
+
+            return model;
         }
 
     });

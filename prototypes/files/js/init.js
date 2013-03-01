@@ -4,8 +4,8 @@ define([
     "underscore",
     "backbone",
     "bootstrap",
-    "views/Foo"
-], function ($, _, Backbone, Bootstrap, Foo) {
+    "views/MainApp"
+], function ($, _, Backbone, Bootstrap, App) {
 
     // Check for the various File API support.
     if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -15,8 +15,8 @@ define([
     }
 
     // $(function () {
-        var foo = new Foo();
-        foo.render();
+        var app = new App();
+        app.render();
     // });
 
 });
