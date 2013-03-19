@@ -135,9 +135,10 @@ define([
         },
 
         parseColumns: function (cols, model) {
-            for (var j = 0; j < cols.length; j++) {
-                var val = cols[j].replace(/,$/, "").replace(/^"/, "").replace(/"$/, "");
-                model.set("a"+j.toString(), val);
+            var i, val;
+            for (i = 0; i < cols.length; i++) {
+                val = cols[i].replace(/,$/, "").replace(/^"/, "").replace(/"$/, "");
+                model.set("c"+i.toString(), val);
             }
 
             return model;

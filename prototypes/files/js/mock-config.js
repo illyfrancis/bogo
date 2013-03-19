@@ -10,6 +10,7 @@ require.config({
         "backbone": "../lib/backbone-0.9.10",
         "backbone.paginator": "../lib/backbone.paginator",
         "moment": "../lib/moment",
+        "spin": "../lib/spin",
         "text": "../lib/require/text"
     },
     shim: {
