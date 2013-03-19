@@ -80,8 +80,8 @@ define([
 
         _swapPositions: function (item, target, place) {
             var $target = target.apply($(item)); // == $(item).prev() or $(item).next();
-            var currModel = this.collection.getByCid(item.value);
-            var targetModel = this.collection.getByCid($target.val());
+            var currModel = this.collection.get(item.value);
+            var targetModel = this.collection.get($target.val());
             var currPosition = currModel.get("position");
             currModel.setPosition(targetModel.get("position"));
             targetModel.setPosition(currPosition);
@@ -111,7 +111,7 @@ define([
             if(selections) {
                 _.each(selections, function (cid) {
                     if(!this.validationMaxReached) {
-                        this.collection.getByCid(cid).toggle();
+                        this.collection.get(cid).toggle();
                     }
                 }, this);
                 this.validationMaxReached = false;
