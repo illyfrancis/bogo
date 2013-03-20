@@ -16,7 +16,7 @@ define([
     // TODO - consider placing class defs in App.Models or App.Collections (depends on how RequireJS expect directory names)
     // and place instances under app.models etc. But for now just use lower cases.
 
-    $(function () {
+    // $(function () {
 
         // enable tooltips
         $("body").tooltip({
@@ -29,7 +29,6 @@ define([
         app.Bogo = new BogoApp();
         app.Bogo.render();
 
-
         // loading image
         // http://stackoverflow.com/questions/68485/how-to-show-loading-spinner-in-jquery
         $("#loadingDiv")
@@ -40,6 +39,6 @@ define([
             .ajaxStop(function () {
                 $(this).hide();
             });
-    });
+    // });
 
 });
