@@ -29,11 +29,10 @@ require.config({
         "bootstrap": {
             deps: ["jquery", "jquery.ui"]
         }
-    }
+    },
 
     // hack!! - forcing jquery.ui to be loaded before bootstrap, refactor, instead, to only use jquery.ui.datepicker plugin becasue bootstrap.tooltip is
     // blown away by jquery.ui.tooltip plugin if it"s loaded after bootstrap loads.
-    ,
     urlArgs: "bust=" + (new Date()).getTime()
 });
 
