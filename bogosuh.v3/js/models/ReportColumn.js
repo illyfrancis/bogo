@@ -47,7 +47,10 @@ define([
         },
 
         toggle: function () {
-            this.set("selected", !this.get("selected"));
+            // this.set("selected", !this.get("selected"));
+            this.set("selected", !this.get("selected"), {
+                validate: true
+            });
 
             // if removed, also remove sorting for this column.
             if (!this.get("selected")) {

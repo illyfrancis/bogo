@@ -22,7 +22,7 @@ define([
         initialize: function () {
             // collection = ReportSchema
             this.collection.on("change", this.render, this);
-            this.collection.on("error", this.onValidationError, this);
+            this.collection.on("invalid", this.onValidationError, this);
 
             this.$el.html(this.template());
             this.$available = this.$el.find(".report-column-available");
