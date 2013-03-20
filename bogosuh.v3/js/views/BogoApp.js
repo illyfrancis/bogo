@@ -20,7 +20,7 @@ define([
             // if the viewManager doesn't really manage the view, what's the point? TODO - refactor viewManager
             // var viewManager = new ViewManager();
 
-            ViewManager.appMenu(this.searchCriteria);
+            this.appMenu = ViewManager.appMenu(this.searchCriteria);
             this.reportSettings = ViewManager.reportSettings(this.reportSchema);
             this.filterStatusBar = ViewManager.filterStatusBar(this.searchCriteria);
             this.searchFilters = ViewManager.searchFilters(this.searchCriteria);
@@ -103,6 +103,7 @@ define([
 
         render: function () {
             console.log("BogoApp:render");
+            this.$el.append(this.appMenu.render().el);
             this.$el.append(this.filterStatusBar.render().el);
             this.$el.append(this.searchContent.el); // nothing to render
             this.$el.append(this.reportSettings.render().el);

@@ -8,7 +8,7 @@ define([
     "views/ReportSettings",
     "views/SearchFilters",
     "views/SearchContent"
-], function ($, _, Backbone, BogoAppMenu, FilterStatusBar, ReportSettings, SearchFilters, SearchContent) {
+], function ($, _, Backbone, AppMenu, FilterStatusBar, ReportSettings, SearchFilters, SearchContent) {
 
     var ViewManager = {
 
@@ -29,7 +29,7 @@ define([
             return appMenu;
             */
             // nav (menu) bar
-            return new BogoAppMenu({
+            return new AppMenu({
                 collection: searchCriteria
             });
         },

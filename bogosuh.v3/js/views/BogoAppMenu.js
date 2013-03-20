@@ -1,41 +1,50 @@
-define(["jquery", "underscore", "backbone", "events/EventBus"], function ($, _, Backbone, EventBus) {
+define([
+    "jquery",
+    "underscore",
+    "backbone",
+    "events/EventBus",
+    "text!templates/AppMenu.html"
+], function ($, _, Backbone, EventBus, tpl) {
 
     var BogoAppMenu = Backbone.View.extend({
 
-    el: ".navbar",
+        template: _.template(tpl),
 
-    events: {
-        "click .report-search:not('.disabled')": "reportSearch",
-        "click .report-settings:not('.disabled')": "reportSettings",
-        "click .add-filters": "showFilters"
-    },
+        events: {
+            "click .report-search:not('.disabled')": "reportSearch",
+            "click .report-settings:not('.disabled')": "reportSettings",
+            "click .add-filters": "showFilters"
+        },
 
-    initialize: function () {
-        // collection is SearchCriteria
-        this.collection.on("change:isApplied", this.render, this);
-        this.render();
-    },
+        initialize: function () {
+            // collection is SearchCriteria
+            this.listenTo(this.collection, "change:isApplied", this.toggleSearchButton);
+        },
 
-    reportSearch: function () {
-        console.log("report search");
-        EventBus.trigger("startSearch");
-    },
+        render: function () {
+            this.$el.empty();
+            this.$el.html(this.template());
 
-    reportSettings: function () {
-        console.log("report settings");
-        EventBus.trigger("showReportSettings");
-    },
+            return this;
+        },
 
-    showFilters: function () {
-        EventBus.trigger("showFilters");
-    },
+        reportSearch: function () {
+            console.log("report search");
+            EventBus.trigger("startSearch");
+        },
 
-    render: function () {
-        console.log("render menu to update button state");
-        this.$el.find(".report-search").toggleClass("disabled", !this.collection.isReadyForSearch());
+        reportSettings: function () {
+            console.log("report settings");
+            EventBus.trigger("showReportSettings");
+        },
 
-        return this;
-    }
+        showFilters: function () {
+            EventBus.trigger("showFilters");
+        },
+
+        toggleSearchButton: function () {
+            this.$(".report-search").toggleClass("disabled", !this.collection.isReadyForSearch());
+        }
 
     });
 
