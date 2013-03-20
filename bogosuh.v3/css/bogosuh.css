@@ -2,6 +2,11 @@
  * Reporting app specifics
  */
 
+.filter-bar {
+  padding: 5px 20px;
+  margin: 5px 0;
+}
+
 /* for report-column-selector */
 .modal select {
   width: 219px;

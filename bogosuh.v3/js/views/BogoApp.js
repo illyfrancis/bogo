@@ -45,6 +45,7 @@ define([
                     var position = 0;
                     self.reportSchema.each(function (reportColumn) {
                         reportColumn.set("position", ++position);
+                        // reportColumn.set("position", ++position, {silent: true});
                     });
                 },
                 error: function () {

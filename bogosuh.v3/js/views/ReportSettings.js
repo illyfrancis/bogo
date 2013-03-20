@@ -18,8 +18,6 @@ define([
 
         initialize: function () {
             // collection = ReportSchema
-            // should it be?
-            // EventBus.on("showReportSettings", this.show, this);
             this.reportColumnSelector = new ReportColumnSelector({
                 collection: this.collection
             });
@@ -38,8 +36,8 @@ define([
         },
 
         renderReportColumnSelector: function () {
-            this.$el.find(".modal-body div").append(
-            this.reportColumnSelector.render().el);
+            this.$(".modal-body div").append(
+                this.reportColumnSelector.render().el);
         },
 
         show: function () {

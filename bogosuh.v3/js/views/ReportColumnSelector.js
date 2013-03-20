@@ -30,22 +30,38 @@ define([
         },
 
         render: function () {
-            // should render separate list (selected vs available)
+            this.disposeReportColumnItems();
+
             this.$available.empty();
-            _.each(this.collection.availableColumns(), this.appendReportColumnItem, this.$available);
+            _.each(this.collection.availableColumns(),
+                this.appendReportColumnItem, this.$available);
 
             this.$selected.empty();
-            _.each(this.collection.selectedColumns(), this.appendReportColumnItem, this.$selected);
+            _.each(this.collection.selectedColumns(),
+                this.appendReportColumnItem, this.$selected);
 
             return this;
         },
 
+        remove: function () {
+            // for proper disposal of sub views.
+            this.disposeReportColumnItems();
+            Backbone.View.prototype.remove.call(this);
+            return this;
+        },
+
+        disposeReportColumnItems: function () {
+            this.trigger("dispose");
+        },
+
         appendReportColumnItem: function (reportColumn) {
-            // TODO - proper disposal of itemviews
-            var itemView = new ReportColumnItem({
+            var reportColumnItem = new ReportColumnItem({
                 model: reportColumn
             });
-            this.append(itemView.render().el);
+
+            // register the report column items for dispose event.
+            reportColumnItem.listenTo(this, "dispose", reportColumnItem.remove);
+            this.append(reportColumnItem.render().el);
         },
 
         onValidationError: function (model, error) {
