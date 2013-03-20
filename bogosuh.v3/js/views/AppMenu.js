@@ -6,7 +6,7 @@ define([
     "text!templates/AppMenu.html"
 ], function ($, _, Backbone, EventBus, tpl) {
 
-    var BogoAppMenu = Backbone.View.extend({
+    var AppMenu = Backbone.View.extend({
 
         template: _.template(tpl),
 
@@ -48,6 +48,6 @@ define([
 
     });
 
-    return BogoAppMenu;
+    return AppMenu;
 
 });

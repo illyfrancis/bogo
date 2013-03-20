@@ -3,7 +3,7 @@ define([
     "jquery",
     "underscore",
     "backbone",
-    "views/BogoAppMenu",
+    "views/AppMenu",
     "views/FilterStatusBar",
     "views/ReportSettings",
     "views/SearchFilters",
