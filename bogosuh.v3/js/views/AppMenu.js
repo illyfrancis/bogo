@@ -29,12 +29,10 @@ define([
         },
 
         reportSearch: function () {
-            console.log("report search");
             EventBus.trigger("startSearch");
         },
 
         reportSettings: function () {
-            console.log("report settings");
             EventBus.trigger("showReportSettings");
         },
 

@@ -1,0 +1,359 @@
+Note: SwiftReasonManager.java line 92, loadReasons() seems to suggest that there could be more than one trade reasons associated with a single swfit reason code.
+
+
+ADEA:
+Account Servicer Deadline Missed,
+
+AWMO:
+Awaiting Money from Ctpty,
+
+AWSH:
+Awaiting Securities from Ctpty,
+
+BATC:
+Processing Batch Issue,
+
+BENO:
+Beneficial Ownership Disagreement,
+
+BLOC:
+Account Blocked,
+
+BOTH:
+Both Instructions Held,
+
+BYIY:
+Buy-in Procedure Started,
+
+CADE:
+Transaction Call Delay Issue,
+
+CAEV:
+Corporate Action Pending,
+
+CAIS:
+Awaiting Securities from Corp Action Issue or Other Procedure,
+
+CALD:
+Repo Call In Progress,
+
+CALI:
+CALI,
+
+CALP:
+Repo Call Processed,
+
+CALR:
+CALR,
+
+CANI:
+Cancelled By Yourselves,
+
+CANR:
+Cancellation/Confirmation Requested,
+
+CANS:
+Cancelled By System,
+
+CANT:
+Cancelled Due To Transformation,
+
+CANZ:
+Cancelled Due To Split/Partial Settlement,
+
+CASH:
+Cash Account Issue,
+
+CASY:
+Impossible Cash Settlement System Instructed,
+
+CERT:
+Wrong Certificate Numbers,
+
+CHAS:
+Inquiry Sent,
+
+CLAC:
+Ctpty Insufficient Securities,
+
+CLAT:
+Ctpty Instruction Too Late,
+
+CLHT:
+Instructed Settle Date does not agree with Clearing House Trade,
+
+CMIS:
+Matching Instruction Not Found,
+
+CMON:
+Ctpty Insufficient Money,
+
+COLL:
+Securities Pledged as Collateral,
+
+CPCA:
+Ctpty Cancelled Their Instruction,
+
+CPEC:
+Ctpty in Receivership,
+
+CSUB:
+Cancelled By Agent,
+
+CYCL:
+Awaiting Next Settlement Cycle,
+
+DCAL:
+Call Denied Since Already Applied,
+
+DCAN:
+Denied Since Already Cancelled,
+
+DDAT:
+Settlement Date Issue,
+
+DDEA:
+Deal Price Issue,
+
+DELN:
+Disagreement Direction of Trade,
+
+DENO:
+Quantity Instructed Does Not Match Denomination Available/Deliverable,
+
+DEPO:
+Refused Deposit Due To Allotment Exceeded,
+
+DEPT:
+Place of Settlement Issue,
+
+DFOR:
+Call Denied Since Not Allowed,
+
+DISA:
+Closing Due to Natural Disaster,
+
+DKNY:
+Ctpty Returned Shares,
+
+DMON:
+Settlement Amount Issue,
+
+DOCC:
+Awaiting Documents/Registration Instruction/Endorsements from Ctpty,
+
+DOCY:
+Awaiting Documents/Registration Instruction/Endorsements from You,
+
+DPRG:
+Denied Since In Progress,
+
+DQUA:
+Quantity Issue,
+
+DREP:
+Denied Since Repo Ended,
+
+DSEC:
+Security Issue,
+
+DSET:
+Denied Since Already Settled,
+
+DTRA:
+Not Recognized By Ctpty,
+
+DTRD:
+Trade Date Issue,
+
+FLIM:
+Maximum Foreign Limit Reached,
+
+FORF:
+Forfeit Amount Issue,
+
+FRAP:
+Disagreement Payment Type,
+
+FROZ:
+Securities Frozen at CSD,
+
+FUTU:
+Awaiting Settlement Date - No Issue,
+
+GLOB:
+Global Form Securities,
+
+GUAD:
+GUAD,
+
+IAAD:
+Status Reason Investigation,
+
+ICAG:
+Incorrect Agent,
+
+ICUS:
+Receive/Deliver Custodian Issue,
+
+IEXE:
+Incorrect Buyer or Seller,
+
+IIND:
+Common Reference Issue,
+
+INCA:
+Income Adjustment Required,
+
+LAAW:
+Awaiting Settlement Of A Purchase To Cover Failing Position,
+
+LACK:
+Lack of Securities,
+
+LALO:
+Securities are Loaned Out,
+
+LATE:
+Market or Processing Deadline Missed,
+
+LEOG:
+Letter of Guarantee Indicator Issue,
+
+LINK:
+Linked Instruction Pending,
+
+LIQU:
+Insufficient Central Bank Liquidity,
+
+MACH:
+MACH,
+
+MINO:
+Minimum Settlement Quantity Issue,
+
+MLAT:
+Money/Securities Too Late,
+
+MONY:
+Insufficient Money,
+
+MUNO:
+Multiple Settlement Quantity Issue,
+
+NARR:
+Narrative Reason,
+
+NCON:
+Confirmation Not Received,
+
+NCRR:
+Settlement Amount Currency Issue,
+
+NEWI:
+New Issue,
+
+NMAS:
+Matching Not Required,
+
+NOFX:
+No Foreign Exchange Instruction,
+
+NPRO:
+NPRO,
+
+OBJT:
+Securities Under Objection,
+
+PART:
+Trade Settles in Partials,
+
+PHCK:
+Physical Securities Being Verified,
+
+PHSE:
+Physical Delivery Delay,
+
+PHYS:
+Disagreement Physical Settlement,
+
+PLCE:
+Place of Trade Issue,
+
+PODU:
+Possible Duplicate Instruction,
+
+PRCY:
+Ctpty Instruction Held,
+
+PREA:
+Your Instruction Held,
+
+REFE:
+Duplicate Reference,
+
+REFS:
+Not in Good Order,
+
+REFU:
+Instruction Refused/Not Recognized,
+
+REGD:
+Disagreement Registration Details,
+
+REGT:
+Certificates Rejected,
+
+REPA:
+Termination Transaction Amt Issue,
+
+REPO:
+Repurchase Rate Issue,
+
+REPP:
+Premium Amount Issue,
+
+RERT:
+Repurchase Rate Type Issue,
+
+RSPR:
+RSPR,
+
+RTGS:
+Disagreement RTGS System,
+
+SAFE:
+Safekeeping Account Issue,
+
+SBLO:
+Securities Blocked,
+
+SDUT:
+Lack of Stamp Duty Information,
+
+SETR:
+Settlement Transaction Issue,
+
+SETS:
+Settlement System/Method Modified,
+
+SMPG:
+Market Practice Rule Discrepancy,
+
+STCD:
+Confirmation Discrepancy,
+
+TAMM:
+Trade Amended in Market,
+
+TERM:
+Closing Date/Time Issue,
+
+TXST:
+Tax Status Issue,
+
+VASU:
+Variable Rate Support Issue,
+
+YCOL:
+Collateral Shortage,
