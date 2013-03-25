@@ -16,7 +16,8 @@ $(function() {
 
         },
         update: function (e, ui) {
-            console.log('done');
+            var i = ui.item.index();
+            console.log('done [' + i + ']');
         },
         cursor: 'move',
         cursorAt: {
