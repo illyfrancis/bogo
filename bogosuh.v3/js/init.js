@@ -8,7 +8,8 @@ define([
     "backbone",
     "bootstrap",
     "views/ViewManager",
-    "views/BogoApp"
+    // "views/BogoApp"
+    "views/BogoApp2"
 ], function ($, _, Backbone, Bootstrap, ViewManager, BogoApp) {
 
     // place bootstraped models here
@@ -27,7 +28,8 @@ define([
         // main app (app.views.bogo)
         //-------------------------------------------------------------------------
         app.Bogo = new BogoApp();
-        app.Bogo.render();
+        // app.Bogo.render();
+        app.Bogo.load();
 
         // loading image
         // http://stackoverflow.com/questions/68485/how-to-show-loading-spinner-in-jquery
