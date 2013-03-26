@@ -32,7 +32,7 @@ define([
             this.render();
 
             // set default search filter
-            this.setSearchFilter("AccountCriteria");
+            this.selectFilter("AccountCriteria");
         },
 
         registerEvents: function () {
@@ -94,7 +94,7 @@ define([
             this.filterSelectors.push(filterSelector);
         },
 
-        setSearchFilter: function (criteriaName) {
+        selectFilter: function (criteriaName) {
             var filterSelector = _.find(this.filterSelectors, function (selector) {
                 return selector.model.get("name") === criteriaName;
             });
@@ -136,7 +136,7 @@ define([
 
         show: function (criteriaName) {
             if (criteriaName) {
-                this.setSearchFilter(criteriaName);
+                this.selectFilter(criteriaName);
             }
             this.$el.modal();
         },
