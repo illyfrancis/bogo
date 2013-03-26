@@ -9,8 +9,9 @@ define([
     "bootstrap",
     "views/ViewManager",
     // "views/BogoApp"
-    "views/BogoApp2"
-], function ($, _, Backbone, Bootstrap, ViewManager, BogoApp) {
+    "views/BogoApp2",
+    "events/ReferenceRepository"
+], function ($, _, Backbone, Bootstrap, ViewManager, BogoApp, Repository) {
 
     // place bootstraped models here
     // the idea is that we place JSON string within reset(***) for rendering, escape all </ within JSON for security measure (refer to http://backbonejs.org/#FAQ-bootstrap)
@@ -30,6 +31,8 @@ define([
         app.Bogo = new BogoApp();
         // app.Bogo.render();
         app.Bogo.load();
+
+        app.Repository = Repository;
 
         // loading image
         // http://stackoverflow.com/questions/68485/how-to-show-loading-spinner-in-jquery
