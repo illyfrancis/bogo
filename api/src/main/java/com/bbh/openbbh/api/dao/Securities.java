@@ -47,6 +47,10 @@ public class Securities {
 		return securityIds;
 	}
 
+	public static List<Model> findAll() {
+		return newArrayList(securities.find().as(Model.class));
+	}
+
 	private static List<SecurityId> findByCusip(Pattern cusip) {
 		Iterable<Model> models = securities.find("{cusip: #}", cusip)
 				.fields("{cusip: 1}").limit(5).as(Model.class);
