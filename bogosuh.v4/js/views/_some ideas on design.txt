@@ -1,0 +1,186 @@
+App
++ onSearch:
+    // 1. validate if searchable (should've been validated before calling)
+    // 2. display searching ... message (or spinner etc)
+    // 3. collect sort, query string
+    // 4. issue fetch on report object
+    // 5. on success, render results
+    // 6. on failure, render error
+
++ onPager:
+
++ onExport:
+
+
+Report
+ReportItem
+
+
+ReportCommand
++ search
++ export
++ 
+
+
+App:
+    doSearch: function() {
+        SearchReport.execute();
+    },
+
+    doExport: function() {
+        ExportReport.execute(); ??? how to execute command on the server ???
+    }
+
+SearchContent:
+    tagName: "div",
+    className: "search-content content-fluid",
+    execute: function() {
+        this.validate();
+        showProgress();
+        var query = this.query();
+
+        // fetch
+        this.report = new Report();
+        this.report.url & set query string
+        this.report.fetch(
+            onSucess,
+            onError
+        );
+    }
+    onSuccess: function() {
+        hideProgress();
+        renderReport();
+    }
+    onError: function() {
+        hideProgress();
+        renderError();
+    }
+    showProgress: function() {
+        this.progress = new Progress(); // or reuse the same one?
+        this.$el.append(this.progress.render().el);
+        this.progress.show();
+    },
+    hideProgress: function() {
+        this.progress.hide();
+    },
+    renderReport: function() {
+        // have this.Report (PaginatedReport)
+        var searchResult = new SearchResult({collection: this.report});
+        this.$el.append(searchResult.render().el);
+    },
+    renderError: function() {
+        // alert?
+    }
+
+SearchResult:
+    tagName: div,
+    className: "search-result",
+
+    // need the template derived from ReportSchema
+    initialize: function() {
+        // collection = Report
+
+        // init template (dynamic)
+        this.rowTemplate = _.template(...);
+    },
+    render: function() {
+        for each report columns
+            this.appendColumnHeaders();
+
+        if report empty
+            this.appendNoReport();
+        for each report item
+            this.appendRows();
+
+        return this;
+    },
+    appendColumnHeaders: function(reportColumn) {
+        var columnHeader = new ???ReportColumnHeader???
+        this.$el.find(".report-header").append(columnHeader.render().el);
+    },
+    appendRows: function(reportItem) {
+        var row = new ReportRow({model: reportItem });
+        this.$el.find(".report-content").append(row.render().el);
+    },
+    appendNoReport: function() {
+        new NoReport();
+    }
+
+Progress:
+    show: function() {
+
+    }
+    hide: function() {
+
+    }
+ReportColumnHeader:
+    render ???
+
+ReportRow:
+    tagName: "tr",
+    events: {
+        "click": "showDetail"
+    },
+    initialize: function() {
+        // model = ReportItem
+    },
+    render: function() {
+
+    },
+    showDetail: function() {
+        // what is the id of ReportItem?
+        var reportDetail = new ReportDetail({model: this.model});
+        reportDetail.show();
+    }
+
+ReportDetail:
+    show: function() {
+        ???
+        may need to fetch "full" model
+    }
+
+NoReport:
+    render:
+
+
+---------------------------------
+
+html
+
+// for searching... display
+<div class="nav-bar"></div>
+<div class="filter-bar"></div>
+<div class="search-content content-fluid">
+    <div class="modal show">spinner...</div>
+</div>
+
+// for search result display
+<div class="nav-bar"></div>
+<div class="filter-bar"></div>
+<div class="search-content content-fluid">
+    <div class="modal hide">spinner...</div>
+    <div class="search-result">
+        <div class="report-header"></div>
+        <div class="report-body"></div>
+        <div class="report-footer"></div>
+    </div>
+</div>
+
+// for search error display
+<div class="nav-bar"></div>
+<div class="filter-bar"></div>
+<div class="search-content content-fluid">
+    <div class="modal hide">spinner...</div>
+    <div>Error message</div> // or alert
+</div>
+
+// for search result display (no data) - depends on requirement
+<div class="nav-bar"></div>
+<div class="filter-bar"></div>
+<div class="search-content content-fluid">
+    <div class="modal hide">spinner...</div>
+    <div class="search-result">
+        <div>No data</div> // or alert (more likely)
+        <div class="report-header"></div>
+    </div>
+</div>
