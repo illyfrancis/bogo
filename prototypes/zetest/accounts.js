@@ -7,7 +7,7 @@ var Account = Backbone.Model.extend({
 
     select: function(state) {
         this.set("selected", state);
-    }    
+    }
 });
 
 var PaginatedAccounts = Backbone.Paginator.clientPager.extend({
@@ -32,5 +32,24 @@ var PaginatedAccounts = Backbone.Paginator.clientPager.extend({
     parse: function(response) {
         var tags = response.values;
         return tags;
+    }
+});
+
+// --- trying out defining class.
+
+var Base = function (attr) {
+    console.log("begin.");
+    this.attr = "";
+    this.set(attr);
+    console.log("end.");
+};
+
+_.extend(Base.prototype, {
+    set: function (val) {
+        console.log("> set: with val [" + val + "]");
+        this.attr = val;
+    },
+    get: function () {
+        return this.attr;
     }
 });
