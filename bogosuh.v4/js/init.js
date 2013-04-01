@@ -9,7 +9,7 @@ define([
     "bootstrap",
     "views/ViewManager",
     "views/BogoApp",
-    "events/ReferenceRepository"
+    "events/Repository"
 ], function ($, _, Backbone, Bootstrap, ViewManager, BogoApp, Repository) {
 
     // place bootstraped models here
