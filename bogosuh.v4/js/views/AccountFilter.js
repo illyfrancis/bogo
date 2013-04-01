@@ -21,7 +21,7 @@ define([
         },
 
         initialize: function () {
-            // model = ReportCriteria (AccountCriteria)
+            // model = AccountCriterion
             this.paginatedAccounts = this.model.paginatedAccounts();
 
             this.listenTo(this.paginatedAccounts, "change:selected", this.filterChanged);

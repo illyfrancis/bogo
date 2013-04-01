@@ -8,8 +8,7 @@ define([
     "backbone",
     "bootstrap",
     "views/ViewManager",
-    // "views/BogoApp"
-    "views/BogoApp2",
+    "views/BogoApp",
     "events/ReferenceRepository"
 ], function ($, _, Backbone, Bootstrap, ViewManager, BogoApp, Repository) {
 

@@ -1,25 +1,25 @@
 define([
-    "underscore",
-    "backbone"
+    'underscore',
+    'backbone'
 ], function (_, Backbone) {
 
-    // ReportColumn must be associated with ReportCriteria?
+    // ReportColumn must be associated with Criterion?
     var ReportColumn = Backbone.Model.extend({
 
         defaults: {
-            title: "",
+            title: '',
             // for displaying - e.g. Account Name
-            label: "",
+            label: '',
             // for report columns
-            name: "",
+            name: '',
             // for rendering JSON response - e.g. accountName
             selected: false,
             // boolean test for including in report
             position: 0,
-            criteria: "",
-            // name of ReportCriteria object
+            criteria: '',
+            // name of Criterion object
             //        filterable: true   // some columns may not be (or use criteria as an indication)
-            sort: "" // "asc" | "desc" | ""
+            sort: '' // 'asc' | 'desc' | ''
         },
 
         validate: function (attrs) {
@@ -30,11 +30,11 @@ define([
             // be careful, the collection attrib for this model is the first collection that this model is bound to.
             // e.g. if the model is added to a second collection the this.collection refers to the first collection obj only.
             if (this._isColumnBeingAdded(attrs) && this.collection.hasMaximumReportColumns()) {
-                return "Cannot add more report columns";
+                return 'Cannot add more report columns';
             }
 
             if (this._isColumnBeingRemoved(attrs) && this.collection.hasMinimumReportColumns()) {
-                return "Cannot remove more report columns";
+                return 'Cannot remove more report columns';
             }
         },
 
@@ -47,21 +47,21 @@ define([
         },
 
         toggle: function () {
-            // this.set("selected", !this.get("selected"));
-            this.set("selected", !this.get("selected"), {
+            // this.set('selected', !this.get('selected'));
+            this.set('selected', !this.get('selected'), {
                 validate: true
             });
 
             // if removed, also remove sorting for this column.
-            if (!this.get("selected")) {
+            if (!this.get('selected')) {
                 this.set({
-                    sort: ""
+                    sort: ''
                 });
             }
         },
 
         setPosition: function (position) {
-            this.set("position", position, {
+            this.set('position', position, {
                 silent: true
             });
         },
@@ -69,35 +69,35 @@ define([
         reverseSort: function () {
             if (this.isSortAsc()) {
                 this.set({
-                    sort: "desc"
+                    sort: 'desc'
                 });
             } else if (this.isSortDesc()) {
                 this.set({
-                    sort: "asc"
+                    sort: 'asc'
                 });
             } else {
                 this.set({
-                    sort: "asc"
+                    sort: 'asc'
                 });
             }
         },
 
         removeSort: function () {
             this.set({
-                sort: ""
+                sort: ''
             });
         },
 
         isSortAsc: function () {
-            return this.get("sort") === "asc";
+            return this.get('sort') === 'asc';
         },
 
         isSortDesc: function () {
-            return this.get("sort") === "desc";
+            return this.get('sort') === 'desc';
         },
 
         isSortApplied: function () {
-            return this.get("sort") !== "" && this.get("selected");
+            return this.get('sort') !== '' && this.get('selected');
         },
 
         // SMELL - accessing collection from model is strange.
@@ -115,11 +115,11 @@ define([
     /*
 
     AccountNumber {
-        title: "Account Number",
-        name: "accountNumber",
+        title: 'Account Number',
+        name: 'accountNumber',
         selected: true,
         position: 0,
-        criteria: "AccountCriteria"
+        criteria: 'AccountCriteria'
     }
     */
 });

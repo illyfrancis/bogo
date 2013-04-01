@@ -1,55 +1,55 @@
 define([
-    "jquery",
-    "underscore",
-    "backbone",
-    "events/EventBus",
-    "views/FilterStatusBadge",
-    "text!templates/FilterStatusBar.html"
-], function($, _, Backbone, EventBus, FilterStatusBadge, tpl) {
+    'jquery',
+    'underscore',
+    'backbone',
+    'events/EventBus',
+    'views/FilterStatusBadge',
+    'text!templates/FilterStatusBar.html'
+], function ($, _, Backbone, EventBus, FilterStatusBadge, tpl) {
 
     var FilterStatusBar = Backbone.View.extend({
 
-        tagName: "div",
+        tagName: 'div',
 
-        className: "filter-bar",
+        className: 'filter-bar',
 
         template: _.template(tpl),
 
         events: {
-            "click .add-filters": "showFilters"
+            'click .add-filters': 'showFilters'
         },
 
-        initialize: function() {
+        initialize: function () {
             // collection = SearchCriteria
-            this.listenTo(this.collection, "change:isApplied", this.updateView);
+            this.listenTo(this.collection, 'change:isApplied', this.updateView);
         },
 
-        updateView: function(reportCriteria) {
+        updateView: function (criterion) {
             // only do partial update
-            if(reportCriteria.get("isApplied")) {
-                this.addFilterBadge(reportCriteria);
+            if(criterion.get('isApplied')) {
+                this.addFilterBadge(criterion);
             }
         },
 
-        showFilters: function() {
-            EventBus.trigger("showFilters");
+        showFilters: function () {
+            EventBus.trigger('showFilters');
         },
 
-        render: function() {
+        render: function () {
             this.$el.empty();
             this.$el.html(this.template());
             this.renderFilterBadges();
             return this;
         },
 
-        renderFilterBadges: function() {
+        renderFilterBadges: function () {
             var filtersApplied = this.collection.where({
                 isApplied: true
             });
             _.each(filtersApplied, this.addFilterBadge, this);
         },
 
-        addFilterBadge: function(filter) {
+        addFilterBadge: function (filter) {
             // TODO - dispose views properly
             var filterBadge = new FilterStatusBadge({
                 model: filter

@@ -17,7 +17,7 @@ define([
         },
 
         initialize: function () {
-            // model = ReportCriteria
+            // model = Criterion
             this.listenTo(this.model, "change:isApplied", this.filterChange);
         },
 

@@ -1,7 +1,16 @@
-/*global define,app*/
-define(["collections/PaginatedAccounts"], function (PaginatedAccounts) {
+define([
+    'models/Criterion',
+    'collections/PaginatedAccounts'
+], function (Criterion, PaginatedAccounts) {
 
-    var AccountCriteria = {
+    var AccountCriterion = Criterion.extend({
+
+        initialize: function () {
+            this.set({
+                'name': 'Account',
+                'title': 'Account'
+            });
+        },
 
         hydrate: function (selections) {
             // apply restrictions to accounts
@@ -16,21 +25,21 @@ define(["collections/PaginatedAccounts"], function (PaginatedAccounts) {
                 app.data.accounts = response.accounts.valid.values; // from response.js
                 this.accounts.reset(app.data.accounts); // from global, prefetched accounts data
                 // this.accounts.reset(response.accounts.valid.values); // from response.js
-                // console.log("count before pager : " + this.accounts.length);
+                // console.log('count before pager : ' + this.accounts.length);
                 this.accounts.pager();
-                // console.log("count after pager : " + this.accounts.length);
+                // console.log('count after pager : ' + this.accounts.length);
             }
 
             return this.accounts;
         },
 
         preserve: function () {
-            console.log("> account criteria: preserve");
-            this.get("restrictions").accountNumbers = [2];
+            console.log('> account criteria: preserve');
+            this.get('restrictions').accountNumbers = [2];
         },
 
         query: function () {
-            console.log("> account criteria: ");
+            console.log('> account criteria: ');
             return this.paginatedAccounts().selectedAccountNumbers();
         },
 
@@ -39,13 +48,13 @@ define(["collections/PaginatedAccounts"], function (PaginatedAccounts) {
             if (attrs.isApplied) {
                 if (this.paginatedAccounts() && !this.paginatedAccounts().hasSelection()) {
                     // TODO - better error message
-                    return "Cannot apply filter, nothing selected";
+                    return 'Cannot apply filter, nothing selected';
                 }
             }
         }
 
-    };
+    });
 
-    return AccountCriteria;
+    return AccountCriterion;
 
 });

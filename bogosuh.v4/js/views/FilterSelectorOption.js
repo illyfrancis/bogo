@@ -16,7 +16,7 @@ define([
         },
 
         initialize: function () {
-            // model = ReportCriteria
+            // model = Criterion
         },
 
         render: function () {

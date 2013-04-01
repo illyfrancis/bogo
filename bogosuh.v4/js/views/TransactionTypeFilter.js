@@ -9,7 +9,7 @@ define([
     var TransactionTypeFilter = Backbone.View.extend({
 
         initialize: function () {
-            // model = ReportCriteria (TransactionTypeCriteria)
+            // model = TransactionTypeCriterion
             this.listenTo(this.model.transactionTypes(), "childChange", this.filterChanged);
 
             this.transactionTypes = new Tree({

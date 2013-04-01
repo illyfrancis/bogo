@@ -12,7 +12,7 @@ define([
         // or generic date template?
 
         initialize: function () {
-            // model = ReportCriteria (SettlementDateCriteria)
+            // model = SettlementDateCriterion
             // .settlementDates (DateRange)
             this.settlementDatesFilter = new DateRangeFilter({
                 model: this.model.settlementDates

@@ -1,7 +1,17 @@
 /*global define*/
-define(["collections/TreeCollection"], function (TreeCollection) {
+define([
+    'models/Criterion',
+    'collections/TreeCollection'
+], function (Criterion, TreeCollection) {
 
-    var TransactionTypeCriteria = {
+    var TransactionTypeCriterion = Criterion.extend({
+
+        initialize: function () {
+            this.set({
+                'name': 'TransactionType',
+                'title': 'Transaction Type'
+            });
+        },
 
         transactionTypes: function () {
             if (this.types === undefined) {
@@ -20,26 +30,26 @@ define(["collections/TreeCollection"], function (TreeCollection) {
             this.transactionTypes().selectByValues(types);
         },
         preserve: function () {
-            console.log("> TransactionTypeCriteria: preserve");
-            // this.get("restrictions").accountNumbers = [2];
+            console.log('> TransactionTypeCriterion: preserve');
+            // this.get('restrictions').accountNumbers = [2];
             // this.transactionTypes().selectedValues()
         },
 
         query: function () {
-            console.log("> TransactionTypeCriteria: query");
+            console.log('> TransactionTypeCriterion: query');
         },
 
         validate: function (attrs) {
-            console.log("> TransactionTypeCriteria: validate");
+            console.log('> TransactionTypeCriterion: validate');
             // when the criteria is applied, confirm if the criteria are set
             if (attrs.isApplied) {
                 if (!this.transactionTypes().hasSelection()) {
-                    return "Cannot apply filter, nothing selected";
+                    return 'Cannot apply filter, nothing selected';
                 }
             }
         }
-    };
+    });
 
-    return TransactionTypeCriteria;
+    return TransactionTypeCriterion;
     
 });

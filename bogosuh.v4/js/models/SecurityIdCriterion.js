@@ -1,0 +1,30 @@
+define([
+    'underscore',
+    'backbone',
+    'models/Criterion'
+], function (_, Backbone, Criterion) {
+
+    var SecurityIdCriterion = Criterion.extend({
+
+        initialize: function () {
+            this.set({
+                'name': 'SecurityId',
+                'title': 'Security Id'
+            });
+        },
+
+        validate: function (attrs) {
+            if(attrs.isApplied) {
+                console.log('security id criteria: validate');
+            }
+        },
+
+        query: function () {
+            return 'SecurityIdCriterion:JSON';
+        }
+
+    });
+
+    return SecurityIdCriterion;
+
+});
