@@ -2,10 +2,10 @@ define([
     "jquery",
     "underscore",
     "backbone",
-    "text!templates/SearchFilterSelector.html"
+    "text!templates/FilterSelectorOption.html"
 ], function ($, _, Backbone, tpl) {
 
-    var SearchFilterSelector = Backbone.View.extend({
+    var FilterSelectorOption = Backbone.View.extend({
 
         tagName: "li",
 
@@ -25,10 +25,10 @@ define([
         },
 
         select: function () {
-            this.$el.trigger("change", this.model.cid);
+            this.$el.trigger("select", this.model.cid);
         }
 
     });
 
-    return SearchFilterSelector;
+    return FilterSelectorOption;
 });

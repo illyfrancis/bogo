@@ -8,7 +8,7 @@ define([
     "models/SettlementDateCriteria",
     "models/SettlementLocationCriteria",
     "models/TransactionTypeCriteria"
-], function (_, Backbone) {
+], function (_, Backbone, AccountCriteria) {
 
     var ReportCriteria = Backbone.Model.extend({
 
@@ -26,7 +26,13 @@ define([
         parse: function (response) {
 
             try {
-                var criteria = require("models/" + response.name);
+                var criteria = {};
+                if (response.name === "AccountCriteria") {
+                    console.log("Account criteria");
+                    criteria = AccountCriteria;
+                } else {
+                    criteria = require("models/" + response.name);
+                }
                 // mixin
                 _.extend(this, criteria);
             } catch (err) {

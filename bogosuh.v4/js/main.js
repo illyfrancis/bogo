@@ -7,7 +7,7 @@ require.config({
         "jquery.ui": "../lib/jquery-ui-1.9.0.custom",
         "bootstrap": "../lib/bootstrap",
         "underscore": "../lib/underscore-1.4.4",
-        "backbone": "../lib/backbone-0.9.10",
+        "backbone": "../lib/backbone-1.0.0",
         "backbone.paginator": "../lib/backbone.paginator",
         "moment": "../lib/moment",
         "text": "../lib/require/text"
