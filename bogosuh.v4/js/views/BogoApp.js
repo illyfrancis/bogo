@@ -16,6 +16,7 @@ define([
             EventBus.on('showReportSettings', this.showReportSettings, this);
             EventBus.on('showFilters', this.showFilters, this);
             EventBus.on('startSearch', this.doSearch, this);
+            EventBus.on('loadPreference', this.doPreference, this);
 
             this.searchCriteria = new SearchCriteria();
         },
@@ -53,6 +54,15 @@ define([
         doSearch: function () {
             console.log('doSearch');
             this.searchContent.execute();
+        },
+
+        doPreference: function () {
+            Repository.loadPreference(this.searchCriteria.hydrate, this.searchCriteria);
+        },
+
+        savePreference: function () {
+            // TODO - think about this one
+            this.searchCriteria.preserve();
         }
 
     });

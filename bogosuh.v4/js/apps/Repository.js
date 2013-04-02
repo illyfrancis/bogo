@@ -3,15 +3,16 @@ define([
     'backbone',
     'underscore',
     'collections/PaginatedAccounts',
-    'collections/ReportSchema'
-], function (Backbone, _, PaginatedAccounts, ReportSchema) {
+    'collections/ReportSchema',
+    'collections/TreeCollection'
+], function (Backbone, _, PaginatedAccounts, ReportSchema, TreeCollection) {
 
     var Repository = {
 
         loadAll: function (onLoaded, context) {
 
             // list out all load ops in array
-            var loaders = ['loadAccounts', 'loadSecurities', 'loadReportSchema'],
+            var loaders = ['loadAccounts', 'loadSecurities', 'loadReportSchema', 'loadTransactionTypes'],
                 options = {};
 
             if (_.isFunction(onLoaded)) {
@@ -65,8 +66,65 @@ define([
             // all available swift reasons code?
         },
 
-        loadTransactionTypes: function() {
+        loadTransactionTypes: function(options) {
+            var data = [{
+                name: "TRADE",
+                list: [{
+                    name: "RECEIVE",
+                    list: [
+                        {name: "RECEIVE VS PAYMENT (RVP)", value: "RVP"},
+                        {name: "RECEIVE FREE (REC)", value: "REC"},
+                        {name: "PURCHASE (PUR)", value: "PUR"},
+                        {name: "MUTUAL FUND PURCHASE (MTP)", value: "MTP"},
+                        {name: "RETURN DELIVER (RTD)", value: "RTD"},
+                        {name: "RECEIVE NO S F (RCW)", value: "RCW"},
+                        {name: "SELL REVERSAL (SRV)", value: "SRV"}
+                    ]},{
+                    name: "DELIVER",
+                    list: [
+                        {name: "DELIVER VS PAYMENT (DVP)", value: "DVP"},
+                        {name: "DELIVER FREE (DEL)", value: "DEL"},
+                        {name: "SELL (SEL)", value: "SEL"},
+                        {name: "MUTUAL FUND REDEMPTION (MTR)", value: "MTR"},
+                        {name: "RETURN RECEIVE (RTR)", value: "RTR"},
+                        {name: "DELIVER NO S F (DLW)", value: "DLW"},
+                        {name: "DELIVER VS PAYMENT NO S F (DVW)", value: "DVW"},
+                        {name: "RETURN DELIVER NO S F (RWD)", value: "RWD"},
+                        {name: "PURCHASE REVERSAL (PRV)", value: "PRV"}
+                    ]}
+                ]},{
+                name: "CORPORATE ACTIONS",
+                list: [
+                    {name: "CONVERSION (CON)", value: "CON"},
+                    {name: "DIVIDEND REINVESTMENT (DRV)", value: "DRV"},
+                    {name: "REV DIVIDEND REINVESTMENT (DRR)", value: "DRR"},
+                    {name: "EXCHANGE (EXC)", value: "EXC"},
+                    {name: "LIQUIDATION (LIQ)", value: "LIQ"},
+                    {name: "MERGER (MER)", value: "MER"},
+                    {name: "NAME CHANGE (NAM)", value: "NAM"},
+                    {name: "REDEMPTION (RED)", value: "RED"},
+                    {name: "RIGHTS (RTS)", value: "RTS"},
+                    {name: "STOCK DIVIDEND (SDV)", value: "SDV"},
+                    {name: "SUBSCRIPTION (SUB)", value: "SUB"},
+                    {name: "TENDER (TEN)", value: "TEN"}
+                ]},{
+                name: "MISCELLANEOUS",
+                list: [
+                    {name: "ADJUST (ADJ)", value: "ADJ"},
+                    {name: "EQUALIZATION (EQL)", value: "EQL"},
+                    {name: "FROZEN CALL BOND (FCB)", value: "FCB"},
+                    {name: "MISCELLANEOUS (LPA)", value: "LPA"}
+                ]
+            }];
 
+            this.transactionTypes = new TreeCollection();
+            this.transactionTypes.reset(data);
+
+            options = options || {};
+            if (options.success) {
+                console.log('transaction types loaded');
+                options.success();
+            }
         },
 
         // this is just for testing... remove
@@ -113,53 +171,32 @@ define([
         },
 
         // I think this is for hydrating
-        loadSearchCriteria: function () {
-            this.searchCriteria = new SearchCriteria();
-            /*
-            this.searchCriteria.reset([{
-                name: 'AccountCriteria',
-                title: 'Account',
-                isApplied: true,
+        loadPreference: function (callback, context) {
+
+            var preference = new Backbone.Collection();
+            // preference.url = '/api/criteria/{id}';
+            // preference.fetch();
+
+            preference.reset([{
+                name: 'Account',
                 restrictions: {
+                    isApplied: true,
                     accountNumbers: ['0015594','0067173','0067249']
                 }
             }, {
-                name: 'TransactionTypeCriteria',
-                title: 'Transaction Types',
-                isApplied: false,
+                name: 'TransactionType',
                 restrictions: {
+                    isApplied: true,
                     types: ['DVW','RVP','REC'],
                     id: 'TR001'
-                }
-            }, {
-                name: 'SecurityIdCriteria',
-                title: 'Security ID',
-                isApplied: false,
-                restrictions: {
-                }
-            }, {
-                name: 'SecurityCategoryCriteria',
-                title: 'Security Category',
-                isApplied: false,
-                restrictions: {
-                }
-            }, {
-                name: 'SettlementDateCriteria',
-                title: 'Settlement Date',
-                isApplied: false,
-                restrictions: {
-                }
-            }, {
-                name: 'SettlementLocationCriteria',
-                title: 'Settlement Location',
-                isApplied: false,
-                restrictions: {
                 }
             }], {
                 parse: true
             }); // for forcing the parse in the model
-*/
 
+            if (callback && context) {
+                callback.call(context, preference);
+            }
         }
 
     };

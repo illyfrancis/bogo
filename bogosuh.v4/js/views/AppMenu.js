@@ -1,9 +1,9 @@
 define([
-    "jquery",
-    "underscore",
-    "backbone",
-    "apps/EventBus",
-    "text!templates/AppMenu.html"
+    'jquery',
+    'underscore',
+    'backbone',
+    'apps/EventBus',
+    'text!templates/AppMenu.html'
 ], function ($, _, Backbone, EventBus, tpl) {
 
     var AppMenu = Backbone.View.extend({
@@ -11,14 +11,15 @@ define([
         template: _.template(tpl),
 
         events: {
-            "click .report-search:not('.disabled')": "reportSearch",
-            "click .report-settings:not('.disabled')": "reportSettings",
-            "click .add-filters": "showFilters"
+            'click .report-search:not(".disabled")': 'reportSearch',
+            'click .report-settings:not(".disabled")': 'reportSettings',
+            'click .add-filters': 'showFilters',
+            'click .load-preference:not(".disabled")': 'loadPreference'
         },
 
         initialize: function () {
             // collection is SearchCriteria
-            this.listenTo(this.collection, "change:isApplied", this.toggleSearchButton);
+            this.listenTo(this.collection, 'change:isApplied', this.toggleSearchButton);
         },
 
         render: function () {
@@ -29,19 +30,23 @@ define([
         },
 
         reportSearch: function () {
-            EventBus.trigger("startSearch");
+            EventBus.trigger('startSearch');
         },
 
         reportSettings: function () {
-            EventBus.trigger("showReportSettings");
+            EventBus.trigger('showReportSettings');
         },
 
         showFilters: function () {
-            EventBus.trigger("showFilters");
+            EventBus.trigger('showFilters');
         },
 
         toggleSearchButton: function () {
-            this.$(".report-search").toggleClass("disabled", !this.collection.isReadyForSearch());
+            this.$('.report-search').toggleClass('disabled', !this.collection.isReadyForSearch());
+        },
+
+        loadPreference: function () {
+            EventBus.trigger('loadPreference');
         }
 
     });

@@ -1,7 +1,7 @@
 define([
-    'models/Criterion',
-    'apps/Repository'
-], function (Criterion, Repository) {
+    'apps/Repository',
+    'models/Criterion'
+], function (Repository, Criterion) {
 
     var AccountCriterion = Criterion.extend({
 
@@ -19,6 +19,11 @@ define([
             // apply restrictions to accounts
             var accountNumbers = selections.accountNumbers;
             this.accounts.selectBy(accountNumbers);
+            // Q: should it first unselect all previously selected accounts?
+
+            if (selections.isApplied) {
+                this.set('isApplied', selections.isApplied);
+            }
         },
 
         preserve: function () {

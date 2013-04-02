@@ -23,6 +23,15 @@ define(["underscore", "backbone", "models/TreeModel"], function (_, Backbone, Tr
         selectByValues: function (values) {
             _.each(this.leaves(), function (item) {
                 if (_.contains(values, item.get("value"))) {
+                    item.set({ "selected": true });
+                    item.trigger("childChange");
+                }
+            });
+        },
+
+        _selectByValues: function (values) {
+            _.each(this.leaves(), function (item) {
+                if (_.contains(values, item.get("value"))) {
                     item.set({
                         "selected": true
                     }, {

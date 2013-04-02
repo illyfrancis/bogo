@@ -36,6 +36,25 @@ define(['underscore', 'backbone', 'models/Criterion'], function (_, Backbone, Cr
             });
 
             return criterionByName && criterionByName.get('isApplied');
+        },
+
+        hydrate: function (preference) {
+            console.log('hydrate all');
+            preference.each(function (item) {
+                var criterionName = item.get("name");
+                var criterion = this.findWhere({'name': criterionName});
+                if (criterion) {
+                    criterion.hydrate(item.get('restrictions'));
+                }
+            }, this);
+        },
+
+        preserve: function () {
+            console.log('preserve all');
+            this.each(function (criterion) {
+                // TODO - think about preserve. should it return JSON?
+                //criterion.preserve();
+            });
         }
 
     });
