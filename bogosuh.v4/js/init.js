@@ -8,8 +8,9 @@ define([
     'backbone',
     'bootstrap',
     'views/BogoApp',
+    'views/BaseView',
     'apps/Repository'
-], function ($, _, Backbone, Bootstrap, BogoApp, Repository) {
+], function ($, _, Backbone, Bootstrap, BogoApp, Foo, Repository) {
 
     // No need to wrap within ready()
     // $(function () {
@@ -34,8 +35,11 @@ define([
     //-------------------------------------------------------------------------
     // main app (app.views.bogo)
     //-------------------------------------------------------------------------
-    app.Bogo = new BogoApp();
-    app.Bogo.load();
-    app.Repository = Repository;
+    // app.Bogo = new BogoApp();
+    // app.Bogo.load();
+    // app.Repository = Repository;
+
+    app.foo = new Foo();
+    $('body').append(app.foo.render().el);
 
 });
