@@ -68,7 +68,6 @@ define([
 
         renderColumnHeaders: function () {
             _.each(this.reportSchema.selectedColumns(), this.appendColumnHeader, this);
-            this.enableTooltip();
         },
 
         appendColumnHeader: function (reportColumn) {
@@ -77,10 +76,6 @@ define([
                 searchCriteria: this.searchCriteria
             });
             this.$el.find('.report-header tr').append(columnHeader.render().el);
-        },
-
-        enableTooltip: function () {
-            this.$el.find('[rel=tooltip]').tooltip();
         },
 
         renderReports: function () {
