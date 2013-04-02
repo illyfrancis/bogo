@@ -50,11 +50,11 @@ define([
             });
         },
 
-        hasMinimumReportColumns: function () {
+        hasMinReportColumns: function () {
             return this.selectedColumns().length <= this.MIN_REPORT_COLUMNS;
         },
 
-        hasMaximumReportColumns: function () {
+        hasMaxReportColumns: function () {
             return this.selectedColumns().length >= this.MAX_REPORT_COLUMNS;
         },
 

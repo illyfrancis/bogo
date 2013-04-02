@@ -24,11 +24,11 @@ define([
             // validate based on collection (ReportSchema) property.
             // be careful, the collection attrib for this model is the first collection that this model is bound to.
             // e.g. if the model is added to a second collection the this.collection refers to the first collection obj only.
-            if (this._isColumnBeingAdded(attrs) && this.collection.hasMaximumReportColumns()) {
+            if (this._isColumnBeingAdded(attrs) && this.collection.hasMaxReportColumns()) {
                 return 'Cannot add more report columns';
             }
 
-            if (this._isColumnBeingRemoved(attrs) && this.collection.hasMinimumReportColumns()) {
+            if (this._isColumnBeingRemoved(attrs) && this.collection.hasMinReportColumns()) {
                 return 'Cannot remove more report columns';
             }
         },

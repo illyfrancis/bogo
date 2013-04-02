@@ -1,9 +1,9 @@
 define([
-    "jquery",
-    "underscore",
-    "backbone",
-    "views/ReportColumnItem",
-    "text!templates/ReportColumnSelector.html"
+    'jquery',
+    'underscore',
+    'backbone',
+    'views/ReportColumnItem',
+    'text!templates/ReportColumnSelector.html'
 ], function ($, _, Backbone, ReportColumnItem, tpl) {
 
     var ReportColumnSelector = Backbone.View.extend({
@@ -11,22 +11,22 @@ define([
         template: _.template(tpl),
 
         events: {
-            "click .move-up": "moveUp",
-            "click .move-down": "moveDown",
-            "click .add-columns": "addColumns",
-            "click .remove-columns": "removeColumns",
-            "dblclick select": "toggle",
-            "click .reset-columns": "foo"
+            'click .move-up': 'moveUp',
+            'click .move-down': 'moveDown',
+            'click .add-columns': 'addColumns',
+            'click .remove-columns': 'removeColumns',
+            'dblclick select': 'toggle',
+            'click .reset-columns': 'foo'
         },
 
         initialize: function () {
             // collection = ReportSchema
-            this.collection.on("change", this.render, this);
-            this.collection.on("invalid", this.onValidationError, this);
+            this.collection.on('change', this.render, this);
+            this.collection.on('invalid', this.onValidationError, this);
 
             this.$el.html(this.template());
-            this.$available = this.$el.find(".report-column-available");
-            this.$selected = this.$el.find(".report-column-selected");
+            this.$available = this.$el.find('.report-column-available');
+            this.$selected = this.$el.find('.report-column-selected');
         },
 
         render: function () {
@@ -51,7 +51,7 @@ define([
         },
 
         disposeReportColumnItems: function () {
-            this.trigger("dispose");
+            this.trigger('dispose');
         },
 
         appendReportColumnItem: function (reportColumn) {
@@ -60,7 +60,7 @@ define([
             });
 
             // register the report column items for dispose event.
-            reportColumnItem.listenTo(this, "dispose", reportColumnItem.remove);
+            reportColumnItem.listenTo(this, 'dispose', reportColumnItem.remove);
             this.append(reportColumnItem.render().el);
         },
 
@@ -70,12 +70,12 @@ define([
         },
 
         moveUp: function () {
-            var $selections = this.$selected.find(":selected");
+            var $selections = this.$selected.find(':selected');
             this._move($selections.first(), $selections, $().prev, $().before);
         },
 
         moveDown: function () {
-            var $selections = this.$selected.find(":selected");
+            var $selections = this.$selected.find(':selected');
             this._move($selections.last(), _.toArray($selections).reverse(), $().next, $().after);
         },
 
@@ -98,8 +98,8 @@ define([
             var $target = target.apply($(item)); // == $(item).prev() or $(item).next();
             var currModel = this.collection.get(item.value);
             var targetModel = this.collection.get($target.val());
-            var currPosition = currModel.get("position");
-            currModel.setPosition(targetModel.get("position"));
+            var currPosition = currModel.get('position');
+            currModel.setPosition(targetModel.get('position'));
             targetModel.setPosition(currPosition);
 
             // update view
@@ -111,7 +111,7 @@ define([
             var s = this.$selected.get(0);
             s.selectedIndex = s.selectedIndex;
             _.each($selections, function (item) {
-                $(item).prop("selected", "selected");
+                $(item).prop('selected', 'selected');
             });
         },
 
@@ -141,7 +141,7 @@ define([
         },
 
         foo: function () {
-            alert("Not implemented yet");
+            alert('Not implemented yet');
 
             console.log(JSON.stringify(this.collection.reportTemplate()));
         }

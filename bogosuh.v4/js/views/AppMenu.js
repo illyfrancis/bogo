@@ -25,6 +25,7 @@ define([
         render: function () {
             this.$el.empty();
             this.$el.html(this.template());
+            this.toggleSearchButton();
 
             return this;
         },
