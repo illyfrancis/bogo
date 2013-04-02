@@ -22,17 +22,17 @@ define([
         },
 
         preserve: function () {
-            console.log('> account criteria: preserve');
+            console.log('> account criterion: preserve');
             this.get('restrictions').accountNumbers = [2];
         },
 
         query: function () {
-            console.log('> account criteria: ');
+            console.log('> account criterion: ');
             return this.accounts.selectedAccountNumbers();
         },
 
         validate: function (attrs) {
-            // when the criteria is applied, confirm if  the criteria are set
+            // when the criterion is applied, confirm if  the criterion are set
             if (attrs.isApplied) {
                 if (this.accounts && !this.accounts.hasSelection()) {
                     // TODO - better error message

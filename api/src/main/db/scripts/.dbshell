@@ -1,5 +1,7 @@
 db.reportschema.find()
-
-
 # showing list of collections
 show collections
+use openbbh
+db.reportschema.find()
+use openbbh
+db.reportschema.find()

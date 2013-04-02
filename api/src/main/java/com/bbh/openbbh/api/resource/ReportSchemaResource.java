@@ -30,7 +30,7 @@ public class ReportSchemaResource {
 		private String name;
 		private boolean selected;
 		private int position;
-		private String criteria;
+		private String criterion;
 
 		public ObjectId get_id() {
 			return _id;
@@ -80,12 +80,12 @@ public class ReportSchemaResource {
 			this.position = position;
 		}
 
-		public String getCriteria() {
-			return criteria;
+		public String getCriterion() {
+			return criterion;
 		}
 
-		public void setCriteria(String criteria) {
-			this.criteria = criteria;
+		public void setCriterion(String criterion) {
+			this.criterion = criterion;
 		}
 	}
 }

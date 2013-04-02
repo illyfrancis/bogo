@@ -34,7 +34,7 @@ define([
 
         validate: function (attrs) {
             if(attrs.isApplied) {
-                console.log('settlement date criteria: validate');
+                console.log('settlement date criterion: validate');
             }
         }
 

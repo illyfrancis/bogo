@@ -1,9 +1,6 @@
 /*global define*/
 define(['underscore', 'backbone', 'models/Criterion'], function (_, Backbone, Criterion) {
 
-    /*
-        SearchCriteria is a collection of Criterion
-    */
     var SearchCriteria = Backbone.Collection.extend({
 
         model: Criterion,
@@ -14,7 +11,7 @@ define(['underscore', 'backbone', 'models/Criterion'], function (_, Backbone, Cr
             }, this);
         },
 
-        // aggregation of 'applied' critereia and 'OR'ed
+        // aggregation of 'applied' criterion and 'OR'ed
         // TODO - or maybe the criteria is a 'combination' of both 'filter' and 'sort'
         // whereby each criteria object defines the definition of filter and sort.
         // getCriteria: function() {
@@ -23,8 +20,8 @@ define(['underscore', 'backbone', 'models/Criterion'], function (_, Backbone, Cr
             return _.reduce(_.map(this.where({isApplied: true}), this.mapper), this.reducer, '');
         },
 
-        mapper: function (criteria) {
-            return criteria.query();
+        mapper: function (criterion) {
+            return criterion.query();
         },
 
         reducer: function (memo, value, key, list) {

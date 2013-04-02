@@ -27,7 +27,7 @@ define([
 
         onClickForFilter: function (e) {
             e.stopPropagation();
-            var criterionName = this.model.get("criteria");
+            var criterionName = this.model.get("criterion");
             EventBus.trigger("showFilters", criterionName);
         },
 
@@ -43,7 +43,7 @@ define([
             this.$el.html(this.template(this.model.toJSON()));
 
             // adjust filter icon according to criteria's applied state.
-            if(this.searchCriteria.isCriterionApplied(this.model.get("criteria"))) {
+            if(this.searchCriteria.isCriterionApplied(this.model.get("criterion"))) {
                 this.$el.children("i").removeClass("icon-white");
             }
 

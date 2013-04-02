@@ -15,7 +15,7 @@ define([
 
         validate: function (attrs) {
             if(attrs.isApplied) {
-                console.log('settlement location criteria: validate');
+                console.log('settlement location criterion: validate');
             }
         },
 

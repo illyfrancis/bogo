@@ -15,7 +15,7 @@ define([
 
         validate: function (attrs) {
             if(attrs.isApplied) {
-                console.log('security id criteria: validate');
+                console.log('security id criterion: validate');
             }
         },
 

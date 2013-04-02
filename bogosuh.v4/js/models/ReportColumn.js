@@ -16,9 +16,9 @@ define([
             selected: false,
             // boolean test for including in report
             position: 0,
-            criteria: '',
+            criterion: '',
             // name of Criterion object
-            //        filterable: true   // some columns may not be (or use criteria as an indication)
+            //        filterable: true   // some columns may not be (or use criterion as an indication)
             sort: '' // 'asc' | 'desc' | ''
         },
 
@@ -119,7 +119,7 @@ define([
         name: 'accountNumber',
         selected: true,
         position: 0,
-        criteria: 'AccountCriteria'
+        criterion: 'Account'
     }
     */
 });
