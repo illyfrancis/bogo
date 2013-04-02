@@ -16,10 +16,9 @@ define([
 
             if (_.isFunction(onLoaded)) {
                 var callback = function () {
-                    return onLoaded.call(this);
+                    return onLoaded.call(context);
                 };
                 var onSuccess = _.after(loaders.length, callback);
-                // var onSuccess = _.after(loaders.length, onLoaded);
                 options = {
                     success: function () {
                         onSuccess();

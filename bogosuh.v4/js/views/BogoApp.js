@@ -21,7 +21,7 @@ define([
         },
 
         load: function () {
-            Repository.loadAll(this.render);
+            Repository.loadAll(this.render, this);
         },
 
         render: function () {

@@ -3,13 +3,13 @@ var app = app || {};
 app.data = app.data || {};
 
 define([
-    "jquery",
-    "underscore",
-    "backbone",
-    "bootstrap",
-    "views/ViewManager",
-    "views/BogoApp",
-    "events/Repository"
+    'jquery',
+    'underscore',
+    'backbone',
+    'bootstrap',
+    'views/ViewManager',
+    'views/BogoApp',
+    'events/Repository'
 ], function ($, _, Backbone, Bootstrap, ViewManager, BogoApp, Repository) {
 
     // place bootstraped models here
@@ -20,8 +20,8 @@ define([
     // $(function () {
 
         // enable tooltips
-        $("body").tooltip({
-            selector: "[rel=tooltip]"
+        $('body').tooltip({
+            selector: '[rel=tooltip]'
         });
 
         //-------------------------------------------------------------------------
@@ -35,14 +35,22 @@ define([
 
         // loading image
         // http://stackoverflow.com/questions/68485/how-to-show-loading-spinner-in-jquery
-        $("#loadingDiv")
-            .hide()  // hide it initially
-            .ajaxStart(function () {
-                $(this).show();
-            })
-            .ajaxStop(function () {
-                $(this).hide();
-            });
+        $('#loadingDiv').hide();
+        $(document).ajaxStart(function () {
+            console.log('ajax start');
+            $('#loadingDiv').show();
+        }).ajaxStop(function () {
+            console.log('ajax stop');
+            $('#loadingDiv').hide();
+        });
+        // $('#loadingDiv')
+        //     .hide()  // hide it initially
+        //     .ajaxStart(function () {
+        //         $(this).show();
+        //     })
+        //     .ajaxStop(function () {
+        //         $(this).hide();
+        //     });
     // });
 
 });
