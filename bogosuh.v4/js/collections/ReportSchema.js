@@ -1,15 +1,19 @@
 /*global define*/
-define(["underscore", "backbone", "models/ReportColumn"], function (_, Backbone, ReportColumn) {
+define([
+    'underscore',
+    'backbone',
+    'models/ReportColumn'
+], function (_, Backbone, ReportColumn) {
 
     /*
 
 - What is JSON structure for report result?
     {
-        accountNumber: "8110192", accountName: "LOREM IPSUM DOLOR SIT AMET",
-        clientRefID: "ABDC-XYZT", transactionRefID: "39483028930000000000",
-        transactionType: "REC", transactionTypeDesc: "RECEIVE FREE",
-        securityID: "G12345675", securityDesc: "PERCIPIT MNESARCHUM EAM EA",
-        securityIDType: "CUSIP", location: "US"
+        accountNumber: '8110192', accountName: 'LOREM IPSUM DOLOR SIT AMET',
+        clientRefID: 'ABDC-XYZT', transactionRefID: '39483028930000000000',
+        transactionType: 'REC', transactionTypeDesc: 'RECEIVE FREE',
+        securityID: 'G12345675', securityDesc: 'PERCIPIT MNESARCHUM EAM EA',
+        securityIDType: 'CUSIP', location: 'US'
     }
 
     - If we assume the same ReportColumn's name is used in the JSON response (report),
@@ -31,7 +35,7 @@ define(["underscore", "backbone", "models/ReportColumn"], function (_, Backbone,
 
         comparator: function (reportColumn) {
             // sort by position
-            return reportColumn.get("position");
+            return reportColumn.get('position');
         },
 
         availableColumns: function () {

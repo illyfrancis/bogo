@@ -1,40 +1,39 @@
 define([
-    "jquery",
-    "underscore",
-    "backbone",
-    "apps/EventBus",
-    "text!templates/ReportColumnHeader.html"
+    'jquery',
+    'underscore',
+    'backbone',
+    'apps/EventBus',
+    'text!templates/ReportColumnHeader.html'
 ], function ($, _, Backbone, EventBus, tpl) {
 
     var ReportColumnHeader = Backbone.View.extend({
 
-        tagName: "th",
+        tagName: 'th',
 
-        className: "",
+        className: '',
 
         template: _.template(tpl),
 
         events: {
-            "click i": "onClickForFilter",
-            "click": "onClickForSort"
+            'click': 'updateSortForSearch',
+            'click i': 'showFilter'
         },
 
         initialize: function (options) {
             // model = ReportColumn
             this.searchCriteria = options.searchCriteria;
-            this.searchCriteria.on("change:isApplied", this.render, this);
+            this.listenTo(this.searchCriteria, 'change:isApplied', this.render);
         },
 
-        onClickForFilter: function (e) {
+        showFilter: function (e) {
             e.stopPropagation();
-            var criterionName = this.model.get("criterion");
-            EventBus.trigger("showFilters", criterionName);
+            var criterionName = this.model.get('criterion');
+            EventBus.trigger('showFilters', criterionName);
         },
 
-        onClickForSort: function (e) {
+        updateSortForSearch: function (e) {
             this.model.reverseSort();
-            this.model.removeSortFromOtherColumns();
-            EventBus.trigger("startSearch");
+            EventBus.trigger('startSearch');
         },
 
         render: function () {
@@ -43,21 +42,26 @@ define([
             this.$el.html(this.template(this.model.toJSON()));
 
             // adjust filter icon according to criteria's applied state.
-            if(this.searchCriteria.isCriterionApplied(this.model.get("criterion"))) {
-                this.$el.children("i").removeClass("icon-white");
+            if (this.searchCriteria.isCriterionApplied(this.model.get('criterion'))) {
+                this.$('i').removeClass('icon-white');
             }
 
-            var $sortDirection = this.$el.children("span.pull-right");
-            if(this.model.isSortAsc()) {
-                $sortDirection.addClass("caret").removeClass("caron");
-            } else if(this.model.isSortDesc()) {
-                $sortDirection.removeClass("caret").addClass("caron");
-            } else {
-                $sortDirection.removeClass("caret caron");
-            }
+            this.updateSortDirection();
 
             return this;
+        },
+
+        updateSortDirection: function () {
+            var $sortDirection = this.$('span.pull-right');
+            $sortDirection.removeClass('caret caron');
+
+            if (this.model.isSortAsc()) {
+                $sortDirection.addClass('caret');
+            } else if (this.model.isSortDesc()) {
+                $sortDirection.addClass('caron');
+            }
         }
+
     });
 
     return ReportColumnHeader;
