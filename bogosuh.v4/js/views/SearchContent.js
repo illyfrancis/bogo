@@ -82,6 +82,9 @@ define([
         },
 
         renderReport: function () {
+            // temporary
+            this.dispose();
+            
             console.log("> SearchContent: renderReport");
             var searchResult = new SearchResult({
                 collection: this.report,
@@ -89,11 +92,22 @@ define([
                 searchCriteria: this.searchCriteria
             });
             this.$el.empty().append(searchResult.render().el);
+            searchResult.listenTo(this, 'dispose', searchResult.remove);
         },
 
         renderError: function () {
             console.log("> SearchContent: renderError");
             // show alert?
+        },
+
+        dispose: function () {
+            this.trigger('dispose');
+        },
+
+        remove: function () {
+            this.dispose();
+            Backbone.View.prototype.remove.call(this);
+            return this;
         }
     });
 

@@ -57,6 +57,7 @@ define([
         },
 
         render: function () {
+            this.dispose();
             // if report is empty
             //  this.renderNoReport();
             // else do the following.
@@ -75,7 +76,9 @@ define([
                 model: reportColumn,
                 searchCriteria: this.searchCriteria
             });
-            this.$el.find('.report-header tr').append(columnHeader.render().el);
+
+            this.$('.report-header tr').append(columnHeader.render().el);
+            columnHeader.listenTo(this, 'dispose', columnHeader.remove);
         },
 
         renderReports: function () {
@@ -90,7 +93,9 @@ define([
                 model: reportItem,
                 template: this.rowTemplate
             });
-            this.$el.find('.report-body').append(row.render().el);
+
+            this.$('.report-body').append(row.render().el);
+            row.listenTo(this, 'dispose', row.remove);
         },
 
         reportRowTemplate: function () {
@@ -101,6 +106,16 @@ define([
             });
 
             return template;
+        },
+
+        dispose: function () {
+            this.trigger('dispose');
+        },
+
+        remove: function () {
+            this.dispose();
+            Backbone.View.prototype.remove.call(this);
+            return this;
         }
     });
 
