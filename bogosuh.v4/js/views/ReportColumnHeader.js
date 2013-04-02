@@ -27,8 +27,8 @@ define([
 
         onClickForFilter: function (e) {
             e.stopPropagation();
-            var criteriaName = this.model.get("criteria");
-            EventBus.trigger("showFilters", criteriaName);
+            var criterionName = this.model.get("criteria");
+            EventBus.trigger("showFilters", criterionName);
         },
 
         onClickForSort: function (e) {

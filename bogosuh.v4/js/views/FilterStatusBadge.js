@@ -1,24 +1,24 @@
 define([
-    "underscore",
-    "backbone",
-    "events/EventBus",
-    "text!templates/FilterStatusBadge.html"
+    'underscore',
+    'backbone',
+    'events/EventBus',
+    'text!templates/FilterStatusBadge.html'
 ], function (_, Backbone, EventBus, tpl) {
 
     var FilterStatusBadge = Backbone.View.extend({
 
-        tagName: "span",
+        tagName: 'span',
 
         template: _.template(tpl),
 
         events: {
-            "click a.remove-filter": "removeFilter",
-            "click a.show-filter": "showFilter"
+            'click a.remove-filter': 'removeFilter',
+            'click a.show-filter': 'showFilter'
         },
 
         initialize: function () {
             // model = Criterion
-            this.listenTo(this.model, "change:isApplied", this.filterChange);
+            this.listenTo(this.model, 'change:isApplied', this.filterChange);
         },
 
         removeFilter: function () {
@@ -26,8 +26,8 @@ define([
         },
 
         showFilter: function () {
-            var criteriaName = this.model.get("name");
-            EventBus.trigger("showFilters", criteriaName);
+            var criterionName = this.model.get('name');
+            EventBus.trigger('showFilters', criterionName);
         },
 
         render: function () {
@@ -37,7 +37,7 @@ define([
         },
 
         filterChange: function () {
-            if (this.model.get("isApplied")) {
+            if (this.model.get('isApplied')) {
                 return;
             }
 

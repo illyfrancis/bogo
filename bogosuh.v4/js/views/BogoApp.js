@@ -5,8 +5,8 @@ define([
     'events/EventBus',
     'events/Repository',
     'collections/SearchCriteria',
-    'views/ViewManager'
-], function ($, _, Backbone, EventBus, Repository, SearchCriteria, ViewManager) {
+    'views/ViewFactory'
+], function ($, _, Backbone, EventBus, Repository, SearchCriteria, ViewFactory) {
 
     var BogoApp = Backbone.View.extend({
 
@@ -28,32 +28,33 @@ define([
             var reportSchema = Repository.reportSchema;
 
             // create views
-            this.appMenu = ViewManager.appMenu(this.searchCriteria);
-            this.reportSettings = ViewManager.reportSettings(reportSchema);
-            this.filterStatusBar = ViewManager.filterStatusBar(this.searchCriteria);
-            this.searchFilters = ViewManager.searchFilters(this.searchCriteria);
-            this.searchContent = ViewManager.searchContent(reportSchema, this.searchCriteria);
+            this.appMenu = ViewFactory.createAppMenu(this.searchCriteria);
+            this.reportSettings = ViewFactory.createReportSettings(reportSchema);
+            this.filterStatusBar = ViewFactory.createFilterStatusBar(this.searchCriteria);
+            this.searchFilters = ViewFactory.createSearchFilters(this.searchCriteria);
+            this.searchContent = ViewFactory.createSearchContent(reportSchema, this.searchCriteria);
 
             console.log('BogoApp:render');
             this.$el.append(this.appMenu.render().el);
             this.$el.append(this.filterStatusBar.render().el);
-            this.$el.append(this.searchContent.el); // nothing to render
             this.$el.append(this.reportSettings.render().el);
-            this.$el.append(this.searchFilters.render().el); // - already rendered in initilize of searchfilters
+            this.$el.append(this.searchFilters.render().el);
+            this.$el.append(this.searchContent.el); // nothing to render
+        },
+
+        showFilters: function (criterionName) {
+            this.searchFilters.show(criterionName);
+        },
+
+        showReportSettings: function () {
+            this.reportSettings.show();
         },
 
         doSearch: function () {
             console.log('doSearch');
             this.searchContent.execute();
-        },
-
-        showFilters: function (e) {
-            this.searchFilters.show(e);
-        },
-
-        showReportSettings: function () {
-            this.reportSettings.show();
         }
+
     });
 
     return BogoApp;
