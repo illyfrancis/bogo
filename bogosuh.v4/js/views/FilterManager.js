@@ -24,7 +24,6 @@ define([
     _.extend(FilterManager.prototype, {
         buildFilters: function (searchCriteria) {
             // configure filters by criteria
-            // var criteriaByName = ['Account', 'TransactionType', 'SecurityId'];
             var criteriaByName = ['Account', 'TransactionType', 'SecurityId', 'SecurityCategory', 'SettlementDate', 'SettlementLocation'];
             _.each(criteriaByName, function (criterionName) {
                 this.createCriterionAndFilter(criterionName);

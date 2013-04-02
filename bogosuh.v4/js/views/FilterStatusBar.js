@@ -2,7 +2,7 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'events/EventBus',
+    'apps/EventBus',
     'views/FilterStatusBadge',
     'text!templates/FilterStatusBar.html'
 ], function ($, _, Backbone, EventBus, FilterStatusBadge, tpl) {

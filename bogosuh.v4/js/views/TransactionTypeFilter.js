@@ -2,7 +2,7 @@ define([
     "jquery",
     "underscore",
     "backbone",
-    "events/EventBus",
+    "apps/EventBus",
     "views/Tree"
 ], function ($, _, Backbone, EventBus, Tree) {
 

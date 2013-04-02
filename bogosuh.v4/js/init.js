@@ -8,7 +8,7 @@ define([
     'backbone',
     'bootstrap',
     'views/BogoApp',
-    'events/Repository'
+    'apps/Repository'
 ], function ($, _, Backbone, Bootstrap, BogoApp, Repository) {
 
     // No need to wrap within ready()

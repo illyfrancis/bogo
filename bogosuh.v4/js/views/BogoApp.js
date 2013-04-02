@@ -2,8 +2,8 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'events/EventBus',
-    'events/Repository',
+    'apps/EventBus',
+    'apps/Repository',
     'collections/SearchCriteria',
     'views/ViewFactory'
 ], function ($, _, Backbone, EventBus, Repository, SearchCriteria, ViewFactory) {

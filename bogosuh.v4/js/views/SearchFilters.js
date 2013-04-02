@@ -3,7 +3,7 @@ define([
     'underscore',
     'backbone',
     'bootstrap',
-    'events/EventBus',
+    'apps/EventBus',
     'views/FilterSelector',
     'views/FilterManager',
     'text!templates/SearchFilters.html',

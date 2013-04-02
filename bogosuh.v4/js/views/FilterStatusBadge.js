@@ -1,7 +1,7 @@
 define([
     'underscore',
     'backbone',
-    'events/EventBus',
+    'apps/EventBus',
     'text!templates/FilterStatusBadge.html'
 ], function (_, Backbone, EventBus, tpl) {
 

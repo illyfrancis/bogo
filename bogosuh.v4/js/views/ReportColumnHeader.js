@@ -2,7 +2,7 @@ define([
     "jquery",
     "underscore",
     "backbone",
-    "events/EventBus",
+    "apps/EventBus",
     "text!templates/ReportColumnHeader.html"
 ], function ($, _, Backbone, EventBus, tpl) {
 

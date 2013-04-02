@@ -24,6 +24,9 @@ define([
                         onSuccess();
                     }
                 };
+
+                // TODO - 1. handling of error
+                // TODO - 2. pass options directly into loadXXX functions?
             }
 
             _.each(loaders, function (loader) {
@@ -58,7 +61,35 @@ define([
                     console.log('Cannot fetch accounts');
                 }
             });
+        },
 
+        loadAccounts2: function (options) {
+            // the accounts to choose from?
+            // Q. should this return the Backbone Collection or JSON?
+            var self = this;
+            this.accounts2 = new PaginatedAccounts();
+            // For bootstrapping data
+            // this.accounts2.init();
+            // app.data.accounts = response.accounts.valid.values; // from response.js
+            // this.accounts2.reset(app.data.accounts); // from global, prefetched accounts data
+            // this.accounts2.pager();
+
+            this.accounts2.url = '/api/accounts';
+            this.accounts2.fetch({
+                success: function () {
+                    console.log('Accounts loaded');
+                    self.accounts2.init();
+                    self.accounts2.pager();
+                    // debugger;
+                    options = options || {};
+                    if (options.success) {
+                        options.success();
+                    }
+                },
+                error: function () {
+                    console.log('Cannot fetch accounts');
+                }
+            });
         },
 
         loadSwiftReasons: function () {
@@ -165,6 +196,6 @@ define([
         }
 
     };
-    
+
     return Repository;
 });

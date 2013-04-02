@@ -2,7 +2,7 @@ define([
     "jquery",
     "underscore",
     "backbone",
-    "events/EventBus",
+    "apps/EventBus",
     "views/AccountList",
     "views/AccountPaginator",
     "text!templates/AccountFilter.html"

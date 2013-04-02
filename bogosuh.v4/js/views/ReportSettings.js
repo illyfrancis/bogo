@@ -3,7 +3,7 @@ define([
     "underscore",
     "backbone",
     "bootstrap",
-    "events/EventBus",
+    "apps/EventBus",
     "views/ReportColumnSelector",
     "text!templates/ReportSettings.html"
 ], function ($, _, Backbone, Bootstrap, EventBus, ReportColumnSelector, tpl) {

@@ -2,7 +2,7 @@ define([
     "jquery",
     "underscore",
     "backbone",
-    "events/EventBus",
+    "apps/EventBus",
     "text!templates/AppMenu.html"
 ], function ($, _, Backbone, EventBus, tpl) {
 
