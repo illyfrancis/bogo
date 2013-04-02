@@ -35,11 +35,9 @@ define([
         },
 
         loadAccounts: function (options) {
-            // the accounts to choose from?
-            // Q. should this return the Backbone Collection or JSON?
             var self = this;
-            // this.accounts = new PaginatedAccounts();
-            this.accounts = new Backbone.Collection();
+            this.accounts = new PaginatedAccounts();
+            // For bootstrapping, do next.
             // this.accounts.init();
             // app.data.accounts = response.accounts.valid.values; // from response.js
             // this.accounts.reset(app.data.accounts); // from global, prefetched accounts data
@@ -49,37 +47,8 @@ define([
             this.accounts.fetch({
                 success: function () {
                     console.log('Accounts loaded');
-                    // self.accounts.init();
-                    // self.accounts.pager();
-                    // debugger;
-                    options = options || {};
-                    if (options.success) {
-                        options.success();
-                    }
-                },
-                error: function () {
-                    console.log('Cannot fetch accounts');
-                }
-            });
-        },
-
-        loadAccounts2: function (options) {
-            // the accounts to choose from?
-            // Q. should this return the Backbone Collection or JSON?
-            var self = this;
-            this.accounts2 = new PaginatedAccounts();
-            // For bootstrapping data
-            // this.accounts2.init();
-            // app.data.accounts = response.accounts.valid.values; // from response.js
-            // this.accounts2.reset(app.data.accounts); // from global, prefetched accounts data
-            // this.accounts2.pager();
-
-            this.accounts2.url = '/api/accounts';
-            this.accounts2.fetch({
-                success: function () {
-                    console.log('Accounts loaded');
-                    self.accounts2.init();
-                    self.accounts2.pager();
+                    self.accounts.init();
+                    self.accounts.pager();
                     // debugger;
                     options = options || {};
                     if (options.success) {
@@ -128,8 +97,7 @@ define([
                     // need to assume that the position is already determined - but let's just do that here for now.
                     var position = 0;
                     self.reportSchema.each(function (reportColumn) {
-                        // reportColumn.set('position', ++position);
-                        reportColumn.set('position', ++position, {silent: true});   // this is now possible because we force the load of report schema.
+                        reportColumn.set('position', ++position, {silent: true});
                     });
 
                     options = options || {};
@@ -142,7 +110,6 @@ define([
                     console.log('Error fetch reportschema');
                 }
             });
-            // this.reportSchema.reset(response.reportSchema.values);
         },
 
         // I think this is for hydrating

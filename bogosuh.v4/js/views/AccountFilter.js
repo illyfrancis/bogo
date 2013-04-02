@@ -22,7 +22,7 @@ define([
 
         initialize: function () {
             // model = AccountCriterion
-            this.paginatedAccounts = this.model.paginatedAccounts();
+            this.paginatedAccounts = this.model.accounts;
 
             this.listenTo(this.paginatedAccounts, "change:selected", this.filterChanged);
 
