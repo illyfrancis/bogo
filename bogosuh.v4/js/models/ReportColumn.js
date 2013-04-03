@@ -7,9 +7,9 @@ define([
     var ReportColumn = Backbone.Model.extend({
 
         defaults: {
-            title: '',  // for displaying - e.g. Account Name
-            label: '',  // for report columns
-            name: '',   // for rendering JSON response - e.g. accountName
+            title: '',  // for displaying - e.g. Account Name (full description)
+            label: '',  // for report columns (short description)
+            name: '',   // for rendering JSON response - e.g. accountName (should be unique, used as an id for persistence)
             selected: false,    // boolean test for including in report
             position: 0,    // column ordering within results
             criterion: '',  // name of Criterion object
