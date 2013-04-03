@@ -12,7 +12,7 @@ define([
             // model = TransactionTypeCriterion
             this.listenTo(this.model.transactionTypes, 'childChange', this.filterChanged);
 
-            this.transactionTypes = new Tree({
+            this.transactionTypesTree = this.createSubView(Tree, {
                 collection: this.model.transactionTypes
             });
 
@@ -31,14 +31,8 @@ define([
         },
 
         _render: function () {
-            this.$el.append(this.transactionTypes.render().el);
-            this.transactionTypes.refresh(); // this many need to be fired after render.
-        },
-
-        remove: function () {
-            this.transactionTypes.remove();
-            Backbone.View.prototype.remove.call(this);
-            return this;
+            this.$el.append(this.transactionTypesTree.render().el);
+            this.transactionTypesTree.refresh(); // this many need to be fired after render.
         }
 
     });

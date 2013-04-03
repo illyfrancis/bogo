@@ -44,7 +44,6 @@ define([
             this.searchCriteria.add(criterion);
 
             var filter = this.createFilter(criterionName, criterion);
-            this.filters[criterionName] = filter;
             return filter;
         },
 
@@ -54,26 +53,26 @@ define([
         },
 
         createFilter: function (criterionName, criterion) {
-            var Filter = require('views/' + criterionName + 'Filter');
-            return new Filter({model: criterion});
+            var FilterClass = require('views/' + criterionName + 'Filter');
+            var filter = new FilterClass({model: criterion});
+            this.filters[criterionName] = filter;
+            return filter;
         },
 
         getFilter: function (criterion) {
             var criterionName = criterion.get('name');
             var filter = this.filters[criterionName];
             if (!filter) {
-                // need a new filter
                 filter = this.createFilter(criterionName, criterion);
             }
-
             return filter;
         },
 
-        removeFilter: function (criterion) {
+        disposeFilter: function (criterion) {
             var criterionName = criterion.get('name');
             var filter = this.filters[criterionName];
             if (filter) {
-                filter.remove();
+                filter.dispose();
                 delete this.filters[criterionName];
             }
         }

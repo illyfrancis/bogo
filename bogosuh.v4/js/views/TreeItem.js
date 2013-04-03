@@ -62,13 +62,13 @@ define([
             // render subitems
             if (!this.model.isLeaf()) {
                 var Tree = require("views/Tree");
-                var subTreeView = new Tree({
+                var subTreeView = this.createSubView(Tree, {
                     collection: this.model.subItems
                 });
+
                 parent.$el.append(subTreeView.render().el);
                 // collapse when first appended
                 subTreeView.collapse();
-                subTreeView.listenTo(this, "treeitem:dispose", subTreeView.remove);
             }
         },
 
@@ -109,13 +109,6 @@ define([
 
         setCheckbox: function (selected, indeterminate) {
             this.$el.find("input:checkbox").prop("checked", selected).prop("indeterminate", indeterminate);
-        },
-
-        remove: function () {
-            console.log("remove - tree item");
-            this.trigger("treeitem:dispose");
-            Backbone.View.prototype.remove.call(this);
-            return this;
         }
 
     });

@@ -170,7 +170,7 @@ define([
         kill: function () {
             var index = this.$('.filter-index').val() || 0;
             var x = this.collection.at(index);  // should be Accounts
-            this.filterManager.removeFilter(x);
+            this.filterManager.disposeFilter(x);
         }
 
     });

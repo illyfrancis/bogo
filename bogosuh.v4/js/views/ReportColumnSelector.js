@@ -25,43 +25,27 @@ define([
             this.collection.on('invalid', this.onValidationError, this);
 
             this.$el.html(this.template());
-            this.$available = this.$el.find('.report-column-available');
-            this.$selected = this.$el.find('.report-column-selected');
+            this.$available = this.$('.report-column-available');
+            this.$selected = this.$('.report-column-selected');
         },
 
         render: function () {
-            this.disposeReportColumnItems();
+            this.disposeSubViews();
 
             this.$available.empty();
-            _.each(this.collection.availableColumns(),
-                this.appendReportColumnItem, this.$available);
-
             this.$selected.empty();
-            _.each(this.collection.selectedColumns(),
-                this.appendReportColumnItem, this.$selected);
+            this.collection.each(this.appendReportColumnItem, this);
 
             return this;
-        },
-
-        remove: function () {
-            // for proper disposal of sub views.
-            this.disposeReportColumnItems();
-            Backbone.View.prototype.remove.call(this);
-            return this;
-        },
-
-        disposeReportColumnItems: function () {
-            this.trigger('dispose');
         },
 
         appendReportColumnItem: function (reportColumn) {
-            var reportColumnItem = new ReportColumnItem({
+            var reportColumnItem = this.createSubView(ReportColumnItem, {
                 model: reportColumn
             });
 
-            // register the report column items for dispose event.
-            reportColumnItem.listenTo(this, 'dispose', reportColumnItem.remove);
-            this.append(reportColumnItem.render().el);
+            var $selection = reportColumn.get('selected') ? this.$selected : this.$available;
+            $selection.append(reportColumnItem.render().el);
         },
 
         onValidationError: function (model, error) {

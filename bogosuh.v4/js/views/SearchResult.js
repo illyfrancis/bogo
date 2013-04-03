@@ -57,7 +57,7 @@ define([
         },
 
         render: function () {
-            this.dispose();
+            this.disposeSubViews();
             // if report is empty
             //  this.renderNoReport();
             // else do the following.
@@ -72,13 +72,12 @@ define([
         },
 
         appendColumnHeader: function (reportColumn) {
-            var columnHeader = new ReportColumnHeader({
+            var columnHeader = this.createSubView(ReportColumnHeader, {
                 model: reportColumn,
                 searchCriteria: this.searchCriteria
             });
 
             this.$('.report-header tr').append(columnHeader.render().el);
-            columnHeader.listenTo(this, 'dispose', columnHeader.remove);
         },
 
         renderReports: function () {
@@ -89,13 +88,12 @@ define([
         },
 
         appendReportRow: function (reportItem) {
-            var row = new ReportRow({
+            var row = this.createSubView(ReportRow, {
                 model: reportItem,
                 template: this.rowTemplate
             });
 
             this.$('.report-body').append(row.render().el);
-            row.listenTo(this, 'dispose', row.remove);
         },
 
         reportRowTemplate: function () {
@@ -106,17 +104,8 @@ define([
             });
 
             return template;
-        },
-
-        dispose: function () {
-            this.trigger('dispose');
-        },
-
-        remove: function () {
-            this.dispose();
-            Backbone.View.prototype.remove.call(this);
-            return this;
         }
+
     });
 
     return SearchResult;

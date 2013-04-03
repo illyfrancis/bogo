@@ -70,6 +70,8 @@ define([
             return this;
         },
 
+        // TODO - need to think about this remove function, is it possible to replace with dispose()?
+        // in a way that destroy of the datepicker can be moved out as a handler to "dispose:view" event.
         remove: function () {
             // need to destroy datepickers?
             this.$('.fromDate, .toDate').datepicker('destroy');

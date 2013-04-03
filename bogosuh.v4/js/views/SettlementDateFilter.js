@@ -14,7 +14,7 @@ define([
         initialize: function () {
             // model = SettlementDateCriterion
             // .settlementDates (DateRange)
-            this.settlementDatesFilter = new DateRangeFilter({
+            this.settlementDatesFilter = this.createSubView(DateRangeFilter, {
                 model: this.model.settlementDates
             });
         },
@@ -23,12 +23,6 @@ define([
             console.log("SettlementDateFilter: render");
             // this.$el.html(this.template());
             this.$el.empty().append(this.settlementDatesFilter.render().el);
-            return this;
-        },
-
-        remove: function () {
-            this.settlementDatesFilter.remove();
-            Backbone.View.prototype.remove.call(this);
             return this;
         }
 

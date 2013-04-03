@@ -26,10 +26,11 @@ define([
 
             this.listenTo(this.paginatedAccounts, "change:selected", this.filterChanged);
 
-            this.accountList = new AccountList({
+            this.accountList = this.createSubView(AccountList, {
                 collection: this.paginatedAccounts
             });
-            this.paginator = new AccountPaginator({
+
+            this.paginator = this.createSubView(AccountPaginator, {
                 collection: this.paginatedAccounts
             });
         },
@@ -49,13 +50,6 @@ define([
             // this.$(".account-pagination").append(this.paginator.render().el);
             this.paginator.setElement(this.$(".account-pagination")).render();
 
-            return this;
-        },
-
-        remove: function () {
-            this.accountList.remove();
-            this.paginator.remove();
-            Backbone.View.prototype.remove.call(this);
             return this;
         },
 
