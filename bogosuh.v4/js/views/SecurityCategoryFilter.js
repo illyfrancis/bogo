@@ -1,8 +1,8 @@
 define([
-    "jquery",
-    "underscore",
-    "backbone",
-    "text!templates/SecurityCategoryFilter.html"
+    'jquery',
+    'underscore',
+    'backbone',
+    'text!templates/SecurityCategoryFilter.html'
 ], function ($, _, Backbone, tpl) {
 
     var SecurityCategoryFilter = Backbone.View.extend({
@@ -10,7 +10,7 @@ define([
         template: _.template(tpl),
 
         render: function () {
-            console.log("SecurityCategoryFilter: render");
+            console.log('SecurityCategoryFilter: render');
             this.$el.html(this.template());
             return this;
         }

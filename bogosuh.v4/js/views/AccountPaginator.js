@@ -1,22 +1,22 @@
-define(["jquery", "underscore", "backbone", "text!templates/AccountPaginator.html"], function ($, _, Backbone, tpl) {
+define(['jquery', 'underscore', 'backbone', 'text!templates/AccountPaginator.html'], function ($, _, Backbone, tpl) {
 
     var AccountPaginator = Backbone.View.extend({
 
         template: _.template(tpl),
 
         initialize: function () {
-            this.listenTo(this.collection, "reset", this.render);
-            this.listenTo(this.collection, "change", function () { console.log("pagi: change"); });
-            this.listenTo(this.collection, "add", function () { console.log("pagi: add"); });
+            this.listenTo(this.collection, 'reset', this.render);
+            this.listenTo(this.collection, 'change', function () { console.log('pagi: change'); });
+            this.listenTo(this.collection, 'add', function () { console.log('pagi: add'); });
         },
 
         events: {
-            "click li:not('.disabled') .prev": "gotoPrevious",
-            "click li:not('.disabled') .next": "gotoNext",
-            "click li:not('.disabled') .first": "gotoFirst",
-            "click li:not('.disabled') .last": "gotoLast",
-            "click li .current": "foo",
-            "change .pageNumber": "gotoPage"
+            'click li:not(".disabled") .prev': 'gotoPrevious',
+            'click li:not(".disabled") .next': 'gotoNext',
+            'click li:not(".disabled") .first': 'gotoFirst',
+            'click li:not(".disabled") .last': 'gotoLast',
+            'click li .current': 'foo',
+            'change .pageNumber': 'gotoPage'
         },
 
         foo: function (e) {
@@ -56,14 +56,14 @@ define(["jquery", "underscore", "backbone", "text!templates/AccountPaginator.htm
 
         decoratePaginator: function (info) {
             if (info.previous === false) {
-                this.$(".first, .prev").each(function (i, el) {
-                    $(el).parent("li").addClass("disabled");
+                this.$('.first, .prev').each(function (i, el) {
+                    $(el).parent('li').addClass('disabled');
                 });
             }
 
             if (info.next === false) {
-                this.$(".next, .last").each(function (i, el) {
-                    $(el).parent("li").addClass("disabled");
+                this.$('.next, .last').each(function (i, el) {
+                    $(el).parent('li').addClass('disabled');
                 });
             }
         }

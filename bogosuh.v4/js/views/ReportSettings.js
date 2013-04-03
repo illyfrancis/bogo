@@ -1,11 +1,11 @@
 define([
-    "jquery",
-    "underscore",
-    "backbone",
-    "bootstrap",
-    "apps/EventBus",
-    "views/ReportColumnSelector",
-    "text!templates/ReportSettings.html"
+    'jquery',
+    'underscore',
+    'backbone',
+    'bootstrap',
+    'apps/EventBus',
+    'views/ReportColumnSelector',
+    'text!templates/ReportSettings.html'
 ], function ($, _, Backbone, Bootstrap, EventBus, ReportColumnSelector, tpl) {
 
     var ReportSettings = Backbone.View.extend({
@@ -13,7 +13,7 @@ define([
         template: _.template(tpl),
 
         events: {
-            "click .search-report": "searchReport"
+            'click .search-report': 'searchReport'
         },
 
         initialize: function () {
@@ -24,11 +24,11 @@ define([
         },
 
         render: function () {
-            console.log("rendering ReportSettings");
+            console.log('rendering ReportSettings');
             this.$el.html(this.template());
 
             // don't want extra outer div tag, reset the view.el
-            var pane = this.$el.children("div:first").get(0);
+            var pane = this.$el.children('div:first').get(0);
             this.setElement(pane);
 
             this.renderReportColumnSelector();
@@ -36,7 +36,7 @@ define([
         },
 
         renderReportColumnSelector: function () {
-            this.$(".modal-body div").append(
+            this.$('.modal-body div').append(
                 this.reportColumnSelector.render().el);
         },
 
@@ -45,14 +45,14 @@ define([
         },
 
         hide: function () {
-            this.$el.modal("hide");
+            this.$el.modal('hide');
         },
 
         searchReport: function () {
             // need to validate
             // if (this.collection.isReadyForSearch()) {
             this.hide();
-            EventBus.trigger("startSearch");
+            EventBus.trigger('startSearch');
         }
     });
 

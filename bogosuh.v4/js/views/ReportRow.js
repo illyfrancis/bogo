@@ -1,11 +1,11 @@
-define(["jquery", "underscore", "backbone"], function ($, _, Backbone) {
+define(['jquery', 'underscore', 'backbone'], function ($, _, Backbone) {
 
     var ReportRow = Backbone.View.extend({
 
-        tagName: "tr",
+        tagName: 'tr',
 
         events: {
-            "click": "showDetail"
+            'click': 'showDetail'
         },
 
         initialize: function (options) {
@@ -18,14 +18,14 @@ define(["jquery", "underscore", "backbone"], function ($, _, Backbone) {
             try {
                 this.$el.html(this.template(this.model.toJSON()));
             } catch(err) {
-                this.$el.html("unable to render: " + err.message);
+                this.$el.html('unable to render: ' + err.message);
                 console.log(err.message);
             }
             return this;
         },
 
         showDetail: function () {
-            alert("show detail : " + this.template(this.model.toJSON()));
+            alert('show detail : ' + this.template(this.model.toJSON()));
             // Q: what is the id for transaction detail? it should always be fetched?
             // fetch full model xxx
             // new ReportDetail({model: xxx})

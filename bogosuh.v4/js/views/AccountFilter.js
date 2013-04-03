@@ -1,30 +1,30 @@
 define([
-    "jquery",
-    "underscore",
-    "backbone",
-    "apps/EventBus",
-    "views/AccountList",
-    "views/AccountPaginator",
-    "text!templates/AccountFilter.html"
+    'jquery',
+    'underscore',
+    'backbone',
+    'apps/EventBus',
+    'views/AccountList',
+    'views/AccountPaginator',
+    'text!templates/AccountFilter.html'
 ], function ($, _, Backbone, EventBus, AccountList, AccountPaginator, tpl) {
 
     var AccountFilter = Backbone.View.extend({
 
-        className: "account-search",
+        className: 'account-search',
 
         template: _.template(tpl),
 
         events: {
-            "click .account-selection .select-all": "selectAll",
-            "click .account-selection .select-none": "selectNone",
-            "click .account-filter .filter": "filterAccounts"
+            'click .account-selection .select-all': 'selectAll',
+            'click .account-selection .select-none': 'selectNone',
+            'click .account-filter .filter': 'filterAccounts'
         },
 
         initialize: function () {
             // model = AccountCriterion
             this.paginatedAccounts = this.model.accounts;
 
-            this.listenTo(this.paginatedAccounts, "change:selected", this.filterChanged);
+            this.listenTo(this.paginatedAccounts, 'change:selected', this.filterChanged);
 
             this.accountList = this.createSubView(AccountList, {
                 collection: this.paginatedAccounts
@@ -36,30 +36,30 @@ define([
         },
 
         render: function () {
-            console.log("account search criteria");
+            console.log('account search criteria');
 
             this.$el.empty();
             this.$el.html(this.template());
             // TODO - need to hold on to filter values for re-render.
-            // consider splitting out "account search filter" into its own class?
+            // consider splitting out 'account search filter' into its own class?
 
             // account list
-            this.accountList.setElement(this.$(".account-list table tbody")).render();
+            this.accountList.setElement(this.$('.account-list table tbody')).render();
 
             // account paginator
-            // this.$(".account-pagination").append(this.paginator.render().el);
-            this.paginator.setElement(this.$(".account-pagination")).render();
+            // this.$('.account-pagination').append(this.paginator.render().el);
+            this.paginator.setElement(this.$('.account-pagination')).render();
 
             return this;
         },
 
         filterChanged: function () {
-            // decide if filter value change should be tracked by SearchFilter, if so trigger "filter change" event.
-            if (this.model.get("isApplied")) {
+            // decide if filter value change should be tracked by SearchFilter, if so trigger 'filter change' event.
+            if (this.model.get('isApplied')) {
                 if (!this.paginatedAccounts.hasSelection()) {
-                    EventBus.trigger("filter:remove");
+                    EventBus.trigger('filter:remove');
                 } else {
-                    EventBus.trigger("filter:change");
+                    EventBus.trigger('filter:change');
                 }
             }
         },
@@ -79,11 +79,11 @@ define([
         },
 
         filterAccounts: function () {
-            var name = this.$el.find(".account-filter .account-name").val();
-            var number = this.$el.find(".account-filter .account-number").val();
-            var selected = this.$el.find(".account-filter .account-selection").hasClass("active");
+            var name = this.$el.find('.account-filter .account-name').val();
+            var number = this.$el.find('.account-filter .account-number').val();
+            var selected = this.$el.find('.account-filter .account-selection').hasClass('active');
 
-            console.log("> " + name + ":" + number + ":" + selected);
+            console.log('> ' + name + ':' + number + ':' + selected);
 
             // build the filter fields based on selection
             var fieldFilters = [];
@@ -91,37 +91,37 @@ define([
             // filter by number
             if(_.isEmpty(number)) {
                 fieldFilters.push({
-                    field: "number",
-                    type: "pattern",
-                    value: new RegExp(".")
+                    field: 'number',
+                    type: 'pattern',
+                    value: new RegExp('.')
                 });
             } else {
                 fieldFilters.push({
-                    field: "number",
-                    type: "pattern",
-                    value: new RegExp("^" + number, "igm")
+                    field: 'number',
+                    type: 'pattern',
+                    value: new RegExp('^' + number, 'igm')
                 });
             }
 
             // filter by name
             if(_.isEmpty(name)) {
                 fieldFilters.push({
-                    field: "name",
-                    type: "pattern",
-                    value: new RegExp(".")
+                    field: 'name',
+                    type: 'pattern',
+                    value: new RegExp('.')
                 });
             } else {
                 fieldFilters.push({
-                    field: "name",
-                    type: "pattern",
-                    value: new RegExp("^" + name, "igm")
+                    field: 'name',
+                    type: 'pattern',
+                    value: new RegExp('^' + name, 'igm')
                 });
             }
 
             // filter by selection
             fieldFilters.push({
-                field: "selected",
-                type: "equalTo",
+                field: 'selected',
+                type: 'equalTo',
                 value: selected
             });
 

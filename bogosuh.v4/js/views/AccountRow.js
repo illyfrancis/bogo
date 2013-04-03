@@ -1,22 +1,22 @@
 define([
-    "jquery",
-    "underscore",
-    "backbone",
-    "text!templates/AccountRow.html"
+    'jquery',
+    'underscore',
+    'backbone',
+    'text!templates/AccountRow.html'
 ], function ($, _, Backbone, tpl) {
 
     var AccountRow = Backbone.View.extend({
 
-        tagName: "tr",
+        tagName: 'tr',
 
         template: _.template(tpl),
 
         events: {
-            "click": "toggleSelection"
+            'click': 'toggleSelection'
         },
 
         initialize: function () {
-            this.listenTo(this.model, "change", this.render);
+            this.listenTo(this.model, 'change', this.render);
         },
 
         render: function () {

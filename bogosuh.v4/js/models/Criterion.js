@@ -1,14 +1,14 @@
 /*global define, require*/
 define([
-    "underscore",
-    "backbone"
+    'underscore',
+    'backbone'
 ], function (_, Backbone) {
 
     var Criterion = Backbone.Model.extend({
 
         defaults: {
-            name: "",
-            title: "",
+            name: '',
+            title: '',
             isApplied: false,
             restrictions: {}
         },
@@ -19,30 +19,30 @@ define([
         // parse: function (response) {
         //     try {
         //         var criteria = {};
-        //         if (response.name === "AccountCriteria") {
-        //             console.log("Account criteria");
+        //         if (response.name === 'AccountCriteria') {
+        //             console.log('Account criteria');
         //             criteria = AccountCriteria;
         //         } else {
-        //             criteria = require("models/" + response.name);
+        //             criteria = require('models/' + response.name);
         //         }
         //         // mixin
         //         _.extend(this, criteria);
         //     } catch (err) {
-        //         console.log("parse", "Criteria [" + response.name + "] not found");
+        //         console.log('parse', 'Criteria [' + response.name + '] not found');
         //     }
         //     return response;
         // },
 
         applyFilter: function () {
-            this.set("isApplied", true);
+            this.set('isApplied', true);
         },
 
         removeFilter: function () {
-            this.set("isApplied", false);
+            this.set('isApplied', false);
         },
 
         toggleFilter: function () {
-            this.set("isApplied", !this.get("isApplied"));
+            this.set('isApplied', !this.get('isApplied'));
         },
 
         preserve: function () {
@@ -51,7 +51,7 @@ define([
 
         hydrate: function (json) {
             // noop
-            console.log("hydrate", JSON.stringify(json));
+            console.log('hydrate', JSON.stringify(json));
         },
 
         query: function () {

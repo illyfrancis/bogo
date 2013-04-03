@@ -1,28 +1,28 @@
 define([
-    "jquery",
-    "underscore",
-    "backbone",
-    "require",
-    "text!templates/TreeItem.html"
+    'jquery',
+    'underscore',
+    'backbone',
+    'require',
+    'text!templates/TreeItem.html'
 ], function ($, _, Backbone, require, tpl) {
 
     var TreeItem = Backbone.View.extend({
 
-        tagName: "li",
+        tagName: 'li',
 
-        className: "tree",
+        className: 'tree',
 
         template: _.template(tpl),
 
         events: {
-            "click input:checkbox": "onClick",
-            "click span": "toggleFolder"
+            'click input:checkbox': 'onClick',
+            'click span': 'toggleFolder'
         },
 
         initialize: function () {
             // model = TreeModel
-            this.listenTo(this.model, "change:selected", this.onSelfChange);
-            this.listenTo(this.model.subItems, "childChange", this.onChildrenChange);
+            this.listenTo(this.model, 'change:selected', this.onSelfChange);
+            this.listenTo(this.model.subItems, 'childChange', this.onChildrenChange);
         },
 
         onClick: function (e) {
@@ -32,18 +32,18 @@ define([
         },
 
         notifyParent: function () {
-            this.model.trigger("childChange");
+            this.model.trigger('childChange');
         },
 
         toggleFolder: function () {
             if (!this.model.isLeaf()) {
-                this.$el.next("ul:first").toggle("hide");
+                this.$el.next('ul:first').toggle('hide');
 
-                var $e = this.$el.find("span i");
-                if ($e.removeClass().data("expanded")) {
-                    $e.addClass("icon-folder-close").data("expanded", false);
+                var $e = this.$el.find('span i');
+                if ($e.removeClass().data('expanded')) {
+                    $e.addClass('icon-folder-close').data('expanded', false);
                 } else {
-                    $e.addClass("icon-folder-open").data("expanded", true);
+                    $e.addClass('icon-folder-open').data('expanded', true);
                 }
             }
         },
@@ -51,17 +51,17 @@ define([
         appendTo: function (parent) {
             // render self
             this.$el.html(this.template(this.model.toJSON()));
-            this.setCheckbox(this.model.get("selected"), false);
+            this.setCheckbox(this.model.get('selected'), false);
             parent.$el.append(this.el);
 
             // node icon
             if (this.model.isLeaf()) {
-                this.$el.find("span i").removeClass().addClass("icon-file");
+                this.$el.find('span i').removeClass().addClass('icon-file');
             }
 
             // render subitems
             if (!this.model.isLeaf()) {
-                var Tree = require("views/Tree");
+                var Tree = require('views/Tree');
                 var subTreeView = this.createSubView(Tree, {
                     collection: this.model.subItems
                 });
@@ -73,7 +73,7 @@ define([
         },
 
         onSelfChange: function () {
-            var selected = this.model.get("selected");
+            var selected = this.model.get('selected');
             this.setCheckbox(selected, false);
 
             // update self & descendants to the new selected state, the change event in descendants will cause themselves to redraw.
@@ -108,7 +108,7 @@ define([
         },
 
         setCheckbox: function (selected, indeterminate) {
-            this.$el.find("input:checkbox").prop("checked", selected).prop("indeterminate", indeterminate);
+            this.$el.find('input:checkbox').prop('checked', selected).prop('indeterminate', indeterminate);
         }
 
     });

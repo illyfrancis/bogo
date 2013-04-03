@@ -1,12 +1,12 @@
 define([
-    "underscore",
-    "backbone",
-    "moment"
+    'underscore',
+    'backbone',
+    'moment'
 ], function (_, Backbone, moment) {
     // require moment.js
     var DateRange = Backbone.Model.extend({
         defaults: {
-            type: "today",
+            type: 'today',
             fromDate: new Date(),
             toDate: new Date(),
             fromTime: {},
@@ -20,7 +20,7 @@ define([
 
         today: function () {
             this.set({
-                type: "today",
+                type: 'today',
                 fromDate: new Date(),
                 toDate: new Date()
             });
@@ -28,7 +28,7 @@ define([
 
         yesterday: function () {
             this.set({
-                type: "yesterday",
+                type: 'yesterday',
                 fromDate: moment().subtract('d', 1).toDate(),
                 toDate: moment().subtract('d', 1).toDate()
             });
@@ -36,7 +36,7 @@ define([
 
         last7days: function () {
             this.set({
-                type: "last7days",
+                type: 'last7days',
                 fromDate: moment().subtract('w', 1).toDate(),
                 toDate: moment().toDate()
             });
@@ -44,7 +44,7 @@ define([
 
         lastweek: function () {
             this.set({
-                type: "lastweek",
+                type: 'lastweek',
                 fromDate: moment().day(1).subtract('w', 1).toDate(),
                 toDate: moment().day(5).subtract('w', 1).toDate()
             });
@@ -52,7 +52,7 @@ define([
 
         lastmonth: function () {
             this.set({
-                type: "lastmonth",
+                type: 'lastmonth',
                 fromDate: moment().date(0).date(1).toDate(),
                 toDate: moment().date(0).toDate()
             });
@@ -62,7 +62,7 @@ define([
             fromDate = fromDate || new Date();
             toDate = toDate || new Date();
             this.set({
-                type: "customdate",
+                type: 'customdate',
                 fromDate: fromDate,
                 toDate: toDate
             });
@@ -77,7 +77,7 @@ define([
 
         changeFromDate: function (dateString) {
             var newFromDate = moment(dateString);
-            var toDate = this.get("toDate");
+            var toDate = this.get('toDate');
             if (toDate < newFromDate) {
                 toDate = moment(newFromDate).toDate();
             }
@@ -86,7 +86,7 @@ define([
 
         changeToDate: function (dateString) {
             var newToDate = moment(dateString);
-            var fromDate = this.get("fromDate");
+            var fromDate = this.get('fromDate');
             if (fromDate > newToDate) {
                 fromDate = moment(newToDate).toDate();
             }

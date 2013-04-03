@@ -1,15 +1,15 @@
 define([
-    "jquery",
-    "underscore",
-    "backbone",
-    "views/TreeItem"
+    'jquery',
+    'underscore',
+    'backbone',
+    'views/TreeItem'
 ], function ($, _, Backbone, TreeItem) {
 
     var Tree = Backbone.View.extend({
 
-        tagName: "ul",
+        tagName: 'ul',
 
-        className: "nav nav-list",
+        className: 'nav nav-list',
 
         render: function () {
             // collection = TreeCollection
@@ -29,12 +29,12 @@ define([
         refresh: function () {
             // trigger child change event to force redraw on parents.
             _.each(this.collection.leaves(), function (item) {
-                item.trigger("childChange");
+                item.trigger('childChange');
             });
         },
 
         collapse: function () {
-            this.$el.addClass("hide");
+            this.$el.addClass('hide');
         }
 
     });

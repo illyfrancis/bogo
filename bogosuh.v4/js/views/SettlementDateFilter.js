@@ -1,9 +1,9 @@
 define([
-    "jquery",
-    "underscore",
-    "backbone",
-    "views/DateRangeFilter",
-    "text!templates/SettlementDateFilter.html"
+    'jquery',
+    'underscore',
+    'backbone',
+    'views/DateRangeFilter',
+    'text!templates/SettlementDateFilter.html'
 ], function ($, _, Backbone, DateRangeFilter, tpl) {
 
     var SettlementDateFilter = Backbone.View.extend({
@@ -20,7 +20,7 @@ define([
         },
 
         render: function () {
-            console.log("SettlementDateFilter: render");
+            console.log('SettlementDateFilter: render');
             // this.$el.html(this.template());
             this.$el.empty().append(this.settlementDatesFilter.render().el);
             return this;

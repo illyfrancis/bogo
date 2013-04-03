@@ -1,17 +1,17 @@
 define([
-    "jquery",
-    "underscore",
-    "backbone",
-    "collections/Report",
-    "views/Progress",
-    "views/SearchResult"
+    'jquery',
+    'underscore',
+    'backbone',
+    'collections/Report',
+    'views/Progress',
+    'views/SearchResult'
 ], function ($, _, Backbone, Report, Progress, SearchResult) {
 
     var SearchContent = Backbone.View.extend({
 
-        tagName: "div",
+        tagName: 'div',
 
-        className: "search-content content-fluid",
+        className: 'search-content content-fluid',
 
         initialize: function (options) {
             // no model or collection
@@ -30,7 +30,7 @@ define([
 
             // fetch
             this.report = new Report();
-            // this.report.url = "transactions.json";
+            // this.report.url = 'transactions.json';
             // this.report.fetch({
             //     success: _.bind(this.onSuccess, this),
             //     error: _.bind(this.onError, this)
@@ -52,29 +52,29 @@ define([
             // this.collection._for_constructing_criteria_with_sort_info_
             this.searchCriteria.query();
 
-            return "query";
+            return 'query';
         },
 
         onSuccess: function (collection, response, options) {
-            console.log("> SearchContent: onSuccess");
+            console.log('> SearchContent: onSuccess');
             this.hideProgress();
             this.renderReport();
         },
 
         onError: function (collection, xhr, options) {
-            console.log("> SearchContent: onError");
+            console.log('> SearchContent: onError');
             this.hideProgress();
             this.renderError();
         },
 
         validate: function () {
-            console.log("> SearchContent: validate");
+            console.log('> SearchContent: validate');
             // 1. need to validate that search can be done
             //    if not valid, return with message or fire error event?
         },
 
         showProgress: function () {
-            // this.progress.show("Searching...");
+            // this.progress.show('Searching...');
         },
 
         hideProgress: function () {
@@ -85,7 +85,7 @@ define([
             // temporary
             this.disposeSubViews();
             
-            console.log("> SearchContent: renderReport");
+            console.log('> SearchContent: renderReport');
             var searchResult = this.createSubView(SearchResult, {
                 collection: this.report,
                 reportSchema: this.reportSchema,
@@ -95,7 +95,7 @@ define([
         },
 
         renderError: function () {
-            console.log("> SearchContent: renderError");
+            console.log('> SearchContent: renderError');
             // show alert?
         }
 

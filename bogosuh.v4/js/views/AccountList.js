@@ -1,15 +1,15 @@
 define([
-    "jquery",
-    "underscore",
-    "backbone",
-    "views/AccountRow"
+    'jquery',
+    'underscore',
+    'backbone',
+    'views/AccountRow'
 ], function ($, _, Backbone, AccountRow) {
 
     var AccountList = Backbone.View.extend({
 
         initialize: function () {
             // collection = PaginatedAccounts
-            this.listenTo(this.collection, "reset", this.render);
+            this.listenTo(this.collection, 'reset', this.render);
         },
 
         render: function () {
@@ -25,13 +25,13 @@ define([
             });
 
             // register the accountRow for events.
-            accountRow.listenTo(this, "account-filter:update", accountRow.updateSelection);
+            accountRow.listenTo(this, 'account-filter:update', accountRow.updateSelection);
 
             this.$el.append(accountRow.render().el);
         },
 
         updateSelections: function (checked) {
-            this.trigger("account-filter:update", checked);
+            this.trigger('account-filter:update', checked);
         }
 
     });

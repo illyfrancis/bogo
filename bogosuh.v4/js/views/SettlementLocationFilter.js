@@ -1,8 +1,8 @@
 define([
-    "jquery",
-    "underscore",
-    "backbone",
-    "text!templates/SettlementLocationFilter.html"
+    'jquery',
+    'underscore',
+    'backbone',
+    'text!templates/SettlementLocationFilter.html'
 ], function ($, _, Backbone, tpl) {
 
     var SettlementLocationFilter = Backbone.View.extend({
@@ -10,7 +10,7 @@ define([
         template: _.template(tpl),
 
         render: function () {
-            console.log("SettlementLocationFilter: render");
+            console.log('SettlementLocationFilter: render');
 
             this.$el.html(this.template());
 

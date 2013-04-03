@@ -1,4 +1,4 @@
-define(["underscore", "backbone"], function(_, Backbone) {
+define(['underscore', 'backbone'], function(_, Backbone) {
 
 	var ReportItem = Backbone.Model.extend({
 	});
