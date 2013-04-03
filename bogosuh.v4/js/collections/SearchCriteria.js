@@ -31,8 +31,7 @@ define(['underscore', 'backbone', 'models/Criterion'], function (_, Backbone, Cr
         isCriterionApplied: function (criterionName) {
             // get criterion by name
             var criterionByName = this.find(function (criterion) {
-                return criterion.get('name') === criterionName ||
-                    criterion.get('name') + 'Criteria' === criterionName;   // temporary until api data is fixed up
+                return criterion.get('name') === criterionName;
             });
 
             return criterionByName && criterionByName.get('isApplied');
