@@ -4,25 +4,45 @@ define([
     'backbone'
 ], function ($, _, Backbone) {
 
-    // extend Backbone.View for managing child views
-    BaseView = Backbone.View.extend({
-        create: function (viewClass, options) {
+/*    // extend Backbone.View
+    Backbone.View = Backbone.View.extend({
+        createSubView: function (viewClass, options) {
             var view = new viewClass(options);
-            view.listenTo(this, 'dispose', view.remove);
+            view.listenTo(this, 'dispose:views', view.dispose);
             return view;
         },
 
+        disposeSubViews: function () {
+            this.trigger('dispose:views');
+        },
+
         dispose: function () {
-            this.trigger('dispose');
+            console.log('dispose [' + this.tagName + ']');
+            this.disposeSubViews();
+            this.remove();
+            return this;
+        }
+    });*/
+/*
+    // extend Backbone.View for managing child views
+    BaseView = Backbone.View.extend({
+        createSubView: function (viewClass, options) {
+            var view = new viewClass(options);
+            view.listenTo(this, 'dispose:views', view.remove);
+            return view;
+        },
+
+        disposeSubViews: function () {
+            this.trigger('dispose:views');
         },
 
         remove: function () {
-            console.log('remove');
-            this.dispose();
+            console.log('remove [' + this.tagName + ']');
+            this.disposeSubViews();
             Backbone.View.prototype.remove.call(this);
             return this;
         }
-    });
+    });*/
 
     var Child = Backbone.Model.extend({
         defaults: {
@@ -30,7 +50,7 @@ define([
         }
     });
 
-    var SubView = BaseView.extend({
+    var SubView = Backbone.View.extend({
 
         tagName: 'li',
 
@@ -41,7 +61,7 @@ define([
 
     });
 
-    var ParentView = BaseView.extend({
+    var ParentView = Backbone.View.extend({
 
         tagName: 'ul',
 
@@ -51,7 +71,7 @@ define([
 
         render: function () {
 
-            var subView = this.create(SubView, { model: this.data });
+            var subView = this.createSubView(SubView, { model: this.data });
             this.$el.append(subView.render().el);
             return this;
         }
