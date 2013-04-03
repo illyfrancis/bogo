@@ -21,8 +21,8 @@ define([
 
         initialize: function () {
             // collection = ReportSchema
-            this.collection.on('change', this.render, this);
-            this.collection.on('invalid', this.onValidationError, this);
+            this.listenTo(this.collection, 'change', this.render);
+            this.listenTo(this.collection, 'invalid', this.onValidationError);
 
             this.$el.html(this.template());
             this.$available = this.$('.report-column-available');
