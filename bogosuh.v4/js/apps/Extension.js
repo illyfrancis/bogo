@@ -15,7 +15,6 @@ define(['backbone'], function (Backbone) {
         // Call to trigger disposal of any sub views created via
         // 'createSubView' function.
         disposeSubViews: function () {
-            console.log('disposeSubViews from [' + this.tagName + ']');
             this.trigger('dispose:views');
         },
 
@@ -23,10 +22,10 @@ define(['backbone'], function (Backbone) {
         // and remove itself according to Backbone.View.remove() function.
         dispose: function () {
             this.disposeSubViews();
-            console.log('dispose [' + this.tagName + ']');
             this.remove();
             return this;
         }
+
     });
 
 });

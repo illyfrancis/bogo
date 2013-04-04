@@ -142,6 +142,10 @@
       	  <port>9090</port>
       	  <path>/</path>
       	  <warSourceDirectory>${warDirectory}</warSourceDirectory>
+      	  <!-- 
+          <tomcatUsers>D:\Apps\apache-tomcat-7.0.30\conf\tomcat-users.xml</tomcatUsers>
+          <tomcatWebXml>D:\Apps\apache-tomcat-7.0.30\conf\web.xml</tomcatWebXml>
+      	  -->
       	</configuration>
       </plugin>
     </plugins>
