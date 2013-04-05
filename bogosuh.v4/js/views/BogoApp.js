@@ -5,8 +5,9 @@ define([
     'apps/EventBus',
     'apps/Repository',
     'collections/SearchCriteria',
-    'views/ViewFactory'
-], function ($, _, Backbone, EventBus, Repository, SearchCriteria, ViewFactory) {
+    'views/ViewFactory',
+    'views/PreferenceDropdown'
+], function ($, _, Backbone, EventBus, Repository, SearchCriteria, ViewFactory, PreferenceDropdown) {
 
     var BogoApp = Backbone.View.extend({
 
@@ -41,6 +42,10 @@ define([
             this.$el.append(this.reportSettings.render().el);
             this.$el.append(this.searchFilters.render().el);
             this.$el.append(this.searchContent.el); // nothing to render
+
+            // foo
+            var preferenceDropdown = new PreferenceDropdown();
+            this.$el.append(preferenceDropdown.render().el);
         },
 
         showFilters: function (criterionName) {

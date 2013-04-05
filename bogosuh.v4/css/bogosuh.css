@@ -76,3 +76,7 @@ li.tree span {
 .typeahead.dropdown-menu {
   z-index: 1051;
 }
+
+.preference-remove {
+  margin-left: 5px;
+}

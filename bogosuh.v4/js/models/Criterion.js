@@ -56,6 +56,11 @@ define([
 
         query: function () {
             // noop
+        },
+
+        reset: function () {
+            // noop
+            // factory reset?
         }
 
     });

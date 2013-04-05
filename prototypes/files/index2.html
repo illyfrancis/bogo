@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>File tests</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <style type="text/css">
+        .waiting {
+          padding: 10px 15px;
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          z-index: 1050;
+          width: 380px;
+          margin: -200px 0 0 -190px;
+          background-color: #ffffff;
+          border: 1px solid #999;
+          border: 1px solid rgba(0, 0, 0, 0.3);
+          *border: 1px solid #999;
+          /* IE6-7 */
+
+          -webkit-border-radius: 6px;
+          -moz-border-radius: 6px;
+          border-radius: 6px;
+          -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+          -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+          -webkit-background-clip: padding-box;
+          -moz-background-clip: padding-box;
+          background-clip: padding-box;
+          outline: none;
+        }
+        .waiting.fade {
+          -webkit-transition: opacity .3s linear, top .3s ease-out;
+          -moz-transition: opacity .3s linear, top .3s ease-out;
+          -o-transition: opacity .3s linear, top .3s ease-out;
+          transition: opacity .3s linear, top .3s ease-out;
+          top: -25%;
+        }
+        .waiting.fade.in {
+          top: 50%;
+        }        
+        .progress {
+            margin-bottom: 0px;
+        }
+        .bar {
+          /*margin-left: 20px;*/
+        }
+        .baz {
+          margin-left: 5px;
+        }
+        .foo {
+          /*float: left;*/
+        }
+
+    </style>
+    
+    <script type="text/javascript" src="lib/json2.js"></script>
+    <script data-main="js/config" src="lib/require/require.js"></script>
+
+    <!-- fake response etc 
+    <script type="text/javascript" src="js/fake/response.js"></script>
+    -->
+
+</head>
+<body>
+    <div class="navbar navbar-static-top">
+        <div class="navbar-inner">
+            <a class="brand">File Reader</a>
+            <div class="pull-right">
+
+                <div class="btn-group">
+                    <button class="btn" title="Save Preference"><i class="icon-star-empty"></i></button>
+                    <button class="btn dropdown-toggle" data-toggle="dropdown" title="More...">
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a tabindex="-1" href="#"><i class="foo icon-star-empty"></i> None</a></li>
+                    </ul>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn" title="Save Preference"><i class="icon-star-empty"></i></button>
+                    <button class="btn dropdown-toggle" data-toggle="dropdown" title="More...">
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a tabindex="-1" href="#"><span class="bar">My Pref One</span><i class="baz pull-right icon-remove-circle"></i></a></li>
+                      <li><a tabindex="-1" href="#"><span class="bar">Something here</span><i class="baz pull-right icon-remove-circle"></i></a></li>
+                      <li class="divider"></li>
+                      <li><a tabindex="-1" href="#"><i class="foo icon-star-empty"></i> None</a></li>
+                    </ul>
+                </div>
+
+
+                <div class="btn-group">
+                    <button class="btn" title="Save Preference"><i class="icon-star"></i></button>
+                    <button class="btn dropdown-toggle" data-toggle="dropdown" title="More...">
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a tabindex="-1" href="#"><span class="bar">My Pref One</span><i class="baz pull-right icon-remove-circle"></i></a></li>
+                      <li><a tabindex="-1" href="#"><span class="bar">Nice Report and longer</span><i class="baz pull-right icon-remove-circle"></i></a></li>
+                      <li><a tabindex="-1" href="#"><i class="foo icon-star"></i> <span class="bar">Something here</span><i class="baz pull-right icon-remove-circle"></i></a></li>
+                      <li class="divider"></li>
+                      <li><a tabindex="-1" href="#">None</a></li>
+                    </ul>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn" title="Save Preference"><i class="icon-bookmark"></i></button>
+                    <button class="btn dropdown-toggle" data-toggle="dropdown" title="More...">
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a tabindex="-1" href="#">My Pref One</a></li>
+                      <li><a tabindex="-1" href="#">Nice Report <i class="icon-ok"></i></a></li>
+                      <li><a tabindex="-1" href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a tabindex="-1" href="#">None</a></li>
+                    </ul>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" class="btn" title=""><i class="icon-time"></i></button>
+                    <button type="button" class="btn" title="Export"><i class="icon-download-alt"></i></button>
+                    <button class="btn report-settings" title="Customize Results"><i class="icon-th-list"></i></button>
+                </div>
+                <button class="btn btn-primary report-search"><i class="icon-search icon-white"></i> Search</button>
+            </div>
+        </div>
+    </div>
+    <div class="waiting fade">
+        <div class="progress">
+            <div class="bar" style="width: 0%;"></div>
+        </div>    
+    </div>
+</body>
+</html>
