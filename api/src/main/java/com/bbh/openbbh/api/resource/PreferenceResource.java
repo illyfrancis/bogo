@@ -25,7 +25,7 @@ public class PreferenceResource {
     public static class Model {
         ObjectId _id;
         String name;
-        String description;
+        String values;
     }
 
     @GET

@@ -17,8 +17,7 @@ define(['backbone'], function (Backbone) {
 
         defaults: {
             name: '',
-            description: []
-            // values: []
+            values: []
         },
 
         idAttribute: '_id', // map to mongo's id
@@ -29,7 +28,7 @@ define(['backbone'], function (Backbone) {
             // ??
             console.log('r: ' + response + ' || ' + 'o: ' + options);
 
-            this.values = JSON.parse(response.description);
+            this.parsed = JSON.parse(response.values);
 
             // need to return the response??
             return response;
@@ -42,16 +41,22 @@ define(['backbone'], function (Backbone) {
     // create a dummy account criterion
     var account = new Backbone.Model();
     account.set({
-        isApplied: true,
-        accountNumbers: ['0015594','0067173','0067249']
+        name: 'Account',
+        criterion: {
+            isApplied: true,
+            accountNumbers: ['0015594','0067173','0067249']
+        }
     });
 
     // create a dummy transaction type criterion
     var transasctionType = new Backbone.Model();
     transasctionType.set({
-        isApplied: true,
-        types: ['DVW','RVP','REC'],
-        id: 'TR001'
+        name: 'TransactionType',
+        criterion: {
+            isApplied: true,
+            types: ['DVW','RVP','REC'],
+            id: 'TR001'
+        }
     });
 
     var prefs = [];
@@ -64,13 +69,12 @@ define(['backbone'], function (Backbone) {
     preference.set({
         // name: (new Date()).toISOString(),
         name: (new Date()).toString(),
-        description: j
+        values: j
     });
 
 
     preference.save();
     app.x = preference;
-
 
     return Preference;
 
