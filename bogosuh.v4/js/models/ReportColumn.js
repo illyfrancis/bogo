@@ -17,6 +17,8 @@ define([
             sort: '' // 'asc' | 'desc' | ''
         },
 
+        idAttribute: '_id',
+
         validate: function (attrs) {
 
             // validate only if ReportColumn is being selected

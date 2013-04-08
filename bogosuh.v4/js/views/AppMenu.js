@@ -14,7 +14,8 @@ define([
             'click .report-search:not(".disabled")': 'reportSearch',
             'click .report-settings:not(".disabled")': 'reportSettings',
             'click .add-filters': 'showFilters',
-            'click .load-preference:not(".disabled")': 'loadPreference'
+            'click .load-preference:not(".disabled")': 'loadPreference',
+            'click .save-preference:not(".disabled")': 'savePreference'
         },
 
         initialize: function () {
@@ -48,6 +49,10 @@ define([
 
         loadPreference: function () {
             EventBus.trigger('loadPreference');
+        },
+
+        savePreference: function () {
+            EventBus.trigger('savePreference');
         }
 
     });

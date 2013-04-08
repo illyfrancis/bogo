@@ -46,6 +46,7 @@ define([
 
             this.accounts.url = '/api/accounts';
             this.accounts.fetch({
+                reset: true,
                 success: function () {
                     console.log('Accounts loaded');
                     self.accounts.init();
@@ -148,7 +149,11 @@ define([
 
         loadReportSchema: function (options) {
             var self = this;
-            this.reportSchema = new ReportSchema();
+
+            if (!this.reportSchema) {
+                this.reportSchema = new ReportSchema();
+            }
+
             this.reportSchema.url = '/api/reportschema';
             this.reportSchema.fetch({
                 success: function () {

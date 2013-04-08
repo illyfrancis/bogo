@@ -67,6 +67,25 @@ define([
             if (!anySortApplied && firstColumn) {
                 firstColumn.reverseSort();
             }
+        },
+
+        hydrate: function (models) {
+            // 1. first step is to 'unselect' everything without triggering any 'change' event
+            // 2. use the models and 'update' the collection (this) - using 'set' method (which should trigger 'change' event)
+        },
+
+        preserve: function () {
+            // should return stringified JSON of 'selected' ReportColumns with its state of 'position' & 'sort'
+            // so it could look like this
+            /*
+                var selections = [
+                    { name: 'accountName', position: 1, sort: 'desc' },
+                    { name: 'clientRefId', position: 2, sort: '' },
+                    ...
+                ];
+
+                return JSON.stringify(selections);
+            */
         }
 
     });
