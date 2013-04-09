@@ -70,6 +70,8 @@ define([
             // reset!!!
             console.log("Mediator: applyPreference");
 
+            var searchCriteria = Repository.searchCriteria();
+            Repository.loadPreference(searchCriteria.hydrate, searchCriteria);
         },
 
         savePreference: function () {
@@ -82,13 +84,17 @@ define([
 
             var criteria = searchCriteria.preserve();
             var schema = reportSchema.preserve();
+            var data = {
+                criteria: criteria.criteria,    // review this, maybe drop 'criteria' from return value and just return array.
+                schema: schema.schema
+            };
 
             var preference = new Backbone.Model();
             preference.urlRoot = '/api/preferences';
             preference.idAttribute = "_id";    // need this!
             preference.set({
-                name: 'one',
-                values: 'xxxxxxxxxxxxxxxxxxxxxxx'
+                name: 'pref:' + (new Date()).getTime(),
+                values: JSON.stringify(data)
             });
 
             // somehow concat and turn into preference.

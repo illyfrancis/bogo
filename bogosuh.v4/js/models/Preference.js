@@ -6,12 +6,19 @@ define(['backbone'], function (Backbone) {
         id: '123',
         name: 'Anything really',
         values: {
-
+            // this is unique to this app.
+            criteria: [
+                { name: 'Account', isApplied: false, accountNumbers: ['123', '234'] },
+                { name: 'TransactionType', isApplied: false, types: ['DVW','RVP','REC'], id: 'TR001' }
+            ],
+            schema: [
+                { name: 'accountName', position: 1, sort: 'desc' },
+                { name: 'clientRefId', position: 2, sort: '' }
+            ]
         }
     };
 
     var preferences; // is a collection of preference
-
 
     var Preference = Backbone.Model.extend({
 

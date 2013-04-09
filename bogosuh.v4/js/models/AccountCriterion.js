@@ -28,7 +28,15 @@ define([
 
         preserve: function () {
             console.log('> account criterion: preserve');
-            this.get('restrictions').accountNumbers = [2];
+            // this.get('restrictions').accountNumbers = [2];
+
+            // { name: 'Account', isApplied: false, accountNumbers: ['123', '234'] },
+
+            return {
+                name: this.get('name'),
+                isApplied: this.get('isApplied'),
+                accountNumbers: this.accounts.selectedAccountNumbers()
+            };
         },
 
         query: function () {

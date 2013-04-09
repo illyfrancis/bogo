@@ -75,6 +75,19 @@ define([
         },
 
         preserve: function () {
+            var schema = [];
+            this.selectedColumns();
+            _.each(this.selectedColumns(), function (reportColumn) {
+                schema.push({
+                    name: reportColumn.get('name'),
+                    position: reportColumn.get('position'),
+                    sort: reportColumn.get('sort')
+                });
+            });
+
+            console.log(">>> " + JSON.stringify(schema));
+            // return criteria;
+
             // should return stringified JSON of 'selected' ReportColumns with its state of 'position' & 'sort'
             // so it could look like this
             /*
@@ -88,7 +101,7 @@ define([
             */
             console.log('ReportSchema::preserve all');
 
-            return 'some stuff from reportschema';
+            return { 'schema': schema };
         }
 
     });

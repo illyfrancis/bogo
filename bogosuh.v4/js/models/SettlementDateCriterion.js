@@ -26,8 +26,6 @@ define([
             // }
         },
 
-        preserve: function () {},
-
         query: function () {
             return 'SettlementDateCriterion:JSON';
         },

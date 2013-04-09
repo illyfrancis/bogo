@@ -47,6 +47,10 @@ define([
 
         preserve: function () {
             // noop
+            return {
+                name: this.get('name'),
+                isApplied: this.get('isApplied')
+            };
         },
 
         hydrate: function (json) {

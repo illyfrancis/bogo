@@ -31,8 +31,16 @@ define([
         
         preserve: function () {
             console.log('> TransactionTypeCriterion: preserve');
-            // this.get('restrictions').accountNumbers = [2];
-            // this.transactionTypes.selectedValues()
+            // { name: 'TransactionType', isApplied: false, types: ['DVW','RVP','REC'], id: 'TR001' }
+            // return {
+            //     name: this.get('name'),
+            //     isApplied: this.get('isApplied'),
+            //     types: this.transactionTypes.selectedValues()
+            // };
+
+            var data = Criterion.prototype.preserve.call(this);
+            data.types = this.transactionTypes.selectedValues();
+            return data;
         },
 
         query: function () {

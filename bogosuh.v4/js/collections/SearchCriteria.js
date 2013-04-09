@@ -50,11 +50,13 @@ define(['underscore', 'backbone', 'models/Criterion'], function (_, Backbone, Cr
 
         preserve: function () {
             console.log('SearchCriteria::preserve all');
+            var criteria = [];
             this.each(function (criterion) {
-                // TODO - think about preserve. should it return JSON?
-                //criterion.preserve();
+                // or use _.invoke and pass array?
+                criteria.push(criterion.preserve());
             });
-            return 'preserve from SearchCriteria';
+
+            return { 'criteria' : criteria };
         }
 
     });
