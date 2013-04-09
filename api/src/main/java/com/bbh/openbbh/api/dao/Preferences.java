@@ -20,7 +20,9 @@ public class Preferences {
 	}
 
 	public static List<Model> get() {
-		return newArrayList(preferences.find().as(Model.class));
+		// use projection to narrow the returned columns.
+		// native syntax would be .find({}, {name: 1}) but Jongo has .projection
+		return newArrayList(preferences.find().projection("{name: 1}").as(Model.class));
 	}
 
 	public static Model get(String id) {

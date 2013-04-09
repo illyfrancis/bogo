@@ -53,7 +53,7 @@ public class Securities {
 
 	private static List<SecurityId> findByCusip(Pattern cusip) {
 		Iterable<Model> models = securities.find("{cusip: #}", cusip)
-				.fields("{cusip: 1}").limit(5).as(Model.class);
+				.projection("{cusip: 1}").limit(5).as(Model.class);
 
 		List<SecurityId> securityIds = newArrayList();
 		for (Model model : models) {
@@ -64,7 +64,7 @@ public class Securities {
 
 	private static List<SecurityId> findBySedol(Pattern sedol) {
 		Iterable<Model> models = securities.find("{sedol: #}", sedol)
-				.fields("{sedol: 1}").limit(5).as(Model.class);
+				.projection("{sedol: 1}").limit(5).as(Model.class);
 
 		List<SecurityId> securityIds = newArrayList();
 		for (Model model : models) {
@@ -75,7 +75,7 @@ public class Securities {
 
 	private static List<SecurityId> findByIsin(Pattern isin) {
 		Iterable<Model> models = securities.find("{isin: #}", isin)
-				.fields("{isin: 1}").limit(5).as(Model.class);
+				.projection("{isin: 1}").limit(5).as(Model.class);
 
 		List<SecurityId> securityIds = newArrayList();
 		for (Model model : models) {
@@ -86,7 +86,7 @@ public class Securities {
 
 	private static List<SecurityId> findByCustody(Pattern custody) {
 		Iterable<Model> models = securities.find("{custody: #}", custody)
-				.fields("{custody: 1}").limit(5).as(Model.class);
+				.projection("{custody: 1}").limit(5).as(Model.class);
 
 		List<SecurityId> securityIds = newArrayList();
 		for (Model model : models) {
