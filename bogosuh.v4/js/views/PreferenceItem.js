@@ -2,8 +2,9 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'apps/EventBus',
     'text!templates/PreferenceItem.html'
-], function ($, _, Backbone, tpl) {
+], function ($, _, Backbone, EventBus, tpl) {
 
     var PreferenceItem = Backbone.View.extend({
 
@@ -29,10 +30,14 @@ define([
 
         selectItem: function () {
             console.log('selected : ' + this.model.get('name'));
+            // TODO - confirm if change, modal etc
             this.model.collection.each(function (item) {
                 item.set('selected', false, { silent:true });
             });
             this.model.set('selected', true);
+
+            // trigger with preference id
+            EventBus.trigger('loadPreference', this.model.id);
         },
 
         render: function () {

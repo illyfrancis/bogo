@@ -2,18 +2,20 @@
 define([
     'backbone',
     'underscore',
+    'models/Preference',
     'collections/PaginatedAccounts',
     'collections/ReportSchema',
     'collections/TreeCollection',
+    'collections/Preferences',
     'collections/SearchCriteria'
-], function (Backbone, _, PaginatedAccounts, ReportSchema, TreeCollection, SearchCriteria) {
+], function (Backbone, _, Preference, PaginatedAccounts, ReportSchema, TreeCollection, Preferences, SearchCriteria) {
 
     var Repository = {
 
         loadAll: function (onLoaded, context) {
 
             // list out all load ops in array
-            var loaders = ['loadAccounts', 'loadSecurities', 'loadReportSchema', 'loadTransactionTypes'],
+            var loaders = ['loadAccounts', 'loadSecurities', 'loadReportSchema', 'loadTransactionTypes', 'loadPreferences'],
                 options = {};
 
             if (_.isFunction(onLoaded)) {
@@ -180,33 +182,52 @@ define([
             return this._reportSchema;
         },
 
-        // I think this is for hydrating
-        loadPreference: function (callback, context) {
-
-            var preference = new Backbone.Collection();
-            // preference.url = '/api/criteria/{id}';
-            // preference.fetch();
-
-            preference.reset([{
-                name: 'Account',
-                restrictions: {
-                    isApplied: true,
-                    accountNumbers: ['0015594','0067173','0067249']
-                }
-            }, {
-                name: 'TransactionType',
-                restrictions: {
-                    isApplied: true,
-                    types: ['DVW','RVP','REC'],
-                    id: 'TR001'
-                }
-            }], {
-                parse: true
-            }); // for forcing the parse in the model
-
-            if (callback && context) {
-                callback.call(context, preference);
+        preferences : function () {
+            if (!this._preferences) {
+                this._preferences = new Preferences();
             }
+
+            return this._preferences;
+        },
+
+        // this is for really 'loading'
+        loadPreferences: function (options) {
+
+            var preferences = this.preferences();
+            preferences.fetch({
+                success: function () {
+                    console.log('preferences loaded');
+
+                    options = options || {};
+                    if (options.success) {
+                        options.success();
+                    }
+                },
+                error: function () {
+                    console.error('preferences not loaded');
+                }
+            });
+        },
+
+        // I think this is for hydrating
+        getPreference: function (id, callback, context) {
+
+            var preference = new Preference();
+            preference.id = id;
+
+            preference.fetch({
+                success: function () {
+                    console.log('preference loaded');
+
+                    if (callback && context) {
+                        callback.call(context, preference);
+                    }
+                },
+                error: function () {
+                    console.log('preference not loaded');
+                }
+            });
+
         },
 
         savePreference: function (preference, callback, context) {

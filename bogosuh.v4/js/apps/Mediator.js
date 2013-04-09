@@ -63,15 +63,24 @@ define([
             };
         },
 
-        applyPreference: function () {
-            // let's assume it applies the latest one.
-            // but it may take an id as input
+        applyPreference: function (id) {
 
-            // reset!!!
-            console.log("Mediator: applyPreference");
+            if (_.isUndefined(id)) {
+                id = 'none';
+            }
 
-            var searchCriteria = Repository.searchCriteria();
-            Repository.loadPreference(searchCriteria.hydrate, searchCriteria);
+            Repository.getPreference(id, this.parsePreference, this);
+        },
+
+        parsePreference: function (preference) {
+
+            var data = JSON.parse(preference.get('values'));
+
+            var searchCriteria = Repository.searchCriteria(),
+                reportSchema = Repository.reportSchema();
+
+            searchCriteria.hydrate(data.criteria);
+            reportSchema.hydrate(data.schema);
         },
 
         savePreference: function () {

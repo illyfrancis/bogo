@@ -85,6 +85,15 @@ define([
 
         isSortApplied: function () {
             return this.get('sort') !== '' && this.get('selected');
+        },
+
+        clearAll: function () {
+            this.set({
+                selected: false,
+                position: 0
+            }, {
+                silent:true
+            });
         }
 
     });

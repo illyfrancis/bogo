@@ -94,6 +94,7 @@ define([
                 state = true;
             }
 
+            // TODO - consider using invoke
             _.each(this.sortedAndFilteredModels, function (account) {
                 account.set({
                     selected: state

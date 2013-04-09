@@ -69,9 +69,27 @@ define([
             }
         },
 
-        hydrate: function (models) {
+        hydrate: function (selections) {
             // 1. first step is to 'unselect' everything without triggering any 'change' event
             // 2. use the models and 'update' the collection (this) - using 'set' method (which should trigger 'change' event)
+
+            this.invoke('clearAll');
+
+            // not the most efficient: O(n^2)
+            _.each(selections, function (item) {
+                var reportColumn = this.findWhere({'name': item.name});
+                if (reportColumn) {
+                    reportColumn.set({
+                        selected: true,
+                        position: item.position,
+                        sort: item.sort
+                    }, {
+                        silent: true
+                    });
+                }
+            }, this);
+
+            this.trigger('change'); // review this???
         },
 
         preserve: function () {

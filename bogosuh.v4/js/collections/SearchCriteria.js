@@ -37,13 +37,15 @@ define(['underscore', 'backbone', 'models/Criterion'], function (_, Backbone, Cr
             return criterionByName && criterionByName.get('isApplied');
         },
 
-        hydrate: function (preference) {
+        hydrate: function (criteria) {
             console.log('hydrate all');
-            preference.each(function (item) {
-                var criterionName = item.get("name");
+
+            // not the most efficient: O(n^2)
+            _.each(criteria, function (item) {
+                var criterionName = item.name;
                 var criterion = this.findWhere({'name': criterionName});
                 if (criterion) {
-                    criterion.hydrate(item.get('restrictions'));
+                    criterion.hydrate(item);
                 }
             }, this);
         },

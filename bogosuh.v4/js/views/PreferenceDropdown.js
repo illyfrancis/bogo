@@ -2,16 +2,11 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'apps/Repository',
+    'models/Preference',
     'views/PreferenceItem',
     'text!templates/Preferences.html'
-], function ($, _, Backbone, PreferenceItem, tpl) {
-
-    var Preference = Backbone.Model.extend({
-        defaults: {
-            name: '',
-            selected: false
-        }
-    });
+], function ($, _, Backbone, Repository, Preference, PreferenceItem, tpl) {
 
     var PreferenceDropdown = Backbone.View.extend({
 
@@ -26,10 +21,7 @@ define([
 
         initialize: function () {
             // collection = Preferences...
-            this.collection = new Backbone.Collection();
-            this.collection.add(new Preference({name:'one'}));
-            this.collection.add(new Preference({name:'two'}));
-            this.collection.add(new Preference({name:'three'}));
+            this.collection = Repository.preferences();
 
             this.listenTo(this.collection, 'destroy', this.render);
             this.listenTo(this.collection, 'change', this.render);
