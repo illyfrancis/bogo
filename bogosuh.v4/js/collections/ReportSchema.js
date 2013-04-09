@@ -86,6 +86,9 @@ define([
 
                 return JSON.stringify(selections);
             */
+            console.log('ReportSchema::preserve all');
+
+            return 'some stuff from reportschema';
         }
 
     });

@@ -8,10 +8,12 @@ define([
     'backbone',
     'bootstrap',
     'apps/Extension',
+    'apps/EventBus',
+    'apps/Repository',
+    'apps/Mediator',
     'views/BogoApp',
-    'models/Preference',
-    'apps/Repository'
-], function ($, _, Backbone, Bootstrap, Extension, BogoApp, Preference, Repository) {
+    'models/Preference'
+], function ($, _, Backbone, Bootstrap, Extension, EventBus, Repository, Mediator, BogoApp, Preference) {
 
     // No need to wrap within ready()
     // $(function () {
@@ -32,6 +34,11 @@ define([
         console.log('ajax stop');
         $('#loadingDiv').hide();
     });
+
+    //-------------------------------------------------------------------------
+    // Mediator
+    //-------------------------------------------------------------------------
+    app.Mediator = new Mediator(EventBus);
 
     //-------------------------------------------------------------------------
     // main app (app.views.bogo)

@@ -1,14 +1,38 @@
 define([
     'backbone',
     'underscore',
-    'apps/EventBus',
     'apps/Repository'
-], function (Backbone, _, EventBus, Repository) {
+], function (Backbone, _, Repository) {
+
+/*    var TransactionReport = Backbone.Collection.extend({
+
+        model: TransactionRecord,
+
+        setQuery: function () {
+
+        }
+    });
+
+    var definePreferenceLifecycle = {
+
+    };*/
 
     // Mediator or Controller, not sure yet.
     // if mediator, should it be merged with EvantBus? - I don't think so but worth considering.
 
-    var Mediator = {
+    var Mediator = function(eventBus) {
+        this.initialize(eventBus);
+    };
+
+    _.extend(Mediator.prototype, Backbone.Events, {
+
+        // wrap initialize with 'once'
+        initialize: _.once(function(eventBus) {
+            console.log('Mediator::initialize');
+            this.listenTo(eventBus, 'loadPreference', this.applyPreference);
+            this.listenTo(eventBus, 'savePreference', this.savePreference);
+
+        }),
 
         searchReport: function () {
             // something triggers 'startSearch' event, then...
@@ -44,29 +68,37 @@ define([
             // but it may take an id as input
 
             // reset!!!
+            console.log("Mediator: applyPreference");
+
         },
 
         savePreference: function () {
             // take current snapshot
+            console.log("Mediator: savePreference");
+
+            // need access to searchCriteria & reportSchema. Let's assume Repository is defined and provided.
+            var searchCriteria = Repository.searchCriteria(),
+                reportSchema = Repository.reportSchema();
+
+            var criteria = searchCriteria.preserve();
+            var schema = reportSchema.preserve();
+
+            var preference = new Backbone.Model();
+            preference.urlRoot = '/api/preferences';
+            preference.idAttribute = "_id";    // need this!
+            preference.set({
+                name: 'one',
+                values: 'xxxxxxxxxxxxxxxxxxxxxxx'
+            });
+
+            // somehow concat and turn into preference.
+            Repository.savePreference(preference);
+
         }
 
         // what about delete preference? are we defining preference maint screen here?? seems wrong!
-    };
+
+    });
 
     return Mediator;
-    
 });
-
-
-var TransactionReport = Backbone.Collection.extend({
-
-    model: TransactionRecord,
-
-    setQuery: function () {
-
-    }
-});
-
-var definePreferenceLifecycle = {
-
-};

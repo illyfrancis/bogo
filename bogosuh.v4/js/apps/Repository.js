@@ -4,8 +4,9 @@ define([
     'underscore',
     'collections/PaginatedAccounts',
     'collections/ReportSchema',
-    'collections/TreeCollection'
-], function (Backbone, _, PaginatedAccounts, ReportSchema, TreeCollection) {
+    'collections/TreeCollection',
+    'collections/SearchCriteria'
+], function (Backbone, _, PaginatedAccounts, ReportSchema, TreeCollection, SearchCriteria) {
 
     var Repository = {
 
@@ -148,18 +149,14 @@ define([
         },
 
         loadReportSchema: function (options) {
-            var self = this;
 
-            if (!this.reportSchema) {
-                this.reportSchema = new ReportSchema();
-            }
-
-            this.reportSchema.url = '/api/reportschema';
-            this.reportSchema.fetch({
+            var reportSchema = this.reportSchema();
+            reportSchema.url = '/api/reportschema';
+            reportSchema.fetch({
                 success: function () {
                     // need to assume that the position is already determined - but let's just do that here for now.
                     var position = 0;
-                    self.reportSchema.each(function (reportColumn) {
+                    reportSchema.each(function (reportColumn) {
                         reportColumn.set('position', ++position, {silent: true});
                     });
 
@@ -173,6 +170,14 @@ define([
                     console.log('Error fetch reportschema');
                 }
             });
+        },
+
+        reportSchema: function () {
+            if (!this._reportSchema) {
+                this._reportSchema = new ReportSchema();
+            }
+
+            return this._reportSchema;
         },
 
         // I think this is for hydrating
@@ -202,6 +207,24 @@ define([
             if (callback && context) {
                 callback.call(context, preference);
             }
+        },
+
+        savePreference: function (preference, callback, context) {
+            console.log("savePreference");
+            // callback.call(context);
+
+            preference.save();
+
+        },
+
+        // search criteria isn't persistent model so it shouldn't be managed by Repository
+        // but for now just keep it here.
+        searchCriteria: function () {
+            if (!this._searchCriteria) {
+                this._searchCriteria = new SearchCriteria();
+            }
+
+            return this._searchCriteria;
         }
 
     };

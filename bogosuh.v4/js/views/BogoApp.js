@@ -17,9 +17,10 @@ define([
             EventBus.on('showReportSettings', this.showReportSettings, this);
             EventBus.on('showFilters', this.showFilters, this);
             EventBus.on('startSearch', this.doSearch, this);
-            EventBus.on('loadPreference', this.doPreference, this);
+            // EventBus.on('loadPreference', this.doPreference, this);
+            this.listenTo(EventBus, 'loadPreference', this.doPreference);
 
-            this.searchCriteria = new SearchCriteria();
+            this.searchCriteria = Repository.searchCriteria();
         },
 
         load: function () {
@@ -27,7 +28,7 @@ define([
         },
 
         render: function () {
-            var reportSchema = Repository.reportSchema;
+            var reportSchema = Repository.reportSchema();
 
             // create views
             this.appMenu = ViewFactory.createAppMenu(this.searchCriteria);
