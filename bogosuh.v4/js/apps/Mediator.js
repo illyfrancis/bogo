@@ -121,6 +121,9 @@ define([
         clearPreference: function () {
             var searchCriteria = Repository.searchCriteria();
             searchCriteria.reset();
+
+            // reload report schema
+            Repository.loadReportSchema();
         }
 
         // what about delete preference? are we defining preference maint screen here?? seems wrong!
