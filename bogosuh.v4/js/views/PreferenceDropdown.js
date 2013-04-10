@@ -2,17 +2,18 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'apps/EventBus',
     'apps/Repository',
     'models/Preference',
     'views/PreferenceItem',
     'text!templates/Preferences.html'
-], function ($, _, Backbone, Repository, Preference, PreferenceItem, tpl) {
+], function ($, _, Backbone, EventBus, Repository, Preference, PreferenceItem, tpl) {
 
     var PreferenceDropdown = Backbone.View.extend({
 
         template: _.template(tpl),
 
-        className: 'baz',
+        className: 'baza',
 
         events: {
             'click li.none': 'clearSelection',
@@ -25,6 +26,7 @@ define([
 
             this.listenTo(this.collection, 'destroy', this.render);
             this.listenTo(this.collection, 'change', this.render);
+            this.listenTo(this.collection, 'add', this.render);
         },
 
         render: function () {
@@ -76,8 +78,10 @@ define([
 
             if (preference) {
                 console.log('save.. existing ' + preference.get('name'));
+                EventBus.trigger('savePreference', preference.id);
             } else {
                 console.log('save nuew');
+                EventBus.trigger('savePreference');
             }
 
         }

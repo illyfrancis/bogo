@@ -1,8 +1,9 @@
 define([
     'backbone',
     'underscore',
-    'apps/Repository'
-], function (Backbone, _, Repository) {
+    'apps/Repository',
+    'models/Preference'
+], function (Backbone, _, Repository, Preference) {
 
 /*    var TransactionReport = Backbone.Collection.extend({
 
@@ -83,7 +84,7 @@ define([
             reportSchema.hydrate(data.schema);
         },
 
-        savePreference: function () {
+        savePreference: function (id) {
             // take current snapshot
             console.log("Mediator: savePreference");
 
@@ -98,9 +99,14 @@ define([
                 schema: schema.schema
             };
 
-            var preference = new Backbone.Model();
-            preference.urlRoot = '/api/preferences';
-            preference.idAttribute = "_id";    // need this!
+            var preference = {};
+            if (id) {
+                var preferences = Repository.preferences();
+                preference = preferences.get(id);
+            } else {
+                preference = new Preference();
+            }
+
             preference.set({
                 name: 'pref:' + (new Date()).getTime(),
                 values: JSON.stringify(data)

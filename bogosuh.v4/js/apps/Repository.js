@@ -234,8 +234,20 @@ define([
             console.log("savePreference");
             // callback.call(context);
 
-            preference.save();
+            var preferences = this.preferences();
+            // preference.save(null, {
+            //     success: function (model, response, options) {
+            //         model.set('selected', true);
+            //         preferences.add(model);
+            //     }
+            // });
+            preference.save('selected', true, {
+                success: function (model, response, options) {
+                    preferences.add(model);
+                }
+            });
 
+            // preference.save();
         },
 
         // search criteria isn't persistent model so it shouldn't be managed by Repository
