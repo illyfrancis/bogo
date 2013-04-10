@@ -53,13 +53,15 @@ define([
 
         clearSelection: function () {
             console.log('clearSelection');
+
             // clear selection
             this.collection.each(function (item) {
                 item.set('selected', false, { silent:true });
             });
 
             // trigger 'reset'
-
+            EventBus.trigger('clearPreference');
+            
             this.render();
         },
 

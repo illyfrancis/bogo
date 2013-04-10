@@ -30,7 +30,6 @@ require.config({
             deps: ['jquery', 'jquery.ui']
         }
     }
-
     // hack!! - forcing jquery.ui to be loaded before bootstrap, refactor, instead, to only use jquery.ui.datepicker plugin becasue bootstrap.tooltip is
     // blown away by jquery.ui.tooltip plugin if it's loaded after bootstrap loads.
     // ,
@@ -41,4 +40,5 @@ require.config({
 //     // init();
 // });
 
-define(['init'], function (init) {});
+define(['scribble', 'init'], function () {});
+// define(['init'], function (init) {});

@@ -57,7 +57,9 @@ define([
             // decide if filter value change should be tracked by SearchFilter, if so trigger 'filter change' event.
             if (this.model.get('isApplied')) {
                 if (!this.paginatedAccounts.hasSelection()) {
-                    EventBus.trigger('filter:remove');
+                    // remove this filter when there's no selection.
+                    this.model.removeFilter();
+                    EventBus.trigger('filter:remove', this.model);
                 } else {
                     EventBus.trigger('filter:change');
                 }

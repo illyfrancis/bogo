@@ -44,8 +44,8 @@ define([
             this.listenTo(this.collection, 'error', this.onValidationError);
             this.listenTo(this.collection, 'change:isApplied', this.updateFilterButtonLabel);
 
-            EventBus.on('filter:change', this.alertFilterChange, this);
-            EventBus.on('filter:remove', this.alertFilterRemove, this);
+            this.listenTo(EventBus, 'filter:change', this.alertFilterChange);
+            this.listenTo(EventBus, 'filter:remove', this.alertFilterRemove);
         },
 
         render: function () {
@@ -72,20 +72,20 @@ define([
         },
 
         updateFilterButtonLabel: function (criterion) {
-            var buttonLabel = criterion.get('isApplied') ? 'Remove Filter' : 'Apply Filter',
-                $buttonText = this.$('.modal-footer > .btn.toggle-filter > span');
-            $buttonText.html(buttonLabel);
+            // only update if the criterion is currently selected
+            if (criterion && criterion === this.selectedCriterion) {
+                var buttonLabel = criterion.get('isApplied') ? 'Remove Filter' : 'Apply Filter',
+                    $buttonText = this.$('.modal-footer > .btn.toggle-filter > span');
+                $buttonText.html(buttonLabel);
+            }
         },
 
         onFilterSelect: function (e, criterionCid) {
-            if (this.selectedCriterion.cid === criterionCid) {
-                // no change
-                return;
+            if (this.selectedCriterion.cid !== criterionCid) {
+                this.dismissAlerts();
+                this.selectedCriterion = this.collection.get(criterionCid);
+                this.renderFilterContent(this.selectedCriterion);
             }
-
-            this.dismissAlerts();
-            this.selectedCriterion = this.collection.get(criterionCid);
-            this.renderFilterContent(this.selectedCriterion);
         },
 
         show: function (criterionName) {
@@ -141,10 +141,9 @@ define([
             this.showAlert('filter values changed, do search again');
         },
 
-        // alert using tooltip instead of alert (i think it's broken!!!)
         alertFilterRemove: function () {
             this.dismissAlerts();
-            this.selectedCriterion.toggleFilter();  // TODO - why this? I don't remember doing this!!??
+
             // init - can be moved to init() method
             var $btn = this.$el.find('.toggle-filter');
             $btn.tooltip({ // or popover

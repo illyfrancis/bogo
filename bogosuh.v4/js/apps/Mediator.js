@@ -32,6 +32,7 @@ define([
             console.log('Mediator::initialize');
             this.listenTo(eventBus, 'loadPreference', this.applyPreference);
             this.listenTo(eventBus, 'savePreference', this.savePreference);
+            this.listenTo(eventBus, 'clearPreference', this.clearPreference);
 
         }),
 
@@ -115,6 +116,11 @@ define([
             // somehow concat and turn into preference.
             Repository.savePreference(preference);
 
+        },
+
+        clearPreference: function () {
+            var searchCriteria = Repository.searchCriteria();
+            searchCriteria.reset();
         }
 
         // what about delete preference? are we defining preference maint screen here?? seems wrong!

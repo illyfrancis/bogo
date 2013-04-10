@@ -22,10 +22,17 @@ define(["underscore", "backbone", "models/TreeModel"], function (_, Backbone, Tr
 
         selectByValues: function (values) {
             _.each(this.leaves(), function (item) {
-                if (_.contains(values, item.get("value"))) {
-                    item.set({ "selected": true });
-                    item.trigger("childChange");
-                }
+
+                // this version sets 'selected' state regardless, hence no
+                // need to 'reset' the selection beforehand.
+                var selection = _.contains(values, item.get("value"));
+                item.set({ "selected": selection });
+                item.trigger("childChange");    // TODO review this, might be a bit excessive.
+
+                // if (_.contains(values, item.get("value"))) {
+                //     item.set({ "selected": true });
+                //     item.trigger("childChange");
+                // }
             });
         },
 

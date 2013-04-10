@@ -12,31 +12,36 @@ define([
             });
 
             // expect that the accounts are loaded.
-            this.accounts = Repository.accounts;
+            this.accounts = Repository.accounts();
         },
 
-        hydrate: function (selections) {
-            // apply restrictions to accounts
-            var accountNumbers = selections.accountNumbers;
-            this.accounts.selectBy(accountNumbers);
-            // Q: should it first unselect all previously selected accounts?
+        setFilter: function (status) {
+            this.set('isApplied', status);
+        },
 
-            if (selections.isApplied) {
-                this.set('isApplied', selections.isApplied);
-            }
+        hydrate: function (data) {
+            var accountNumbers = data.accountNumbers;
+            this.accounts.selectBy(accountNumbers);
+            this.setFilter(data.isApplied);
         },
 
         preserve: function () {
-            console.log('> account criterion: preserve');
-            // this.get('restrictions').accountNumbers = [2];
+            // Style 1. ------------------------
+            // return {
+            //     name: this.get('name'),
+            //     isApplied: this.get('isApplied'),
+            //     accountNumbers: this.accounts.selectedAccountNumbers()
+            // };
 
-            // { name: 'Account', isApplied: false, accountNumbers: ['123', '234'] },
+            // vs Style 2. ---------------------
+            var data = Criterion.prototype.preserve.call(this);
+            data.accountNumbers = this.accounts.selectedAccountNumbers();
+            return data;
+        },
 
-            return {
-                name: this.get('name'),
-                isApplied: this.get('isApplied'),
-                accountNumbers: this.accounts.selectedAccountNumbers()
-            };
+        reset: function () {
+            this.accounts.clearSelections();
+            this.removeFilter();
         },
 
         query: function () {

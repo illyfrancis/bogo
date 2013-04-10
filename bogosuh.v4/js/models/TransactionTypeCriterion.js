@@ -16,22 +16,15 @@ define([
             this.transactionTypes = Repository.transactionTypes;
         },
 
-        hydrate: function (selections) {
-            var types = selections.types; // array
-            var refId = selections.id;
-
-            // get all leaves.
+        hydrate: function (data) {
+            var types = data.types,
+                refId = data.id;
             // TODO - if (types && !_.isEmpty(types)) { do below }
             this.transactionTypes.selectByValues(types);
-
-            if (selections.isApplied) {
-                this.set('isApplied', selections.isApplied);
-            }
+            this.setFilter(data.isApplied);
         },
-        
+
         preserve: function () {
-            console.log('> TransactionTypeCriterion: preserve');
-            // { name: 'TransactionType', isApplied: false, types: ['DVW','RVP','REC'], id: 'TR001' }
             // return {
             //     name: this.get('name'),
             //     isApplied: this.get('isApplied'),
@@ -41,6 +34,11 @@ define([
             var data = Criterion.prototype.preserve.call(this);
             data.types = this.transactionTypes.selectedValues();
             return data;
+        },
+
+        reset: function () {
+            this.transactionTypes.selectByValues([]);
+            this.removeFilter();
         },
 
         query: function () {

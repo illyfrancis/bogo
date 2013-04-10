@@ -50,8 +50,7 @@ define([
         },
 
         addFilterBadge: function (filter) {
-            // TODO - dispose views properly
-            var filterBadge = new FilterStatusBadge({
+            var filterBadge = this.createSubView(FilterStatusBadge, {
                 model: filter
             });
             this.$el.prepend(filterBadge.render().el);

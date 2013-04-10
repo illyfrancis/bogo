@@ -18,6 +18,9 @@ define([
     // $(function () {
     // });
 
+    // disable cache (esp for IE)
+    $.ajaxSetup({ cache: false });
+
     // enable tooltips
     $('body').tooltip({
         selector: '[rel=tooltip]'

@@ -9,65 +9,49 @@ define([
         defaults: {
             name: '',
             title: '',
-            isApplied: false,
-            restrictions: {}
+            isApplied: false
         },
 
         initialize: function () {
         },
 
-        // parse: function (response) {
-        //     try {
-        //         var criteria = {};
-        //         if (response.name === 'AccountCriteria') {
-        //             console.log('Account criteria');
-        //             criteria = AccountCriteria;
-        //         } else {
-        //             criteria = require('models/' + response.name);
-        //         }
-        //         // mixin
-        //         _.extend(this, criteria);
-        //     } catch (err) {
-        //         console.log('parse', 'Criteria [' + response.name + '] not found');
-        //     }
-        //     return response;
-        // },
-
+        // TODO appears to be not used by anything!
         applyFilter: function () {
-            this.set('isApplied', true);
+            this.setFilter(true);
         },
 
         removeFilter: function () {
-            this.set('isApplied', false);
+            this.setFilter(false);
         },
 
         toggleFilter: function () {
-            this.set('isApplied', !this.get('isApplied'));
+            this.setFilter(!this.get('isApplied'));
+        },
+
+        setFilter: function (status) {
+            this.set('isApplied', status);
+        },
+
+        hydrate: function (filter) {
+            this.setFilter(filter.isApplied);
         },
 
         preserve: function () {
-            // noop
             return {
                 name: this.get('name'),
                 isApplied: this.get('isApplied')
             };
         },
 
-        hydrate: function (json) {
-            // noop
-            console.log('hydrate', JSON.stringify(json));
+        reset: function () {
+            this.removeFilter();
         },
 
         query: function () {
             // noop
-        },
-
-        reset: function () {
-            // noop
-            // factory reset?
         }
-
     });
 
     return Criterion;
+
 });

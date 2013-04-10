@@ -14,9 +14,8 @@ define([
         el: 'body',
 
         initialize: function () {
-            EventBus.on('showReportSettings', this.showReportSettings, this);
-            EventBus.on('showFilters', this.showFilters, this);
-            // EventBus.on('startSearch', this.doSearch, this);
+            this.listenTo(EventBus, 'showReportSettings', this.showReportSettings);
+            this.listenTo(EventBus, 'showFilters', this.showFilters);
             this.listenTo(EventBus, 'startSearch', this.doSearch);
 
             this.searchCriteria = Repository.searchCriteria();

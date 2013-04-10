@@ -38,22 +38,30 @@ define([
             }, this);
         },
 
+        accounts: function () {
+            if (!this._accounts) {
+                this._accounts = new PaginatedAccounts();
+            }
+
+            return this._accounts;
+        },
+
         loadAccounts: function (options) {
             var self = this;
-            this.accounts = new PaginatedAccounts();
+            var accounts = this.accounts();
             // For bootstrapping, do next.
             // this.accounts.init();
             // app.data.accounts = response.accounts.valid.values; // from response.js
             // this.accounts.reset(app.data.accounts); // from global, prefetched accounts data
             // this.accounts.pager();
 
-            this.accounts.url = '/api/accounts';
-            this.accounts.fetch({
+            accounts.url = '/api/accounts';
+            accounts.fetch({
                 reset: true,
                 success: function () {
                     console.log('Accounts loaded');
-                    self.accounts.init();
-                    self.accounts.pager();
+                    accounts.init();
+                    accounts.pager();
                     // debugger;
                     options = options || {};
                     if (options.success) {

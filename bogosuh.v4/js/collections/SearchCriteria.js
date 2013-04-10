@@ -59,6 +59,10 @@ define(['underscore', 'backbone', 'models/Criterion'], function (_, Backbone, Cr
             });
 
             return { 'criteria' : criteria };
+        },
+
+        reset: function () {
+            this.invoke('reset');
         }
 
     });

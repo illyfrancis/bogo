@@ -15,6 +15,14 @@ define(['backbone'], function (Backbone) {
 
         select: function (state) {
             this.set('selected', state === true);
+        },
+
+        // not DRY...
+        // used by PaginatedAccounts.clearSelection
+        clear: function () {
+            this.set({
+                selected: false
+            });
         }
 
     });

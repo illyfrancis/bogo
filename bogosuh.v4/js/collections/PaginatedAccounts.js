@@ -127,6 +127,10 @@ define([
                     account.set("selected", true);
                 }
             });
+        },
+
+        clearSelections: function () {
+            _.invoke(this.origModels, 'clear');
         }
 
     });
