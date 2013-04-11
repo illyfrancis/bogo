@@ -13,7 +13,7 @@ define([
 
         template: _.template(tpl),
 
-        className: 'baza',
+        className: 'btn-group',
 
         events: {
             'click li.none': 'clearSelection',

@@ -3,8 +3,9 @@ define([
     'underscore',
     'backbone',
     'apps/EventBus',
+    'views/PreferenceDropdown',
     'text!templates/AppMenu.html'
-], function ($, _, Backbone, EventBus, tpl) {
+], function ($, _, Backbone, EventBus, PreferenceDropdown, tpl) {
 
     var AppMenu = Backbone.View.extend({
 
@@ -27,6 +28,9 @@ define([
             this.$el.empty();
             this.$el.html(this.template());
             this.toggleSearchButton();
+
+            var preferenceDropdown = this.createSubView(PreferenceDropdown);
+            this.$('.preferences').replaceWith(preferenceDropdown.render().el);
 
             return this;
         },
