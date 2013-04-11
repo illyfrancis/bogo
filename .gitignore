@@ -5,6 +5,7 @@
 response.js
 concatenated*
 api/src/main/db/data/*.json
+api/src/main/db/data/*.export
 
 
 #################

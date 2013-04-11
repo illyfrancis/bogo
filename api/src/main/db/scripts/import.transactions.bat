@@ -1,0 +1,1 @@
+mongoimport --db openbbh --collection transactions --jsonArray --type json --file ../data/transactions.json

@@ -27,7 +27,7 @@ define([
 
     _.extend(Mediator.prototype, Backbone.Events, {
 
-        // wrap initialize with 'once'
+        // make sure called once only
         initialize: _.once(function(eventBus) {
             console.log('Mediator::initialize');
             this.listenTo(eventBus, 'loadPreference', this.applyPreference);

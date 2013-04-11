@@ -40,13 +40,16 @@ define([
     //-------------------------------------------------------------------------
     // Mediator
     //-------------------------------------------------------------------------
-    app.Mediator = new Mediator(EventBus);
+    new Mediator(EventBus);
 
     //-------------------------------------------------------------------------
     // main app (app.views.bogo)
     //-------------------------------------------------------------------------
-    app.Bogo = new BogoApp();
-    app.Bogo.load();
-    app.Repository = Repository;
+    var bogo = new BogoApp();
+    bogo.load();
+
+    // export
+    app.bogo = bogo;
+    app.repo = Repository;
     
 });
