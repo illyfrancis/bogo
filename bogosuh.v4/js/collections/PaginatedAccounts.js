@@ -120,13 +120,114 @@ define([
             return selected;
         },
 
-        selectBy: function (accountNumbers) {
+        // slow, O(n^2) - especially when accountNumbers are large (or the same as origModels)
+        _selectBy: function (accountNumbers) {
+            if (accountNumbers.length === 0) {
+                return;
+            }
+
+            // TODO - this causes IE stop scripting etc warning....
+            var index = -1;
             _.each(this.origModels, function (account) {
-                var index = _.indexOf(accountNumbers, account.get("number"));
+                index = _.indexOf(accountNumbers, account.get("number"));
                 if (index >= 0) {
                     account.set("selected", true);
                 }
             });
+        },
+
+        // version 2
+        __selectBy: function (accountNumbers) {
+            _.each(accountNumbers, function (number) {
+                _.delay(this.oneByOne, 0, number, this.origModels);
+            }, this);
+        },
+
+        oneByOne: function (number, loop) {
+            // console.log('*' + number);
+            _.each(loop, function (account) {
+                if (account.get('number') === number) {
+                    account.set("selected", true);
+                }
+            });
+        },
+
+        // version 3
+        ___selectBy: function (accountNumbers) {
+            var copy = accountNumbers.concat();
+
+            this.chunk(copy, this.doProcess, this);
+        },
+
+        chunk: function (array, process, context) {
+            (function () {
+                var item = array.shift();
+                process.call(context, item);
+
+                if (array.length > 0){
+                    setTimeout(arguments.callee, 0);
+                }
+            })();
+        },
+
+        doProcess: function (accountNumber) {
+            var model = _.find(this.origModels, function (account) {
+                return account.get('number') === accountNumber;
+            });
+
+            if (model) {
+                model.set('selected', true);
+            }
+        },
+
+        // version 4 - with callback
+        ____selectBy: function (accountNumbers) {
+            var copy = accountNumbers.concat();
+
+            this.chunk2(copy, this.doProcess, this, this.alertDone);
+        },
+
+        alertDone: function () {
+            console.log('>>>>>>>>>>>>>>>>>>>>> done ! >>>>>>>>>>>>>>>');
+            alert('done');
+        },
+
+        chunk2: function (array, process, context, callback) {
+            (function () {
+                if (array.length === 0) {
+                    callback.call(context);
+                } else {
+                    var item = array.shift();
+                    process.call(context, item);
+                    setTimeout(arguments.callee, 0);
+                }
+            })();
+        },
+
+        // version 5 - with process
+        selectBy: function (accountNumbers) {
+            var copy = accountNumbers.concat();
+
+            this.chunk3(copy, this.doProcess, this, this.alertDone, this.progressCallback);
+        },
+
+        chunk3: function (array, process, context, doneCallback, progressCallback) {
+            var total = array.length;
+            (function () {
+                if (array.length === 0) {
+                    doneCallback.call(context);
+                } else {
+                    progressCallback.call(context, array.length, total);
+                    var item = array.shift();
+                    process.call(context, item);
+                    setTimeout(arguments.callee, 0);
+                }
+            })();
+        },
+
+        progressCallback: function (current, total) {
+            var percent = 100 * (total - current) / total;
+            console.log("> " + percent);
         },
 
         clearSelections: function () {

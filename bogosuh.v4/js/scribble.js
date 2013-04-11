@@ -12,28 +12,22 @@ define([
     'apps/Mediator'
 ], function ($, _, Backbone, Bootstrap, Extension, EventBus, Repository, Mediator) {
 
-    var Listener = Backbone.View.extend({
-        initialize: function () {
-            // this.model
-            this.listenTo(this.model, 'change', this.logit);
-        },
+    function chunk(array, process, context){
+        setTimeout(function(){
+            var item = array.shift();
+            process.call(context, item);
 
-        logit: function () {
-            console.log('model changed');
-        }
+            if (array.length > 0){
+                setTimeout(arguments.callee, 100);
+            }
+        }, 100);
+    }
+
+    var names = ["Nicholas", "Steve", "Doug", "Bill", "Ben", "Dion"],
+        todo = names.concat();  //clone the array
+
+    chunk(todo, function(item){
+        console.log(item);
     });
-
-    var Baz = Backbone.Model.extend({
-        defaults: {
-            name: 'hello',
-            value: '123'
-        }
-    });
-
-    app.m = new Baz();
-    var listener = new Listener({
-        model: app.m
-    });
-
 
 });
