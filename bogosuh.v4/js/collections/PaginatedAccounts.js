@@ -120,6 +120,10 @@ define([
             return selected;
         },
 
+        selectBy: function (accountNumbers) {
+            this._selectBy(accountNumbers);
+        },
+
         // slow, O(n^2) - especially when accountNumbers are large (or the same as origModels)
         _selectBy: function (accountNumbers) {
             if (accountNumbers.length === 0) {
@@ -137,7 +141,7 @@ define([
         },
 
         // version 2
-        __selectBy: function (accountNumbers) {
+        _2_selectBy: function (accountNumbers) {
             _.each(accountNumbers, function (number) {
                 _.delay(this.oneByOne, 0, number, this.origModels);
             }, this);
@@ -153,7 +157,7 @@ define([
         },
 
         // version 3
-        ___selectBy: function (accountNumbers) {
+        _3_selectBy: function (accountNumbers) {
             var copy = accountNumbers.concat();
 
             this.chunk(copy, this.doProcess, this);
@@ -181,7 +185,7 @@ define([
         },
 
         // version 4 - with callback
-        ____selectBy: function (accountNumbers) {
+        _4_selectBy: function (accountNumbers) {
             var copy = accountNumbers.concat();
 
             this.chunk2(copy, this.doProcess, this, this.alertDone);
@@ -204,8 +208,8 @@ define([
             })();
         },
 
-        // version 5 - with process
-        selectBy: function (accountNumbers) {
+        // version 5 - with progress
+        _5_selectBy: function (accountNumbers) {
             var copy = accountNumbers.concat();
 
             this.chunk3(copy, this.doProcess, this, this.alertDone, this.progressCallback);
@@ -228,6 +232,34 @@ define([
         progressCallback: function (current, total) {
             var percent = 100 * (total - current) / total;
             console.log("> " + percent);
+        },
+
+        // version 6 - chunk them into a bigger pieces.
+
+        _6_selectBy: function (accountNumbers) {
+            var copy = accountNumbers.concat();
+
+            // split accountNumbers into chunks.
+            var chunkSize = 100,
+                bundles = [];
+
+            do {
+                bundles.push(copy.splice(0, chunkSize));
+            } while (copy.length > 0);
+
+            this.chunk3(bundles, this.doBiggerProcess, this, this.alertDone, this.progressCallback);
+        },
+
+
+        doBiggerProcess: function (accountNumbers) {
+            if (accountNumbers.length === 0) {
+                return;
+            }
+
+            do {
+                var item = accountNumbers.shift();
+                this.doProcess(item);
+            } while (accountNumbers.length > 0);
         },
 
         clearSelections: function () {
