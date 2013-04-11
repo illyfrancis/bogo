@@ -33,7 +33,7 @@ define([
             this.listenTo(eventBus, 'loadPreference', this.applyPreference);
             this.listenTo(eventBus, 'savePreference', this.savePreference);
             this.listenTo(eventBus, 'clearPreference', this.clearPreference);
-
+            this.listenTo(eventBus, 'resetReportSchema', this.resetReportSchema);
         }),
 
         searchReport: function () {
@@ -122,11 +122,15 @@ define([
             var searchCriteria = Repository.searchCriteria();
             searchCriteria.reset();
 
+            this.resetReportSchema();
+        },
+
+        // what about delete preference? are we defining preference maint screen here?? seems wrong!
+
+        resetReportSchema: function () {
             // reload report schema
             Repository.loadReportSchema();
         }
-
-        // what about delete preference? are we defining preference maint screen here?? seems wrong!
 
     });
 

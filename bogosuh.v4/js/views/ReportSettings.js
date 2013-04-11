@@ -13,7 +13,8 @@ define([
         template: _.template(tpl),
 
         events: {
-            'click .search-report': 'searchReport'
+            'click .search-report': 'searchReport',
+            'click .reset': 'resetReportSchema'
         },
 
         initialize: function () {
@@ -53,6 +54,10 @@ define([
             // if (this.collection.isReadyForSearch()) {
             this.hide();
             EventBus.trigger('startSearch');
+        },
+
+        resetReportSchema: function () {
+            EventBus.trigger('resetReportSchema');
         }
     });
 
