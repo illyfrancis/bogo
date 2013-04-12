@@ -15,7 +15,7 @@ define([
     // var d = new Date(1365706592680);
     // alert(d);
 
-    var Transaction = Backbone.Model.extend({
+/*    var Transaction = Backbone.Model.extend({
         idAttribute: '_id',
         urlRoot: '/api/transactions'
     });
@@ -60,5 +60,5 @@ define([
             process(tr);
         }
     });
-    app.transactions = tr;
+    app.transactions = tr;*/
 });

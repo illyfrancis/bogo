@@ -45,8 +45,14 @@ define([
         },
 
         query: function () {
-            console.log('> account criterion: ');
-            return this.accounts.selectedAccountNumbers();
+            // TODO - the column name 'accountNumber' should be managed in a single place,
+            // currently the assumption is ReportSchema should maintain it but by specifying it
+            // here again, kinda breaks that...
+            return {
+                accountNumber: {
+                    $in: this.accounts.selectedAccountNumbers()
+                }
+            };
         },
 
         validate: function (attrs) {

@@ -52,7 +52,36 @@ define([
 
         doSearch: function () {
             console.log('doSearch');
+
+            var query = this.searchCriteria.query();
+
+            // this.queryByGet(query);
+            this.queryByPost(query);
+
             this.searchContent.execute();
+        },
+
+        queryByGet: function (query) {
+            var jsonstring = JSON.stringify(query);
+            console.log('q: ' + jsonstring);
+
+            var tx = new Backbone.Collection();
+            // tx.url = '/api/transactions/search?q=' + jsonstring;
+            tx.url = '/api/transactions/search';
+            tx.fetch({
+                data:{q:jsonstring}
+            });
+        },
+
+        queryByPost: function (query) {
+            var jsonstring = JSON.stringify(query);
+            console.log('q: ' + jsonstring);
+
+            var txSearch = new Backbone.Model(query);
+            // tx.url = '/api/transactions/search?q=' + jsonstring;
+            txSearch.urlRoot = '/api/transactions/search';
+            txSearch.save();
+            // on success -> map the list to a transaction collection.
         }
 
     });

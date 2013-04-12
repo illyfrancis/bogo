@@ -11,6 +11,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -88,6 +89,49 @@ public class TransactionResource {
         return Response.ok(transaction).build();
     }
 
+    @GET
+    @Path("search")
+    @Produces(MediaType.APPLICATION_JSON)
+//    public Response query(@QueryParam("q") String query) {
+//
+//    	System.out.println("> in query [" + query + "]");
+//    	Response response;
+//    	if (query == null || query.trim().isEmpty()) {
+//    		response = Response.noContent().build();
+//    	} else {
+//            List<Model> transactions = Transactions.findBy(query);
+//
+//            GenericEntity<List<Model>> entity = new GenericEntity<List<Model>>(transactions) {};
+//            response = Response.ok(entity).build();
+//    	}
+//    	
+//        return response;
+//    }
+    // decide which style to follow. GenericEntity<T> vs specific List<T>
+    public List<Model> query(@QueryParam("q") String query) {
+
+    	System.out.println("> in query [" + query + "]");
+    	if (query == null || query.trim().isEmpty()) {
+    		return null;
+    	} 
+
+    	return Transactions.findBy(query);
+    }
+
+    @POST
+    @Path("search")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Model> queryByPost(String query) {
+
+        System.out.println("> in queryByPost [" + query + "]");
+        if (query == null || query.trim().isEmpty()) {
+            return null;
+        } 
+
+        return Transactions.findBy(query);
+    }
+
     @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -115,7 +159,7 @@ public class TransactionResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response get() {
     	
-        List<Model> transactions = Transactions.get();
+        List<Model> transactions = Transactions.find();
 
         GenericEntity<List<Model>> entity = new GenericEntity<List<Model>>(transactions) {};
         return Response.ok(entity).build();

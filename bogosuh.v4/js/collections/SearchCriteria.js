@@ -17,15 +17,21 @@ define(['underscore', 'backbone', 'models/Criterion'], function (_, Backbone, Cr
         // getCriteria: function() {
         query: function () {
             // TODO - instead of _.map use _.each to combine both map & where into one.
-            return _.reduce(_.map(this.where({isApplied: true}), this.mapper), this.reducer, '');
+            return _.reduce(_.map(this.where({isApplied: true}), this.mapper), this.reducer, {});
         },
 
         mapper: function (criterion) {
             return criterion.query();
         },
 
-        reducer: function (memo, value, key, list) {
-            return memo.concat(key < (list.length - 1) ? value + '#OR#' : value);
+        reducer: function (memo, query, key, list) {
+            if (_.isObject(query)) {
+                _.extend(memo, query);
+            }
+
+            return memo;
+
+            // return memo.concat(key < (list.length - 1) ? query + '#OR#' : query);
         },
 
         isCriterionApplied: function (criterionName) {

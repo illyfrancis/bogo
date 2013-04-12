@@ -34,9 +34,18 @@ define([
             this.listenTo(eventBus, 'savePreference', this.savePreference);
             this.listenTo(eventBus, 'clearPreference', this.clearPreference);
             this.listenTo(eventBus, 'resetReportSchema', this.resetReportSchema);
+
+            // tempor
+            this.listenTo(eventBus, 'startSearch', this.searchReport);
+
+            
         }),
 
         searchReport: function () {
+            
+        },
+
+        _searchReport: function () {
             // something triggers 'startSearch' event, then...
 
             // 1. should validation occur here or before event gets kicked off?

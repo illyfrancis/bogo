@@ -19,8 +19,16 @@ public class Transactions {
 		transactions = jongo.getCollection("transactions");
 	}
 
-	public static List<Model> get() {
+	public static List<Model> find() {
 		return newArrayList(transactions.find().as(Model.class));
+	}
+	
+	public static List<Model> findBy(String query) {
+		// first cut, assume query looks like - 
+		// accountNumber:8123861
+		// accountNumber:8123861,6133938;amount:($gt:500),($lt:1000);statusDate:14000000;clientRefId:C371122161
+		// String q = String.format("{%s}", query);
+		return newArrayList(transactions.find(query).as(Model.class));
 	}
 
 	public static Model get(String id) {

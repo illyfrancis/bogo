@@ -42,7 +42,11 @@ define([
         },
 
         query: function () {
-            console.log('> TransactionTypeCriterion: query');
+            return {
+                transactionType: {
+                    $in: this.transactionTypes.selectedValues()
+                }
+            };
         },
 
         validate: function (attrs) {

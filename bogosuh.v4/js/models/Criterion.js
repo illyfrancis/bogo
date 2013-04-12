@@ -48,7 +48,7 @@ define([
         },
 
         query: function () {
-            // noop
+            return {};
         }
     });
 
