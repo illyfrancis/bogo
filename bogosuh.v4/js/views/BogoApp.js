@@ -79,7 +79,7 @@ define([
 
             var txSearch = new Backbone.Model(query);
             // tx.url = '/api/transactions/search?q=' + jsonstring;
-            txSearch.urlRoot = '/api/transactions/search';
+            txSearch.urlRoot = '/api/transactions/search?p=stuff';
             txSearch.save();
             // on success -> map the list to a transaction collection.
         }

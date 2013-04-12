@@ -122,9 +122,9 @@ public class TransactionResource {
     @Path("search")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Model> queryByPost(String query) {
+    public List<Model> queryByPost(String query, @QueryParam("p") String param) {
 
-        System.out.println("> in queryByPost [" + query + "]");
+        System.out.println("> in queryByPost param [" + param + "]query [" + query + "]");
         if (query == null || query.trim().isEmpty()) {
             return null;
         } 
