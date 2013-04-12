@@ -39,19 +39,19 @@ public class TransactionResource {
         String securityDesc;
         String location;
 
-        String instructionDate;
-        String tradeDate;
-        String settlementDate;
+        // String instructionDate;
+        // String tradeDate;
+        // String settlementDate;
 
-        Date _instructionDate;
-        Date _tradeDate;
-        Date _settlementDate;
+        Date instructionDate;
+        Date tradeDate;
+        Date settlementDate;
 
-        String units;
-        double _units;
+        // String units;
+        double units;
         String currency;
-        String amount;
-        double _amount;
+        // String amount;
+        double amount;
 
         String transactionStatus;
         String transactionStatusDesc;
@@ -61,20 +61,19 @@ public class TransactionResource {
         String tradingBroker;
         String clearingBroker;
 
-        String clearedDate;
-        String exDate;
-        String paymentDate;
-        String recordDate;
-        String statusDate;
-        String valueDate;
+        // String clearedDate;
+        // String exDate;
+        // String paymentDate;
+        // String recordDate;
+        // String statusDate;
+        // String valueDate;
 
-        Date _clearedDate;
-        Date _exDate;
-        Date _paymentDate;
-        Date _recordDate;
-        Date _statusDate;
-        Date _valueDate;
-
+        Date clearedDate;
+        Date exDate;
+        Date paymentDate;
+        Date recordDate;
+        Date statusDate;
+        Date valueDate;
     }
 
     @GET

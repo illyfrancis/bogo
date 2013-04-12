@@ -1,4 +1,5 @@
-### OpenBBH database details ###
+OpenBBH database details
+========================
 
 db name: openbbh
 collections:
@@ -6,13 +7,33 @@ collections:
 	securities
 	etc
 
-### How to Import / Export ###
+Import / Export
+===============
 
 Refer to https://github.com/illyfrancis/francis-trial/issues/55
 
 Mongo manual
+------------
 
 http://docs.mongodb.org/manual/administration/import-export/
 
+Example 1:
 mongoexport --db sales --collection contacts
 mongoimport --db users --collection contacts --type csv --file /opt/backups/contacts.csv
+
+Example 2:
+mongoexport -db openbbh --collection transactions --out tx.export  
+    (Note: default type is JSON, use --jsonArray to wrap each output in a single JSON array)
+
+mongoimport -db openbbh --collection transactions --type json --file tx.export
+
+Rename a collection
+===================
+
+Refer to
+
+http://docs.mongodb.org/manual/reference/command/renameCollection/
+
+as mentioned in the last bit of the doco, you can do below from the shell:
+
+db.{collection}.renameCollection('{xxx}')
