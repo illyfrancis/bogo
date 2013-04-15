@@ -19,7 +19,7 @@ define([
             }
         },
 
-        query: function () {
+        queryCriteria: function () {
             return 'SecurityCategoryCriterion:JSON';
         }
     });

@@ -81,6 +81,8 @@ public class TransactionResource {
         String criteria;
         String fields;
         String sort;
+        int offset = 0;
+        int limit = 10;
         
         public String getFields() {
         	String projection = "";
@@ -98,6 +100,14 @@ public class TransactionResource {
 		public String getSort() {
 			return this.sort;
 		}
+
+        public int getSkipOffset() {
+            return this.offset * this.limit;
+        }
+
+        public int getLimit() {
+            return this.limit;
+        }
     }
 
     @GET

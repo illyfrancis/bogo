@@ -44,7 +44,7 @@ define([
             this.removeFilter();
         },
 
-        query: function () {
+        queryCriteria: function () {
             // TODO - the column name 'accountNumber' should be managed in a single place,
             // currently the assumption is ReportSchema should maintain it but by specifying it
             // here again, kinda breaks that...

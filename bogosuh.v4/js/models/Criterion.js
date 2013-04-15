@@ -47,7 +47,7 @@ define([
             this.removeFilter();
         },
 
-        query: function () {
+        queryCriteria: function () {
             return {};
         }
     });

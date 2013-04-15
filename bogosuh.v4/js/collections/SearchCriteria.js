@@ -15,23 +15,21 @@ define(['underscore', 'backbone', 'models/Criterion'], function (_, Backbone, Cr
         // TODO - or maybe the criteria is a 'combination' of both 'filter' and 'sort'
         // whereby each criteria object defines the definition of filter and sort.
         // getCriteria: function() {
-        query: function () {
+        queryCriteria: function () {
             // TODO - instead of _.map use _.each to combine both map & where into one.
             return _.reduce(_.map(this.where({isApplied: true}), this.mapper), this.reducer, {});
         },
 
         mapper: function (criterion) {
-            return criterion.query();
+            return criterion.queryCriteria();
         },
 
-        reducer: function (memo, query, key, list) {
-            if (_.isObject(query)) {
-                _.extend(memo, query);
+        reducer: function (memo, queryCriteria, key, list) {
+            if (_.isObject(queryCriteria)) {
+                _.extend(memo, queryCriteria);
             }
 
             return memo;
-
-            // return memo.concat(key < (list.length - 1) ? query + '#OR#' : query);
         },
 
         isCriterionApplied: function (criterionName) {

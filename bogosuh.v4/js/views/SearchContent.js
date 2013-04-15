@@ -50,7 +50,7 @@ define([
 
             // then extract sort info from this.collection (== ReportSchema)
             // this.collection._for_constructing_criteria_with_sort_info_
-            this.searchCriteria.query();
+            this.searchCriteria.queryCriteria();
 
             return 'query';
         },

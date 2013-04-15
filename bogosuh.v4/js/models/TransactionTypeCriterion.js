@@ -41,7 +41,7 @@ define([
             this.removeFilter();
         },
 
-        query: function () {
+        queryCriteria: function () {
             return {
                 transactionType: {
                     $in: this.transactionTypes.selectedValues()

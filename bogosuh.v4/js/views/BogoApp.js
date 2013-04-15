@@ -61,7 +61,7 @@ define([
             console.log("fields : " + JSON.stringify(fields));
             console.log("sort : " + JSON.stringify(sort));
 
-            var criteria = this.searchCriteria.query();
+            var criteria = this.searchCriteria.queryCriteria();
             // var query = {
             //     criteria: criteria
             // };
@@ -69,6 +69,8 @@ define([
             query['criteria'] = JSON.stringify(criteria);
             query['fields'] = JSON.stringify(fields);
             query['sort'] = JSON.stringify(sort);
+            // query['limit'] = 2;
+            // query['offset'] = 1;
 
             // this.queryByGet(query);
             this.queryByPost(query);
@@ -83,9 +85,23 @@ define([
             var txSearch = new Backbone.Model(query);
             // txSearch.set("criteria", JSON.stringify(query.criteria));
             // tx.url = '/api/transactions/search?q=' + jsonstring;
-            txSearch.urlRoot = '/api/transactions/search?p=stuff';
+            txSearch.urlRoot = '/api/transactions/search?limit=10&offset=1';
             txSearch.save();
             // on success -> map the list to a transaction collection.
+        }
+    });
+
+    var Query = Backbone.Model.extend({
+        defaults: {
+            criteria: "",
+            fields: "",
+            sort: "",
+            limit: 10,
+            offset: 0
+        },
+
+        execute: function (page) {
+            // call save() which in turn invoke 'post'
         }
     });
 

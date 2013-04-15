@@ -30,10 +30,14 @@ public class Transactions {
 		//	criteria: { ... },
 		//	fields: { ... },
 		//	sort: { ... }
+		//	limit: 10
+		//	offset: 1
 		// }
 		return newArrayList(transactions.find(query.getCriteria())
 				.projection(query.getFields())
 				.sort(query.getSort())
+				.skip(query.getSkipOffset())	// TODO - apparently skip() is very inefficient...
+				.limit(query.getLimit())
 				.as(Model.class));
 	}
 
