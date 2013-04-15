@@ -53,7 +53,22 @@ define([
         doSearch: function () {
             console.log('doSearch');
 
-            var query = this.searchCriteria.query();
+
+            var reportSchema = Repository.reportSchema();
+            var fields = reportSchema.queryFields();
+            var sort = reportSchema.querySort();
+
+            console.log("fields : " + JSON.stringify(fields));
+            console.log("sort : " + JSON.stringify(sort));
+
+            var criteria = this.searchCriteria.query();
+            // var query = {
+            //     criteria: criteria
+            // };
+            var query = {};
+            query['criteria'] = JSON.stringify(criteria);
+            query['fields'] = JSON.stringify(fields);
+            query['sort'] = JSON.stringify(sort);
 
             // this.queryByGet(query);
             this.queryByPost(query);
@@ -61,29 +76,17 @@ define([
             this.searchContent.execute();
         },
 
-        queryByGet: function (query) {
-            var jsonstring = JSON.stringify(query);
-            console.log('q: ' + jsonstring);
-
-            var tx = new Backbone.Collection();
-            // tx.url = '/api/transactions/search?q=' + jsonstring;
-            tx.url = '/api/transactions/search';
-            tx.fetch({
-                data:{q:jsonstring}
-            });
-        },
-
         queryByPost: function (query) {
             var jsonstring = JSON.stringify(query);
             console.log('q: ' + jsonstring);
 
             var txSearch = new Backbone.Model(query);
+            // txSearch.set("criteria", JSON.stringify(query.criteria));
             // tx.url = '/api/transactions/search?q=' + jsonstring;
             txSearch.urlRoot = '/api/transactions/search?p=stuff';
             txSearch.save();
             // on success -> map the list to a transaction collection.
         }
-
     });
 
     return BogoApp;

@@ -65,7 +65,7 @@ define([
                 });
 
             if (!anySortApplied && firstColumn) {
-                firstColumn.reverseSort();
+                firstColumn.set('sort', 1); // asc
             }
         },
 
@@ -120,6 +120,32 @@ define([
             console.log('ReportSchema::preserve all');
 
             return { 'schema': schema };
+        },
+
+        queryFields: function () {
+            var fields = [];
+            this.each(function (column) {
+                if (column.get('selected')) {
+                    fields.push(column.get('name'));
+                }
+            });
+
+            return fields;
+        },
+
+        querySort: function () {
+            this.setDefaultSort();
+            var sortColumn = this.find(function (column) {
+                var sort = column.get('sort');
+                return sort !== 0;
+            });
+
+            var sortField = {};
+            if (sortColumn) {
+                sortField[sortColumn.get('name')] = sortColumn.get('sort');
+            }
+
+            return sortField;
         }
 
     });

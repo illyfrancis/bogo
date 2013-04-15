@@ -14,7 +14,7 @@ define([
             position: 0,    // column ordering within results
             criterion: '',  // name of Criterion object
             //filterable: true   // some columns may not be (or use criterion as an indication)
-            sort: '' // 'asc' | 'desc' | ''
+            sort: 0 // 1 for asc, -1 for desc
         },
 
         idAttribute: '_id',
@@ -51,7 +51,7 @@ define([
 
             // if removed, also remove sorting for this column.
             if (!this.get('selected')) {
-                this.set('sort', '');
+                this.set('sort', 0);
             }
         },
 
@@ -62,29 +62,30 @@ define([
         },
 
         reverseSort: function () {
-            // reverse the sort order
-            var order = this.isSortAsc() ? 'desc' : 'asc';
+            // reverse the sort order (if 0 then set it to 1)
+            var order = this.get('sort');
+            order = (order === 0) ? order = 1 : order * -1;
             this.set('sort', order);
 
             // remove sort order from the other columns
             // SMELL - accessing collection from model is strange.
             this.collection.each(function (reportColumn) {
                 if (reportColumn !== this) {
-                    reportColumn.set('sort', '');
+                    reportColumn.set('sort', 0);
                 }
             }, this);
         },
 
         isSortAsc: function () {
-            return this.get('sort') === 'asc';
+            return this.get('sort') === 1;
         },
 
         isSortDesc: function () {
-            return this.get('sort') === 'desc';
+            return this.get('sort') === -1;
         },
 
         isSortApplied: function () {
-            return this.get('sort') !== '' && this.get('selected');
+            return this.get('sort') !== 0 && this.get('selected');
         },
 
         clearAll: function () {
@@ -100,14 +101,4 @@ define([
 
     return ReportColumn;
 
-    /*
-
-    AccountNumber {
-        title: 'Account Number',
-        name: 'accountNumber',
-        selected: true,
-        position: 0,
-        criterion: 'Account'
-    }
-    */
 });

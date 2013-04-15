@@ -77,6 +77,29 @@ public class TransactionResource {
         Date valueDate;
     }
 
+    public static class Query {
+        String criteria;
+        String fields;
+        String sort;
+        
+        public String getFields() {
+        	String projection = "";
+        	if (fields != null && !fields.isEmpty()) {
+        		// convert ["field1","field2",...] to {"field1":1,"field2":1,...}
+        		projection = fields.replaceAll("^\\[(.*?)\\]$", "{$1}").replaceAll("(\".+?\")", "$1:1");
+        	}
+        	return projection;
+        }
+
+		public String getCriteria() {
+			return this.criteria;
+		}
+		
+		public String getSort() {
+			return this.sort;
+		}
+    }
+
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -89,45 +112,20 @@ public class TransactionResource {
         return Response.ok(transaction).build();
     }
 
-    @GET
-    @Path("search")
-    @Produces(MediaType.APPLICATION_JSON)
-//    public Response query(@QueryParam("q") String query) {
-//
-//    	System.out.println("> in query [" + query + "]");
-//    	Response response;
-//    	if (query == null || query.trim().isEmpty()) {
-//    		response = Response.noContent().build();
-//    	} else {
-//            List<Model> transactions = Transactions.findBy(query);
-//
-//            GenericEntity<List<Model>> entity = new GenericEntity<List<Model>>(transactions) {};
-//            response = Response.ok(entity).build();
-//    	}
-//    	
-//        return response;
-//    }
-    // decide which style to follow. GenericEntity<T> vs specific List<T>
-    public List<Model> query(@QueryParam("q") String query) {
-
-    	System.out.println("> in query [" + query + "]");
-    	if (query == null || query.trim().isEmpty()) {
-    		return null;
-    	} 
-
-    	return Transactions.findBy(query);
-    }
-
     @POST
     @Path("search")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Model> queryByPost(String query, @QueryParam("p") String param) {
+    public List<Model> queryByPost(@QueryParam("p") String param, Query query) {
 
-        System.out.println("> in queryByPost param [" + param + "]query [" + query + "]");
-        if (query == null || query.trim().isEmpty()) {
+        if (query == null) {
             return null;
-        } 
+        }
+        System.out.println("> in queryByPost param [" + param 
+        		+ "] query.criteria [" + query.criteria 
+        		+ "] query.fields [" + query.fields 
+        		+ "] query.sort [" + query.sort 
+        		+ "]");
 
         return Transactions.findBy(query);
     }
