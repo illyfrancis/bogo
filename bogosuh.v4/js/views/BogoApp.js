@@ -8,6 +8,40 @@ define([
     'views/ViewFactory'
 ], function ($, _, Backbone, EventBus, Repository, SearchCriteria, ViewFactory) {
 
+    var Query = Backbone.Model.extend({
+
+        defaults: {
+            criteria: "",
+            fields: "",
+            sort: "",
+            limit: 10,
+            offset: 0
+        },
+
+        searchUrl: '/api/transactions/search?limit={{limit}}&offset={{offset}}',
+
+        initialize: function () {
+            // specify the callback when query is initialized
+            // options.callback
+            // then in execute, set up save with callback.
+        },
+
+        // urlRoot: '/api/transactions/search',
+        // urlRoot: '/api/transactions/search?limit=2&offset=1',
+        urlRoot: function () {
+            return this.searchUrl.replace('{{limit}}',
+                this.get('limit')).replace('{{offset}}', this.get('offset'));
+        },
+
+        execute: function (page) {
+            if (!_.isUndefined(page)) {
+                this.set('offset', page);
+            }
+            // call save() which in turn invoke 'post'
+            this.save();
+        }
+    });
+
     var BogoApp = Backbone.View.extend({
 
         el: 'body',
@@ -53,56 +87,23 @@ define([
         doSearch: function () {
             console.log('doSearch');
 
-
             var reportSchema = Repository.reportSchema();
             var fields = reportSchema.queryFields();
             var sort = reportSchema.querySort();
-
-            console.log("fields : " + JSON.stringify(fields));
-            console.log("sort : " + JSON.stringify(sort));
-
             var criteria = this.searchCriteria.queryCriteria();
-            // var query = {
-            //     criteria: criteria
-            // };
-            var query = {};
-            query['criteria'] = JSON.stringify(criteria);
-            query['fields'] = JSON.stringify(fields);
-            query['sort'] = JSON.stringify(sort);
-            // query['limit'] = 2;
-            // query['offset'] = 1;
 
-            // this.queryByGet(query);
-            this.queryByPost(query);
+            var query = new Query();
+            query.set('criteria', JSON.stringify(criteria));
+            query.set('fields', JSON.stringify(fields));
+            query.set('sort', JSON.stringify(sort));
+            query.set('limit', 2);
+            // query.set('offset', 1);
+
+            query.execute(1);
 
             this.searchContent.execute();
-        },
-
-        queryByPost: function (query) {
-            var jsonstring = JSON.stringify(query);
-            console.log('q: ' + jsonstring);
-
-            var txSearch = new Backbone.Model(query);
-            // txSearch.set("criteria", JSON.stringify(query.criteria));
-            // tx.url = '/api/transactions/search?q=' + jsonstring;
-            txSearch.urlRoot = '/api/transactions/search?limit=10&offset=1';
-            txSearch.save();
-            // on success -> map the list to a transaction collection.
         }
-    });
 
-    var Query = Backbone.Model.extend({
-        defaults: {
-            criteria: "",
-            fields: "",
-            sort: "",
-            limit: 10,
-            offset: 0
-        },
-
-        execute: function (page) {
-            // call save() which in turn invoke 'post'
-        }
     });
 
     return BogoApp;

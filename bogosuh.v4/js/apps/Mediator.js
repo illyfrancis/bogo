@@ -37,8 +37,6 @@ define([
 
             // tempor
             this.listenTo(eventBus, 'startSearch', this.searchReport);
-
-            
         }),
 
         searchReport: function () {

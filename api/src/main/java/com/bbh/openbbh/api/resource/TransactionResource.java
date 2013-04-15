@@ -126,16 +126,28 @@ public class TransactionResource {
     @Path("search")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Model> queryByPost(@QueryParam("p") String param, Query query) {
+    public List<Model> queryByPost(
+        @QueryParam("limit") Integer limit,
+        @QueryParam("offset") Integer offset,
+        Query query) {
 
         if (query == null) {
             return null;
         }
-        System.out.println("> in queryByPost param [" + param 
+        System.out.println("> in queryByPost limit [" + limit
+                + "] offset [" + offset
         		+ "] query.criteria [" + query.criteria 
         		+ "] query.fields [" + query.fields 
         		+ "] query.sort [" + query.sort 
         		+ "]");
+
+        if (limit != null) {
+            query.limit = limit.intValue();
+        }
+
+        if (offset != null) {
+            query.offset = offset.intValue();
+        }
 
         return Transactions.findBy(query);
     }
