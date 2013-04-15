@@ -13,14 +13,24 @@ define([
         defaults: {
             criteria: "",
             fields: "",
-            sort: "",
-            limit: 10,
-            offset: 0
+            sort: ""
         },
 
         searchUrl: '/api/transactions/search?limit={{limit}}&offset={{offset}}',
 
-        initialize: function () {
+        // paging: {
+        //     limit: 10,
+        //     offset: 0
+        // },
+
+        limit: 10,
+        offset: 0,
+
+        initialize: function (options) {
+            // _.defaults(options, {
+            //     limit: 10,
+            //     offset: 0
+            // });
             // specify the callback when query is initialized
             // options.callback
             // then in execute, set up save with callback.
@@ -29,13 +39,12 @@ define([
         // urlRoot: '/api/transactions/search',
         // urlRoot: '/api/transactions/search?limit=2&offset=1',
         urlRoot: function () {
-            return this.searchUrl.replace('{{limit}}',
-                this.get('limit')).replace('{{offset}}', this.get('offset'));
+            return this.searchUrl.replace('{{limit}}', this.limit).replace('{{offset}}', this.offset);
         },
 
         execute: function (page) {
             if (!_.isUndefined(page)) {
-                this.set('offset', page);
+                this.offset = page;
             }
             // call save() which in turn invoke 'post'
             this.save();
