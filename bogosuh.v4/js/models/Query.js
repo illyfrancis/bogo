@@ -27,8 +27,8 @@ define(['backbone'], function (Backbone) {
         },
 
         execute: function (page) {
-            if (!_.isNumber(page)) {
-                this.offset = 0;
+            if (_.isNumber(page)) {
+                this.offset = page;
             }
 
             // call save() which in turn invoke Backbone.sync
