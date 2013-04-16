@@ -9,7 +9,7 @@ define(['jquery', 'underscore', 'backbone'], function ($, _, Backbone) {
         },
 
         initialize: function (options) {
-            // model = ReportItem
+            // model = Transaction
             // pass in template for efficiency
             this.template = options.template;
         },

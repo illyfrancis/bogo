@@ -2,10 +2,10 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'collections/Report',
+    'collections/TransactionReport',
     'views/Progress',
     'views/SearchResult'
-], function ($, _, Backbone, Report, Progress, SearchResult) {
+], function ($, _, Backbone, TransactionReport, Progress, SearchResult) {
 
     var SearchContent = Backbone.View.extend({
 
@@ -29,7 +29,7 @@ define([
             var query = this.query();
 
             // fetch
-            this.report = new Report();
+            this.report = new TransactionReport();
             // this.report.url = 'transactions.json';
             // this.report.fetch({
             //     success: _.bind(this.onSuccess, this),

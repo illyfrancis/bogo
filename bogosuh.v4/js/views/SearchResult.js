@@ -51,7 +51,7 @@ define([
         template: _.template(tpl),
 
         initialize: function (options) {
-            // collection = Report
+            // collection = TransactionReport
             this.reportSchema = options.reportSchema;
             this.searchCriteria = options.searchCriteria;
         },

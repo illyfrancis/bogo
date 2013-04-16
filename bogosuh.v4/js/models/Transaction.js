@@ -1,8 +1,8 @@
 define(['underscore', 'backbone'], function(_, Backbone) {
 
-	var ReportItem = Backbone.Model.extend({
+	var Transaction = Backbone.Model.extend({
 	});
 
-	return ReportItem;
+	return Transaction;
 
 });
