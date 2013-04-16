@@ -17,7 +17,8 @@ define(['underscore', 'backbone', 'models/Criterion'], function (_, Backbone, Cr
         // getCriteria: function() {
         queryCriteria: function () {
             // TODO - instead of _.map use _.each to combine both map & where into one.
-            return _.reduce(_.map(this.where({isApplied: true}), this.mapper), this.reducer, {});
+            var criteria = _.reduce(_.map(this.where({isApplied: true}), this.mapper), this.reducer, {});
+            return JSON.stringify(criteria);
         },
 
         mapper: function (criterion) {

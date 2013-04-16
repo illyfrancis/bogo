@@ -12,6 +12,25 @@ define([
     'apps/Mediator'
 ], function ($, _, Backbone, Bootstrap, Extension, EventBus, Repository, Mediator) {
 
+    // this should be in unit test.
+    var Q = Backbone.Model.extend({
+        defaults: {
+            limit: 10,
+            offset: 0
+        },
+        initialize: function (attr, options) {
+
+        }
+    });
+
+    // test1
+    var q = new Q();
+
+
+    // test2
+    q = new Q({}, {offset: 5});
+
+
     // var d = new Date(1365706592680);
     // alert(d);
 

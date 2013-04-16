@@ -2,8 +2,9 @@ define([
     'backbone',
     'underscore',
     'apps/Repository',
-    'models/Preference'
-], function (Backbone, _, Repository, Preference) {
+    'models/Preference',
+    'models/Query'
+], function (Backbone, _, Repository, Preference, Query) {
 
 /*    var TransactionReport = Backbone.Collection.extend({
 
@@ -40,7 +41,17 @@ define([
         }),
 
         searchReport: function () {
+
+            var searchCriteria = Repository.searchCriteria(),
+                reportSchema = Repository.reportSchema();
             
+            var query = new Query({
+                criteria: searchCriteria.queryCriteria(),
+                fields: reportSchema.queryFields(),
+                sort: reportSchema.querySort()
+            });
+
+            query.execute();
         },
 
         _searchReport: function () {

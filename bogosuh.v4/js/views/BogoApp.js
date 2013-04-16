@@ -4,52 +4,10 @@ define([
     'backbone',
     'apps/EventBus',
     'apps/Repository',
+    'models/Query',
     'collections/SearchCriteria',
     'views/ViewFactory'
-], function ($, _, Backbone, EventBus, Repository, SearchCriteria, ViewFactory) {
-
-    var Query = Backbone.Model.extend({
-
-        defaults: {
-            criteria: "",
-            fields: "",
-            sort: ""
-        },
-
-        searchUrl: '/api/transactions/search?limit={{limit}}&offset={{offset}}',
-
-        // paging: {
-        //     limit: 10,
-        //     offset: 0
-        // },
-
-        limit: 10,
-        offset: 0,
-
-        initialize: function (options) {
-            // _.defaults(options, {
-            //     limit: 10,
-            //     offset: 0
-            // });
-            // specify the callback when query is initialized
-            // options.callback
-            // then in execute, set up save with callback.
-        },
-
-        // urlRoot: '/api/transactions/search',
-        // urlRoot: '/api/transactions/search?limit=2&offset=1',
-        urlRoot: function () {
-            return this.searchUrl.replace('{{limit}}', this.limit).replace('{{offset}}', this.offset);
-        },
-
-        execute: function (page) {
-            if (!_.isUndefined(page)) {
-                this.offset = page;
-            }
-            // call save() which in turn invoke 'post'
-            this.save();
-        }
-    });
+], function ($, _, Backbone, EventBus, Repository, Query, SearchCriteria, ViewFactory) {
 
     var BogoApp = Backbone.View.extend({
 
@@ -96,22 +54,33 @@ define([
         doSearch: function () {
             console.log('doSearch');
 
+            var criteria = this.searchCriteria.queryCriteria();
             var reportSchema = Repository.reportSchema();
             var fields = reportSchema.queryFields();
             var sort = reportSchema.querySort();
-            var criteria = this.searchCriteria.queryCriteria();
 
-            var query = new Query();
-            query.set('criteria', JSON.stringify(criteria));
-            query.set('fields', JSON.stringify(fields));
-            query.set('sort', JSON.stringify(sort));
-            query.set('limit', 2);
-            // query.set('offset', 1);
+            var query = new Query({
+                criteria: criteria,
+                fields: fields,
+                sort: sort
+            }, {
+                success: this.fooSuccess,
+                error: this.fooError
+            });
 
-            query.execute(1);
+            query.execute();
 
             this.searchContent.execute();
+        },
+
+        fooSuccess: function () {
+            console.log("> success foo");
+        },
+
+        fooError: function () {
+            console.log("> error foo");
         }
+
 
     });
 

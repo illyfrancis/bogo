@@ -130,7 +130,7 @@ define([
                 }
             });
 
-            return fields;
+            return JSON.stringify(fields);
         },
 
         querySort: function () {
@@ -145,7 +145,7 @@ define([
                 sortField[sortColumn.get('name')] = sortColumn.get('sort');
             }
 
-            return sortField;
+            return JSON.stringify(sortField);
         }
 
     });
