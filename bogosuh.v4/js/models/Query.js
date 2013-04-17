@@ -35,6 +35,15 @@ define(['backbone'], function (Backbone) {
 
         _convertPageToOffset: function (page) {
             return (!_.isNumber(page) || _.isNaN(page) || page <= 0) ? 0 : page - 1;
+        },
+
+        // TODO - let's think about the possibility of next() and previous() ???
+        next: function () {
+            this.execute(this.offset + 2);
+        },
+
+        previous: function () {
+            this.execute(this.offset);
         }
 
     });

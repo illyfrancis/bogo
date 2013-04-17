@@ -87,18 +87,19 @@ describe('Given Query Model', function () {
     });
 
     describe('when execute the query with page number', function () {
-        // beforeEach(function () {
-        //     sinon.stub(Query, 'save');
-        // });
+
+        var query;
+
+        beforeEach(function () {
+            query = new Query();
+            sinon.stub(query, 'save');
+        });
 
         // afterEach(function () {
         //     Query.save.restore();
         // });
 
-        it('should have offset = (page - 1) when positive page number', function () {
-            var query = new Query();
-            sinon.stub(query, 'save');
-
+        it('should have offset = (page - 1) with positive, non-zero page number', function () {
             query.execute(1);
             expect(query.limit).toEqual(defaultLimit);
             expect(query.offset).toEqual(0);
@@ -113,9 +114,6 @@ describe('Given Query Model', function () {
         });
 
         it('should have zero offset when page is not a number', function () {
-            var query = new Query();
-            sinon.stub(query, 'save');
-
             query.execute('hello');
             expect(query.limit).toEqual(defaultLimit);
             expect(query.offset).toEqual(0);
@@ -127,11 +125,16 @@ describe('Given Query Model', function () {
             query.execute({});
             expect(query.limit).toEqual(defaultLimit);
             expect(query.offset).toEqual(0);
+
+            query.execute(function () {});
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(0);
         });
 
         it('should have zero offset when zero or negative page number', function () {
-            var query = new Query();
-            sinon.stub(query, 'save');
+            query.execute();
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(0);
 
             query.execute(0);
             expect(query.limit).toEqual(defaultLimit);

@@ -25,9 +25,16 @@ define([
 
             // tempor
             this.listenTo(eventBus, 'startSearch', this.searchReport);
+
+            this.query = new Query({}, {
+                success: this.onSearchSuccess,
+                error: this.onSearchError
+            });
+            this.listenTo(eventBus, 'next', this.searchNext);
+            this.listenTo(eventBus, 'previous', this.searchPrevious);
         }),
 
-        searchReport: function (page) {
+        _searchReport: function (page) {
             // 1. should validation occur here or before event gets kicked off?
             // 2. assuming everything is in order do proceding.
 
@@ -44,6 +51,32 @@ define([
             });
 
             query.execute(page);
+        },
+
+        searchReport: function (page) {
+            // 1. should validation occur here or before event gets kicked off?
+            // 2. assuming everything is in order do proceding.
+
+            var searchCriteria = Repository.searchCriteria(),
+                reportSchema = Repository.reportSchema();
+            
+            this.query.set({
+                criteria: searchCriteria.queryCriteria(),
+                fields: reportSchema.queryFields(),
+                sort: reportSchema.querySort()
+            });
+
+            this.query.execute(page);
+        },
+
+
+        // TRY THIS!!
+        searchNext: function () {
+            this.query.next();
+        },
+
+        searchPrevious: function () {
+            this.query.previous();
         },
 
         onSearchSuccess: function (query, response, options) {
