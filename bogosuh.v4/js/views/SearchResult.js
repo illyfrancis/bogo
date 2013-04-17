@@ -54,6 +54,8 @@ define([
             // collection = TransactionReport
             this.reportSchema = options.reportSchema;
             this.searchCriteria = options.searchCriteria;
+
+            this.listenTo(this.collection, 'reset', this.render);
         },
 
         render: function () {

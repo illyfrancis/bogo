@@ -2,10 +2,11 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'apps/Repository',    
     'collections/TransactionReport',
     'views/Progress',
     'views/SearchResult'
-], function ($, _, Backbone, TransactionReport, Progress, SearchResult) {
+], function ($, _, Backbone, Repository, TransactionReport, Progress, SearchResult) {
 
     var SearchContent = Backbone.View.extend({
 
@@ -26,33 +27,18 @@ define([
             this.validate();
             this.showProgress();
 
-            var query = this.query();
-
             // fetch
-            this.report = new TransactionReport();
+            // this.report = new TransactionReport();
+            this.report = Repository.transactionReport();
+
             // this.report.url = 'transactions.json';
             // this.report.fetch({
             //     success: _.bind(this.onSuccess, this),
             //     error: _.bind(this.onError, this)
             // });
-            this.report.reset(response.report.transactions);
+            // this.report.reset(response.report.transactions);
             // simulate success by calling this.onSuccess
             this.onSuccess();
-        },
-
-        query: function () {
-            // gather query & sort string
-            // prep search criteria
-            // TODO - need to define relationship between SearchCriteria (or its elements) and
-            // ReportColumns. Because when search criteria is passed on to the service it must have
-            // query for { fieldName=[... filtered value ...] & sortBy=fieldName & sortDirection=asc } etc
-            this.reportSchema.setDefaultSort();
-
-            // then extract sort info from this.collection (== ReportSchema)
-            // this.collection._for_constructing_criteria_with_sort_info_
-            this.searchCriteria.queryCriteria();
-
-            return 'query';
         },
 
         onSuccess: function (collection, response, options) {

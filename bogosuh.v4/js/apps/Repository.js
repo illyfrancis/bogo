@@ -7,8 +7,9 @@ define([
     'collections/ReportSchema',
     'collections/TreeCollection',
     'collections/Preferences',
-    'collections/SearchCriteria'
-], function (Backbone, _, Preference, PaginatedAccounts, ReportSchema, TreeCollection, Preferences, SearchCriteria) {
+    'collections/SearchCriteria',
+    'collections/TransactionReport'
+], function (Backbone, _, Preference, PaginatedAccounts, ReportSchema, TreeCollection, Preferences, SearchCriteria, TransactionReport) {
 
     var Repository = {
 
@@ -266,6 +267,14 @@ define([
             }
 
             return this._searchCriteria;
+        },
+
+        transactionReport: function () {
+            if (!this._transactionReport) {
+                this._transactionReport = new TransactionReport();
+            }
+
+            return this._transactionReport;
         }
 
     };

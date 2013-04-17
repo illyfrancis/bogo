@@ -54,33 +54,8 @@ define([
         doSearch: function () {
             console.log('doSearch');
 
-            var criteria = this.searchCriteria.queryCriteria();
-            var reportSchema = Repository.reportSchema();
-            var fields = reportSchema.queryFields();
-            var sort = reportSchema.querySort();
-
-            var query = new Query({
-                criteria: criteria,
-                fields: fields,
-                sort: sort
-            }, {
-                success: this.fooSuccess,
-                error: this.fooError
-            });
-
-            query.execute();
-
             this.searchContent.execute();
-        },
-
-        fooSuccess: function () {
-            console.log("> success foo");
-        },
-
-        fooError: function () {
-            console.log("> error foo");
         }
-
 
     });
 

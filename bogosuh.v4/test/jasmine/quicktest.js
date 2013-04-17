@@ -62,7 +62,7 @@ require(['underscore', 'jquery', 'jasmine-html', 'sinon'], function (_, $, jasmi
     var specs = [];
 
     specs.push('spec/models/QuerySpec');
-    // specs.push('spec/models/DateRangeSpec');
+    specs.push('spec/models/DateRangeSpec');
     // specs.push('spec/models/AccountCriteriaSpec');
     // specs.push('spec/models/ReportCriteriaSpec');
     // specs.push('spec/collections/PaginatedAccountsSpec');
