@@ -51,5 +51,6 @@ define([
     // export
     app.bogo = bogo;
     app.repo = Repository;
+    app.ev = EventBus;
     
 });

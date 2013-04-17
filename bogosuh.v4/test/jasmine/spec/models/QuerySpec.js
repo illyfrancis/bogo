@@ -86,6 +86,67 @@ describe('Given Query Model', function () {
         });
     });
 
+    describe('when execute the query with page number', function () {
+        // beforeEach(function () {
+        //     sinon.stub(Query, 'save');
+        // });
+
+        // afterEach(function () {
+        //     Query.save.restore();
+        // });
+
+        it('should have offset = (page - 1) when positive page number', function () {
+            var query = new Query();
+            sinon.stub(query, 'save');
+
+            query.execute(1);
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(0);
+
+            query.execute(49);
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(48);
+
+            query.execute(17);
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(16);
+        });
+
+        it('should have zero offset when page is not a number', function () {
+            var query = new Query();
+            sinon.stub(query, 'save');
+
+            query.execute('hello');
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(0);
+
+            query.execute(NaN);
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(0);
+
+            query.execute({});
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(0);
+        });
+
+        it('should have zero offset when zero or negative page number', function () {
+            var query = new Query();
+            sinon.stub(query, 'save');
+
+            query.execute(0);
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(0);
+
+            query.execute(-49);
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(0);
+
+            query.execute(-17);
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(0);
+        });
+    });
+
     xdescribe('when execute the query', function () {
         it('should POST with default limit and offset', function () {
             spyOn(Backbone, 'sync');
@@ -118,38 +179,41 @@ describe('Given Query Model', function () {
         });
 
         it('should call Backbone.sync with create default limit and specified page/offset', function () {
-            var query = new Query();
-            query.execute(2);
+            var page = 2,
+                query = new Query();
+            query.execute(page);
 
             expect(Backbone.sync.calledOnce).toBe(true);
             expect(Backbone.sync.calledWith('create', query)).toBe(true);
             expect(query.limit).toEqual(defaultLimit);
-            expect(query.offset).toEqual(2);
+            expect(query.offset).toEqual(page-1);
         });
 
         it('should continue to call Backbone.sync with create, when multiple execute() is called', function () {
-            var query = new Query(mockData);
-            query.execute(2);
+            var page = 2,
+                query = new Query();
+            query.execute(page);
+
             expect(Backbone.sync.calledOnce).toBe(true);
             expect(Backbone.sync.calledWith('create', query)).toBe(true);
             expect(query.limit).toEqual(defaultLimit);
-            expect(query.offset).toEqual(2);
+            expect(query.offset).toEqual(page-1);
 
             Backbone.sync.reset();
 
-            query.execute(2);
+            query.execute(page);
             expect(Backbone.sync.calledOnce).toBe(true);
             expect(Backbone.sync.calledWith('create', query)).toBe(true);
             expect(query.limit).toEqual(defaultLimit);
-            expect(query.offset).toEqual(2);
+            expect(query.offset).toEqual(page-1);
 
             Backbone.sync.reset();
 
-            query.execute(2);
+            query.execute(page);
             expect(Backbone.sync.calledOnce).toBe(true);
             expect(Backbone.sync.calledWith('create', query)).toBe(true);
             expect(query.limit).toEqual(defaultLimit);
-            expect(query.offset).toEqual(2);
+            expect(query.offset).toEqual(page-1);
         });
     });
 

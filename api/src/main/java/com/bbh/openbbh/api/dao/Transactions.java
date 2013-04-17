@@ -23,6 +23,10 @@ public class Transactions {
 	public static List<Model> find() {
 		return newArrayList(transactions.find().as(Model.class));
 	}
+
+	public static long count(Query query) {
+		return transactions.count(query.getCriteria());
+	}
 	
 	public static List<Model> findBy(Query query) {
 		// assume query is structured like

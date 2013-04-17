@@ -110,6 +110,11 @@ public class TransactionResource {
         }
     }
 
+    static class QueryResponse {
+        List<Model> transactions;
+        long total;
+    }
+
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -126,20 +131,15 @@ public class TransactionResource {
     @Path("search")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Model> queryByPost(
+    public Response queryByPost(
         @QueryParam("limit") Integer limit,
         @QueryParam("offset") Integer offset,
         Query query) {
 
         if (query == null) {
-            return null;
+            // return null;
+            return Response.noContent().build();
         }
-        System.out.println("> in queryByPost limit [" + limit
-                + "] offset [" + offset
-        		+ "] query.criteria [" + query.criteria 
-        		+ "] query.fields [" + query.fields 
-        		+ "] query.sort [" + query.sort 
-        		+ "]");
 
         if (limit != null) {
             query.limit = limit.intValue();
@@ -149,7 +149,21 @@ public class TransactionResource {
             query.offset = offset.intValue();
         }
 
-        return Transactions.findBy(query);
+        long count = Transactions.count(query);
+
+        System.out.println("> in queryByPost limit [" + limit
+                + "] offset [" + offset
+                + "] count [" + count
+                + "] query.criteria [" + query.criteria 
+                + "] query.fields [" + query.fields 
+                + "] query.sort [" + query.sort 
+                + "]");
+
+        // return Response.ok(Transactions.findBy(query)).build();
+        QueryResponse response = new QueryResponse();
+        response.transactions = Transactions.findBy(query);
+        response.total = count;
+        return Response.ok(response).build();
     }
 
     @PUT

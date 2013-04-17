@@ -59,11 +59,14 @@ define([
         },
 
         render: function () {
+
+            console.log("> pager: " + JSON.stringify(this.collection._pager));
+
             this.disposeSubViews();
             // if report is empty
             //  this.renderNoReport();
             // else do the following.
-            this.$el.html(this.template());
+            this.$el.html(this.template(this.collection.pager()));
             this.renderColumnHeaders();
             this.renderReports();
             return this;

@@ -27,7 +27,7 @@ define([
             this.listenTo(eventBus, 'startSearch', this.searchReport);
         }),
 
-        searchReport: function () {
+        searchReport: function (page) {
             // 1. should validation occur here or before event gets kicked off?
             // 2. assuming everything is in order do proceding.
 
@@ -43,12 +43,13 @@ define([
                 error: this.onSearchError
             });
 
-            query.execute();
+            query.execute(page);
         },
 
-        onSearchSuccess: function (model, response, options) {
+        onSearchSuccess: function (query, response, options) {
             var transactionReport = Repository.transactionReport();
-            transactionReport.reset(response);
+            transactionReport.pageInfo(query.limit, query.offset);
+            transactionReport.reset(response, {parse: true});
         },
 
         onSearchError: function () {

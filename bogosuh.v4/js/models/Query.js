@@ -27,13 +27,16 @@ define(['backbone'], function (Backbone) {
         },
 
         execute: function (page) {
-            if (_.isNumber(page)) {
-                this.offset = page;
-            }
+            this.offset = this._convertPageToOffset(page);
 
             // call save() which in turn invoke Backbone.sync
             this.save({}, this.callbacks);
+        },
+
+        _convertPageToOffset: function (page) {
+            return (!_.isNumber(page) || _.isNaN(page) || page <= 0) ? 0 : page - 1;
         }
+
     });
 
     return Query;

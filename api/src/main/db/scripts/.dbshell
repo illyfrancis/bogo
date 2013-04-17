@@ -5,3 +5,4 @@ use openbbh
 db.reportschema.find()
 use openbbh
 db.reportschema.find()
+use openbbh

@@ -23,7 +23,7 @@ define([
             this.$el.append(this.progress.el);
         },
 
-        execute: function () {
+        render: function () {
             this.validate();
             this.showProgress();
 
@@ -39,6 +39,7 @@ define([
             // this.report.reset(response.report.transactions);
             // simulate success by calling this.onSuccess
             this.onSuccess();
+            return this;
         },
 
         onSuccess: function (collection, response, options) {
