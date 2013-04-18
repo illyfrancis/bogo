@@ -27,14 +27,14 @@ define([
         },
 
         preserve: function () {
-            // Style 1. ------------------------
+            // Style 1
             // return {
             //     name: this.get('name'),
             //     isApplied: this.get('isApplied'),
             //     accountNumbers: this.accounts.selectedAccountNumbers()
             // };
 
-            // vs Style 2. ---------------------
+            // vs Style 2
             var data = Criterion.prototype.preserve.call(this);
             data.accountNumbers = this.accounts.selectedAccountNumbers();
             return data;

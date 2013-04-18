@@ -1,8 +1,8 @@
 define([
-    "underscore",
-    "backbone",
-    "backbone.paginator",
-    "models/Account"
+    'underscore',
+    'backbone',
+    'backbone.paginator',
+    'models/Account'
 ], function (_, Backbone, Paginator, Account) {
 
     var PaginatedAccounts = Backbone.Paginator.clientPager.extend({
@@ -11,13 +11,13 @@ define([
 
         paginator_core: {
             // the type of the request (GET by default)
-            type: "GET",
+            type: 'GET',
 
             // the type of reply (jsonp by default)
-            dataType: "json",
+            dataType: 'json',
 
             // the URL (or base URL) for the service
-            url: "/api/accounts"
+            url: '/api/accounts'
         },
 
         paginator_ui: {
@@ -71,7 +71,7 @@ define([
             // Be sure to change this based on how your results
             // are structured
             //      var tags = response.d.results;
-            console.log("parse");
+            console.log('parse');
             // var tags = response.values;
             // return tags;
             return response;
@@ -106,15 +106,15 @@ define([
 
         hasSelection: function () {
             return _.any(this.origModels, function (account) {
-                return account.get("selected");
+                return account.get('selected');
             }, this);
         },
 
         selectedAccountNumbers: function () {
             var selected = [];
             _.each(this.origModels, function (account) {
-                if (account.get("selected")) {
-                    selected.push(account.get("number"));
+                if (account.get('selected')) {
+                    selected.push(account.get('number'));
                 }
             });
             return selected;
@@ -133,9 +133,9 @@ define([
             // TODO - this causes IE stop scripting etc warning....
             var index = -1;
             _.each(this.origModels, function (account) {
-                index = _.indexOf(accountNumbers, account.get("number"));
+                index = _.indexOf(accountNumbers, account.get('number'));
                 if (index >= 0) {
-                    account.set("selected", true);
+                    account.set('selected', true);
                 }
             });
         },
@@ -151,7 +151,7 @@ define([
             // console.log('*' + number);
             _.each(loop, function (account) {
                 if (account.get('number') === number) {
-                    account.set("selected", true);
+                    account.set('selected', true);
                 }
             });
         },
@@ -231,7 +231,7 @@ define([
 
         progressCallback: function (current, total) {
             var percent = 100 * (total - current) / total;
-            console.log("> " + percent);
+            console.log('> ' + percent);
         },
 
         // version 6 - chunk them into a bigger pieces.
@@ -263,7 +263,7 @@ define([
         },
 
         clearSelections: function () {
-            _.invoke(this.origModels, 'clear');
+            _.invoke(this.origModels, 'select', false);
         }
 
     });

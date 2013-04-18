@@ -10,21 +10,13 @@ define(['backbone'], function (Backbone) {
         },
 
         toggle: function () {
-            this.set('selected', !this.get('selected'));
+            this.select(!this.attributes.selected);
         },
 
         select: function (state) {
             this.set('selected', state === true);
-        },
-
-        // not DRY...
-        // used by PaginatedAccounts.clearSelection
-        clear: function () {
-            this.set({
-                selected: false
-            });
         }
-
+        
     });
 
     return Account;

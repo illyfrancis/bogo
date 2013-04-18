@@ -38,6 +38,15 @@ describe('Given AccountCriterion Model', function () {
 
             accountCriterion.setFilter(false);
             expect(accountCriterion.get('isApplied')).toBe(false);
+
+            accountCriterion.setFilter({});
+            expect(accountCriterion.get('isApplied')).toBe(false);
+
+            accountCriterion.setFilter('true');
+            expect(accountCriterion.get('isApplied')).toBe(false);
+
+            accountCriterion.setFilter(1);
+            expect(accountCriterion.get('isApplied')).toBe(false);
         });
     });
 

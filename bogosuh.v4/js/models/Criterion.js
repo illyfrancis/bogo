@@ -21,7 +21,7 @@ define([
         },
 
         setFilter: function (status) {
-            this.set('isApplied', status);
+            this.set('isApplied', status === true);
         },
 
         hydrate: function (filter) {

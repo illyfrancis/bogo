@@ -3,13 +3,12 @@ define([
     'backbone'
 ], function (_, Backbone) {
 
-    // ReportColumn must be associated with Criterion?
     var ReportColumn = Backbone.Model.extend({
 
         defaults: {
-            title: '',  // for displaying - e.g. Account Name (full description)
-            label: '',  // for report columns (short description)
             name: '',   // for rendering JSON response - e.g. accountName (should be unique, used as an id for persistence)
+            label: '',  // for report columns (short description)
+            title: '',  // for displaying - e.g. Account Name (full description)
             selected: false,    // boolean test for including in report
             position: 0,    // column ordering within results
             criterion: '',  // name of Criterion object
@@ -45,9 +44,7 @@ define([
 
         toggle: function () {
             // this.set('selected', !this.get('selected'));
-            this.set('selected', !this.get('selected'), {
-                validate: true
-            });
+            this.set('selected', !this.get('selected'), {validate: true});
 
             // if removed, also remove sorting for this column.
             if (!this.get('selected')) {
@@ -56,9 +53,7 @@ define([
         },
 
         setPosition: function (position) {
-            this.set('position', position, {
-                silent: true
-            });
+            this.set('position', position, {silent: true});
         },
 
         reverseSort: function () {
