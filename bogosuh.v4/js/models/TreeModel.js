@@ -20,7 +20,7 @@ define(['underscore', 'backbone', 'require'], function (_, Backbone, require) {
         },
 
         toggle: function () {
-            this.set('selected', !this.get('selected'));
+            this.set('selected', !this.attributes.selected);
         },
 
         setParent: function (parent) {

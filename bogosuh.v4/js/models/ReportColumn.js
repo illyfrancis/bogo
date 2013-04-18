@@ -43,13 +43,10 @@ define([
         },
 
         toggle: function () {
-            // this.set('selected', !this.get('selected'));
-            this.set('selected', !this.get('selected'), {validate: true});
+            var isSelected = this.attributes.selected,
+                sort = isSelected ? 0 : this.attributes.sort;
 
-            // if removed, also remove sorting for this column.
-            if (!this.get('selected')) {
-                this.set('sort', 0);
-            }
+            this.set({selected: !isSelected, sort: sort}, {validate: true});
         },
 
         setPosition: function (position) {
