@@ -11,11 +11,7 @@ define(['underscore', 'backbone', 'models/Criterion'], function (_, Backbone, Cr
             }, this);
         },
 
-        // aggregation of 'applied' criterion and 'OR'ed
-        // TODO - or maybe the criteria is a 'combination' of both 'filter' and 'sort'
-        // whereby each criteria object defines the definition of filter and sort.
-        // getCriteria: function() {
-        queryCriteria: function () {
+        _queryCriteria: function () {
             // TODO - instead of _.map use _.each to combine both map & where into one.
             var criteria = _.reduce(_.map(this.where({isApplied: true}), this.mapper), this.reducer, {});
             return JSON.stringify(criteria);
@@ -33,19 +29,28 @@ define(['underscore', 'backbone', 'models/Criterion'], function (_, Backbone, Cr
             return memo;
         },
 
-        isCriterionApplied: function (criterionName) {
-            // get criterion by name
-            var criterionByName = this.find(function (criterion) {
-                return criterion.get('name') === criterionName;
+        queryCriteria: function () {
+            var queryCriteria, criteria = {};
+            this.each(function (criterion) {
+                if (criterion.get('isApplied')) {
+                    queryCriteria = criterion.queryCriteria();
+                    if (_.isObject(queryCriteria)) {
+                        _.extend(criteria, queryCriteria);
+                    }
+                }
             });
 
-            return criterionByName && criterionByName.get('isApplied');
+            return JSON.stringify(criteria);
+        },
+
+        isCriterionApplied: function (criterionName) {
+            // get criterion by name
+            var criterion = this.findWhere({'name': criterionName});
+            return criterion && criterion.get('isApplied');
         },
 
         hydrate: function (criteria) {
-            console.log('hydrate all');
-
-            // not the most efficient: O(n^2)
+            // TODO - review, not the most efficient: O(n^2)
             _.each(criteria, function (item) {
                 var criterionName = item.name;
                 var criterion = this.findWhere({'name': criterionName});
@@ -56,10 +61,8 @@ define(['underscore', 'backbone', 'models/Criterion'], function (_, Backbone, Cr
         },
 
         preserve: function () {
-            console.log('SearchCriteria::preserve all');
             var criteria = [];
             this.each(function (criterion) {
-                // or use _.invoke and pass array?
                 criteria.push(criterion.preserve());
             });
 

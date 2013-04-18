@@ -12,14 +12,6 @@ define([
             isApplied: false
         },
 
-        initialize: function () {
-        },
-
-        // TODO appears to be not used by anything!
-        applyFilter: function () {
-            this.setFilter(true);
-        },
-
         removeFilter: function () {
             this.setFilter(false);
         },

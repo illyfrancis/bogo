@@ -4,10 +4,9 @@ define([
     'backbone',
     'apps/EventBus',
     'apps/Repository',
-    'models/Query',
     'collections/SearchCriteria',
     'views/ViewFactory'
-], function ($, _, Backbone, EventBus, Repository, Query, SearchCriteria, ViewFactory) {
+], function ($, _, Backbone, EventBus, Repository, SearchCriteria, ViewFactory) {
 
     var BogoApp = Backbone.View.extend({
 
@@ -33,7 +32,6 @@ define([
             this.searchFilters = ViewFactory.createSearchFilters(searchCriteria);
             this.searchContent = ViewFactory.createSearchContent(reportSchema, searchCriteria);
 
-            console.log('BogoApp:render');
             this.$el.append(this.appMenu.render().el);
             this.$el.append(this.filterStatusBar.render().el);
             this.$el.append(this.reportSettings.render().el);

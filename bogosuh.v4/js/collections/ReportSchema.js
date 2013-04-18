@@ -5,25 +5,6 @@ define([
     'models/ReportColumn'
 ], function (_, Backbone, ReportColumn) {
 
-    /*
-
-- What is JSON structure for report result?
-    {
-        accountNumber: '8110192', accountName: 'LOREM IPSUM DOLOR SIT AMET',
-        clientRefID: 'ABDC-XYZT', transactionRefID: '39483028930000000000',
-        transactionType: 'REC', transactionTypeDesc: 'RECEIVE FREE',
-        securityID: 'G12345675', securityDesc: 'PERCIPIT MNESARCHUM EAM EA',
-        securityIDType: 'CUSIP', location: 'US'
-    }
-
-    - If we assume the same ReportColumn's name is used in the JSON response (report),
-        we can generate schema using the same name.
-
-    - How should the report columns be persisted and hydrated? I think ReportSchema should be responsible for it (data API)
-        define URL and call fetch & save etc.
-
-    */
-
     var ReportSchema = Backbone.Collection.extend({
 
         model: ReportColumn,
@@ -39,15 +20,11 @@ define([
         },
 
         availableColumns: function () {
-            return this.where({
-                selected: false
-            });
+            return this.where({selected: false});
         },
 
         selectedColumns: function () {
-            return this.where({
-                selected: true
-            });
+            return this.where({selected: true});
         },
 
         hasMinReportColumns: function () {
@@ -59,7 +36,21 @@ define([
         },
 
         setDefaultSort: function () {
-            var firstColumn = this.selectedColumns()[0],
+            var anySortApplied = this.any(function (reportColumn) {
+                    return reportColumn.isSortApplied();
+                });
+
+            if (!anySortApplied) {
+                var firstColumn = _.first(this.selectedColumns());
+                // firstColumn && firstColumn.set('sort', 1); // asc
+                if (firstColumn) {
+                    firstColumn.set('sort', 1); // asc
+                }
+            }
+        },
+
+        _setDefaultSort: function () {
+            var firstColumn = _.first(this.selectedColumns()),
                 anySortApplied = this.any(function (reportColumn) {
                     return reportColumn.isSortApplied();
                 });
@@ -89,7 +80,7 @@ define([
                 }
             }, this);
 
-            this.trigger('change'); // review this???
+            this.trigger('change');
         },
 
         preserve: function () {
@@ -102,22 +93,6 @@ define([
                     sort: reportColumn.get('sort')
                 });
             });
-
-            console.log(">>> " + JSON.stringify(schema));
-            // return criteria;
-
-            // should return stringified JSON of 'selected' ReportColumns with its state of 'position' & 'sort'
-            // so it could look like this
-            /*
-                var selections = [
-                    { name: 'accountName', position: 1, sort: 'desc' },
-                    { name: 'clientRefId', position: 2, sort: '' },
-                    ...
-                ];
-
-                return JSON.stringify(selections);
-            */
-            console.log('ReportSchema::preserve all');
 
             return { 'schema': schema };
         },
