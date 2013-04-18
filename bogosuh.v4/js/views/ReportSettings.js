@@ -53,7 +53,7 @@ define([
             // need to validate
             // if (this.collection.isReadyForSearch()) {
             this.hide();
-            EventBus.trigger('startSearch');
+            EventBus.trigger('search');
         },
 
         resetReportSchema: function () {

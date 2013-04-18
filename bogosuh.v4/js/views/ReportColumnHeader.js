@@ -33,7 +33,7 @@ define([
 
         updateSortForSearch: function (e) {
             this.model.reverseSort();
-            EventBus.trigger('startSearch');
+            EventBus.trigger('search');
         },
 
         render: function () {

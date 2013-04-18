@@ -9,33 +9,33 @@ define([
     // Mediator or Controller, not sure yet.
     // if mediator, should it be merged with EvantBus? - I don't think so but worth considering.
 
-    var Mediator = function(eventBus) {
+    var Mediator = function (eventBus) {
         this.initialize(eventBus);
     };
 
     _.extend(Mediator.prototype, Backbone.Events, {
 
-        // make sure called once only
+        // make sure called only once
         initialize: _.once(function(eventBus) {
-            console.log('Mediator::initialize');
+            // preferences
             this.listenTo(eventBus, 'loadPreference', this.applyPreference);
             this.listenTo(eventBus, 'savePreference', this.savePreference);
             this.listenTo(eventBus, 'clearPreference', this.clearPreference);
             this.listenTo(eventBus, 'resetReportSchema', this.resetReportSchema);
 
-            // tempor
-            this.listenTo(eventBus, 'startSearch', this.searchReport);
+            // report searches
+            this.listenTo(eventBus, 'search', this.search);
             this.listenTo(eventBus, 'searchNext', this.searchNext);
             this.listenTo(eventBus, 'searchPrevious', this.searchPrevious);
 
             // initialize query object with callbacks
             this.query = new Query({}, {
-                success: this.onSearchSuccess,
-                error: this.onSearchError
+                success: this.querySuccess,
+                error: this.queryError
             });
         }),
 
-        searchReport: function (page) {
+        search: function (page) {
             // 1. should validation occur here or before event gets kicked off?
             // 2. assuming everything is in order do proceding.
 
@@ -59,13 +59,13 @@ define([
             this.query.previous();
         },
 
-        onSearchSuccess: function (query, response, options) {
+        querySuccess: function (query, response, options) {
             var transactionReport = Repository.transactionReport();
             transactionReport.pageInfo(query.limit, query.offset);
             transactionReport.reset(response, {parse: true});
         },
 
-        onSearchError: function () {
+        queryError: function () {
             // TODO
         },
 

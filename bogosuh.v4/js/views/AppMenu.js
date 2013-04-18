@@ -36,7 +36,7 @@ define([
         },
 
         reportSearch: function () {
-            EventBus.trigger('startSearch');
+            EventBus.trigger('search');
         },
 
         reportSettings: function () {

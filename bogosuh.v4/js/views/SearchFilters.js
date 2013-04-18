@@ -108,7 +108,7 @@ define([
             this.dismissAlerts();
             if (this.collection.isReadyForSearch()) {
                 this.hide();
-                EventBus.trigger('startSearch');
+                EventBus.trigger('search');
             } else {
                 this.showAlert('First set the search filter');
             }
