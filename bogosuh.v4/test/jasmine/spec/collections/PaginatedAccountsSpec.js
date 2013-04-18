@@ -1,166 +1,197 @@
-describe('Collection :: PaginatedAccounts', function () {
+describe('Given PaginatedAccounts Collection', function () {
 
-    var app = app || {};
-    app.collections = app.collections || {};
-    app.models = app.models || {};
-
-    require(['collections/PaginatedAccounts', 'models/Account'], function (PaginatedAccounts, Account) {
-        app.collections.PaginatedAccounts = PaginatedAccounts;
-        app.models.Account = Account;
-    });
+    var PaginatedAccounts, Account;
 
     beforeEach(function () {
-        this.accounts = new app.collections.PaginatedAccounts();
+        if (_.isUndefined(PaginatedAccounts)) {
+            var done = false;
+
+            require(['collections/PaginatedAccounts', 'models/Account'
+                ], function (paginatedAccounts, account) {
+                PaginatedAccounts = paginatedAccounts;
+                Account = account;
+                done = true;
+            });
+
+            waitsFor(function () {
+                return done;
+            }, "Get SUD");
+        }
     });
 
-    describe('creation', function () {
+    describe('when initialize', function () {
         it('must invoke init first', function () {
-            expect(this.accounts.firstPage).not.toBeDefined();
-            expect(this.accounts.currentPage).not.toBeDefined();
-            expect(this.accounts.perPage).not.toBeDefined();
-            expect(this.accounts.totalPages).not.toBeDefined();
+            var accounts = new PaginatedAccounts();
 
-            this.accounts.init();
-            expect(this.accounts.firstPage).toBeDefined();
-            expect(this.accounts.currentPage).toBeDefined();
-            expect(this.accounts.perPage).toBeDefined();
-            expect(this.accounts.totalPages).toBeDefined();
+            expect(accounts.firstPage).not.toBeDefined();
+            expect(accounts.currentPage).not.toBeDefined();
+            expect(accounts.perPage).not.toBeDefined();
+            expect(accounts.totalPages).not.toBeDefined();
+
+            accounts.init();
+
+            expect(accounts.firstPage).toBeDefined();
+            expect(accounts.currentPage).toBeDefined();
+            expect(accounts.perPage).toBeDefined();
+            expect(accounts.totalPages).toBeDefined();
         });
-    });
 
-    describe('initialization', function () {
         it('should default to predefined configuration', function () {
-            var config = this.accounts.paginator_ui;
+            var accounts = new PaginatedAccounts(),
+                config = accounts.paginator_ui;
 
-            this.accounts.init();
-            expect(this.accounts.firstPage).toEqual(config.firstPage);
-            expect(this.accounts.currentPage).toEqual(config.currentPage);
-            expect(this.accounts.perPage).toEqual(config.perPage);
-            expect(this.accounts.totalPages).toEqual(config.totalPages);
+            accounts.init();
+            expect(accounts.firstPage).toEqual(config.firstPage);
+            expect(accounts.currentPage).toEqual(config.currentPage);
+            expect(accounts.perPage).toEqual(config.perPage);
+            expect(accounts.totalPages).toEqual(config.totalPages);
         });
     });
 
-    describe('.hasSelection()', function () {
+    describe('hasSelection()', function () {
+
+        var accounts, accountOne, accountTwo, accountThree, accountFour;
 
         beforeEach(function () {
-            this.accountOne = new app.models.Account({name:"one"});
-            this.accountTwo = new app.models.Account();
-            this.accountThree = new app.models.Account();
-            this.accountFour = new app.models.Account();
+            accounts = new PaginatedAccounts();
+            accountOne = new Account({name:"one"});
+            accountTwo = new Account();
+            accountThree = new Account();
+            accountFour = new Account();
 
-            this.accounts.init();
-            this.accounts.reset([this.accountOne, this.accountTwo, this.accountThree, this.accountFour]);
-            this.accounts.pager();
+            accounts.init();
+            accounts.reset([accountOne, accountTwo, accountThree, accountFour]);
+            accounts.pager();
+        });
+
+        afterEach(function () {
+            accounts = null;
+            accountOne = null;
+            accountTwo = null;
+            accountThree = null;
+            accountFour = null;
         });
 
         it('should return false when there is no account', function () {
-            this.accounts.reset();
-            expect(this.accounts.length).toEqual(0);
-            expect(this.accounts.hasSelection()).toEqual(false);
+            accounts.reset();
+            expect(accounts.length).toEqual(0);
+            expect(accounts.hasSelection()).toEqual(false);
         });
 
         it('should return false if no account is selected', function () {
-            expect(this.accounts.hasSelection()).toEqual(false);
+            expect(accounts.hasSelection()).toEqual(false);
         });
 
         it('should return true if one account is selected', function () {
-            this.accountTwo.select(true);
-            expect(this.accounts.hasSelection()).toEqual(true);
+            accountTwo.select(true);
+            expect(accounts.hasSelection()).toEqual(true);
 
-            this.accountTwo.toggle();
-            expect(this.accounts.hasSelection()).toEqual(false);
+            accountTwo.toggle();
+            expect(accounts.hasSelection()).toEqual(false);
         });
 
         it('should return false if one account is selected then toggled', function () {
-            this.accountTwo.select(true);
-            this.accountTwo.toggle();
-            expect(this.accounts.hasSelection()).toEqual(false);
+            accountTwo.select(true);
+            accountTwo.toggle();
+            expect(accounts.hasSelection()).toEqual(false);
         });
 
         it('should return true if two accounts are selected', function () {
-            this.accountTwo.select(true);
-            this.accountFour.select(true);
-            expect(this.accounts.hasSelection()).toEqual(true);
+            accountTwo.select(true);
+            accountFour.select(true);
+            expect(accounts.hasSelection()).toEqual(true);
         });
 
         it('should return true if all accounts are selected', function () {
-            this.accountOne.select(true);
-            this.accountTwo.select(true);
-            this.accountThree.select(true);
-            this.accountFour.select(true);
-            expect(this.accounts.hasSelection()).toEqual(true);
+            accountOne.select(true);
+            accountTwo.select(true);
+            accountThree.select(true);
+            accountFour.select(true);
+            expect(accounts.hasSelection()).toEqual(true);
         });
 
         it('should return false if all accounts are selected then toggled', function () {
-            this.accountOne.select(true);
-            this.accountTwo.select(true);
-            this.accountThree.select(true);
-            this.accountFour.select(true);
+            accountOne.select(true);
+            accountTwo.select(true);
+            accountThree.select(true);
+            accountFour.select(true);
 
-            this.accountOne.toggle();
-            this.accountTwo.toggle();
-            this.accountThree.toggle();
-            this.accountFour.toggle();
-            expect(this.accounts.hasSelection()).toEqual(false);
+            accountOne.toggle();
+            accountTwo.toggle();
+            accountThree.toggle();
+            accountFour.toggle();
+            expect(accounts.hasSelection()).toEqual(false);
         });
 
     });
 
-    describe('.selectAll()', function () {
-        beforeEach(function () {
-            this.accountOne = new app.models.Account();
-            this.accountTwo = new app.models.Account();
-            this.accountThree = new app.models.Account();
-            this.accountFour = new app.models.Account();
+    describe('selectAll()', function () {
 
-            this.accounts.init();
-            this.accounts.reset([this.accountOne, this.accountTwo, this.accountThree, this.accountFour]);
-            this.accounts.pager();
+        var accounts, accountOne, accountTwo, accountThree, accountFour;
+
+        beforeEach(function () {
+            accounts = new PaginatedAccounts();
+            accountOne = new Account();
+            accountTwo = new Account();
+            accountThree = new Account();
+            accountFour = new Account();
+
+            accounts.init();
+            accounts.reset([accountOne, accountTwo, accountThree, accountFour]);
+            accounts.pager();
+        });
+
+        afterEach(function () {
+            accounts = null;
+            accountOne = null;
+            accountTwo = null;
+            accountThree = null;
+            accountFour = null;
         });
 
         it('should only select on sortedAndFilteredModels', function () {
-            this.accounts.selectAll(true);
-            expect(this.accounts.sortedAndFilteredModels.length).toBe(4);
-            expect(this.accountOne.attributes.selected).toEqual(true);
-            expect(this.accountTwo.attributes.selected).toEqual(true);
-            expect(this.accountThree.attributes.selected).toEqual(true);
-            expect(this.accountFour.attributes.selected).toEqual(true);
+            accounts.selectAll(true);
+            expect(accounts.sortedAndFilteredModels.length).toBe(4);
+            expect(accountOne.attributes.selected).toEqual(true);
+            expect(accountTwo.attributes.selected).toEqual(true);
+            expect(accountThree.attributes.selected).toEqual(true);
+            expect(accountFour.attributes.selected).toEqual(true);
         });
 
         it('should un-select with false', function () {
-            this.accounts.selectAll(false);
-            expect(this.accounts.sortedAndFilteredModels.length).toBe(4);
-            expect(this.accountOne.attributes.selected).toEqual(false);
-            expect(this.accountTwo.attributes.selected).toEqual(false);
-            expect(this.accountThree.attributes.selected).toEqual(false);
-            expect(this.accountFour.attributes.selected).toEqual(false);
+            accounts.selectAll(false);
+            expect(accounts.sortedAndFilteredModels.length).toBe(4);
+            expect(accountOne.attributes.selected).toEqual(false);
+            expect(accountTwo.attributes.selected).toEqual(false);
+            expect(accountThree.attributes.selected).toEqual(false);
+            expect(accountFour.attributes.selected).toEqual(false);
         });
 
         it('should still select when nothing is passed in', function () {
-            this.accounts.selectAll();
-            expect(this.accounts.sortedAndFilteredModels.length).toBe(4);
-            expect(this.accountOne.attributes.selected).toEqual(true);
-            expect(this.accountTwo.attributes.selected).toEqual(true);
-            expect(this.accountThree.attributes.selected).toEqual(true);
-            expect(this.accountFour.attributes.selected).toEqual(true);
+            accounts.selectAll();
+            expect(accounts.sortedAndFilteredModels.length).toBe(4);
+            expect(accountOne.attributes.selected).toEqual(true);
+            expect(accountTwo.attributes.selected).toEqual(true);
+            expect(accountThree.attributes.selected).toEqual(true);
+            expect(accountFour.attributes.selected).toEqual(true);
         });
 
         it('should still select when non-boolean is passed in', function () {
-            this.accounts.selectAll("hello");
-            expect(this.accounts.sortedAndFilteredModels.length).toBe(4);
-            expect(this.accountOne.attributes.selected).toEqual(true);
-            expect(this.accountTwo.attributes.selected).toEqual(true);
-            expect(this.accountThree.attributes.selected).toEqual(true);
-            expect(this.accountFour.attributes.selected).toEqual(true);
+            accounts.selectAll("hello");
+            expect(accounts.sortedAndFilteredModels.length).toBe(4);
+            expect(accountOne.attributes.selected).toEqual(true);
+            expect(accountTwo.attributes.selected).toEqual(true);
+            expect(accountThree.attributes.selected).toEqual(true);
+            expect(accountFour.attributes.selected).toEqual(true);
         });
 
         it('should trigger change event', function () {
             var eventHandler = jasmine.createSpy('eventHandler');
 
-            this.accountOne.on("change", eventHandler, this);
-            this.accounts.on("change", eventHandler, this);
+            accountOne.on("change", eventHandler, this);
+            accounts.on("change", eventHandler, this);
 
-            this.accountOne.toggle();
+            accountOne.toggle();
             expect(eventHandler).toHaveBeenCalled();
             expect(eventHandler.calls.length).toEqual(2);
         });
@@ -168,84 +199,107 @@ describe('Collection :: PaginatedAccounts', function () {
         it('should not trigger change event', function () {
             var eventHandler = jasmine.createSpy('eventHandler');
 
-            this.accountOne.on("change", eventHandler, this);
-            this.accounts.on("change", eventHandler, this);
+            accountOne.on("change", eventHandler, this);
+            accounts.on("change", eventHandler, this);
 
-            this.accounts.selectAll(true);
+            accounts.selectAll(true);
             expect(eventHandler).not.toHaveBeenCalled();
         });
     });
 
-    describe('.selectedAccountNumbers()', function () {
-        beforeEach(function () {
-            this.accountOne = new app.models.Account({name: "One", number: "111"});
-            this.accountTwo = new app.models.Account({name: "Two", number: "222"});
-            this.accountThree = new app.models.Account({name: "Three", number: "333"});
-            this.accountFour = new app.models.Account({name: "Four", number: "444"});
+    describe('selectedAccountNumbers()', function () {
 
-            this.accounts.init();
-            this.accounts.reset([this.accountOne, this.accountTwo, this.accountThree, this.accountFour]);
-            this.accounts.pager();
+        var accounts, accountOne, accountTwo, accountThree, accountFour;
+
+        beforeEach(function () {
+            accounts = new PaginatedAccounts();
+            accountOne = new Account({name: "One", number: "111"});
+            accountTwo = new Account({name: "Two", number: "222"});
+            accountThree = new Account({name: "Three", number: "333"});
+            accountFour = new Account({name: "Four", number: "444"});
+
+            accounts.init();
+            accounts.reset([accountOne, accountTwo, accountThree, accountFour]);
+            accounts.pager();
+        });
+
+        afterEach(function () {
+            accounts = null;
+            accountOne = null;
+            accountTwo = null;
+            accountThree = null;
+            accountFour = null;
         });
 
         it('should return an empty array when there is no account', function () {
-            this.accounts.reset();
-            expect(this.accounts.selectedAccountNumbers().length).toEqual(0);
+            accounts.reset();
+            expect(accounts.selectedAccountNumbers().length).toEqual(0);
         });
 
         it('should return an empty array when nothing is selected', function () {
-            expect(this.accounts.selectedAccountNumbers().length).toEqual(0);
+            expect(accounts.selectedAccountNumbers().length).toEqual(0);
         });
 
         it('should return the selected account numbers', function () {
-            this.accountOne.select(true);
-            this.accountFour.select(true);
-            var selected = this.accounts.selectedAccountNumbers();
+            accountOne.select(true);
+            accountFour.select(true);
+            var selected = accounts.selectedAccountNumbers();
             expect(selected.length).toEqual(2);
-            expect(selected).toContain(this.accountOne.get("number"));
-            expect(selected).toContain(this.accountFour.get("number"));
-            expect(selected).not.toContain(this.accountTwo.get("number"));
-            expect(selected).not.toContain(this.accountThree.get("number"));
+            expect(selected).toContain(accountOne.get("number"));
+            expect(selected).toContain(accountFour.get("number"));
+            expect(selected).not.toContain(accountTwo.get("number"));
+            expect(selected).not.toContain(accountThree.get("number"));
         });
 
     });
 
-    describe('.selectBy()', function() {
-        beforeEach(function () {
-            this.accountOne = new app.models.Account({name: "One", number: "111"});
-            this.accountTwo = new app.models.Account({name: "Two", number: "222"});
-            this.accountThree = new app.models.Account({name: "Three", number: "333"});
-            this.accountFour = new app.models.Account({name: "Four", number: "444"});
+    describe('selectBy()', function() {
+        var accounts, accountOne, accountTwo, accountThree, accountFour;
 
-            this.accounts.init();
-            this.accounts.reset([this.accountOne, this.accountTwo, this.accountThree, this.accountFour]);
-            this.accounts.pager();
+        beforeEach(function () {
+            accounts = new PaginatedAccounts();
+            accountOne = new Account({name: "One", number: "111"});
+            accountTwo = new Account({name: "Two", number: "222"});
+            accountThree = new Account({name: "Three", number: "333"});
+            accountFour = new Account({name: "Four", number: "444"});
+
+            accounts.init();
+            accounts.reset([accountOne, accountTwo, accountThree, accountFour]);
+            accounts.pager();
+        });
+
+        afterEach(function () {
+            accounts = null;
+            accountOne = null;
+            accountTwo = null;
+            accountThree = null;
+            accountFour = null;
         });
 
         it('should select specified account', function () {
-            this.accounts.selectBy(["222"]);
-            expect(this.accountTwo.get("selected")).toEqual(true);
+            accounts.selectBy(["222"]);
+            expect(accountTwo.get("selected")).toEqual(true);
 
-            expect(this.accountOne.get("selected")).toEqual(false);
-            expect(this.accountThree.get("selected")).toEqual(false);
-            expect(this.accountFour.get("selected")).toEqual(false);
+            expect(accountOne.get("selected")).toEqual(false);
+            expect(accountThree.get("selected")).toEqual(false);
+            expect(accountFour.get("selected")).toEqual(false);
         });
 
         it('should select specified accounts', function () {
-            this.accounts.selectBy(["444", "222"]);
-            expect(this.accountTwo.get("selected")).toEqual(true);
-            expect(this.accountFour.get("selected")).toEqual(true);
+            accounts.selectBy(["444", "222"]);
+            expect(accountTwo.get("selected")).toEqual(true);
+            expect(accountFour.get("selected")).toEqual(true);
 
-            expect(this.accountOne.get("selected")).toEqual(false);
-            expect(this.accountThree.get("selected")).toEqual(false);
+            expect(accountOne.get("selected")).toEqual(false);
+            expect(accountThree.get("selected")).toEqual(false);
         });
 
         it('should not select when passing non array', function () {
-            this.accounts.selectBy("111");
-            expect(this.accountOne.get("selected")).toEqual(false);
-            expect(this.accountTwo.get("selected")).toEqual(false);
-            expect(this.accountThree.get("selected")).toEqual(false);
-            expect(this.accountFour.get("selected")).toEqual(false);
+            accounts.selectBy("111");
+            expect(accountOne.get("selected")).toEqual(false);
+            expect(accountTwo.get("selected")).toEqual(false);
+            expect(accountThree.get("selected")).toEqual(false);
+            expect(accountFour.get("selected")).toEqual(false);
         });
     });
 

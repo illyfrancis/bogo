@@ -15,14 +15,15 @@ define([
             this.accounts = Repository.accounts();
         },
 
-        setFilter: function (status) {
-            this.set('isApplied', status);
-        },
-
         hydrate: function (data) {
-            var accountNumbers = data.accountNumbers;
-            this.accounts.selectBy(accountNumbers);
-            this.setFilter(data.isApplied);
+            // expect data is in the form of { accountNumbers: [array of numbers], isApplied: boolean}
+            var invalid = _.isUndefined(data) || _.isUndefined(data.accountNumbers) || _.isUndefined(data.isApplied),
+                valid = !invalid && _.isArray(data.accountNumbers) && _.isBoolean(data.isApplied);
+
+            if (valid) {
+                this.accounts.selectBy(data.accountNumbers);
+                this.setFilter(data.isApplied);
+            }
         },
 
         preserve: function () {

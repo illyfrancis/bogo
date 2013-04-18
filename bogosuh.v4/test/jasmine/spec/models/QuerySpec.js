@@ -4,7 +4,7 @@ describe('Given Query Model', function () {
         defaultLimit = 10,
         defaultOffset = 0;
 
-    var mockData = {
+    var data = {
         criteria: "dummy criteria",
         fields: "dummy fields 123",
         sort: "dummy sort field"
@@ -70,11 +70,11 @@ describe('Given Query Model', function () {
         });
 
         it('should be created with attributes set and default limit, offset', function () {
-            var query = new Query(mockData);
+            var query = new Query(data);
 
-            expect(query.get('criteria')).toEqual(mockData.criteria);
-            expect(query.get('fields')).toEqual(mockData.fields);
-            expect(query.get('sort')).toEqual(mockData.sort);
+            expect(query.get('criteria')).toEqual(data.criteria);
+            expect(query.get('fields')).toEqual(data.fields);
+            expect(query.get('sort')).toEqual(data.sort);
 
             expect(query.limit).toEqual(defaultLimit);
             expect(query.offset).toEqual(defaultOffset);
@@ -96,11 +96,11 @@ describe('Given Query Model', function () {
                 error: queryError
             };
 
-            var query = new Query(mockData, options);
+            var query = new Query(data, options);
 
-            expect(query.get('criteria')).toEqual(mockData.criteria);
-            expect(query.get('fields')).toEqual(mockData.fields);
-            expect(query.get('sort')).toEqual(mockData.sort);
+            expect(query.get('criteria')).toEqual(data.criteria);
+            expect(query.get('fields')).toEqual(data.fields);
+            expect(query.get('sort')).toEqual(data.sort);
 
             expect(query.limit).toEqual(options.limit);
             expect(query.offset).toEqual(options.offset);

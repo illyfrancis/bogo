@@ -68,15 +68,16 @@ describe('Given DateRange Model', function () {
         });
     });
 
-    describe('when .yesterday()', function () {
+    describe('when invoke yesterday()', function () {
         it('should be set to yesterday', function () {
             var dateRange = new DateRange();
             dateRange.yesterday();
-            // TODO - how should I test this?
+
+            expect(dateRange.get('type')).toEqual('yesterday');
         });
     });
 
-    describe('when .changeType(\'yesterday\')', function () {
+    describe('when invoke changeType("yesterday")', function () {
         it('should trigger change event and set to yesterday', function () {
             var triggered = false;
             var dateRange = new DateRange();
@@ -89,7 +90,7 @@ describe('Given DateRange Model', function () {
         });
     });
 
-    describe('.changeType(\'last year\')', function () {
+    describe('when invoke changeType("last year")', function () {
         it('should not trigger change event for unknown type', function () {
             var triggered = false;
             var dateRange = new DateRange();
