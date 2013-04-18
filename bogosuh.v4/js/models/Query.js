@@ -1,6 +1,9 @@
 /*global define*/
 define(['backbone'], function (Backbone) {
 
+    // performs query as POST when GET cannot be used due to the excessive size of query string.
+    // Query object encapsulates search criteria, fields and sort information and POST it in
+    // request payload.
     var Query = Backbone.Model.extend({
 
         defaults: {
@@ -11,12 +14,16 @@ define(['backbone'], function (Backbone) {
 
         limit: 10,
         offset: 0,
-        searchUrl: '/api/transactions/search?limit={{limit}}&offset={{offset}}',
+        searchUrl: '/api/transactions/search',
 
         initialize: function (attr, options) {
-            // set limit and offset
+            // set limit, offset and searchUrl
             options = options || {};
-            _.extend(this, _.pick(options, 'limit', 'offset'));
+            _.extend(this, _.pick(options, 'limit', 'offset', 'searchUrl'));
+
+            // search url
+            var queryParam = '?limit={{limit}}&offset={{offset}}';
+            this.searchUrl = this.searchUrl.concat(queryParam);
 
             // default callbacks
             this.callbacks = _.pick(options, 'success', 'error');

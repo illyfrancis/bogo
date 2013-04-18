@@ -2,9 +2,9 @@ define([
     'backbone',
     'underscore',
     'apps/Repository',
-    'models/Preference',
-    'models/Query'
-], function (Backbone, _, Repository, Preference, Query) {
+    'apps/TransactionQuery',
+    'models/Preference'
+], function (Backbone, _, Repository, TransactionQuery, Preference) {
 
     // Mediator or Controller, not sure yet.
     // if mediator, should it be merged with EvantBus? - I don't think so but worth considering.
@@ -28,45 +28,23 @@ define([
             this.listenTo(eventBus, 'searchNext', this.searchNext);
             this.listenTo(eventBus, 'searchPrevious', this.searchPrevious);
 
-            // initialize query object with callbacks
-            this.query = new Query({}, {
-                success: this.querySuccess,
-                error: this.queryError
-            });
+            this.transactionQuery = new TransactionQuery();
         }),
 
         search: function (page) {
             // 1. should validation occur here or before event gets kicked off?
             // 2. assuming everything is in order do proceding.
 
-            var searchCriteria = Repository.searchCriteria(),
-                reportSchema = Repository.reportSchema(),
-                offset = page - 1;
-
-            this.query.set({
-                criteria: searchCriteria.queryCriteria(),
-                fields: reportSchema.queryFields(),
-                sort: reportSchema.querySort()
-            });
-            this.query.execute(offset);
+            var offset = page - 1;
+            this.transactionQuery.execute(offset);
         },
 
         searchNext: function () {
-            this.query.next();
+            this.transactionQuery.next();
         },
 
         searchPrevious: function () {
-            this.query.previous();
-        },
-
-        querySuccess: function (query, response, options) {
-            var transactionReport = Repository.transactionReport();
-            transactionReport.pageInfo(query.limit, query.offset);
-            transactionReport.reset(response, {parse: true});
-        },
-
-        queryError: function () {
-            // TODO
+            this.transactionQuery.previous();
         },
 
         applyPreference: function (id) {

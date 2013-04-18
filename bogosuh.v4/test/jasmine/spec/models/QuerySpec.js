@@ -35,7 +35,7 @@ describe('Given Query Model', function () {
             expect(query.offset).toEqual(defaultOffset);
         });
 
-        it('should have default limit and offset with given value', function () {
+        it('should have default limit and given offset value', function () {
             var options = {
                 offset: 5
             };
@@ -45,7 +45,7 @@ describe('Given Query Model', function () {
             expect(query.offset).toEqual(options.offset);
         });
 
-        it('should have default limit and offset with given value', function () {
+        it('should have limit and offset as given values', function () {
             var options = {
                 limit: 30,
                 offset: 7
@@ -56,13 +56,58 @@ describe('Given Query Model', function () {
             expect(query.offset).toEqual(options.offset);
         });
 
+        it('should have limit, offset and searchUrl with given value', function () {
+            var options = {
+                limit: 31,
+                offset: 17,
+                searchUrl: '/some/search/url/'
+            };
+
+            var query = new Query({}, options);
+            expect(query.limit).toEqual(options.limit);
+            expect(query.offset).toEqual(options.offset);
+            expect(query.searchUrl).toContain(options.searchUrl);
+        });
+
         it('should be created with attributes set and default limit, offset', function () {
             var query = new Query(mockData);
+
             expect(query.get('criteria')).toEqual(mockData.criteria);
             expect(query.get('fields')).toEqual(mockData.fields);
             expect(query.get('sort')).toEqual(mockData.sort);
+
             expect(query.limit).toEqual(defaultLimit);
             expect(query.offset).toEqual(defaultOffset);
+            
+            expect(query.callbacks).toBeDefined();
+            expect(query.callbacks.success).toBeUndefined();
+            expect(query.callbacks.error).toBeUndefined();
+        });
+
+        it('should be created with attributes and options', function () {
+            var querySuccess = sinon.spy(),
+                queryError = sinon.spy();
+
+            var options = {
+                limit: 13,
+                offset: 71,
+                searchUrl: '/some/search/url/',
+                success: querySuccess,
+                error: queryError
+            };
+
+            var query = new Query(mockData, options);
+
+            expect(query.get('criteria')).toEqual(mockData.criteria);
+            expect(query.get('fields')).toEqual(mockData.fields);
+            expect(query.get('sort')).toEqual(mockData.sort);
+
+            expect(query.limit).toEqual(options.limit);
+            expect(query.offset).toEqual(options.offset);
+            expect(query.searchUrl).toContain(options.searchUrl);
+
+            expect(query.callbacks.success).toBe(querySuccess);
+            expect(query.callbacks.error).toBe(queryError);
         });
     });
 
@@ -81,6 +126,19 @@ describe('Given Query Model', function () {
             };
             var query = new Query({}, options);
             var url = query.urlRoot();
+            expect(url).toContain('limit=' + options.limit);
+            expect(url).toContain('offset=' + options.offset);
+        });
+
+        it('should contain specified limit and offset', function () {
+            var options = {
+                limit: 25,
+                offset: 3,
+                searchUrl: '/some/search/url'
+            };
+            var query = new Query({}, options);
+            var url = query.urlRoot();
+            expect(url).toContain(options.searchUrl);
             expect(url).toContain('limit=' + options.limit);
             expect(url).toContain('offset=' + options.offset);
         });
@@ -161,8 +219,134 @@ describe('Given Query Model', function () {
         });
     });
 
+    describe('when execute the query - using mock', function () {
+        var mock;
+
+        beforeEach(function () {
+            mock = sinon.mock(Backbone);
+        });
+
+        afterEach(function () {
+            mock.restore();
+        });
+
+        it('calls Backbone.sync with method "create" with default limit and offset', function () {
+            var query = new Query();
+            mock.expects('sync').once().withArgs('create', query);
+            query.execute();
+
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(defaultOffset);
+            mock.verify();
+        });
+
+        it('calls Backbone.sync with method "create" with default limit and specified page/offset', function () {
+            var offset = 2,
+                query = new Query();
+
+            mock.expects('sync').once().withArgs('create', query);
+
+            query.execute(offset);
+
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(offset);
+            mock.verify();
+        });
+
+        it('should continue to call Backbone.sync with "create", when execute is called multiple times', function () {
+            var offset = 2,
+                query = new Query();
+
+            mock.expects('sync').exactly(3).withArgs('create', query);
+
+            query.execute(offset);
+            query.execute(offset);
+            query.execute(offset);
+
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(offset);
+            mock.verify();
+        });
+
+    });
+
+    describe('when navigating through records', function () {
+        var mock;
+
+        beforeEach(function () {
+            mock = sinon.mock(Backbone);
+        });
+
+        afterEach(function () {
+            mock.restore();
+        });
+
+        it('increments offset when fetching next lot of records', function () {
+            var query = new Query();
+            mock.expects('sync').exactly(3).withArgs('create', query);
+
+            query.execute();
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(defaultOffset);
+
+            query.next();
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(defaultOffset + 1);
+
+            query.next();
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(defaultOffset + 2);
+
+            mock.verify();
+        });
+
+        it('decrements offset until zerowhen fetching previous records', function () {
+            var query = new Query();
+            mock.expects('sync').exactly(4).withArgs('create', query);
+
+            query.execute(2);
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(2);
+
+            query.previous();
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(1);
+
+            query.previous();
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(0);
+
+            query.previous();
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(0);
+
+            mock.verify();
+        });
+
+        it('maintains zero offset when fetching previous records with initial zero offset', function () {
+            var query = new Query();
+            mock.expects('sync').exactly(3).withArgs('create', query);
+
+            query.execute(0);
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(0);
+
+            query.previous();
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(0);
+
+            query.previous();
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(0);
+
+            mock.verify();
+        });
+
+    });
+
     // using sinon spy instead of jasmine spy, toHaveBeenCalledWith didn't work!
     describe('when execute the query', function () {
+
         beforeEach(function () {
             sinon.stub(Backbone, 'sync');
         });
@@ -171,7 +355,7 @@ describe('Given Query Model', function () {
             Backbone.sync.restore();
         });
 
-        it('should call Backbone.sync with create default limit and offset', function () {
+        it('calls Backbone.sync with method "create" with default limit and offset', function () {
             var query = new Query();
             query.execute();
 
@@ -181,7 +365,7 @@ describe('Given Query Model', function () {
             expect(query.offset).toEqual(defaultOffset);
         });
 
-        it('should call Backbone.sync with create default limit and specified page/offset', function () {
+        it('calls Backbone.sync with method "create" with default limit and specified page/offset', function () {
             var offset = 2,
                 query = new Query();
             query.execute(offset);
@@ -192,7 +376,7 @@ describe('Given Query Model', function () {
             expect(query.offset).toEqual(offset);
         });
 
-        it('should continue to call Backbone.sync with create, when multiple execute() is called', function () {
+        it('should continue to call Backbone.sync with "create", when execute() is called multiple times', function () {
             var offset = 2,
                 query = new Query();
             query.execute(offset);
