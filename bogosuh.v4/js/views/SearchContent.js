@@ -2,7 +2,7 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'apps/Repository',    
+    'apps/Repository',
     'collections/TransactionReport',
     'views/Progress',
     'views/SearchResult'

@@ -1,4 +1,4 @@
-define(["underscore", "backbone", "models/Transaction"], function (_, Backbone, Transaction) {
+define(['underscore', 'backbone', 'models/Transaction'], function (_, Backbone, Transaction) {
     /*
         TransactionReport is a collection of Transaction
     */

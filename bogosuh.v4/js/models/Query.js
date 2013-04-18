@@ -26,24 +26,23 @@ define(['backbone'], function (Backbone) {
             return this.searchUrl.replace('{{limit}}', this.limit).replace('{{offset}}', this.offset);
         },
 
-        execute: function (page) {
-            this.offset = this._convertPageToOffset(page);
+        execute: function (offset) {
+            this.offset = this._validateOffset(offset);
 
             // call save() which in turn invoke Backbone.sync
             this.save({}, this.callbacks);
         },
 
-        _convertPageToOffset: function (page) {
-            return (!_.isNumber(page) || _.isNaN(page) || page <= 0) ? 0 : page - 1;
-        },
-
-        // TODO - let's think about the possibility of next() and previous() ???
         next: function () {
-            this.execute(this.offset + 2);
+            this.execute(this.offset + 1);
         },
 
         previous: function () {
-            this.execute(this.offset);
+            this.execute(this.offset - 1);
+        },
+
+        _validateOffset: function (offset) {
+            return (!_.isNumber(offset) || _.isNaN(offset) || offset <= 0) ? 0 : offset;
         }
 
     });

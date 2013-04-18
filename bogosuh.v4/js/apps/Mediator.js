@@ -25,52 +25,32 @@ define([
 
             // tempor
             this.listenTo(eventBus, 'startSearch', this.searchReport);
+            this.listenTo(eventBus, 'searchNext', this.searchNext);
+            this.listenTo(eventBus, 'searchPrevious', this.searchPrevious);
 
+            // initialize query object with callbacks
             this.query = new Query({}, {
                 success: this.onSearchSuccess,
                 error: this.onSearchError
             });
-            this.listenTo(eventBus, 'next', this.searchNext);
-            this.listenTo(eventBus, 'previous', this.searchPrevious);
         }),
-
-        _searchReport: function (page) {
-            // 1. should validation occur here or before event gets kicked off?
-            // 2. assuming everything is in order do proceding.
-
-            var searchCriteria = Repository.searchCriteria(),
-                reportSchema = Repository.reportSchema();
-            
-            var query = new Query({
-                criteria: searchCriteria.queryCriteria(),
-                fields: reportSchema.queryFields(),
-                sort: reportSchema.querySort()
-            }, {
-                success: this.onSearchSuccess,
-                error: this.onSearchError
-            });
-
-            query.execute(page);
-        },
 
         searchReport: function (page) {
             // 1. should validation occur here or before event gets kicked off?
             // 2. assuming everything is in order do proceding.
 
             var searchCriteria = Repository.searchCriteria(),
-                reportSchema = Repository.reportSchema();
-            
+                reportSchema = Repository.reportSchema(),
+                offset = page - 1;
+
             this.query.set({
                 criteria: searchCriteria.queryCriteria(),
                 fields: reportSchema.queryFields(),
                 sort: reportSchema.querySort()
             });
-
-            this.query.execute(page);
+            this.query.execute(offset);
         },
 
-
-        // TRY THIS!!
         searchNext: function () {
             this.query.next();
         },

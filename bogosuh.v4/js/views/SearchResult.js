@@ -2,11 +2,11 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'bootstrap',
+    'apps/EventBus',
     'views/ReportColumnHeader',
     'views/ReportRow',
     'text!templates/SearchResult.html'
-], function ($, _, Backbone, Bootstrap, ReportColumnHeader, ReportRow, tpl) {
+], function ($, _, Backbone, EventBus, ReportColumnHeader, ReportRow, tpl) {
 
     /*
     // for search result display
@@ -50,6 +50,11 @@ define([
 
         template: _.template(tpl),
 
+        events: {
+            'click li:not(".disabled") .prev': 'searchPrevious',
+            'click li:not(".disabled") .next': 'searchNext'
+        },
+
         initialize: function (options) {
             // collection = TransactionReport
             this.reportSchema = options.reportSchema;
@@ -66,9 +71,11 @@ define([
             // if report is empty
             //  this.renderNoReport();
             // else do the following.
-            this.$el.html(this.template(this.collection.pager()));
+            var pager = this.collection.pager();
+            this.$el.html(this.template(pager));
             this.renderColumnHeaders();
             this.renderReports();
+            this.decoratePaginator(pager);
             return this;
         },
 
@@ -109,6 +116,24 @@ define([
             });
 
             return template;
+        },
+
+        decoratePaginator: function (pager) {
+            if (pager.current === 1) {
+                this.$('.prev').parent('li').addClass('disabled');
+            }
+
+            if (pager.current === pager.total) {
+                this.$('.next').parent('li').addClass('disabled');
+            }
+        },
+
+        searchPrevious: function () {
+            EventBus.trigger('searchPrevious');
+        },
+
+        searchNext: function () {
+            EventBus.trigger('searchNext');
         }
 
     });
