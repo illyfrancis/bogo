@@ -154,12 +154,11 @@ public class TransactionResource {
         System.out.println("> in queryByPost limit [" + limit
                 + "] offset [" + offset
                 + "] count [" + count
-                + "] query.criteria [" + query.criteria 
+                // + "] query.criteria [" + query.criteria 
                 + "] query.fields [" + query.fields 
                 + "] query.sort [" + query.sort 
                 + "]");
 
-        // return Response.ok(Transactions.findBy(query)).build();
         QueryResponse response = new QueryResponse();
         response.transactions = Transactions.findBy(query);
         response.total = count;

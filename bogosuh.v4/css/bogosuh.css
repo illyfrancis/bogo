@@ -80,3 +80,8 @@ li.tree span {
 .preference-remove {
   margin-left: 5px;
 }
+
+/* for SearchResult.html, to remove bottom margin between table and scrollbar*/
+.report > table {
+  margin-bottom: 0;
+}

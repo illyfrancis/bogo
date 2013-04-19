@@ -2,6 +2,7 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    // 'scrollbar',
     'apps/EventBus',
     'views/ReportColumnHeader',
     'views/ReportRow',
@@ -76,6 +77,19 @@ define([
             this.renderColumnHeaders();
             this.renderReports();
             this.decoratePaginator(pager);
+
+            // add scrollbar - it's just too heavy!
+/*            this.$('.report').mCustomScrollbar({
+                // set_width: '90%',
+                scrollInertia: 0,
+                horizontalScroll: true,
+                // theme: 'dark-thick'
+                theme: 'dark-2',
+                scrollButtons:{
+                    enable: true
+                }
+            });
+*/
             return this;
         },
 
@@ -108,27 +122,29 @@ define([
             this.$('.report-body').append(row.render().el);
         },
 
-        _reportRowTemplate: function () {
+        reportRowTemplate: function () {
             var cell, template = '';
             _.each(this.reportSchema.selectedColumns(), function (reportColumn) {
 
-                var columnName = reportColumn.get('name');
-                // if (columnName.indexOf('Date') >= 0) {
-                //     cell = '<td><%= moment(' + reportColumn.get('name') + ').format("L") %></td>';
-                // } else {
-                    cell = '<td><%= ' + reportColumn.get('name') + ' %></td>';
-                // }
-
+                var align = reportColumn.get('align');
+                if (align.indexOf('right') >= 0) {
+                    cell = '<td><span class="pull-right"><%='+ reportColumn.get('name') +'%></span></td>';
+                } else {
+                    cell = '<td><%='+ reportColumn.get('name') +'%></td>';
+                }
                 template = template.concat(cell);
             });
 
             return template;
         },
 
-        reportRowTemplate: function () {
+        _reportRowTemplate: function () {
             var cell, template = '';
             _.each(this.reportSchema.selectedColumns(), function (reportColumn) {
-                cell = '<td><%= ' + reportColumn.get('name') + ' %></td>';
+                // cell = '<td class="text-right"><%= ' + reportColumn.get('name') + ' %></td>';
+                // cell = '<td><%= ' + reportColumn.get('name') + ' %></td>';
+                // cell = '<td><p class="text-right"><%= ' + reportColumn.get('name') + ' %></p></td>';
+                cell = '<td><span class="pull-right"><%= ' + reportColumn.get('name') + ' %></span></td>';
                 template = template.concat(cell);
             });
 

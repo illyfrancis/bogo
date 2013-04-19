@@ -10,7 +10,9 @@ require.config({
         'backbone': '../lib/backbone-1.0.0',
         'backbone.paginator': '../lib/backbone.paginator',
         'moment': '../lib/moment',
-        'text': '../lib/require/text'
+        'text': '../lib/require/text',
+        // 'scrollbar': '../lib/jquery.mCustomScrollbar'
+        'scrollbar': '../lib/jquery.tinyscrollbar.min'
     },
     shim: {
         'underscore': {
@@ -28,6 +30,9 @@ require.config({
         },
         'bootstrap': {
             deps: ['jquery', 'jquery.ui']
+        },
+        'scrollbar': {
+            deps: ['jquery']
         }
     }
     // hack!! - forcing jquery.ui to be loaded before bootstrap, refactor, instead, to only use jquery.ui.datepicker plugin becasue bootstrap.tooltip is

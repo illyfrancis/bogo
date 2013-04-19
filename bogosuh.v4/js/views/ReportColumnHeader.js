@@ -42,7 +42,10 @@ define([
             this.$el.html(this.template(this.model.toJSON()));
 
             // adjust filter icon according to criteria's applied state.
-            if (this.searchCriteria.isCriterionApplied(this.model.get('criterion'))) {
+            var criterionName = this.model.get('criterion');
+            if (_.isUndefined(criterionName) || criterionName.length === 0) {
+                this.$('i').remove();
+            } else if (this.searchCriteria.isCriterionApplied(criterionName)) {
                 this.$('i').removeClass('icon-white');
             }
 

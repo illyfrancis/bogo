@@ -13,7 +13,8 @@ define([
             position: 0,    // column ordering within results
             criterion: '',  // name of Criterion object
             //filterable: true   // some columns may not be (or use criterion as an indication)
-            sort: 0 // 1 for asc, -1 for desc
+            sort: 0, // 1 for asc, -1 for desc
+            align: ''   // '' implies left or 'left', 'right' for align right.
         },
 
         idAttribute: '_id',
