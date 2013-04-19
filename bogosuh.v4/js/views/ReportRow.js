@@ -16,9 +16,9 @@ define(['jquery', 'underscore', 'backbone'], function ($, _, Backbone) {
 
         render: function () {
             try {
-                this.$el.html(this.template(this.model.toJSON()));
-            } catch(err) {
-                this.$el.html('unable to render: ' + err.message);
+                this.$el.html(this.template(this.model.toFormattedJSON()));
+            } catch (err) {
+                this.$el.html('<td>Unable to display: ' + err.message + '</td>');
                 console.log(err.message);
             }
             return this;

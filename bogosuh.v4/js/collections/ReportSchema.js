@@ -11,7 +11,7 @@ define([
 
         initialize: function () {
             this.MIN_REPORT_COLUMNS = 3;
-            this.MAX_REPORT_COLUMNS = 10;
+            this.MAX_REPORT_COLUMNS = 15;
         },
 
         comparator: function (reportColumn) {

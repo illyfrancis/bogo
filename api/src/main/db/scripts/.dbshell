@@ -6,3 +6,8 @@ db.reportschema.find()
 use openbbh
 db.reportschema.find()
 use openbbh
+db.reportschema
+db.reportschema.count()
+db.reportschema.drop()
+db.transactions.update({}, {$rename: {'amount', 'transactionAmount'}}, false, true)
+db.transactions.update({}, {$rename: {'amount': 'transactionAmount'}}, false, true)

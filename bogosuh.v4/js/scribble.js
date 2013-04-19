@@ -6,33 +6,18 @@ define([
     'underscore',
     'backbone',
     'bootstrap',
+    'moment',
     'apps/Extension',
     'apps/EventBus',
     'apps/Repository',
     'apps/Mediator'
-], function ($, _, Backbone, Bootstrap, Extension, EventBus, Repository, Mediator) {
+], function ($, _, Backbone, Bootstrap, moment, Extension, EventBus, Repository, Mediator) {
 
-    // this should be in unit test.
-    var Q = Backbone.Model.extend({
-        defaults: {
-            limit: 10,
-            offset: 0
-        },
-        initialize: function (attr, options) {
+    var d = new Date(1365706592680);
 
-        }
-    });
+    // alert("> d [" + d + "] : isDate? " + _.isDate(d) + " : format : " + moment(d).format('L'));
 
-    // test1
-    var q = new Q();
-
-
-    // test2
-    q = new Q({}, {offset: 5});
-
-
-    // var d = new Date(1365706592680);
-    // alert(d);
+    // debugger;
 
 /*    var Transaction = Backbone.Model.extend({
         idAttribute: '_id',

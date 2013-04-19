@@ -108,6 +108,23 @@ define([
             this.$('.report-body').append(row.render().el);
         },
 
+        _reportRowTemplate: function () {
+            var cell, template = '';
+            _.each(this.reportSchema.selectedColumns(), function (reportColumn) {
+
+                var columnName = reportColumn.get('name');
+                // if (columnName.indexOf('Date') >= 0) {
+                //     cell = '<td><%= moment(' + reportColumn.get('name') + ').format("L") %></td>';
+                // } else {
+                    cell = '<td><%= ' + reportColumn.get('name') + ' %></td>';
+                // }
+
+                template = template.concat(cell);
+            });
+
+            return template;
+        },
+
         reportRowTemplate: function () {
             var cell, template = '';
             _.each(this.reportSchema.selectedColumns(), function (reportColumn) {

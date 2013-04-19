@@ -52,7 +52,7 @@ public class TransactionResource {
         double units;
         String currency;
         // String amount;
-        double amount;
+        double transactionAmount;
 
         String transactionStatus;
         String transactionStatusDesc;
