@@ -11,6 +11,12 @@ describe('Given Query Model', function () {
     };
 
     beforeEach(function () {
+
+        // use jasmine-sinon matchers
+        // TODO - check if this gets descoped or clobbered if called more than once
+        // the idea is to set it up once, and only once
+        this.addMatchers(sinonJasmine.getMatchers());
+
         if (_.isUndefined(Query)) {
             var done = false;
 
@@ -143,7 +149,7 @@ describe('Given Query Model', function () {
         });
     });
 
-    describe('when execute the query with page number', function () {
+    describe('when query executes with a page number', function () {
 
         var query;
 
@@ -205,68 +211,6 @@ describe('Given Query Model', function () {
             expect(query.limit).toEqual(defaultLimit);
             expect(query.offset).toEqual(0);
         });
-    });
-
-    xdescribe('when execute the query', function () {
-        it('should POST with default limit and offset', function () {
-            spyOn(Backbone, 'sync');
-            var query = new Query();
-            query.execute();
-
-            expect(Backbone.sync.calls.length).toEqual(1);
-            // expect(Backbone.sync).toHaveBeenCalledWith('create');
-        });
-    });
-
-    describe('when execute the query - using mock', function () {
-        var mock;
-
-        beforeEach(function () {
-            mock = sinon.mock(Backbone);
-        });
-
-        afterEach(function () {
-            mock.restore();
-        });
-
-        it('calls Backbone.sync with method "create" with default limit and offset', function () {
-            var query = new Query();
-            mock.expects('sync').once().withArgs('create', query);
-            query.execute();
-
-            expect(query.limit).toEqual(defaultLimit);
-            expect(query.offset).toEqual(defaultOffset);
-            mock.verify();
-        });
-
-        it('calls Backbone.sync with method "create" with default limit and specified page/offset', function () {
-            var offset = 2,
-                query = new Query();
-
-            mock.expects('sync').once().withArgs('create', query);
-
-            query.execute(offset);
-
-            expect(query.limit).toEqual(defaultLimit);
-            expect(query.offset).toEqual(offset);
-            mock.verify();
-        });
-
-        it('should continue to call Backbone.sync with "create", when execute is called multiple times', function () {
-            var offset = 2,
-                query = new Query();
-
-            mock.expects('sync').exactly(3).withArgs('create', query);
-
-            query.execute(offset);
-            query.execute(offset);
-            query.execute(offset);
-
-            expect(query.limit).toEqual(defaultLimit);
-            expect(query.offset).toEqual(offset);
-            mock.verify();
-        });
-
     });
 
     describe('when navigating through records', function () {
@@ -340,11 +284,10 @@ describe('Given Query Model', function () {
 
             mock.verify();
         });
-
     });
 
     // using sinon spy instead of jasmine spy, toHaveBeenCalledWith didn't work!
-    describe('when execute the query', function () {
+    describe('when query executes', function () {
 
         beforeEach(function () {
             sinon.stub(Backbone, 'sync');
@@ -358,8 +301,8 @@ describe('Given Query Model', function () {
             var query = new Query();
             query.execute();
 
-            expect(Backbone.sync.calledOnce).toBe(true);
-            expect(Backbone.sync.calledWith('create', query)).toBe(true);
+            expect(Backbone.sync).toHaveBeenCalledOnce();
+            expect(Backbone.sync).toHaveBeenCalledWith('create', query);
             expect(query.limit).toEqual(defaultLimit);
             expect(query.offset).toEqual(defaultOffset);
         });
@@ -369,8 +312,8 @@ describe('Given Query Model', function () {
                 query = new Query();
             query.execute(offset);
 
-            expect(Backbone.sync.calledOnce).toBe(true);
-            expect(Backbone.sync.calledWith('create', query)).toBe(true);
+            expect(Backbone.sync).toHaveBeenCalledOnce();
+            expect(Backbone.sync).toHaveBeenCalledWith('create', query);
             expect(query.limit).toEqual(defaultLimit);
             expect(query.offset).toEqual(offset);
         });
@@ -380,30 +323,80 @@ describe('Given Query Model', function () {
                 query = new Query();
             query.execute(offset);
 
-            expect(Backbone.sync.calledOnce).toBe(true);
-            expect(Backbone.sync.calledWith('create', query)).toBe(true);
+            expect(Backbone.sync).toHaveBeenCalledOnce();
+            expect(Backbone.sync).toHaveBeenCalledWith('create', query);
             expect(query.limit).toEqual(defaultLimit);
             expect(query.offset).toEqual(offset);
 
             Backbone.sync.reset();
 
             query.execute(offset);
-            expect(Backbone.sync.calledOnce).toBe(true);
-            expect(Backbone.sync.calledWith('create', query)).toBe(true);
+            expect(Backbone.sync).toHaveBeenCalledOnce();
+            expect(Backbone.sync).toHaveBeenCalledWith('create', query);
             expect(query.limit).toEqual(defaultLimit);
             expect(query.offset).toEqual(offset);
 
             Backbone.sync.reset();
 
             query.execute(offset);
-            expect(Backbone.sync.calledOnce).toBe(true);
-            expect(Backbone.sync.calledWith('create', query)).toBe(true);
+            expect(Backbone.sync).toHaveBeenCalledOnce();
+            expect(Backbone.sync).toHaveBeenCalledWith('create', query);
             expect(query.limit).toEqual(defaultLimit);
             expect(query.offset).toEqual(offset);
         });
     });
 
-    describe('when foo', function () {
+    describe('when query executes - using mock', function () {
+        var mock;
+
+        beforeEach(function () {
+            mock = sinon.mock(Backbone);
+        });
+
+        afterEach(function () {
+            mock.restore();
+        });
+
+        it('calls Backbone.sync with method "create" with default limit and offset', function () {
+            var query = new Query();
+            mock.expects('sync').once().withArgs('create', query);
+            query.execute();
+
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(defaultOffset);
+            mock.verify();
+        });
+
+        it('calls Backbone.sync with method "create" with default limit and specified page/offset', function () {
+            var offset = 2,
+                query = new Query();
+
+            mock.expects('sync').once().withArgs('create', query);
+
+            query.execute(offset);
+
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(offset);
+            mock.verify();
+        });
+
+        it('should continue to call Backbone.sync with "create", when execute is called multiple times', function () {
+            var offset = 2,
+                query = new Query();
+
+            mock.expects('sync').exactly(3).withArgs('create', query);
+
+            query.execute(offset);
+            query.execute(offset);
+            query.execute(offset);
+
+            expect(query.limit).toEqual(defaultLimit);
+            expect(query.offset).toEqual(offset);
+            mock.verify();
+        });
+    });
+
+    xdescribe('when foo', function () {
 
         var xhr, requests;
 
@@ -438,40 +431,137 @@ describe('Given Query Model', function () {
 
     });
 
-    describe('when query executes successfully', function () {
-        var server;
+    describe('when query executes', function () {
+        var server,
+            query,
+            querySuccess = sinon.spy();
+            queryError = sinon.spy();
 
         beforeEach(function () {
             server = sinon.fakeServer.create();
+            query = new Query({}, {
+                success: querySuccess,
+                error: queryError
+            });
         });
 
         afterEach(function () {
             server.restore();
+            querySuccess.reset();
+            queryError.reset();
         });
 
-        it('should call success callback', function () {
-            var querySuccess = sinon.spy(),
-                queryError = sinon.spy();
-
-            var options = {
-                success: querySuccess,
-                error: queryError
-            };
-
-            var query = new Query({}, options);
-
-            server.respondWith('POST', query.urlRoot(), //'/some/url/data.json',
-                                [200, { "Content-Type": "application/json" },
-                                '[{ "id": 12, "comment": "Hey there" }]']);
+        it('should call success callback on 200 successful response', function () {
+            var fakeResponse = [{foo:'bar'}, {baz:'buzz'}];
 
             query.execute();
+            server.respondWith('POST', query.urlRoot(),
+                                [200, { 'Content-Type': 'application/json' },
+                                JSON.stringify(fakeResponse)]);
             server.respond();
 
-            debugger;
+            // use jasmine-sinon matcher for improved readability
+            expect(queryError).not.toHaveBeenCalled(); // same as expect(queryError.callCount).toEqual(0);
+            expect(querySuccess).toHaveBeenCalledOnce(); // expect(querySuccess.calledOnce).toBe(true);
+            expect(querySuccess).toHaveBeenCalledWith(query, fakeResponse); // expect(querySuccess.calledWith(query, fakeResponse)).toBe(true);
+        });
 
-            expect(querySuccess.calledOnce).toBe(true);
-            // expect(queryError.calledOnce).toBe(true);
+        // 201 resource created
+        it('should call success callback on 201 (created) response', function () {
+            var fakeResponse = [{foo:'bar'}, {baz:'buzz'}];
 
+            query.execute();
+            server.respondWith('POST', query.urlRoot(),
+                                [201, { 'Content-Type': 'application/json' },
+                                JSON.stringify(fakeResponse)]);
+            server.respond();
+
+            // use jasmine-sinon matcher for improved readability
+            expect(queryError).not.toHaveBeenCalled(); // same as expect(queryError.callCount).toEqual(0);
+            expect(querySuccess).toHaveBeenCalledOnce(); // expect(querySuccess.calledOnce).toBe(true);
+            expect(querySuccess).toHaveBeenCalledWith(query, fakeResponse); // expect(querySuccess.calledWith(query, fakeResponse)).toBe(true);
+        });
+
+        // 204 no content
+        it('should call success callback on 204 (no content) successful but empty response', function () {
+            var fakeResponse = {};
+
+            query.execute();
+            server.respondWith('POST', query.urlRoot(),
+                                [204, { 'Content-Type': 'application/json' },
+                                JSON.stringify(fakeResponse)]);
+            server.respond();
+
+            // use jasmine-sinon matcher for improved readability
+            expect(queryError).not.toHaveBeenCalled(); // same as expect(queryError.callCount).toEqual(0);
+            expect(querySuccess).toHaveBeenCalledOnce(); // expect(querySuccess.calledOnce).toBe(true);
+            expect(querySuccess).toHaveBeenCalledWith(query, fakeResponse); // expect(querySuccess.calledWith(query, fakeResponse)).toBe(true);
+        });
+
+        // 304 not modified
+        it('should call success callback on 304 not modified', function () {
+
+            query.execute();
+            server.respondWith(query.urlRoot(), [304, {}, '']);
+            server.respond();
+
+            expect(querySuccess).toHaveBeenCalledOnce();
+            expect(queryError).not.toHaveBeenCalled();
+        });
+
+        // 400 Bad request
+        it('should call error callback on 400 bad request', function () {
+
+            query.execute();
+            server.respondWith(query.urlRoot(), [400, {}, '']);
+            server.respond();
+
+            expect(queryError).toHaveBeenCalledOnce();
+            expect(querySuccess).not.toHaveBeenCalled();
+        });
+
+        // 401 unauthorized
+        it('should call error callback on 401 unauthorized', function () {
+
+            query.execute();
+            server.respondWith(query.urlRoot(), [401, {}, '']);
+            server.respond();
+
+            expect(queryError).toHaveBeenCalledOnce();
+            expect(querySuccess).not.toHaveBeenCalled();
+        });
+
+        // 403 unauthorized
+        it('should call error callback on 403 forbidden', function () {
+
+            query.execute();
+            server.respondWith(query.urlRoot(), [403, {}, '']);
+            server.respond();
+
+            expect(queryError).toHaveBeenCalledOnce();
+            expect(querySuccess).not.toHaveBeenCalled();
+        });
+
+        // 404 not found
+        it('should call error callback on 404 not found', function () {
+
+            query.execute();
+            server.respondWith(query.urlRoot(), [404, {}, '']);
+            server.respond();
+
+            expect(queryError).toHaveBeenCalledOnce();
+            expect(querySuccess).not.toHaveBeenCalled();
+        });
+
+        // 500 internal server error
+        it('should call error callback on 500 server error', function () {
+
+            query.execute();
+            server.respondWith(query.urlRoot(), [500, {}, '']);
+            server.respond();
+
+            expect(queryError).toHaveBeenCalledOnce();
+            expect(querySuccess).not.toHaveBeenCalled();
         });
     });
 
