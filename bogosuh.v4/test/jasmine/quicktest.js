@@ -13,6 +13,7 @@ require.config({
         'jasmine': '../test/lib/jasmine-1.2.0/jasmine',
         'jasmine-html': '../test/lib/jasmine-1.2.0/jasmine-html',
         'sinon': '../test/lib/sinon/sinon-1.6.0',
+        'jasmine-sinon': '../test/lib/jasmine-sinon',   // sinon matcher https://github.com/froots/jasmine-sinon
         'spec': '../test/jasmine/spec/'
     },
     shim: {
@@ -38,6 +39,9 @@ require.config({
         'jasmine-html': {
             deps: ['jasmine'],
             exports: 'jasmine'
+        },
+        'jasmine-sinon': {
+            deps: ['jasmine', 'sinon']
         }
     }
     // hack!! - forcing jquery.ui to be loaded before bootstrap, refactor, instead, to only use jquery.ui.datepicker plugin becasue bootstrap.tooltip is
@@ -45,7 +49,7 @@ require.config({
 });
 
 window.store = "TestStore"; // override local storage store name - for testing
-require(['underscore', 'jasmine-html', 'sinon', 'moment'], function (_, jasmine) {
+require(['underscore', 'jasmine-html', 'sinon', 'jasmine-sinon', 'moment'], function (_, jasmine) {
 
     var jasmineEnv = jasmine.getEnv();
     jasmineEnv.updateInterval = 1000;
@@ -59,8 +63,8 @@ require(['underscore', 'jasmine-html', 'sinon', 'moment'], function (_, jasmine)
     };
 
     var specs = [];
-    specs.push('spec/models/TransactionSpec');
     specs.push('spec/models/QuerySpec');
+    specs.push('spec/models/TransactionSpec');
     specs.push('spec/models/DateRangeSpec');
     specs.push('spec/models/AccountCriterionSpec');
     specs.push('spec/collections/PaginatedAccountsSpec');
