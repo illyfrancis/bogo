@@ -6,52 +6,39 @@ define([
     var ReportColumn = Backbone.Model.extend({
 
         defaults: {
-            name: '',   // for rendering JSON response - e.g. accountName (should be unique, used as an id for persistence)
-            label: '',  // for report columns (short description)
-            title: '',  // for displaying - e.g. Account Name (full description)
-            selected: false,    // boolean test for including in report
+            name: '',       // for rendering JSON response - e.g. accountName (should be unique, used as an id for persistence)
+            label: '',      // for report columns (short description)
+            title: '',      // for displaying - e.g. Account Name (full description)
+            selected: false,// boolean test for including in report
             position: 0,    // column ordering within results
             criterion: '',  // name of Criterion object
-            //filterable: true   // some columns may not be (or use criterion as an indication)
-            sort: 0, // 1 for asc, -1 for desc
-            align: ''   // '' implies left or 'left', 'right' for align right.
+            sort: 0,        // 1 for asc, -1 for desc
+            align: ''       // '' implies left or 'left', 'right' for align right.
         },
 
         idAttribute: '_id',
 
-        validate: function (attrs) {
+        validate: function (attributes) {
 
-            // validate only if ReportColumn is being selected
-            // (but if the value isn't changed i.e. already selected don't bother)
-            // validate based on collection (ReportSchema) property.
-            // be careful, the collection attrib for this model is the first collection that this model is bound to.
-            // e.g. if the model is added to a second collection the this.collection refers to the first collection obj only.
-            if (this._isColumnBeingAdded(attrs) && this.collection.hasMaxReportColumns()) {
+            // column being added and already reached max
+            if (this.collection.hasMaxReportColumns() &&
+                attributes.selected && !this.previousAttributes().selected) {
                 return 'Cannot add more report columns';
             }
 
-            if (this._isColumnBeingRemoved(attrs) && this.collection.hasMinReportColumns()) {
+            // column being removed and reached min
+            if (this.collection.hasMinReportColumns() &&
+                !attributes.selected && this.previousAttributes().selected) {
                 return 'Cannot remove more report columns';
             }
         },
 
-        _isColumnBeingAdded: function (attrs) {
-            return attrs.selected && !this.previousAttributes().selected;
-        },
-
-        _isColumnBeingRemoved: function (attrs) {
-            return !attrs.selected && this.previousAttributes().selected;
-        },
-
+        // toggle selection
         toggle: function () {
             var isSelected = this.attributes.selected,
                 sort = isSelected ? 0 : this.attributes.sort;
 
             this.set({selected: !isSelected, sort: sort}, {validate: true});
-        },
-
-        setPosition: function (position) {
-            this.set('position', position, {silent: true});
         },
 
         reverseSort: function () {
@@ -61,7 +48,6 @@ define([
             this.set('sort', order);
 
             // remove sort order from the other columns
-            // SMELL - accessing collection from model is strange.
             this.collection.each(function (reportColumn) {
                 if (reportColumn !== this) {
                     reportColumn.set('sort', 0);
@@ -70,24 +56,23 @@ define([
         },
 
         isSortAsc: function () {
-            return this.get('sort') === 1;
+            return this.attributes.sort === 1;
         },
 
         isSortDesc: function () {
-            return this.get('sort') === -1;
+            return this.attributes.sort === -1;
         },
 
         isSortApplied: function () {
-            return this.get('sort') !== 0 && this.get('selected');
+            return this.attributes.selected && (this.isSortAsc() || this.isSortDesc());
         },
 
-        clearAll: function () {
-            this.set({
-                selected: false,
-                position: 0
-            }, {
-                silent:true
-            });
+        setPosition: function (position) {
+            this.set({position: position}, {silent: true});
+        },
+
+        clearSelection: function () {
+            this.set({selected: false, position: 0}, {silent:true});
         }
 
     });

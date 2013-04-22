@@ -52,7 +52,7 @@ define([
             // 1. first step is to 'unselect' everything without triggering any 'change' event
             // 2. use the models and 'update' the collection (this) - using 'set' method (which should trigger 'change' event)
 
-            this.invoke('clearAll');
+            this.invoke('clearSelection');
 
             // not the most efficient: O(n^2)
             _.each(selections, function (item) {
@@ -86,10 +86,12 @@ define([
         },
 
         queryFields: function () {
-            var fields = [];
+            var fields = [],
+                position = 0;
             this.each(function (column) {
                 if (column.get('selected')) {
                     fields.push(column.get('name'));
+                    column.set('position', ++position, {silent: true}); // TODO - DRY it
                 }
             });
 
