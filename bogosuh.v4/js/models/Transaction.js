@@ -1,5 +1,7 @@
 define(['underscore', 'backbone', 'moment'], function(_, Backbone, moment) {
 
+    // TODO - pull up formatter & co.
+    
 	var Transaction = Backbone.Model.extend({
 
         // dateFormat: 'M/D/YYYY',

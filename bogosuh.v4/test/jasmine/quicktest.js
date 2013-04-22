@@ -67,6 +67,7 @@ require(['underscore', 'jasmine-html', 'sinon', 'jasmine-sinon', 'moment'], func
     specs.push('spec/models/TransactionSpec');
     specs.push('spec/models/DateRangeSpec');
     specs.push('spec/models/AccountCriterionSpec');
+    specs.push('spec/collections/ReportSchemaSpec');
     specs.push('spec/collections/PaginatedAccountsSpec');
 
     require(specs, function () {

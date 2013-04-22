@@ -42,21 +42,9 @@ define([
 
             if (!anySortApplied) {
                 var firstColumn = _.first(this.selectedColumns());
-                // firstColumn && firstColumn.set('sort', 1); // asc
                 if (firstColumn) {
                     firstColumn.set('sort', 1); // asc
                 }
-            }
-        },
-
-        _setDefaultSort: function () {
-            var firstColumn = _.first(this.selectedColumns()),
-                anySortApplied = this.any(function (reportColumn) {
-                    return reportColumn.isSortApplied();
-                });
-
-            if (!anySortApplied && firstColumn) {
-                firstColumn.set('sort', 1); // asc
             }
         },
 
