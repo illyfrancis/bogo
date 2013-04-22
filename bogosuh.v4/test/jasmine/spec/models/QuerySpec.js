@@ -78,8 +78,7 @@ describe('Given Query Model', function () {
 
             expect(query.limit).toEqual(defaultLimit);
             expect(query.offset).toEqual(defaultOffset);
-            
-            expect(query.callbacks).toBeDefined();
+
             expect(query.callbacks.success).toBeUndefined();
             expect(query.callbacks.error).toBeUndefined();
         });
@@ -401,6 +400,78 @@ describe('Given Query Model', function () {
             expect(Backbone.sync.calledWith('create', query)).toBe(true);
             expect(query.limit).toEqual(defaultLimit);
             expect(query.offset).toEqual(offset);
+        });
+    });
+
+    describe('when foo', function () {
+
+        var xhr, requests;
+
+        beforeEach(function () {
+            xhr = sinon.useFakeXMLHttpRequest();
+            requests = [];
+            xhr.onCreate = function (req) {
+                requests.push(req);
+            };
+        });
+
+        afterEach(function () {
+            xhr.restore();
+        });
+
+        it('should call success callback', function () {
+            var querySuccess = sinon.spy(),
+                queryError = sinon.spy();
+
+            var options = {
+                success: querySuccess,
+                error: queryError
+            };
+
+            var query = new Query({}, options);
+
+            query.execute();
+
+            expect(requests.length).toBe(1);
+            expect(requests[0].url).toBe(query.urlRoot());
+        });
+
+    });
+
+    describe('when query executes successfully', function () {
+        var server;
+
+        beforeEach(function () {
+            server = sinon.fakeServer.create();
+        });
+
+        afterEach(function () {
+            server.restore();
+        });
+
+        it('should call success callback', function () {
+            var querySuccess = sinon.spy(),
+                queryError = sinon.spy();
+
+            var options = {
+                success: querySuccess,
+                error: queryError
+            };
+
+            var query = new Query({}, options);
+
+            server.respondWith('POST', query.urlRoot(), //'/some/url/data.json',
+                                [200, { "Content-Type": "application/json" },
+                                '[{ "id": 12, "comment": "Hey there" }]']);
+
+            query.execute();
+            server.respond();
+
+            debugger;
+
+            expect(querySuccess.calledOnce).toBe(true);
+            // expect(queryError.calledOnce).toBe(true);
+
         });
     });
 
