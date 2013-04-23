@@ -5,12 +5,12 @@ define([
     'models/Preference',
     'collections/PaginatedAccounts',
     'collections/ReportSchema',
-    'collections/TreeCollection',
+    'collections/Tree',
     'collections/Preferences',
     'collections/SearchCriteria',
     'collections/TransactionReport',
     'tree/TreeRoot'
-], function (Backbone, _, Preference, PaginatedAccounts, ReportSchema, TreeCollection, Preferences, SearchCriteria, TransactionReport, TreeRoot) {
+], function (Backbone, _, Preference, PaginatedAccounts, ReportSchema, Tree, Preferences, SearchCriteria, TransactionReport, TreeRoot) {
 
     var Repository = {
 
@@ -194,7 +194,7 @@ define([
                 ]
             }];
 
-            this.transactionTypes = new TreeCollection();
+            this.transactionTypes = new Tree();
             this.transactionTypes.reset(data);
 
             options = options || {};

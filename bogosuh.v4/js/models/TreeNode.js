@@ -1,7 +1,7 @@
 /*global define*/
 define(['underscore', 'backbone', 'require'], function (_, Backbone, require) {
 
-    var TreeModel = Backbone.Model.extend({
+    var TreeNode = Backbone.Model.extend({
 
         defaults: {
             name: 'default name',
@@ -11,10 +11,10 @@ define(['underscore', 'backbone', 'require'], function (_, Backbone, require) {
 
         initialize: function () {
             // resolve circular dependency
-            var TreeCollection = require('collections/TreeCollection');
+            var Tree = require('collections/Tree');
 
             // replace the list with collection.
-            this.subItems = new TreeCollection(this.get('list'));
+            this.subItems = new Tree(this.get('list'));
             // set itself as parent on the subItems.
             this.subItems.invoke('setParent', this);
         },
@@ -71,5 +71,5 @@ define(['underscore', 'backbone', 'require'], function (_, Backbone, require) {
 
     });
 
-    return TreeModel;
+    return TreeNode;
 });

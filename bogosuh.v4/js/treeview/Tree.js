@@ -12,7 +12,7 @@ define([
         className: 'nav nav-list',
 
         render: function () {
-            // collection = TreeCollection
+            // collection = Tree
             // tree collection is children of the model
             this.collection.each(this.appendNode, this);
             return this;

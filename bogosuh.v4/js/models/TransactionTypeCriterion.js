@@ -2,8 +2,8 @@
 define([
     'apps/Repository',
     'models/Criterion',
-    'collections/TreeCollection'
-], function (Repository, Criterion, TreeCollection) {
+    'collections/Tree'
+], function (Repository, Criterion, Tree) {
 
     var TransactionTypeCriterion = Criterion.extend({
 

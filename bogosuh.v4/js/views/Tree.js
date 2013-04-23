@@ -2,7 +2,7 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'views/TreeItem'
+    'views/TreeItem2'
 ], function ($, _, Backbone, TreeItem) {
 
     var Tree = Backbone.View.extend({
@@ -12,7 +12,7 @@ define([
         className: 'nav nav-list',
 
         render: function () {
-            // collection = TreeCollection
+            // collection = Tree
             // tree collection is children of the model
             this.collection.each(this.appendItem, this);
             return this;

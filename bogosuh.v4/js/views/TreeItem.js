@@ -20,7 +20,7 @@ define([
         },
 
         initialize: function () {
-            // model = TreeModel
+            // model = TreeNode
             this.listenTo(this.model, 'change:selected', this.onSelfChange);
             this.listenTo(this.model.subItems, 'childChange', this.onChildrenChange);
         },
@@ -41,9 +41,13 @@ define([
 
                 var $e = this.$el.find('span i');
                 if ($e.removeClass().data('expanded')) {
-                    $e.addClass('icon-folder-close').data('expanded', false);
+                    // $e.addClass('icon-chevron-right').data('expanded', false);
+                    $e.addClass('icon-plus-sign').data('expanded', false);
+                    // $e.addClass('icon-folder-close').data('expanded', false);
                 } else {
-                    $e.addClass('icon-folder-open').data('expanded', true);
+                    // $e.addClass('icon-chevron-down').data('expanded', true);
+                    $e.addClass('icon-minus-sign').data('expanded', true);
+                    // $e.addClass('icon-folder-open').data('expanded', true);
                 }
             }
         },
@@ -56,7 +60,8 @@ define([
 
             // node icon
             if (this.model.isLeaf()) {
-                this.$el.find('span i').removeClass().addClass('icon-file');
+                this.$el.find('span i').removeClass().addClass('icon-minus');
+                // this.$el.find('span i').removeClass().addClass('icon-file');
             }
 
             // render subitems

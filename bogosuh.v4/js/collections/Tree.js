@@ -1,9 +1,9 @@
 /*global define*/
-define(["underscore", "backbone", "models/TreeModel"], function (_, Backbone, TreeModel) {
+define(["underscore", "backbone", "models/TreeNode"], function (_, Backbone, TreeNode) {
 
-    var TreeCollection = Backbone.Collection.extend({
+    var Tree = Backbone.Collection.extend({
 
-        model: TreeModel,
+        model: TreeNode,
 
         leaves: function (leafNodes) {
             if (leafNodes === undefined) {
@@ -68,6 +68,6 @@ define(["underscore", "backbone", "models/TreeModel"], function (_, Backbone, Tr
 
     });
 
-    return TreeCollection;
+    return Tree;
 
 });
