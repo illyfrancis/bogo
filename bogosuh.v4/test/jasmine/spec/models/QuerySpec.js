@@ -431,7 +431,7 @@ describe('Given Query Model', function () {
 
     });
 
-    describe('when query executes', function () {
+    describe('when query executes and server responds', function () {
         var server,
             query,
             querySuccess = sinon.spy();
@@ -452,7 +452,7 @@ describe('Given Query Model', function () {
         });
 
         it('should call success callback on 200 successful response', function () {
-            var fakeResponse = [{foo:'bar'}, {baz:'buzz'}];
+            var fakeResponse = {foo:'bar'};
 
             query.execute();
             server.respondWith('POST', query.urlRoot(),
@@ -464,6 +464,18 @@ describe('Given Query Model', function () {
             expect(queryError).not.toHaveBeenCalled(); // same as expect(queryError.callCount).toEqual(0);
             expect(querySuccess).toHaveBeenCalledOnce(); // expect(querySuccess.calledOnce).toBe(true);
             expect(querySuccess).toHaveBeenCalledWith(query, fakeResponse); // expect(querySuccess.calledWith(query, fakeResponse)).toBe(true);
+        });
+
+        it('should not set the query with the response on 200', function () {
+            var fakeResponse = {foo:'bar'};
+
+            query.execute();
+            server.respondWith('POST', query.urlRoot(),
+                                [200, { 'Content-Type': 'application/json' },
+                                JSON.stringify(fakeResponse)]);
+            server.respond();
+            // don't want the response to be set on the query object
+            expect(query.get('foo')).toBeUndefined();
         });
 
         // 201 resource created

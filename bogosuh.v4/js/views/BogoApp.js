@@ -5,8 +5,9 @@ define([
     'apps/EventBus',
     'apps/Repository',
     'collections/SearchCriteria',
-    'views/ViewFactory'
-], function ($, _, Backbone, EventBus, Repository, SearchCriteria, ViewFactory) {
+    'views/ViewFactory',
+    'treeview/TreeRoot'
+], function ($, _, Backbone, EventBus, Repository, SearchCriteria, ViewFactory, TreeRoot) {
 
     var BogoApp = Backbone.View.extend({
 
@@ -37,6 +38,10 @@ define([
             this.$el.append(this.reportSettings.render().el);
             this.$el.append(this.searchFilters.render().el);
             this.$el.append(this.searchContent.render().el);
+
+            this.transactionType();
+
+            return this;
         },
 
         showFilters: function (criterionName) {
@@ -45,6 +50,12 @@ define([
 
         showReportSettings: function () {
             this.reportSettings.show();
+        },
+
+        transactionType: function () {
+            var transactionTypes = Repository.transactionTypesWithRoots;
+            var root = new TreeRoot({model: transactionTypes});
+            this.$el.append(root.render().el);
         }
 
     });

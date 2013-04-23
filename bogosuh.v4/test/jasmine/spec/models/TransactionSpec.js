@@ -1,12 +1,13 @@
 describe('Given Transaction Model', function () {
 
-    var Transaction;
+    var Transaction, Formatter;
 
     beforeEach(function () {
         if (_.isUndefined(Transaction)) {
             var done = false;
 
-            require(['models/Transaction'], function (model) {
+            require(['apps/Formatter','models/Transaction'], function (formatter, model) {
+                Formatter = formatter;
                 Transaction = model;
                 done = true;
             });
@@ -18,41 +19,6 @@ describe('Given Transaction Model', function () {
     });
 
     afterEach(function () {
-    });
-
-    describe('when formats date', function () {
-        var transaction;
-        beforeEach(function () {
-            transaction = new Transaction();
-        });
-
-        it('should return empty string for no arg', function () {
-            var formatted = transaction.formatDate();
-            expect(formatted).toBe('');
-        });
-
-        it('should return empty string for an object', function () {
-            var formatted = transaction.formatDate({});
-            expect(formatted).toBe('');
-        });
-
-        it('should return empty string for NaN', function () {
-            var formatted = transaction.formatDate(NaN);
-            expect(formatted).toBe('');
-        });
-
-        it('should return empty string for a function', function () {
-            var formatted = transaction.formatDate(function () {});
-            expect(formatted).toBe('');
-        });
-
-        it('should return formatted string', function () {
-            var time = new Date().getTime(),
-                expected = moment(time).format(transaction.dateFormat),
-                formatted = transaction.formatDate(time);
-
-            expect(formatted).toBe(expected);
-        });
     });
 
     describe('when invoke toFormattedJSON', function () {
@@ -76,7 +42,7 @@ describe('Given Transaction Model', function () {
                     settlementDate: time
                 },
                 transaction = new Transaction(data),
-                expected = moment(time).format(transaction.dateFormat);
+                expected = moment(time).format(Formatter.dateFormat);
 
             var formatted = transaction.toFormattedJSON();
 

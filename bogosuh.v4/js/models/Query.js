@@ -50,6 +50,10 @@ define(['backbone'], function (Backbone) {
 
         _validateOffset: function (offset) {
             return (!_.isNumber(offset) || _.isNaN(offset) || offset <= 0) ? 0 : offset;
+        },
+
+        parse: function (response) {
+            // ignore the response by return nothing, don't set any response to this object
         }
 
     });

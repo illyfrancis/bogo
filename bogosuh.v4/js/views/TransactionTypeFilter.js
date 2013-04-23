@@ -16,7 +16,7 @@ define([
                 collection: this.model.transactionTypes
             });
 
-            this._render();
+            // this._render();
         },
 
         filterChanged: function () {
@@ -35,6 +35,11 @@ define([
         _render: function () {
             this.$el.append(this.transactionTypesTree.render().el);
             this.transactionTypesTree.refresh(); // this many need to be fired after render.
+        },
+
+        render: function () {
+            this.$el.append(this.transactionTypesTree.render().el);
+            return this;
         }
 
     });
