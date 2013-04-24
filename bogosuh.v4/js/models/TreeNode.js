@@ -14,9 +14,9 @@ define(['underscore', 'backbone', 'require'], function (_, Backbone, require) {
             var Tree = require('collections/Tree');
 
             // replace the list with collection.
-            this.subItems = new Tree(this.get('list'));
-            // set itself as parent on the subItems.
-            this.subItems.invoke('setParent', this);
+            this.subTree = new Tree(this.get('list'));
+            // set itself as parent on the subTree.
+            this.subTree.invoke('setParent', this);
         },
 
         toggle: function () {
@@ -30,7 +30,7 @@ define(['underscore', 'backbone', 'require'], function (_, Backbone, require) {
         },
 
         isLeaf: function () {
-            return this.subItems.length === 0;
+            return this.subTree.length === 0;
         },
 
         parents: function (ancestor) {
@@ -50,22 +50,22 @@ define(['underscore', 'backbone', 'require'], function (_, Backbone, require) {
                 offspring = [];
             }
 
-            this.subItems.each(function (item) {
-                offspring.push(item);
-                item.descendants(offspring);
+            this.subTree.each(function (node) {
+                offspring.push(node);
+                node.descendants(offspring);
             });
             return offspring;
         },
 
         allDescendantsSelected: function () {
-            return _.all(this.descendants(), function (item) {
-                return item.get('selected');
+            return _.all(this.descendants(), function (node) {
+                return node.get('selected');
             });
         },
 
         anyDescendantsSelected: function () {
-            return _.any(this.descendants(), function (item) {
-                return item.get('selected');
+            return _.any(this.descendants(), function (node) {
+                return node.get('selected');
             });
         }
 

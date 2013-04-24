@@ -1,5 +1,5 @@
 /*global define*/
-define(["underscore", "backbone", "models/TreeNode"], function (_, Backbone, TreeNode) {
+define(['underscore', 'backbone', 'models/TreeNode'], function (_, Backbone, TreeNode) {
 
     var Tree = Backbone.Collection.extend({
 
@@ -10,59 +10,43 @@ define(["underscore", "backbone", "models/TreeNode"], function (_, Backbone, Tre
                 leafNodes = [];
             }
 
-            this.each(function (item) {
-                if (item.isLeaf()) {
-                    leafNodes.push(item);
+            this.each(function (node) {
+                if (node.isLeaf()) {
+                    leafNodes.push(node);
                 } else {
-                    item.subItems.leaves(leafNodes);
+                    node.subTree.leaves(leafNodes);
                 }
             });
             return leafNodes;
         },
 
         selectByValues: function (values) {
-            _.each(this.leaves(), function (item) {
-
+            _.each(this.leaves(), function (node) {
                 // this version sets 'selected' state regardless, hence no
                 // need to 'reset' the selection beforehand.
-                var selection = _.contains(values, item.get("value"));
-                item.set({ "selected": selection });
-                item.trigger("childChange");    // TODO review this, might be a bit excessive.
-
-                // if (_.contains(values, item.get("value"))) {
-                //     item.set({ "selected": true });
-                //     item.trigger("childChange");
-                // }
-            });
-        },
-
-        _selectByValues: function (values) {
-            _.each(this.leaves(), function (item) {
-                if (_.contains(values, item.get("value"))) {
-                    item.set({
-                        "selected": true
-                    }, {
-                        silent: true
-                    });
-                }
+                var selection = _.contains(values, node.get('value'));
+                node.set({ 'selected': selection });
+                // TODO review this, might be a bit excessive, instead TreeItem.onSelfChange
+                // could trigger 'chidChange' event
+                node.trigger('childChange');
             });
         },
 
         selectedValues: function () {
             var selectedValues = [];
-            _.each(this.leaves(), function (item) {
-                if (item.get("selected")) {
-                    // selectedValues.push[item.get("value")];
+            _.each(this.leaves(), function (node) {
+                if (node.get('selected')) {
+                    // selectedValues.push[node.get('value')];
                     // TODO - review above statement - push[] is strange?
-                    selectedValues.push(item.get("value"));
+                    selectedValues.push(node.get('value'));
                 }
             });
             return selectedValues;
         },
 
         hasSelection: function () {
-            return _.any(this.leaves(), function (item) {
-                return item.get("selected");
+            return _.any(this.leaves(), function (node) {
+                return node.get('selected');
             });
         }
 

@@ -22,7 +22,7 @@ define([
         initialize: function () {
             // model = TreeNode
             this.listenTo(this.model, 'change:selected', this.onSelfChange);
-            this.listenTo(this.model.subItems, 'childChange', this.onChildrenChange);
+            this.listenTo(this.model.subTree, 'childChange', this.onChildrenChange);
         },
 
         onClick: function (e) {
@@ -65,11 +65,11 @@ define([
                 // this.$el.find('span i').removeClass().addClass('icon-file');
             }
 
-            // render subitems
+            // render subTree
             if (!this.model.isLeaf()) {
                 var Tree = require('views/Tree');
                 var subTreeView = this.createSubView(Tree, {
-                    collection: this.model.subItems
+                    collection: this.model.subTree
                 });
 
                 parent.$el.append(subTreeView.render().el);
@@ -83,8 +83,8 @@ define([
             this.setCheckbox(selected, false);
 
             // update self & descendants to the new selected state, the change event in descendants will cause themselves to redraw.
-            _.each(this.model.descendants(), function (item) {
-                item.set({
+            _.each(this.model.descendants(), function (node) {
+                node.set({
                     selected: selected
                 });
             });
