@@ -41,13 +41,9 @@ define([
 
                 var $e = this.$el.find('span i');
                 if ($e.removeClass().data('expanded')) {
-                    // $e.addClass('icon-chevron-right').data('expanded', false);
                     $e.addClass('icon-plus-sign').data('expanded', false);
-                    // $e.addClass('icon-folder-close').data('expanded', false);
                 } else {
-                    // $e.addClass('icon-chevron-down').data('expanded', true);
                     $e.addClass('icon-minus-sign').data('expanded', true);
-                    // $e.addClass('icon-folder-open').data('expanded', true);
                 }
             }
         },
@@ -61,7 +57,6 @@ define([
             // node icon
             if (this.model.isLeaf()) {
                 this.$el.find('span i').removeClass().addClass('icon-minus');
-                // this.$el.find('span i').removeClass().addClass('icon-file');
             }
 
             // render subTree
@@ -83,9 +78,7 @@ define([
 
             // update self & descendants to the new selected state, the change event in descendants will cause themselves to redraw.
             _.each(this.model.descendants(), function (node) {
-                node.set({
-                    selected: selected
-                });
+                node.set({selected: selected});
             });
         },
 
@@ -104,11 +97,7 @@ define([
             }
 
             this.setCheckbox(selected, indeterminate);
-            this.model.set({
-                selected: selected
-            }, {
-                silent: true
-            });
+            this.model.set({ selected: selected }, { silent: true });
             this.notifyParent();
         },
 

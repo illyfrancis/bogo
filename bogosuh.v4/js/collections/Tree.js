@@ -21,14 +21,13 @@ define(['underscore', 'backbone', 'models/TreeNode'], function (_, Backbone, Tre
         },
 
         selectByValues: function (values) {
+            var selection;
             _.each(this.leaves(), function (node) {
-                // this version sets 'selected' state regardless, hence no
-                // need to 'reset' the selection beforehand.
-                var selection = _.contains(values, node.get('value'));
-                node.set({ 'selected': selection });
-                // TODO review this, might be a bit excessive, instead TreeItem.onSelfChange
-                // could trigger 'chidChange' event
-                node.trigger('childChange');
+                selection = _.contains(values, node.get('value'));
+                if (node.get('selected') !== selection) {
+                    node.toggle();
+                    node.trigger('childChange');
+                }
             });
         },
 
@@ -36,8 +35,6 @@ define(['underscore', 'backbone', 'models/TreeNode'], function (_, Backbone, Tre
             var selectedValues = [];
             _.each(this.leaves(), function (node) {
                 if (node.get('selected')) {
-                    // selectedValues.push[node.get('value')];
-                    // TODO - review above statement - push[] is strange?
                     selectedValues.push(node.get('value'));
                 }
             });
