@@ -6,9 +6,6 @@ define([
     'models/Preference'
 ], function (Backbone, _, Repository, TransactionQuery, Preference) {
 
-    // Mediator or Controller, not sure yet.
-    // if mediator, should it be merged with EvantBus? - I don't think so but worth considering.
-
     var Mediator = function (eventBus) {
         this.initialize(eventBus);
     };
