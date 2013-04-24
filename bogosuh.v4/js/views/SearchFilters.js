@@ -29,11 +29,10 @@ define([
             this.filterManager = new FilterManager(this.collection);
             this.filterManager.buildFilters();
 
-            // should this be part of filter manager??? I think it should...
-            this.filterSelector = new FilterSelector({
+            this.filterSelector = this.createSubView(FilterSelector, {
                 collection: this.collection
             });
-
+            
             this.registerEvents();
 
             // select the first one as default

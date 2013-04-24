@@ -13,7 +13,18 @@ define([
     'apps/Mediator'
 ], function ($, _, Backbone, Bootstrap, moment, Extension, EventBus, Repository, Mediator) {
 
-    var d = new Date(1365706592680);
+    var stooges = [{name : 'moe', age : 40}, {name : 'larry', age : 50}, {name : 'curly', age : 60}];
+    var out = _.pluck(stooges, 'name');
+
+    var mapped = _.map(stooges, function (buddy) {
+        return buddy.name + " " + buddy.age;
+    });
+
+    console.log("::" + out);
+    console.log("::" + mapped);
+    // => ["moe", "larry", "curly"]
+
+    // var d = new Date(1365706592680);
 
     // alert("> d [" + d + "] : isDate? " + _.isDate(d) + " : format : " + moment(d).format('L'));
 

@@ -22,7 +22,7 @@ define([
     };
 
     _.extend(FilterManager.prototype, {
-        buildFilters: function (searchCriteria) {
+        buildFilters: function () {
             // configure filters by criteria
             var criteriaByName = ['Account', 'TransactionType', 'SecurityId', 'SecurityCategory', 'SettlementDate', 'SettlementLocation'];
             _.each(criteriaByName, function (criterionName) {

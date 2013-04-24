@@ -11,6 +11,8 @@ define([
                 'name': 'SettlementLocation',
                 'title': 'Settlement Location'
             });
+
+            this.locations = new Backbone.Collection();
         },
 
         validate: function (attrs) {
