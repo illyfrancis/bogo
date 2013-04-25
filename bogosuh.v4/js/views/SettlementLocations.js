@@ -23,11 +23,11 @@ define([
         },
 
         appendLocation: function (country) {
-            var line = this.createSubView(SettlementLocation, {
+            var location = this.createSubView(SettlementLocation, {
                 model: country,
                 locations: this.collection
             });
-            this.$('.locations').append(line.render().el);
+            this.$('.locations').append(location.render().el);
         }
     });
 
