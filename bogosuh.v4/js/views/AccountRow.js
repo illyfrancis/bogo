@@ -1,9 +1,8 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'text!templates/AccountRow.html'
-], function ($, _, Backbone, tpl) {
+], function (_, Backbone, tpl) {
 
     var AccountRow = Backbone.View.extend({
 

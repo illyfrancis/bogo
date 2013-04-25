@@ -6,8 +6,6 @@ define(['jquery', 'underscore', 'backbone', 'text!templates/AccountPaginator.htm
 
         initialize: function () {
             this.listenTo(this.collection, 'reset', this.render);
-            this.listenTo(this.collection, 'change', function () { console.log('pagi: change'); });
-            this.listenTo(this.collection, 'add', function () { console.log('pagi: add'); });
         },
 
         events: {

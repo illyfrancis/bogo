@@ -1,9 +1,8 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'views/AccountRow'
-], function ($, _, Backbone, AccountRow) {
+], function (_, Backbone, AccountRow) {
 
     var AccountList = Backbone.View.extend({
 

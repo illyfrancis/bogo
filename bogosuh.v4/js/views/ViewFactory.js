@@ -1,6 +1,5 @@
 /*global define*/
 define([
-    'jquery',
     'underscore',
     'backbone',
     'views/AppMenu',
@@ -8,7 +7,7 @@ define([
     'views/ReportSettings',
     'views/SearchFilters',
     'views/SearchContent'
-], function ($, _, Backbone, AppMenu, FilterStatusBar, ReportSettings, SearchFilters, SearchContent) {
+], function (_, Backbone, AppMenu, FilterStatusBar, ReportSettings, SearchFilters, SearchContent) {
 
     var ViewFactory = {
 

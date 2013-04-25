@@ -1,12 +1,11 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'apps/EventBus',
     'views/AccountList',
     'views/AccountPaginator',
     'text!templates/AccountFilter.html'
-], function ($, _, Backbone, EventBus, AccountList, AccountPaginator, tpl) {
+], function (_, Backbone, EventBus, AccountList, AccountPaginator, tpl) {
 
     var AccountFilter = Backbone.View.extend({
 
@@ -15,8 +14,8 @@ define([
         template: _.template(tpl),
 
         events: {
-            'click .account-selection .select-all': 'selectAll',
-            'click .account-selection .select-none': 'selectNone',
+            'click .select-all': 'selectAll',
+            'click .select-none': 'selectNone',
             'click .account-filter .filter': 'filterAccounts'
         },
 
@@ -36,8 +35,11 @@ define([
         },
 
         render: function () {
-            console.log('account search criteria');
+            this.renderOnce();
+            return this;
+        },
 
+        renderOnce: _.once(function () {
             this.$el.empty();
             this.$el.html(this.template());
             // TODO - need to hold on to filter values for re-render.
@@ -49,9 +51,7 @@ define([
             // account paginator
             // this.$('.account-pagination').append(this.paginator.render().el);
             this.paginator.setElement(this.$('.account-pagination')).render();
-
-            return this;
-        },
+        }),
 
         filterChanged: function () {
             // decide if filter value change should be tracked by SearchFilter, if so trigger 'filter change' event.
@@ -75,15 +75,18 @@ define([
         },
 
         updateAccountSelection: function (checked) {
-            // perceived performance improvement - rather than relying on collection to trigger change event then AccountRow to re-render, invoke on visible AccountRow(s) to update the model directly. The updates to the collection is silent so it will not trigger the change events.
+            // perceived performance improvement - rather than relying on collection to trigger
+            // change event then AccountRow to re- render, invoke on visible AccountRow(s) to update
+            // the model directly. The updates to the collection is silent so it will not trigger
+            // the change events.
             this.accountList.updateSelections(checked);
             this.paginatedAccounts.selectAll(checked);
         },
 
         filterAccounts: function () {
-            var name = this.$el.find('.account-filter .account-name').val();
-            var number = this.$el.find('.account-filter .account-number').val();
-            var selected = this.$el.find('.account-filter .account-selection').hasClass('active');
+            var name = this.$('.account-filter .account-name').val();
+            var number = this.$('.account-filter .account-number').val();
+            var selected = this.$('.account-filter .account-selection').hasClass('active');
 
             console.log('> ' + name + ':' + number + ':' + selected);
 
@@ -92,40 +95,20 @@ define([
 
             // filter by number
             if(_.isEmpty(number)) {
-                fieldFilters.push({
-                    field: 'number',
-                    type: 'pattern',
-                    value: new RegExp('.')
-                });
+                fieldFilters.push({ field: 'number', type: 'pattern', value: new RegExp('.') });
             } else {
-                fieldFilters.push({
-                    field: 'number',
-                    type: 'pattern',
-                    value: new RegExp('^' + number, 'igm')
-                });
+                fieldFilters.push({ field: 'number', type: 'pattern', value: new RegExp('^' + number, 'igm') });
             }
 
             // filter by name
             if(_.isEmpty(name)) {
-                fieldFilters.push({
-                    field: 'name',
-                    type: 'pattern',
-                    value: new RegExp('.')
-                });
+                fieldFilters.push({ field: 'name', type: 'pattern', value: new RegExp('.') });
             } else {
-                fieldFilters.push({
-                    field: 'name',
-                    type: 'pattern',
-                    value: new RegExp('^' + name, 'igm')
-                });
+                fieldFilters.push({ field: 'name', type: 'pattern', value: new RegExp('^' + name, 'igm') });
             }
 
             // filter by selection
-            fieldFilters.push({
-                field: 'selected',
-                type: 'equalTo',
-                value: selected
-            });
+            fieldFilters.push({ field: 'selected', type: 'equalTo', value: selected });
 
             this.paginatedAccounts.setFieldFilter(fieldFilters);
 

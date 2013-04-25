@@ -1,8 +1,3 @@
-<div class="account-selection">
-	<span><strong>Select : </strong></span>
-	<a class="select-all">All</a> |
-	<a class="select-none">None</a>
-</div>
 <div class="account-filter form-inline">
 	<input class="account-number span2" type="text" placeholder="Account number"/>
 	<input class="account-name span2" type="text" placeholder="Account name"/>
@@ -10,16 +5,15 @@
 		<button type="button" class="btn account-selection"><i class="icon-ok"></i></button>
 		<button type="button" class="btn account-none active"><i class="icon-remove"></i></button>
 	</div>
-	<a class="btn btn-primary filter"><i class="icon-filter icon-white"></i> Apply</a>
+	<a class="btn btn-inverse filter"><i class="icon-filter icon-white"></i> Apply</a>
 </div>
 <div class="account-list">
 	<div class="scrollable">
 		<table class="table table-condensed table-hover table-striped">
 			<thead>
-				<tr><th class="span2">Number</th><th>Name</th><th class="span1">Selected</th></tr>
+				<tr><th class="span2">Number</th><th>Name</th><th style="text-align:center"><a class="select-all">Select All</a> | <a class="select-none">None</a></th></tr>
 			</thead>
 			<tbody>
-				<tr><td>1234</td><td>ABC Carpet</td><td><input type="checkbox"/></td></tr>
 			</tbody>
 		</table>
 	</div>
