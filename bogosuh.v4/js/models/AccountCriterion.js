@@ -21,6 +21,7 @@ define([
                 valid = !invalid && _.isArray(data.accountNumbers) && _.isBoolean(data.isApplied);
 
             if (valid) {
+                this.accounts.clearSelections();
                 this.accounts.selectBy(data.accountNumbers);
                 this.setFilter(data.isApplied);
             }
