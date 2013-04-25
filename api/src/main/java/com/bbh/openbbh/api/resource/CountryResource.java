@@ -80,4 +80,14 @@ public class CountryResource {
         GenericEntity<List<Model>> entity = new GenericEntity<List<Model>>(country) {};
         return Response.ok(entity).build();
     }
+    
+    @GET
+    @Path("codes/{codes}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response searchByCode(@PathParam("codes") String codes) {
+        List<Model> country = Country.findByCodes(codes);
+        GenericEntity<List<Model>> entity = new GenericEntity<List<Model>>(country) {};
+        return Response.ok(entity).build();
+    }
+
 }

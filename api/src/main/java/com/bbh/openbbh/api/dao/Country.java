@@ -9,6 +9,7 @@ import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 
 import com.bbh.openbbh.api.resource.CountryResource.Model;
+import com.google.common.collect.Lists;
 
 public class Country {
 
@@ -27,6 +28,12 @@ public class Country {
 		String pattern = "^" + q + ".*";
 		String query = "{$or: [{code: {$regex: #, $options: 'i'}}, {desc: {$regex: #, $options: 'i'}}]}";
 		return newArrayList(country.find(query, pattern, pattern).as(Model.class));
+	}
+	
+	public static List<Model> findByCodes(String codesString) {
+		String[] codeArray = codesString.split(",");
+		List<String> codes = Lists.newArrayList(codeArray);
+		return newArrayList(country.find("{code: { $in : # }}", codes).as(Model.class));
 	}
 
 	public static Model get(String id) {
