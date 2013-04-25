@@ -3,26 +3,26 @@ define([
     'underscore',
     'backbone',
     'models/Country',
+    'collections/Countries',
     'views/SettlementLocations',
     'text!templates/SettlementLocationFilter.html'
-], function ($, _, Backbone, Country, SettlementLocations, tpl) {
+], function ($, _, Backbone, Country, Countries, SettlementLocations, tpl) {
 
     var SettlementLocationFilter = Backbone.View.extend({
 
         template: _.template(tpl),
 
         events: {
-            'click .add-country': 'addCountry',
+            'click .add-country': 'addLocation',
             'focus .lookup': 'clearError'
         },
 
         initialize: function () {
             // model = SettlementLocationCriterion, but for now do below.
-            this.locations = new Backbone.Collection();
+            this.locations = new Countries();
 
-            // holds the most recent searches
-            this.searcher = new Backbone.Collection();
-            this.searcher.model = Country;
+            // holds the most recent lookups
+            this.searcher = new Countries();
 
             this.settlementLocations = this.createSubView(SettlementLocations, {
                 collection: this.locations
@@ -35,7 +35,7 @@ define([
             this.$el.html(this.template());
             this.$el.append(this.settlementLocations.render().el);
             this.$('.lookup').typeahead({
-                source: this.lookupCountry,
+                source: this.lookupLocation,
                 minLength: 2,
                 matcher: this.matcher,
                 updater: this.updater,
@@ -55,7 +55,7 @@ define([
             return item.slice(0, 2);
         },
 
-        lookupCountry: function (query, process) {
+        lookupLocation: function (query, process) {
             this.options.searcher.url = '/api/country/search?q=' + query;
             this.options.searcher.fetch({
                 success: function (collection, response, options) {
@@ -70,7 +70,7 @@ define([
             });
         },
 
-        addCountry: function () {
+        addLocation: function () {
             var code = this.$('.lookup').val();
 
             // look for it

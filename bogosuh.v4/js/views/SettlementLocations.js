@@ -19,6 +19,7 @@ define([
 
         initialize: function () {
             // model = Country
+            // options.locations = Countries
         },
 
         render: function () {
@@ -27,7 +28,8 @@ define([
         },
 
         removeLocation: function () {
-            this.model.collection.remove(this.model);
+            // this.model.collection.remove(this.model);
+            this.options.locations.remove(this.model);   // check this!
             this.dispose();
         }
     });
@@ -43,6 +45,8 @@ define([
         },
 
         render: function () {
+            this.disposeSubViews();
+            this.$el.empty();
             this.$el.html(this.template());
             this.collection.each(this.appendLocation, this);
             return this;
@@ -50,7 +54,8 @@ define([
 
         appendLocation: function (country) {
             var line = this.createSubView(SettlementLocation, {
-                model: country
+                model: country,
+                locations: this.collection
             });
             this.$('tbody').append(line.render().el);
         }
