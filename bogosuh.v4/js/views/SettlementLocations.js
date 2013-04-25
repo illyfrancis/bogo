@@ -1,36 +1,9 @@
 define([
-    'jquery',
-    'underscore',
     'backbone',
     'models/Country',
-    'text!templates/SettlementLocations.html',
-    'text!templates/SettlementLocation.html'
-], function ($, _, Backbone, Country, tpl, locationTpl) {
-
-    var SettlementLocation = Backbone.View.extend({
-
-        tagName: 'tr',
-
-        template: _.template(locationTpl),
-
-        events: {
-            'click .remove': 'removeLocation'
-        },
-
-        initialize: function () {
-            // model = Country
-            // options.locations = Countries
-        },
-
-        render: function () {
-            this.$el.html(this.template(this.model.toJSON()));
-            return this;
-        },
-
-        removeLocation: function () {
-            this.options.locations.remove(this.model);   // check this!
-        }
-    });
+    'views/SettlementLocation',
+    'text!templates/SettlementLocations.html'
+], function (Backbone, Country, SettlementLocation, tpl) {
 
     var SettlementLocations = Backbone.View.extend({
 
