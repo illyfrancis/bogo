@@ -31,6 +31,7 @@ define([
 
         render: function () {
             this.renderOnce();
+            this.transactionTypesTree.refresh();
             return this;
         },
 
