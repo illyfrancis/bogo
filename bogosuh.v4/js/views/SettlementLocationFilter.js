@@ -1,12 +1,11 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'models/Country',
     'collections/Countries',
     'views/SettlementLocations',
     'text!templates/SettlementLocationFilter.html'
-], function ($, _, Backbone, Country, Countries, SettlementLocations, tpl) {
+], function (_, Backbone, Country, Countries, SettlementLocations, tpl) {
 
     var SettlementLocationFilter = Backbone.View.extend({
 
@@ -18,20 +17,23 @@ define([
         },
 
         initialize: function () {
-            // model = SettlementLocationCriterion, but for now do below.
-            this.locations = new Countries();
-
-            // holds the most recent lookups
-            this.searcher = new Countries();
-
+            // model = SettlementLocationCriterion
+            this.locations = this.model.locations;
             this.settlementLocations = this.createSubView(SettlementLocations, {
                 collection: this.locations
             });
+
+            // holds the most recent lookups
+            this.searcher = new Countries();
         },
 
         render: function () {
-            console.log('SettlementLocationFilter: render');
+            console.log('render');
+            this.renderOnce();
+            return this;
+        },
 
+        renderOnce: _.once(function () {
             this.$el.html(this.template());
             this.$el.append(this.settlementLocations.render().el);
             this.$('.lookup').typeahead({
@@ -41,9 +43,7 @@ define([
                 updater: this.updater,
                 searcher: this.searcher
             });
-
-            return this;
-        },
+        }),
 
         matcher: function (item) {
             // no further matching needed
@@ -71,19 +71,16 @@ define([
         },
 
         addLocation: function () {
-            var code = this.$('.lookup').val();
+            var found, code = this.$('.lookup').val();
 
             // look for it
-            var found = this.searcher.findWhere({code: code.toUpperCase()});
+            found = this.searcher.findWhere({code: code.toUpperCase()});
             if (found) {
-                console.log('found ' + found.label());
                 this.locations.add(found);
                 this.$('.lookup').val('');
             } else {
                 this.showError();
             }
-
-            console.log(JSON.stringify('locations : ' + JSON.stringify(this.locations)));
         },
 
         showError: function () {
@@ -92,7 +89,6 @@ define([
         },
 
         clearError: function () {
-            console.log('clear');
             this.$('.location-lookup').removeClass('error');
             this.$('.help-inline').hide();
         }

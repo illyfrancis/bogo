@@ -11,7 +11,7 @@ define([
 
         initialize: function () {
             // collection = Countries
-            this.listenTo(this.collection, 'add remove', this.render);
+            this.listenTo(this.collection, 'add remove reset', this.render);
         },
 
         render: function () {
