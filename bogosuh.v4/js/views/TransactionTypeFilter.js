@@ -15,8 +15,6 @@ define([
             this.transactionTypesTree = this.createSubView(Tree, {
                 collection: this.model.transactionTypes
             });
-
-            this._render();
         },
 
         filterChanged: function () {
@@ -32,15 +30,14 @@ define([
             }
         },
 
-        _render: function () {
-            this.$el.append(this.transactionTypesTree.render().el);
-            // this.transactionTypesTree.refresh(); // this many need to be fired after render.
-        }
+        render: function () {
+            this.renderOnce();
+            return this;
+        },
 
-        // render: function () {
-        //     this.$el.append(this.transactionTypesTree.render().el);
-        //     return this;
-        // }
+        renderOnce: _.once(function () {
+            this.$el.append(this.transactionTypesTree.render().el);
+        })
 
     });
 
