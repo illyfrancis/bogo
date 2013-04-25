@@ -28,9 +28,7 @@ define([
         },
 
         removeLocation: function () {
-            // this.model.collection.remove(this.model);
             this.options.locations.remove(this.model);   // check this!
-            this.dispose();
         }
     });
 
@@ -40,14 +38,13 @@ define([
 
         initialize: function () {
             // collection = Countries
-            this.listenTo(this.collection, 'add', this.appendLocation);
-            // this.listenTo(this.collection, 'remove', this.render);
+            this.listenTo(this.collection, 'add remove', this.render);
         },
 
         render: function () {
             this.disposeSubViews();
             this.$el.empty();
-            this.$el.html(this.template());
+            this.$el.html(this.template({empty: this.collection.length === 0}));
             this.collection.each(this.appendLocation, this);
             return this;
         },
@@ -57,7 +54,7 @@ define([
                 model: country,
                 locations: this.collection
             });
-            this.$('tbody').append(line.render().el);
+            this.$('.locations').append(line.render().el);
         }
     });
 

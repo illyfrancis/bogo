@@ -2,7 +2,9 @@
     <thead>
         <tr><th>Code</th><th>Description</th><th></th></tr>
     </thead>
-    <tbody>
+    <tbody class="locations">
+        <% if (empty) { %>
         <tr class="muted"><td colspan="3">No locations selected</td></tr>
+        <% } %>
     </tbody>
 </table>

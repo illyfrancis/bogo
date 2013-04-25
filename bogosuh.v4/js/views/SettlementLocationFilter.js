@@ -4,7 +4,7 @@ define([
     'backbone',
     'models/Country',
     'collections/Countries',
-    'views/SettlementLocations2',
+    'views/SettlementLocations',
     'text!templates/SettlementLocationFilter.html'
 ], function ($, _, Backbone, Country, Countries, SettlementLocations, tpl) {
 
