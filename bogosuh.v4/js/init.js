@@ -18,6 +18,7 @@ define([
     // $(function () {
     // });
 
+
     // disable cache (esp for IE)
     $.ajaxSetup({ cache: false });
 
@@ -52,5 +53,6 @@ define([
     app.bogo = bogo;
     app.repo = Repository;
     app.ev = EventBus;
+
     
 });

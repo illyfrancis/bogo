@@ -41,9 +41,6 @@ require.config({
     // urlArgs: 'bust=' + (new Date()).getTime()
 });
 
-// require(['init'], function (init) {
-//     // init();
-// });
-
-define(['scribble', 'init'], function () {});
-// define(['init'], function (init) {});
+require(['scribble', 'init'], function (init) {
+    // init();
+});
