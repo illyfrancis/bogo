@@ -1,8 +1,7 @@
 define([
-    'jquery',
     'underscore',
     'backbone'
-], function ($, _, Backbone) {
+], function (_, Backbone) {
 
     // modal
     var PreferencePopup = Backbone.View.extend({

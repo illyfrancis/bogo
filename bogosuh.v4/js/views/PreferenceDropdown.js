@@ -1,5 +1,4 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'apps/EventBus',
@@ -7,7 +6,7 @@ define([
     'models/Preference',
     'views/PreferenceItem',
     'text!templates/Preferences.html'
-], function ($, _, Backbone, EventBus, Repository, Preference, PreferenceItem, tpl) {
+], function (_, Backbone, EventBus, Repository, Preference, PreferenceItem, tpl) {
 
     var PreferenceDropdown = Backbone.View.extend({
 

@@ -1,10 +1,9 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'bootstrap',
     'text!templates/Progress.html'
-], function ($, _, Backbone, Bootstrap, tpl) {
+], function (_, Backbone, Bootstrap, tpl) {
 
     var Progress = Backbone.View.extend({
 

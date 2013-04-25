@@ -1,11 +1,10 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'apps/EventBus',
     'views/FilterStatusBadge',
     'text!templates/FilterStatusBar.html'
-], function ($, _, Backbone, EventBus, FilterStatusBadge, tpl) {
+], function (_, Backbone, EventBus, FilterStatusBadge, tpl) {
 
     var FilterStatusBar = Backbone.View.extend({
 

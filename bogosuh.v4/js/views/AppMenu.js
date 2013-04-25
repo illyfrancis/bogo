@@ -1,11 +1,10 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'apps/EventBus',
     'views/PreferenceDropdown',
     'text!templates/AppMenu.html'
-], function ($, _, Backbone, EventBus, PreferenceDropdown, tpl) {
+], function (_, Backbone, EventBus, PreferenceDropdown, tpl) {
 
     var AppMenu = Backbone.View.extend({
 

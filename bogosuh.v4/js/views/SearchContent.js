@@ -1,12 +1,11 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'apps/Repository',
     'collections/TransactionReport',
     'views/Progress',
     'views/SearchResult'
-], function ($, _, Backbone, Repository, TransactionReport, Progress, SearchResult) {
+], function (_, Backbone, Repository, TransactionReport, Progress, SearchResult) {
 
     var SearchContent = Backbone.View.extend({
 

@@ -1,10 +1,9 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'apps/EventBus',
     'text!templates/ReportColumnHeader.html'
-], function ($, _, Backbone, EventBus, tpl) {
+], function (_, Backbone, EventBus, tpl) {
 
     var ReportColumnHeader = Backbone.View.extend({
 

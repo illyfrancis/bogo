@@ -1,12 +1,11 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'apps/EventBus',
     'apps/Repository',
     'collections/SearchCriteria',
     'views/ViewFactory'
-], function ($, _, Backbone, EventBus, Repository, SearchCriteria, ViewFactory) {
+], function (_, Backbone, EventBus, Repository, SearchCriteria, ViewFactory) {
 
     var BogoApp = Backbone.View.extend({
 

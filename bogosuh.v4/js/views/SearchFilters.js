@@ -1,5 +1,4 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'bootstrap',
@@ -8,7 +7,7 @@ define([
     'views/FilterManager',
     'text!templates/SearchFilters.html',
     'text!templates/Alert.html'
-], function ($, _, Backbone, Bootstrap, EventBus, FilterSelector, FilterManager, tpl, tplAlert) {
+], function (_, Backbone, Bootstrap, EventBus, FilterSelector, FilterManager, tpl, tplAlert) {
 
     var SearchFilters = Backbone.View.extend({
 

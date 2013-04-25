@@ -1,10 +1,9 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'apps/EventBus',
     'text!templates/PreferenceItem.html'
-], function ($, _, Backbone, EventBus, tpl) {
+], function (_, Backbone, EventBus, tpl) {
 
     var PreferenceItem = Backbone.View.extend({
 

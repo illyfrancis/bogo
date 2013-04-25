@@ -1,10 +1,9 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'require',
     'text!templates/TreeItem.html'
-], function ($, _, Backbone, require, tpl) {
+], function (_, Backbone, require, tpl) {
 
     var TreeItem = Backbone.View.extend({
 

@@ -1,10 +1,9 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'views/FilterSelectorOption',
     'text!templates/FilterSelector.html'
-], function ($, _, Backbone, FilterSelectorOption, tpl) {
+], function (_, Backbone, FilterSelectorOption, tpl) {
 
     var FilterSelector = Backbone.View.extend({
         

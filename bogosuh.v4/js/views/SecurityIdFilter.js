@@ -1,10 +1,9 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'collections/Securities',
     'text!templates/SecurityIdFilter.html'
-], function ($, _, Backbone, Securities, tpl) {
+], function (_, Backbone, Securities, tpl) {
 
     var SecurityIdFilter = Backbone.View.extend({
 

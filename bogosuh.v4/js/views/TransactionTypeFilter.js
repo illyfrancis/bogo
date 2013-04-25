@@ -1,10 +1,9 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'apps/EventBus',
     'views/Tree'
-], function ($, _, Backbone, EventBus, Tree) {
+], function (_, Backbone, EventBus, Tree) {
 
     var TransactionTypeFilter = Backbone.View.extend({
 

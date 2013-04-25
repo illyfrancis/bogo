@@ -1,9 +1,8 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'text!templates/ReportColumnItem.html'
-], function ($, _, Backbone, tpl) {
+], function (_, Backbone, tpl) {
 
     var ReportColumnItem = Backbone.View.extend({
 

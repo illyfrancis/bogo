@@ -1,10 +1,9 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'views/DateRangeFilter',
     'text!templates/SettlementDateFilter.html'
-], function ($, _, Backbone, DateRangeFilter, tpl) {
+], function (_, Backbone, DateRangeFilter, tpl) {
 
     var SettlementDateFilter = Backbone.View.extend({
 

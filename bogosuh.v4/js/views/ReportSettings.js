@@ -1,12 +1,11 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     'bootstrap',
     'apps/EventBus',
     'views/ReportColumnSelector',
     'text!templates/ReportSettings.html'
-], function ($, _, Backbone, Bootstrap, EventBus, ReportColumnSelector, tpl) {
+], function (_, Backbone, Bootstrap, EventBus, ReportColumnSelector, tpl) {
 
     var ReportSettings = Backbone.View.extend({
 

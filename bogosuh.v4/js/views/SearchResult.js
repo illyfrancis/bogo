@@ -1,5 +1,4 @@
 define([
-    'jquery',
     'underscore',
     'backbone',
     // 'scrollbar',
@@ -7,7 +6,7 @@ define([
     'views/ReportColumnHeader',
     'views/ReportRow',
     'text!templates/SearchResult.html'
-], function ($, _, Backbone, EventBus, ReportColumnHeader, ReportRow, tpl) {
+], function (_, Backbone, EventBus, ReportColumnHeader, ReportRow, tpl) {
 
     /*
     // for search result display
