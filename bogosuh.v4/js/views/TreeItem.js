@@ -20,8 +20,7 @@ define([
 
         initialize: function () {
             // model = TreeNode
-            this.listenTo(this.model, 'change:selected', this.onSelfChange);
-            this.listenTo(this.model.get('subTree'), 'change:selected', this.onChildrenChange);
+            this.listenTo(this.model, 'change:selected', this.renderChange);
         },
 
         onClick: function (e) {
@@ -65,30 +64,9 @@ define([
             }
         },
 
-        onSelfChange: function () {
-            var selected = this.model.get('selected');
+        renderChange: function (model) {
+            var selected = model.attributes.selected;
             this.setCheckbox(selected);
-
-            // update self & descendants to the new selected state, the change
-            // event in descendants will cause themselves to redraw.
-            if (!_.isNull(selected)) {
-                _.each(this.model.descendants(), function (node) {
-                    node.set({ selected: selected });
-                });
-            }
-        },
-
-        onChildrenChange: function () {
-            var selected = false;
-
-            if (this.model.allDescendantsSelected()) {
-                selected = true;
-            } else if (this.model.anyDescendantsSelected()) {
-                selected = null;
-            }
-
-            this.setCheckbox(selected);
-            this.model.set({ selected: selected });
         },
 
         setCheckbox: function (selected) {

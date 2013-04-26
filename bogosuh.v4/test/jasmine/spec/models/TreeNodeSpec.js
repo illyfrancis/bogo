@@ -63,14 +63,8 @@ describe('Given TreeNode Model', function () {
             expect(treeNode.isLeaf()).toBeFalsy();
         });
 
-        it('has direct children and descendants', function () {
+        it('has children', function () {
             expect(treeNode.get('subTree').length).toBe(2);
-            expect(treeNode.descendants().length).toBe(3);
-        });
-
-        it('has no descendants selected', function () {
-            expect(treeNode.allDescendantsSelected()).toBeFalsy();
-            expect(treeNode.anyDescendantsSelected()).toBeFalsy();
         });
     });
 
@@ -127,7 +121,12 @@ describe('Given TreeNode Model', function () {
 
             events.listenTo(treeNode, 'change:selected', events.selectionChange);
         });
-        
+
+        it('should trigger "change:selected" if toggled', function () {
+            treeNode.toggle();
+            expect(doSelectionChange).toHaveBeenCalledOnce();
+        });
+
         it('should trigger "change:selected" if selection changes', function () {
             treeNode.set('selected', true);
             expect(doSelectionChange).toHaveBeenCalledOnce();
@@ -165,19 +164,72 @@ describe('Given TreeNode Model', function () {
             });
         });
 
-        it('has no descendants selected initially', function () {
-            expect(treeNode.allDescendantsSelected()).toBeFalsy();
-            expect(treeNode.anyDescendantsSelected()).toBeFalsy();
+        it('has updated on toggle leaf', function () {
+            var level21 = treeNode.get('subTree').at(0),
+                level22 = treeNode.get('subTree').at(1),
+                level31 = level21.get('subTree').at(0);
+
+            level31.toggle();
+
+            expect(level31.get('selected')).toBe(true);
+            expect(level21.get('selected')).toBe(true);
+            expect(level22.get('selected')).toBe(false);
+            expect(treeNode.get('selected')).toBeNull();
         });
 
-        it('has some descendants selected', function () {
-            var level21 = treeNode.get('subTree').at(0);
-            
-            level21.set('selected', true);
+        it('has updated on toggle middle', function () {
+            var level21 = treeNode.get('subTree').at(0),
+                level22 = treeNode.get('subTree').at(1),
+                level31 = level21.get('subTree').at(0);
 
-            expect(level21.get('name')).toBe('level 2.1');
-            expect(treeNode.allDescendantsSelected()).toBeFalsy();
-            expect(treeNode.anyDescendantsSelected()).toBeTruthy();
+            level21.toggle();
+
+            expect(level31.get('selected')).toBe(true);
+            expect(level21.get('selected')).toBe(true);
+            expect(level22.get('selected')).toBe(false);
+            expect(treeNode.get('selected')).toBeNull();
+        });
+
+        it('has updated on toggle both middles', function () {
+            var level21 = treeNode.get('subTree').at(0),
+                level22 = treeNode.get('subTree').at(1),
+                level31 = level21.get('subTree').at(0);
+
+            level21.toggle();
+            level22.toggle();
+
+            expect(level31.get('selected')).toBe(true);
+            expect(level21.get('selected')).toBe(true);
+            expect(level22.get('selected')).toBe(true);
+            expect(treeNode.get('selected')).toBe(true);
+        });
+
+        it('has updated on toggle middle and leaf', function () {
+            var level21 = treeNode.get('subTree').at(0),
+                level22 = treeNode.get('subTree').at(1),
+                level31 = level21.get('subTree').at(0);
+
+            level31.toggle();
+            level22.toggle();
+
+            expect(level31.get('selected')).toBe(true);
+            expect(level21.get('selected')).toBe(true);
+            expect(level22.get('selected')).toBe(true);
+            expect(treeNode.get('selected')).toBe(true);
+        });
+
+        it('has updated on toggle leaf then toggle middle', function () {
+            var level21 = treeNode.get('subTree').at(0),
+                level22 = treeNode.get('subTree').at(1),
+                level31 = level21.get('subTree').at(0);
+
+            level31.toggle();
+            level21.toggle();
+
+            expect(level31.get('selected')).toBe(false);
+            expect(level21.get('selected')).toBe(false);
+            expect(level22.get('selected')).toBe(false);
+            expect(treeNode.get('selected')).toBe(false);
         });
 
         it('has all descendants selected', function () {
@@ -185,23 +237,26 @@ describe('Given TreeNode Model', function () {
                 level22 = treeNode.get('subTree').at(1),
                 level31 = level21.get('subTree').at(0);
 
-            level21.set('selected', true);
-            level22.set('selected', true);
-            level31.set('selected', true);
-            
-            expect(treeNode.allDescendantsSelected()).toBeTruthy();
-            expect(treeNode.anyDescendantsSelected()).toBeTruthy();
+            treeNode.toggle();
+
+            expect(level31.get('selected')).toBe(true);
+            expect(level21.get('selected')).toBe(true);
+            expect(level22.get('selected')).toBe(true);
+            expect(treeNode.get('selected')).toBe(true);
         });
 
-        xit('has all descendants selected', function () {
-            treeNode.set('selected', true);
-            expect(treeNode.allDescendantsSelected()).toBeTruthy();
-        });
+        it('has no descendants selected', function () {
+            var level21 = treeNode.get('subTree').at(0),
+                level22 = treeNode.get('subTree').at(1),
+                level31 = level21.get('subTree').at(0);
 
-        xit('has no descendants selected', function () {
-            treeNode.set('selected', false);
-            expect(treeNode.allDescendantsSelected()).toBeFalsy();
-            expect(treeNode.anyDescendantsSelected()).toBeFalsy();
+            treeNode.toggle();
+            treeNode.toggle();
+
+            expect(level31.get('selected')).toBe(false);
+            expect(level21.get('selected')).toBe(false);
+            expect(level22.get('selected')).toBe(false);
+            expect(treeNode.get('selected')).toBe(false);
         });
 
     });
