@@ -21,17 +21,11 @@ define([
         initialize: function () {
             // model = TreeNode
             this.listenTo(this.model, 'change:selected', this.onSelfChange);
-            this.listenTo(this.model.subTree, 'childChange', this.onChildrenChange);
+            this.listenTo(this.model.get('subTree'), 'change:selected', this.onChildrenChange);
         },
 
         onClick: function (e) {
             this.model.toggle();
-            // for events to trickle up.
-            this.notifyParent();
-        },
-
-        notifyParent: function () {
-            this.model.trigger('childChange');
         },
 
         toggleFolder: function () {
@@ -62,7 +56,7 @@ define([
             if (!this.model.isLeaf()) {
                 var Tree = require('views/Tree');
                 var subTreeView = this.createSubView(Tree, {
-                    collection: this.model.subTree
+                    collection: this.model.get('subTree')
                 });
 
                 parent.$el.append(subTreeView.render().el);
@@ -73,34 +67,33 @@ define([
 
         onSelfChange: function () {
             var selected = this.model.get('selected');
-            this.setCheckbox(selected, false);
+            this.setCheckbox(selected);
 
-            // update self & descendants to the new selected state, the change event in descendants will cause themselves to redraw.
-            _.each(this.model.descendants(), function (node) {
-                node.set({selected: selected});
-            });
+            // update self & descendants to the new selected state, the change
+            // event in descendants will cause themselves to redraw.
+            if (!_.isNull(selected)) {
+                _.each(this.model.descendants(), function (node) {
+                    node.set({ selected: selected });
+                });
+            }
         },
 
         onChildrenChange: function () {
-            var selected, indeterminate;
+            var selected = false;
 
             if (this.model.allDescendantsSelected()) {
                 selected = true;
-                indeterminate = false;
             } else if (this.model.anyDescendantsSelected()) {
-                selected = false;
-                indeterminate = true;
-            } else {
-                selected = false;
-                indeterminate = false;
+                selected = null;
             }
 
-            this.setCheckbox(selected, indeterminate);
-            this.model.set({ selected: selected }, { silent: true });
-            this.notifyParent();
+            this.setCheckbox(selected);
+            this.model.set({ selected: selected });
         },
 
-        setCheckbox: function (selected, indeterminate) {
+        setCheckbox: function (selected) {
+            var indeterminate = _.isNull(selected) ? true : false;
+            selected = _.isNull(selected) ? false : selected;
             this.$el.find('input:checkbox').prop('checked', selected).prop('indeterminate', indeterminate);
         }
 

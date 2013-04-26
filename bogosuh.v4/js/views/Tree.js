@@ -25,13 +25,6 @@ define([
             itemView.appendTo(this);
         },
 
-        refresh: function () {
-            // trigger child change event to force redraw on parents.
-            _.each(this.collection.leaves(), function (item) {
-                item.trigger('childChange');
-            });
-        },
-
         collapse: function () {
             this.$el.addClass('hide');
         }

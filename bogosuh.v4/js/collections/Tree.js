@@ -14,7 +14,7 @@ define(['underscore', 'backbone', 'models/TreeNode'], function (_, Backbone, Tre
                 if (node.isLeaf()) {
                     leafNodes.push(node);
                 } else {
-                    node.subTree.leaves(leafNodes);
+                    node.get('subTree').leaves(leafNodes);
                 }
             });
             return leafNodes;
@@ -26,7 +26,6 @@ define(['underscore', 'backbone', 'models/TreeNode'], function (_, Backbone, Tre
                 selection = _.contains(values, node.get('value'));
                 if (node.get('selected') !== selection) {
                     node.toggle();
-                    node.trigger('childChange');
                 }
             });
         },

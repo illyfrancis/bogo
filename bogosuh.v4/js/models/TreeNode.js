@@ -14,7 +14,8 @@ define(['underscore', 'backbone', 'require'], function (_, Backbone, require) {
             var Tree = require('collections/Tree');
 
             // replace the list with collection.
-            this.subTree = new Tree(this.get('list'));
+            var subTree = new Tree(this.get('list'));
+            this.set('subTree', subTree);
             this.unset('list');
         },
 
@@ -23,7 +24,7 @@ define(['underscore', 'backbone', 'require'], function (_, Backbone, require) {
         },
 
         isLeaf: function () {
-            return this.subTree.length === 0;
+            return this.get('subTree').length === 0;
         },
 
         descendants: function (offspring) {
@@ -31,7 +32,8 @@ define(['underscore', 'backbone', 'require'], function (_, Backbone, require) {
                 offspring = [];
             }
 
-            this.subTree.each(function (node) {
+            var subTree = this.get('subTree');
+            subTree.each(function (node) {
                 offspring.push(node);
                 node.descendants(offspring);
             });

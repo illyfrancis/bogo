@@ -9,7 +9,7 @@ define([
 
         initialize: function () {
             // model = TransactionTypeCriterion
-            this.listenTo(this.model.transactionTypes, 'childChange', this.filterChanged);
+            this.listenTo(this.model.transactionTypes, 'change:selected', this.filterChanged);
 
             this.transactionTypesTree = this.createSubView(Tree, {
                 collection: this.model.transactionTypes
