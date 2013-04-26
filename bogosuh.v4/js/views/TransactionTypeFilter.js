@@ -14,6 +14,8 @@ define([
             this.transactionTypesTree = this.createSubView(Tree, {
                 collection: this.model.transactionTypes
             });
+
+            this.renderOnce();  // need to have DOM when hydrate
         },
 
         filterChanged: function () {
@@ -31,7 +33,6 @@ define([
 
         render: function () {
             this.renderOnce();
-            this.transactionTypesTree.refresh();
             return this;
         },
 
