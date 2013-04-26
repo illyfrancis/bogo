@@ -15,6 +15,7 @@ define(['underscore', 'backbone', 'require'], function (_, Backbone, require) {
 
             // replace the list with collection.
             this.subTree = new Tree(this.get('list'));
+            this.unset('list');
             // set itself as parent on the subTree.
             this.subTree.invoke('setParent', this);
         },
