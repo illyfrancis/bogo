@@ -16,34 +16,14 @@ define(['underscore', 'backbone', 'require'], function (_, Backbone, require) {
             // replace the list with collection.
             this.subTree = new Tree(this.get('list'));
             this.unset('list');
-            // set itself as parent on the subTree.
-            this.subTree.invoke('setParent', this);
         },
 
         toggle: function () {
             this.set('selected', !this.attributes.selected);
         },
 
-        setParent: function (parent) {
-            if (parent) {
-                this.parent = parent;
-            }
-        },
-
         isLeaf: function () {
             return this.subTree.length === 0;
-        },
-
-        parents: function (ancestor) {
-            if (ancestor === undefined) {
-                ancestor = [];
-            }
-
-            if (this.parent) {
-                ancestor.push(this.parent);
-                this.parent.parents(ancestor);
-            }
-            return ancestor;
         },
 
         descendants: function (offspring) {
