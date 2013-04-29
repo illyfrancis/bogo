@@ -54,6 +54,9 @@ define([
         },
 
         parsePreference: function (preference) {
+            // fetched successfully, can select this one in the dropdown
+            var preferences = Repository.preferences();
+            preferences.select(preference);
 
             var data = JSON.parse(preference.get('values'));
 

@@ -26,10 +26,6 @@ define([
         },
 
         selectItem: function () {
-            this.model.collection.clearSelection({ silent:true });
-            this.model.set('selected', true);
-
-            // trigger with preference id
             EventBus.trigger('loadPreference', this.model.id);
         },
 

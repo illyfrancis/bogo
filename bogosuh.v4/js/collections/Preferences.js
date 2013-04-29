@@ -24,7 +24,9 @@ define([
 
         select: function (preference) {
             this.clearSelection({silent: true});
-            preference.set('selected', true);
+            // preference may not be contained
+            var model = this.get(preference.id);
+            model.set('selected', true);
         }
 
     });
