@@ -1,0 +1,16 @@
+  <button class="btn preference" title="Save Preference">
+    <% if ( selected ) { %>
+      <i class="icon-star"></i>
+    <% } else { %>
+      <i class="icon-star-empty"></i>
+    <% } %>
+  </button>
+  <button class="btn dropdown-toggle" data-toggle="dropdown" title="More...">
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <% if ( !empty ) { %>
+    <li class="divider"></li>
+    <% } %>
+    <li class="none"><a tabindex="-1">None</a></li>
+  </ul>

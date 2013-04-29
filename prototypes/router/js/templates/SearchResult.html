@@ -1,0 +1,22 @@
+<% if (total <= 0) {%>
+<div>None</div>
+<%} else {%>
+<div class="report" style="width:100%; overflow-x:auto">
+<table class="table table-condensed table-striped table-hover table-bordered">
+    <thead class="report-header">
+        <tr></tr>
+    </thead>
+    <tbody class="report-body">
+    </tbody>
+</table>
+</div>
+<div class="report-footer">
+    <div class="pagination pagination-centered">
+        <ul>
+            <li><a class="prev">&laquo; Prev</a></li>
+            <li class="active"><a><%=current%> of <%=total%></a></li>
+            <li><a class="next">Next &raquo;</a></li>
+        </ul>
+    </div>
+</div>
+<%}%>
