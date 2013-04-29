@@ -23,9 +23,7 @@ define([
             // collection = Preferences...
             this.collection = Repository.preferences();
 
-            this.listenTo(this.collection, 'destroy', this.render);
-            this.listenTo(this.collection, 'change', this.render);
-            this.listenTo(this.collection, 'add', this.render);
+            this.listenTo(this.collection, 'change add destroy', this.render);
         },
 
         render: function () {
@@ -76,12 +74,11 @@ define([
                 selected: true
             });
 
-
             if (preference) {
                 console.log('save.. existing ' + preference.get('name'));
                 EventBus.trigger('savePreference', preference.id);
             } else {
-                console.log('save nuew');
+                console.log('save new');
                 EventBus.trigger('savePreference');
             }
 

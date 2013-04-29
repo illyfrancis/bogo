@@ -29,6 +29,7 @@ define([
 
         selectItem: function () {
             console.log('selected : ' + this.model.get('name'));
+
             // TODO - confirm if change, modal etc
             this.model.collection.each(function (item) {
                 item.set('selected', false, { silent:true });
@@ -41,11 +42,6 @@ define([
 
         render: function () {
             this.$el.html(this.template(this.model.toJSON()));
-
-            if (this.model.get('selected')) {
-                this.$('i.selected').addClass('icon-star');
-            }
-
             return this;
         }
 

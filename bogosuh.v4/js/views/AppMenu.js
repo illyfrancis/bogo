@@ -30,6 +30,8 @@ define([
 
             var preferenceDropdown = this.createSubView(PreferenceDropdown);
             this.$('.preferences').replaceWith(preferenceDropdown.render().el);
+            // preferenceDropdown.setElement(this.$('.preferences'));
+            // preferenceDropdown.render();
 
             return this;
         },
