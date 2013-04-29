@@ -1,0 +1,23 @@
+<div class="modal hide preferences-popup">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4>Preferences</h4>
+    </div>
+    <div class="modal-body preferences-popup-body">
+        <div>
+            <form class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Delete preference?</label>
+                    <div class="controls">
+                        <input class="preference-name" type="text" placeholder="Name" value="<%= name %>" disabled>
+                        <span class="help-inline"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn cancel-delete"><i class=""></i> Cancel</button>
+        <button class="btn btn-primary delete"><i class="icon-trash icon-white"></i> Delete</button>
+    </div>
+</div>

@@ -64,7 +64,7 @@ define([
             reportSchema.hydrate(data.schema);
         },
 
-        savePreference: function (id) {
+        savePreference: function (preference) {
             // take current snapshot
             console.log("Mediator: savePreference");
 
@@ -79,20 +79,10 @@ define([
                 schema: schema.schema
             };
 
-            var preference = {};
-            if (id) {
-                var preferences = Repository.preferences();
-                preference = preferences.get(id);
-            } else {
-                preference = new Preference();
-            }
-
             preference.set({
-                name: 'pref:' + (new Date()).getTime(),
                 values: JSON.stringify(data)
             });
 
-            // somehow concat and turn into preference.
             Repository.savePreference(preference);
 
         },

@@ -28,7 +28,19 @@ define(['backbone'], function (Backbone) {
 
         idAttribute: '_id', // map to mongo's id
 
-        urlRoot: '/api/preferences'
+        urlRoot: '/api/preferences',
+
+        validate: function (attributes, options) {
+            // name must exist
+            var name = attributes.name;
+            if (_.isUndefined(name) || _.isNull(name) || name.length === 0) {
+                return 'Please enter name';
+            }
+
+            if (name.length >= 80) {
+                return 'Too long';
+            }
+        }
 
         // nothing to parse..?
 /*        parse: function (response, options) {

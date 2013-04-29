@@ -244,15 +244,10 @@ define([
             // callback.call(context);
 
             var preferences = this.preferences();
-            // preference.save(null, {
-            //     success: function (model, response, options) {
-            //         model.set('selected', true);
-            //         preferences.add(model);
-            //     }
-            // });
-            preference.save('selected', true, {
+            preference.save({}, {
                 success: function (model, response, options) {
                     preferences.add(model);
+                    preferences.select(model);
                 }
             });
 

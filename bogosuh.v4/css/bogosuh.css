@@ -85,3 +85,7 @@ li.tree span {
 .report > table {
   margin-bottom: 0;
 }
+
+.preferences-popup-body {
+  min-height: 0;
+}

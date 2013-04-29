@@ -21,19 +21,12 @@ define([
         },
 
         removeItem: function (e) {
-            console.log('remove item : ' + this.model.get('name'));
             e.stopPropagation();
-            // TODO - confirm modal for yes/no
-            this.model.destroy();
+            EventBus.trigger('confirmDelete', this.model.id);
         },
 
         selectItem: function () {
-            console.log('selected : ' + this.model.get('name'));
-
-            // TODO - confirm if change, modal etc
-            this.model.collection.each(function (item) {
-                item.set('selected', false, { silent:true });
-            });
+            this.model.collection.clearSelection({ silent:true });
             this.model.set('selected', true);
 
             // trigger with preference id

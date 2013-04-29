@@ -22,8 +22,7 @@ define([
         initialize: function () {
             // collection = Preferences...
             this.collection = Repository.preferences();
-
-            this.listenTo(this.collection, 'change add destroy', this.render);
+            this.listenTo(this.collection, 'change:selected add destroy', this.render);
         },
 
         render: function () {
@@ -31,7 +30,7 @@ define([
 
             this.$el.empty();
             this.$el.html(this.template({
-                selected: this.hasSelection(),
+                selected: this.collection.hasSelection(),
                 empty: this.collection.isEmpty()
             }));
 
@@ -52,9 +51,7 @@ define([
             console.log('clearSelection');
 
             // clear selection
-            this.collection.each(function (item) {
-                item.set('selected', false, { silent:true });
-            });
+            this.collection.clearSelection({ silent:true });
 
             // trigger 'reset'
             EventBus.trigger('clearPreference');
@@ -62,26 +59,12 @@ define([
             this.render();
         },
 
-        hasSelection: function () {
-            // TODO - move this into this.collection class
-            return this.collection.any(function (item) {
-                return item.get('selected') === true;
-            });
-        },
-
         savePreference: function () {
             var preference = this.collection.findWhere({
                 selected: true
             });
 
-            if (preference) {
-                console.log('save.. existing ' + preference.get('name'));
-                EventBus.trigger('savePreference', preference.id);
-            } else {
-                console.log('save new');
-                EventBus.trigger('savePreference');
-            }
-
+            EventBus.trigger('confirmSave', preference);
         }
 
     });
