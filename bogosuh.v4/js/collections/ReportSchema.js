@@ -68,6 +68,8 @@ define([
                 }
             }, this);
 
+            // need to sort itself
+            this.sort();
             this.trigger('change');
         },
 
