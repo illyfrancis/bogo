@@ -68,7 +68,7 @@ define([
                 }
             }, this);
 
-            // need to sort itself
+            // need to sort itself after jigging the position
             this.sort();
             this.trigger('change');
         },
