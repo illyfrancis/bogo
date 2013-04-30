@@ -45,22 +45,20 @@ define([
         },
 
         applyPreference: function (id) {
-
             if (_.isUndefined(id)) {
-                id = 'none';
+                // TODO - error
+            } else {
+                Repository.getPreference(id, this._hydrate, this);
             }
-
-            Repository.getPreference(id, this.parsePreference, this);
         },
 
-        parsePreference: function (preference) {
+        _hydrate: function (preference) {
             // fetched successfully, can select this one in the dropdown
             var preferences = Repository.preferences();
             preferences.select(preference);
 
-            var data = JSON.parse(preference.get('values'));
-
-            var searchCriteria = Repository.searchCriteria(),
+            var data = JSON.parse(preference.get('values')),
+                searchCriteria = Repository.searchCriteria(),
                 reportSchema = Repository.reportSchema();
 
             searchCriteria.hydrate(data.criteria);
@@ -68,26 +66,17 @@ define([
         },
 
         savePreference: function (preference) {
-            // take current snapshot
-            console.log("Mediator: savePreference");
-
-            // need access to searchCriteria & reportSchema. Let's assume Repository is defined and provided.
             var searchCriteria = Repository.searchCriteria(),
                 reportSchema = Repository.reportSchema();
 
-            var criteria = searchCriteria.preserve();
-            var schema = reportSchema.preserve();
-            var data = {
-                criteria: criteria.criteria,    // review this, maybe drop 'criteria' from return value and just return array.
-                schema: schema.schema
-            };
-
             preference.set({
-                values: JSON.stringify(data)
+                values: JSON.stringify({
+                    criteria: searchCriteria.preserve(),
+                    schema: reportSchema.preserve()
+                })
             });
 
             Repository.savePreference(preference);
-
         },
 
         clearPreference: function () {
@@ -96,8 +85,6 @@ define([
 
             this.resetReportSchema();
         },
-
-        // what about delete preference? are we defining preference maint screen here?? seems wrong!
 
         resetReportSchema: function () {
             // reload report schema

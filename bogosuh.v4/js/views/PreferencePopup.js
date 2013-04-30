@@ -44,6 +44,7 @@ define([
             }, this.model.toJSON())));
 
             this.show();
+            this.$('.preference-name').focus();
         },
 
         saveNew: function () {

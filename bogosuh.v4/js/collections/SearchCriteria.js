@@ -66,7 +66,7 @@ define(['underscore', 'backbone', 'models/Criterion'], function (_, Backbone, Cr
                 criteria.push(criterion.preserve());
             });
 
-            return { 'criteria' : criteria };
+            return criteria;
         },
 
         reset: function () {

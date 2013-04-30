@@ -82,7 +82,7 @@ define([
                 });
             });
 
-            return { 'schema': schema };
+            return schema;
         },
 
         queryFields: function () {
