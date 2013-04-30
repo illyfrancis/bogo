@@ -61,7 +61,7 @@ define([
                 reset: true,
                 success: function () {
                     console.log('Accounts loaded');
-                    accounts.init();
+                    // accounts.init();
                     accounts.pager();
                     // debugger;
                     options = options || {};

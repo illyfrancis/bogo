@@ -8,7 +8,8 @@ require.config({
         'bootstrap': '../lib/bootstrap',
         'underscore': '../lib/underscore-1.4.4',
         'backbone': '../lib/backbone-1.0.0',
-        'backbone.paginator': '../lib/backbone.paginator',
+        'backbone.paginator': '../lib/backbone.paginator-0.7.0',
+        // 'backbone.paginator': '../lib/backbone.paginator',
         'moment': '../lib/moment',
         'text': '../lib/require/text',
         // 'scrollbar': '../lib/jquery.mCustomScrollbar'
