@@ -63,7 +63,7 @@ require(['underscore', 'jquery', 'jasmine-html'], function (_, $, jasmine) {
     specs.push('spec/models/DateRangeSpec');
     specs.push('spec/models/AccountCriteriaSpec');
     specs.push('spec/models/ReportCriteriaSpec');
-    specs.push('spec/collections/PaginatedAccountsSpec');
+    specs.push('spec/collections/AccountsSpec');
     // specs.push('spec/models/TodoSpec');
     // specs.push('spec/views/FiltersSpec');
 

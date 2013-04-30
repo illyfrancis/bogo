@@ -71,7 +71,7 @@ require(['underscore', 'jasmine-html', 'sinon', 'jasmine-sinon', 'moment'], func
     specs.push('spec/models/DateRangeSpec');
     specs.push('spec/models/AccountCriterionSpec');
     specs.push('spec/collections/ReportSchemaSpec');
-    specs.push('spec/collections/PaginatedAccountsSpec');
+    specs.push('spec/collections/AccountsSpec');
 
     require(specs, function () {
         jasmineEnv.execute();

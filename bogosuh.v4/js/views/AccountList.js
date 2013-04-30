@@ -7,7 +7,7 @@ define([
     var AccountList = Backbone.View.extend({
 
         initialize: function () {
-            // collection = PaginatedAccounts
+            // collection = Accounts
             this.listenTo(this.collection, 'reset', this.render);
         },
 

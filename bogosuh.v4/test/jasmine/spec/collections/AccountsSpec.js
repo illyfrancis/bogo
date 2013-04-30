@@ -1,14 +1,14 @@
-describe('Given PaginatedAccounts Collection', function () {
+describe('Given Accounts Collection', function () {
 
-    var PaginatedAccounts, Account;
+    var Accounts, Account;
 
     beforeEach(function () {
-        if (_.isUndefined(PaginatedAccounts)) {
+        if (_.isUndefined(Accounts)) {
             var done = false;
 
-            require(['collections/PaginatedAccounts', 'models/Account'
-                ], function (paginatedAccounts, account) {
-                PaginatedAccounts = paginatedAccounts;
+            require(['collections/Accounts', 'models/Account'
+                ], function (accounts, account) {
+                Accounts = accounts;
                 Account = account;
                 done = true;
             });
@@ -21,7 +21,7 @@ describe('Given PaginatedAccounts Collection', function () {
 
     describe('when initialize', function () {
         it('must invoke init first', function () {
-            var accounts = new PaginatedAccounts();
+            var accounts = new Accounts();
 
             expect(accounts.firstPage).not.toBeDefined();
             expect(accounts.currentPage).not.toBeDefined();
@@ -37,7 +37,7 @@ describe('Given PaginatedAccounts Collection', function () {
         });
 
         it('should default to predefined configuration', function () {
-            var accounts = new PaginatedAccounts(),
+            var accounts = new Accounts(),
                 config = accounts.paginator_ui;
 
             accounts.init();
@@ -53,13 +53,13 @@ describe('Given PaginatedAccounts Collection', function () {
         var accounts, accountOne, accountTwo, accountThree, accountFour;
 
         beforeEach(function () {
-            accounts = new PaginatedAccounts();
+            accounts = new Accounts();
             accountOne = new Account({name:"one"});
             accountTwo = new Account();
             accountThree = new Account();
             accountFour = new Account();
 
-            accounts.init();
+            // accounts.init(); <--- no longer needed after upgrade to 0.7.0
             accounts.reset([accountOne, accountTwo, accountThree, accountFour]);
             accounts.pager();
         });
@@ -130,13 +130,13 @@ describe('Given PaginatedAccounts Collection', function () {
         var accounts, accountOne, accountTwo, accountThree, accountFour;
 
         beforeEach(function () {
-            accounts = new PaginatedAccounts();
+            accounts = new Accounts();
             accountOne = new Account();
             accountTwo = new Account();
             accountThree = new Account();
             accountFour = new Account();
 
-            accounts.init();
+            accounts.init(); //<--- no longer needed after upgrade to 0.7.0
             accounts.reset([accountOne, accountTwo, accountThree, accountFour]);
             accounts.pager();
         });
@@ -212,13 +212,13 @@ describe('Given PaginatedAccounts Collection', function () {
         var accounts, accountOne, accountTwo, accountThree, accountFour;
 
         beforeEach(function () {
-            accounts = new PaginatedAccounts();
+            accounts = new Accounts();
             accountOne = new Account({name: "One", number: "111"});
             accountTwo = new Account({name: "Two", number: "222"});
             accountThree = new Account({name: "Three", number: "333"});
             accountFour = new Account({name: "Four", number: "444"});
 
-            accounts.init();
+            // accounts.init(); <--- no longer needed after upgrade to 0.7.0
             accounts.reset([accountOne, accountTwo, accountThree, accountFour]);
             accounts.pager();
         });
@@ -257,13 +257,13 @@ describe('Given PaginatedAccounts Collection', function () {
         var accounts, accountOne, accountTwo, accountThree, accountFour;
 
         beforeEach(function () {
-            accounts = new PaginatedAccounts();
+            accounts = new Accounts();
             accountOne = new Account({name: "One", number: "111"});
             accountTwo = new Account({name: "Two", number: "222"});
             accountThree = new Account({name: "Three", number: "333"});
             accountFour = new Account({name: "Four", number: "444"});
 
-            accounts.init();
+            // accounts.init(); <--- no longer needed after upgrade to 0.7.0
             accounts.reset([accountOne, accountTwo, accountThree, accountFour]);
             accounts.pager();
         });

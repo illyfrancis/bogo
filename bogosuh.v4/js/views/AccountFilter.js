@@ -21,16 +21,16 @@ define([
 
         initialize: function () {
             // model = AccountCriterion
-            this.paginatedAccounts = this.model.accounts;
+            this.accounts = this.model.accounts;
 
-            this.listenTo(this.paginatedAccounts, 'change:selected', this.filterChanged);
+            this.listenTo(this.accounts, 'change:selected', this.filterChanged);
 
             this.accountList = this.createSubView(AccountList, {
-                collection: this.paginatedAccounts
+                collection: this.accounts
             });
 
             this.paginator = this.createSubView(AccountPaginator, {
-                collection: this.paginatedAccounts
+                collection: this.accounts
             });
         },
 
@@ -56,7 +56,7 @@ define([
         filterChanged: function () {
             // decide if filter value change should be tracked by SearchFilter, if so trigger 'filter change' event.
             if (this.model.get('isApplied')) {
-                if (!this.paginatedAccounts.hasSelection()) {
+                if (!this.accounts.hasSelection()) {
                     // remove this filter when there's no selection.
                     this.model.removeFilter();
                     EventBus.trigger('filter:remove', this.model);
@@ -80,7 +80,7 @@ define([
             // the model directly. The updates to the collection is silent so it will not trigger
             // the change events.
             this.accountList.updateSelections(checked);
-            this.paginatedAccounts.selectAll(checked);
+            this.accounts.selectAll(checked);
         },
 
         filterAccounts: function () {
@@ -110,7 +110,7 @@ define([
             // filter by selection
             fieldFilters.push({ field: 'selected', type: 'equalTo', value: selected });
 
-            this.paginatedAccounts.setFieldFilter(fieldFilters);
+            this.accounts.setFieldFilter(fieldFilters);
 
             // TODO - how to remove filter? the lib doesn't provide a function for this.
             // one way is to replace .models with .originalModels before starting..

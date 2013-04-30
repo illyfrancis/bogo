@@ -1,17 +1,17 @@
 describe('Given AccountCriterion Model', function () {
 
-    var AccountCriterion, PaginatedAccounts;
+    var AccountCriterion, Accounts;
 
     beforeEach(function () {
-        if (_.isUndefined(PaginatedAccounts)) {
+        if (_.isUndefined(Accounts)) {
             var done = false;
 
             require([
                 'models/AccountCriterion',
-                'collections/PaginatedAccounts'
-            ], function (accountCriterion, paginatedAccounts) {
+                'collections/Accounts'
+            ], function (accountCriterion, accounts) {
                 AccountCriterion = accountCriterion;
-                PaginatedAccounts = paginatedAccounts;
+                Accounts = accounts;
                 done = true;
             });
 

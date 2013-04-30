@@ -3,13 +3,13 @@ define([
     'backbone',
     'underscore',
     'models/Preference',
-    'collections/PaginatedAccounts',
+    'collections/Accounts',
     'collections/ReportSchema',
     'collections/Tree',
     'collections/Preferences',
     'collections/SearchCriteria',
     'collections/TransactionReport'
-], function (Backbone, _, Preference, PaginatedAccounts, ReportSchema, Tree, Preferences, SearchCriteria, TransactionReport) {
+], function (Backbone, _, Preference, Accounts, ReportSchema, Tree, Preferences, SearchCriteria, TransactionReport) {
 
     var Repository = {
 
@@ -41,7 +41,7 @@ define([
 
         accounts: function () {
             if (!this._accounts) {
-                this._accounts = new PaginatedAccounts();
+                this._accounts = new Accounts();
             }
 
             return this._accounts;
