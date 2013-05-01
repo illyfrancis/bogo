@@ -9,8 +9,10 @@
                 <div class="control-group">
                     <label class="control-label">Delete preference?</label>
                     <div class="controls">
-                        <input class="preference-name" type="text" placeholder="Name" value="<%= name %>" disabled>
-                        <span class="help-inline"></span>
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-star"></i></span>
+                            <input class="preference-name" type="text" placeholder="Name" value="<%= name %>" disabled>
+                        </div>                        
                     </div>
                 </div>
             </form>

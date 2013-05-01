@@ -10,7 +10,10 @@
                 <div class="control-group">
                     <label class="control-label"><%= labeltext %></label>
                     <div class="controls">
-                        <input class="preference-name" type="text" placeholder="Name" value="<%= name %>" <%= isNew? '' : 'disabled' %>>
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-star"></i></span>
+                            <input class="preference-name" type="text" placeholder="Name" value="<%= name %>" <%= isNew? '' : 'disabled' %>>
+                        </div>                        
                         <span class="help-inline"></span>
                     </div>
                 </div>
@@ -22,6 +25,6 @@
         <% if (!isNew) { %>
         <button class="btn save-new"><i class=""></i> Save New</button>
         <% } %>
-        <button class="btn btn-primary save"><i class="icon-star icon-white"></i> <%= isNew ? 'Save': 'Update' %></button>
+        <button class="btn btn-primary save"><i class="icon-ok icon-white"></i> <%= isNew ? 'Save': 'Update' %></button>
     </div>
 </div>
