@@ -63,7 +63,9 @@ define([
 
         collapseFilterStatus: function () {
             this.$('.filter-status').toggle();
+            // this.$('.filter-collapse').toggleClass('icon-chevron-up icon-chevron-down');
             this.$('.filter-collapse').toggleClass('icon-circle-arrow-up icon-circle-arrow-down');
+
         },
 
         loadPreference: function () {

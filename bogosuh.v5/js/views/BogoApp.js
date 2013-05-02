@@ -38,6 +38,7 @@ define([
             this.$el.append(this.searchFilters.render().el);
             this.$el.append(this.searchContent.render().el);
 
+            // TODO - move this to somewehre more approp.
             var preferencePopup = this.createSubView(PreferencePopup);
             this.$el.append(preferencePopup.render().el);
 

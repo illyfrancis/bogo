@@ -11,7 +11,7 @@ define([
 
         tagName: 'div',
 
-        className: 'search-content content-fluid',
+        className: 'search-content container-fluid',
 
         initialize: function (options) {
             // no model or collection

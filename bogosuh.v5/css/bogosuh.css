@@ -32,6 +32,21 @@ th .caret, th .caron {
   content: "";
 }
 
+/* for account search */
+.account-search {
+  line-height: 16px;
+}
+
+.account-list table.table {
+/*  font-size: 11px;*/
+}
+
+/*.account-list .table th, .account-list .table td {
+  */
+.filter-content .table th, .account-list .table td {
+  line-height: 16px;
+}
+
 /* for search result */
 .search-result table.table {
   font-size: 11px;
@@ -43,7 +58,7 @@ th .caret, th .caron {
   background-color: #eee;
 }
 
-.search-content {
+._search-content {
   margin: 0 20px;
 }
 
@@ -62,9 +77,17 @@ li.tree span {
   overflow-y: auto;
 }
 
+/* modal top position */
+.modal{
+  top:5%;
+}
+.modal.fade.in{
+  top:5%;
+}
+
 /* for filter modal */
 .modal-body {
-  min-height: 160px;
+  min-height: 200px;
 }
 
 /* for filter content */
@@ -96,6 +119,7 @@ li.tree span {
 
 .search-menu {
   margin-top: 10px;
+  min-width: 480px;
 }
 .filters-list {
   margin-top: 10px;
