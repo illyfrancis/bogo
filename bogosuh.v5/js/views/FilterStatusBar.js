@@ -10,13 +10,9 @@ define([
 
         tagName: 'div',
 
-        className: 'filter-bar',
+        className: 'filters-list',
 
         template: _.template(tpl),
-
-        events: {
-            'click .add-filters': 'showFilters'
-        },
 
         initialize: function () {
             // collection = SearchCriteria
@@ -30,10 +26,6 @@ define([
             }
         },
 
-        showFilters: function () {
-            EventBus.trigger('showFilters');
-        },
-
         render: function () {
             this.$el.empty();
             this.$el.html(this.template());
@@ -45,6 +37,7 @@ define([
             var filtersApplied = this.collection.where({
                 isApplied: true
             });
+
             _.each(filtersApplied, this.addFilterBadge, this);
         },
 

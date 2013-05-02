@@ -89,3 +89,19 @@ li.tree span {
 .preferences-popup-body {
   min-height: 0;
 }
+
+.user-guide {
+  margin-left: 5px;
+}
+
+.search-menu {
+  margin-top: 10px;
+}
+.filters-list {
+  margin-top: 10px;
+  border-top: 1px solid #D3D3D3;
+  padding-top: 5px;
+}
+.filters-list span .btn-group {
+  margin-top: 5px;
+}

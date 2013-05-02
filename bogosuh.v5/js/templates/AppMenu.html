@@ -1,21 +1,30 @@
+<!-- top nav -->
 <div class="navbar navbar-static-top">
     <div class="navbar-inner">
-        <a class="brand">Bogo</a>
-        <div class="pull-right">
-            <div class="btn-group">
-                <button type="button" class="btn" title="Inbox"><i class="icon-envelope"></i> <span class="badge badge-important" style="padding: 0 4px;">5</span></button>
-                <button type="button" class="btn" title="User Guide"><i class="icon-question-sign"></i></button>
-                <button type="button" class="btn" title="My Settings"><i class="icon-wrench"></i></button>
+            <a class="brand">Transactions</a>
+            <div class="pull-right">
+                <form class="navbar-search">
+                <div class="input-prepend input-append" style="margin-bottom: 5px">
+                    <div class="btn-group">
+                        <button class="btn dropdown-toggle" data-toggle="dropdown">
+                            Client <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="-1"><i class="icon-ok"></i> Client</a></li>
+                            <li><a tabindex="-1"><i class="icon-ok icon-white"></i> Corporate Action</a></li>
+                            <li><a tabindex="-1"><i class="icon-ok icon-white"></i> Depository</a></li>
+                            <li><a tabindex="-1"><i class="icon-ok icon-white"></i> Transaction</a></li>
+                        </ul>
+                    </div>
+                    <input id="appendedPrependedDropdownButton" type="text" placeholder="Reference ID">
+                    <button class="btn btn-primary"><i class="icon-search icon-white"></i></button>
+                </div>
+                </form>
+
+                <div class="btn-group user-guide">
+                    <button type="button" class="btn .btn-link" title="User Guide"><i class="icon-question-sign .icon-white"></i></button>
+                    <button type="button" class="btn .btn-link" title="My Settings"><i class="icon-wrench .icon-white"></i></button>
+                </div>
             </div>
-            <div class="preferences">
-            </div>
-            <div class="btn-group">
-                <button type="button" class="btn" title=""><i class="icon-time"></i></button>
-                <button type="button" class="btn" title="Export"><i class="icon-download-alt"></i></button>
-                <button class="btn report-settings" title="Customize Results"><i class="icon-th-list"></i></button>
-            </div>
-            <button class="btn btn-info add-filters"><i class="icon-filter icon-white"></i> Add Filter</button>
-            <button class="btn btn-primary report-search"><i class="icon-search icon-white"></i> Search</button>
-        </div>
     </div>
 </div>

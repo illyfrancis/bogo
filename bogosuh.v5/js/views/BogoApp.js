@@ -27,13 +27,13 @@ define([
 
             // create views
             this.appMenu = ViewFactory.createAppMenu(searchCriteria);
+            this.searchMenu = ViewFactory.createSearchMenu(searchCriteria);
             this.reportSettings = ViewFactory.createReportSettings(reportSchema);
-            this.filterStatusBar = ViewFactory.createFilterStatusBar(searchCriteria);
             this.searchFilters = ViewFactory.createSearchFilters(searchCriteria);
             this.searchContent = ViewFactory.createSearchContent(reportSchema, searchCriteria);
 
             this.$el.append(this.appMenu.render().el);
-            this.$el.append(this.filterStatusBar.render().el);
+            this.$el.append(this.searchMenu.render().el);
             this.$el.append(this.reportSettings.render().el);
             this.$el.append(this.searchFilters.render().el);
             this.$el.append(this.searchContent.render().el);

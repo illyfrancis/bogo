@@ -3,11 +3,12 @@ define([
     'underscore',
     'backbone',
     'views/AppMenu',
+    'views/SearchMenu',
     'views/FilterStatusBar',
     'views/ReportSettings',
     'views/SearchFilters',
     'views/SearchContent'
-], function (_, Backbone, AppMenu, FilterStatusBar, ReportSettings, SearchFilters, SearchContent) {
+], function (_, Backbone, AppMenu, SearchMenu, FilterStatusBar, ReportSettings, SearchFilters, SearchContent) {
 
     var ViewFactory = {
 
@@ -18,8 +19,9 @@ define([
             });
         },
 
-        createFilterStatusBar: function (searchCriteria) {
-            return new FilterStatusBar({
+        createSearchMenu: function (searchCriteria) {
+            // search menu
+            return new SearchMenu({
                 collection: searchCriteria
             });
         },
