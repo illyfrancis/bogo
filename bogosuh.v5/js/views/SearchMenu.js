@@ -65,7 +65,7 @@ define([
             this.$('.filter-status').toggle();
             // this.$('.filter-collapse').toggleClass('icon-chevron-up icon-chevron-down');
             this.$('.filter-collapse').toggleClass('icon-circle-arrow-up icon-circle-arrow-down');
-
+            // this.$('.filter-collapse').toggleClass('icon-resize-small icon-resize-full');
         },
 
         loadPreference: function () {

@@ -39,7 +39,7 @@ define([
         },
 
         registerEvents: function () {
-            this.listenTo(this.collection, 'error', this.onValidationError);
+            this.listenTo(this.collection, 'invalid', this.onValidationError);
             this.listenTo(this.collection, 'change:isApplied', this.updateFilterButtonLabel);
 
             this.listenTo(EventBus, 'filter:change', this.alertFilterChange);
