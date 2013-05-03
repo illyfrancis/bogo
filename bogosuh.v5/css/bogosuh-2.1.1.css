@@ -73,7 +73,7 @@ li.tree span {
 
 /* for filter menu height */
 .filter-type .dropdown-menu {
-  max-height: 180px;
+  max-height: 190px;
   overflow-y: auto;
 }
 
@@ -129,4 +129,14 @@ li.tree span {
 }
 .filters-list span .btn-group {
   margin-top: 5px;
+}
+
+.filters-toggle {
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-top-color: #f5f5f5;
+  padding: 0 18px;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
 }

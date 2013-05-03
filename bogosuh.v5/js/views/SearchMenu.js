@@ -63,6 +63,7 @@ define([
 
         collapseFilterStatus: function () {
             this.$('.filter-status').toggle();
+            // this.$('.filter-status').toggle('hide'); // animation in IE is jumpy.
             // this.$('.filter-collapse span').toggleClass('caret caron');
             this.$('.filter-collapse i').toggleClass('icon-chevron-up icon-chevron-down');
             // this.$('.filter-collapse i').toggleClass('icon-circle-arrow-up icon-circle-arrow-down');
