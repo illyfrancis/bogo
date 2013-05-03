@@ -9,7 +9,7 @@ define([
         model: SecurityCategory,
 
         selectedCodes: function () {
-            return _.pluck(_.where(this.toJSON(), {'selected': false}), 'code');
+            return _.pluck(_.where(this.toJSON(), {'selected': true}), 'code');
         },
 
         selectBy: function (codes) {

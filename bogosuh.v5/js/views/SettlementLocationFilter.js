@@ -31,7 +31,6 @@ define([
         },
 
         render: function () {
-            console.log('render');
             this.renderOnce();
             return this;
         },

@@ -17,13 +17,37 @@ define([
             this.settlementDates.lastweek();
         },
 
-        hydrate: function (selections) {
+        hydrate: function (data) {
             // map to settlement date range model
             console.log('SettlementDateCriterion: hydrate');
             // if(_.isUndefined(this.settlementDates)) {
             //     this.settlementDates = new DateRange();
             //     this.settlementDates.lastweek();
             // }
+
+            var dateRange = data.dateRange;
+            if (dateRange === 'customdate') {
+                var fromDate = new Date(data.dates.from),
+                    toDate = new Date(data.dates.to);
+                this.settlementDates.customdate(fromDate, toDate);
+            } else {
+                this.settlementDates.changeType(dateRange);
+            }
+
+            this.setFilter(data.isApplied);
+        },
+
+        preserve: function () {
+            // var data = Criterion.prototype.preserve.call(this);
+            return {
+                name: this.get('name'),
+                isApplied: this.get('isApplied'),
+                dateRange: this.settlementDates.get('type'),
+                dates: {
+                    from: this.settlementDates.get('fromDate').getTime(),
+                    to: this.settlementDates.get('toDate').getTime()
+                }
+            };
         },
 
         queryCriteria: function () {
