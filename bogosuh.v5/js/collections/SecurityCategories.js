@@ -5,24 +5,30 @@ define([
 ], function (_, Backbone, SecurityCategory) {
 
     var SecurityCategories = Backbone.Collection.extend({
+
         model: SecurityCategory,
 
-        codes: function () {
-            return this.pluck('code');
+        selectedCodes: function () {
+            return _.pluck(_.where(this.toJSON(), {'selected': false}), 'code');
         },
 
-        fetchByCodes: function (codes) {
-            // load the locations
-            if (_.isArray(codes) && codes.length > 0) {
-                this.url = '/api/country/codes/' + codes;
-                this.fetch();
-            }
+        selectBy: function (codes) {
+            _.each(codes, function (code) {
+                var category = this.findWhere({'code': code});
+                if (!_.isNull(category)) {
+                    category.select(true);
+                }
+            }, this);
         },
 
         hasSelection: function () {
             return this.any(function (securityCategory) {
                 return securityCategory.get('selected');
             });
+        },
+
+        clearSelection: function () {
+            this.invoke('select', false);
         }
     });
 
