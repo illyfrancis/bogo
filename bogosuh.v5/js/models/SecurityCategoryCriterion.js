@@ -26,6 +26,9 @@ define([
         validate: function (attrs) {
             if(attrs.isApplied) {
                 console.log('security category criterion: validate');
+                if (!this.securityCategories.hasSelection()) {
+                    return 'No selection';
+                }
             }
         },
 

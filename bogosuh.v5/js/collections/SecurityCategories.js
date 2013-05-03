@@ -17,6 +17,12 @@ define([
                 this.url = '/api/country/codes/' + codes;
                 this.fetch();
             }
+        },
+
+        hasSelection: function () {
+            return this.any(function (securityCategory) {
+                return securityCategory.get('selected');
+            });
         }
     });
 
