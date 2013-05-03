@@ -159,9 +159,11 @@ define([
             }, 1000);
         },
 
-        onHidden: function () {
-            console.log('hiding search criteria');
-            this.dismissAlerts();
+        onHidden: function (e) {
+            if (e.target === this.el) {
+                console.log('hiding search criteria');
+                this.dismissAlerts();
+            }
         },
 
         kill: function () {

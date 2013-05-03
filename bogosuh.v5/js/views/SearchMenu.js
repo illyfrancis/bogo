@@ -19,7 +19,7 @@ define([
             'click .add-filters': 'showFilters',
             'click .load-preference:not(".disabled")': 'loadPreference',
             'click .save-preference:not(".disabled")': 'savePreference',
-            'click .filter-collapse': 'collapseFilterStatus'
+            'click .filter-collapse a': 'collapseFilterStatus'
         },
 
         initialize: function () {
@@ -63,9 +63,10 @@ define([
 
         collapseFilterStatus: function () {
             this.$('.filter-status').toggle();
-            // this.$('.filter-collapse').toggleClass('icon-chevron-up icon-chevron-down');
-            this.$('.filter-collapse').toggleClass('icon-circle-arrow-up icon-circle-arrow-down');
-            // this.$('.filter-collapse').toggleClass('icon-resize-small icon-resize-full');
+            // this.$('.filter-collapse span').toggleClass('caret caron');
+            this.$('.filter-collapse i').toggleClass('icon-chevron-up icon-chevron-down');
+            // this.$('.filter-collapse i').toggleClass('icon-circle-arrow-up icon-circle-arrow-down');
+            // this.$('.filter-collapse i').toggleClass('icon-resize-small icon-resize-full');
         },
 
         loadPreference: function () {
