@@ -36,13 +36,13 @@ define([
             // TODO - DRY it
             // expect data is in the form of { categories: [array of codes], isApplied: boolean}
             var invalid = _.isUndefined(data) || _.isUndefined(data.categories) || _.isUndefined(data.isApplied),
-                valid = !invalid && _.isArray(data.categories) && _.isBoolean(data.isApplied) && data.categories.length > 0;
+                valid = !invalid && _.isArray(data.categories) && _.isBoolean(data.isApplied);
 
             if (valid) {
                 this.securityCategories.clearSelection();
                 this.securityCategories.selectBy(data.categories);
-                this.setFilter(data.isApplied);
             }
+            this.setFilter(data.isApplied);
         },
 
         preserve: function () {
