@@ -1,11 +1,12 @@
 define([
     'underscore',
     'backbone',
+    'apps/EventBus',
     'models/Country',
     'collections/Countries',
     'views/SettlementLocations',
     'text!templates/SettlementLocationFilter.html'
-], function (_, Backbone, Country, Countries, SettlementLocations, tpl) {
+], function (_, Backbone, EventBus, Country, Countries, SettlementLocations, tpl) {
 
     var SettlementLocationFilter = Backbone.View.extend({
 
@@ -19,6 +20,8 @@ define([
         initialize: function () {
             // model = SettlementLocationCriterion
             this.locations = this.model.locations;
+            this.listenTo(this.locations, 'remove', this.filterChanged);
+
             this.settlementLocations = this.createSubView(SettlementLocations, {
                 collection: this.locations
             });
@@ -91,6 +94,19 @@ define([
         clearError: function () {
             this.$('.location-lookup').removeClass('error');
             this.$('.help-inline').hide();
+        },
+
+        filterChanged: function () {
+            // decide if filter value change should be tracked by SearchFilter, if so trigger 'filter change' event.
+            if (this.model.get('isApplied')) {
+                if (this.locations.length === 0) {
+                    // remove this filter when there's no selection.
+                    this.model.removeFilter();
+                    EventBus.trigger('filter:remove', this.model);
+                } else {
+                    EventBus.trigger('filter:change');
+                }
+            }
         }
 
     });

@@ -17,6 +17,9 @@ define([
         validate: function (attrs) {
             if(attrs.isApplied) {
                 console.log('settlement location criterion: validate');
+                if (this.locations.length === 0) {
+                    return 'Please select locations first';
+                }
             }
         },
 
