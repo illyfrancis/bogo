@@ -16,28 +16,21 @@ define([
 
         initialize: function () {
             // collection = SearchCriteria
-            this.listenTo(this.collection, 'change:isApplied', this.updateView);
-        },
-
-        updateView: function (criterion) {
-            // only do partial update
-            if(criterion.get('isApplied')) {
-                this.addFilterBadge(criterion);
-            }
+            this.listenTo(this.collection, 'change:isApplied', this.render);
         },
 
         render: function () {
+            this.disposeSubViews();
             this.$el.empty();
-            this.$el.html(this.template());
-            this.renderFilterBadges();
+
+            var filtersApplied = this.collection.where({isApplied: true});
+            
+            this.$el.html(this.template({empty: filtersApplied.length === 0}));
+            this.renderFilterBadges(filtersApplied);
             return this;
         },
 
-        renderFilterBadges: function () {
-            var filtersApplied = this.collection.where({
-                isApplied: true
-            });
-
+        renderFilterBadges: function (filtersApplied) {
             _.each(filtersApplied, this.addFilterBadge, this);
         },
 
@@ -45,7 +38,7 @@ define([
             var filterBadge = this.createSubView(FilterStatusBadge, {
                 model: filter
             });
-            this.$el.prepend(filterBadge.render().el);
+            this.$el.append(filterBadge.render().el);
         }
 
     });

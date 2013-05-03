@@ -7,10 +7,7 @@ define([
 
     var FilterStatusBadge = Backbone.View.extend({
 
-        // tagName: 'div',
         tagName: 'span',
-
-        // className: 'btn-group',
 
         template: _.template(tpl),
 
