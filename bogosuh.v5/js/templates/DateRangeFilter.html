@@ -16,7 +16,10 @@
             <label>From</label>
         </div>
         <div class="controls">
-            <input class="fromDate span2" type="text" value="<%= moment(fromDate).format('L') %>">
+            <div class="input-prepend">
+                <span class="add-on"><i class="icon-calendar"></i></span>
+                <input class="fromDate span2" type="text" value="<%= moment(fromDate).format('L') %>">
+            </div>
         </div>
     </div>
 
@@ -25,7 +28,11 @@
             <label>To</label>
         </div>
         <div class="controls">
-            <input class="toDate span2" type="text" value="<%= moment(toDate).format('L') %>">
+            <div class="input-prepend">
+                <span class="add-on"><i class="icon-calendar"></i></span>
+                <input class="toDate span2" type="text" value="<%= moment(toDate).format('L') %>">
+            </div>
+
         </div>
     </div>
 </form>
