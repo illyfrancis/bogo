@@ -120,7 +120,7 @@ li.tree span {
 
 .search-menu {
   margin-top: 10px;
-  min-width: 480px;
+  .min-width: 520px;
 }
 .filters-list {
   margin-top: 10px;
