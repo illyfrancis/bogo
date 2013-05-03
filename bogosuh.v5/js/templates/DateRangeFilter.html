@@ -11,6 +11,7 @@
         </select>
         </div>
     </div>
+<!--     
     <div class="control-group">
         <div class="control-label">
             <label>From</label>
@@ -22,7 +23,6 @@
             </div>
         </div>
     </div>
-
     <div class="control-group">
         <div class="control-label">
             <label>To</label>
@@ -35,4 +35,22 @@
 
         </div>
     </div>
+ -->
+     <div class="control-group">
+        <div class="control-label">
+            <label>From</label>
+        </div>
+        <div class="controls">
+            <input class="fromDate span2" type="text" value="<%= moment(fromDate).format('L') %>">
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="control-label">
+            <label>To</label>
+        </div>
+        <div class="controls">
+            <input class="toDate span2" type="text" value="<%= moment(toDate).format('L') %>">
+        </div>
+    </div>
+
 </form>
