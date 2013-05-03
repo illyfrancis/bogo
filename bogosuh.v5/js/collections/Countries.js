@@ -15,9 +15,10 @@ define([
             // load the locations
             if (_.isArray(codes) && codes.length > 0) {
                 this.url = '/api/country/codes/' + codes;
-                this.fetch();
+                return this.fetch();
             }
         }
+        
     });
 
     return Countries;

@@ -27,12 +27,17 @@ define([
             // TODO - DRY it
             // expect data is in the form of { locations: [array of codes], isApplied: boolean}
             var invalid = _.isUndefined(data) || _.isUndefined(data.locations) || _.isUndefined(data.isApplied),
-                valid = !invalid && _.isArray(data.locations) && _.isBoolean(data.isApplied);
+                valid = !invalid && _.isArray(data.locations) && _.isBoolean(data.isApplied) && data.locations.length > 0;
 
             if (valid) {
                 this.locations.reset();
-                this.locations.fetchByCodes(data.locations);
-                this.setFilter(data.isApplied);
+                var self = this,
+                    deferred = this.locations.fetchByCodes(data.locations);
+
+                // apply the filter conditionaly using deferred object
+                deferred.done(function () {
+                    self.setFilter.call(self, data.isApplied);
+                });
             }
         },
 
