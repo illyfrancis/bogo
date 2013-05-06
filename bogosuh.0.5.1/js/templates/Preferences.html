@@ -1,0 +1,12 @@
+<button class="btn preference" title="Save Preference">
+  <i class="<%= selected ? 'icon-star' : 'icon-star-empty' %>"></i>    
+</button>
+<button class="btn dropdown-toggle" data-toggle="dropdown" title="More...">
+  <span class="caret"></span>
+</button>
+<ul class="dropdown-menu">
+  <% if ( !empty ) { %>
+  <li class="divider"></li>
+  <% } %>
+  <li class="none"><a tabindex="-1"><i class="icon-ok <%= selected ? 'icon-white' : '' %>"></i> None</a></li>
+</ul>
