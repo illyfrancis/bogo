@@ -1,0 +1,146 @@
+/*!
+ * Reporting app specifics
+ */
+
+.filter-bar {
+  padding: 5px 20px;
+  margin: 5px 0;
+}
+
+/* for report-column-selector */
+.modal select {
+  width: 219px;
+}
+span.report-column {
+  display: inline-block;
+}
+
+/* for report column header */
+th .caret, th .caron {
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
+.caron {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: top;
+  border-bottom: 4px solid #000000;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+  content: "";
+}
+
+/* for account search */
+.account-search {
+  line-height: 16px;
+}
+
+.account-list table.table {
+/*  font-size: 11px;*/
+}
+
+/*.account-list .table th, .account-list .table td {
+  */
+.filter-content .table th, .account-list .table td {
+  line-height: 16px;
+}
+
+/* for search result */
+.search-result table.table {
+  font-size: 11px;
+}
+.search-result table.table th, table.table td {
+  white-space: nowrap;
+}
+.search-result table.table thead {
+  background-color: #eee;
+}
+
+._search-content {
+  margin: 0 20px;
+}
+
+/* for tree view */
+li.tree label {
+  display: inline-block;
+}
+li.tree span {
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* for filter menu height */
+.filter-type .dropdown-menu {
+  max-height: 190px;
+  overflow-y: auto;
+}
+
+/* modal top position 
+.modal{
+  top:5%;
+}
+.modal.fade.in{
+  top:5%;
+}
+*/
+
+/* for filter modal */
+.modal-body {
+  min-height: 200px;
+}
+
+/* for filter content */
+.filter-content {
+  margin-top: 12px;
+}
+
+/* for displaying dropdown within modal - https://github.com/twitter/bootstrap/issues/1078 */
+.typeahead.dropdown-menu {
+  z-index: 1051;
+}
+
+.preference-remove {
+  margin-left: 5px;
+}
+
+/* for SearchResult.html, to remove bottom margin between table and scrollbar*/
+.report > table {
+  margin-bottom: 0;
+}
+
+.preferences-popup-body {
+  min-height: 0;
+}
+
+.user-guide {
+  margin-left: 5px;
+}
+
+.search-menu {
+  margin-top: 10px;
+  .min-width: 520px;
+}
+.filters-list {
+  margin-top: 10px;
+  border-top: 1px solid #D3D3D3;
+  padding-top: 5px;
+}
+.filters-list span .btn-group {
+  margin-top: 5px;
+}
+
+.filters-toggle {
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-top-color: #f5f5f5;
+  padding: 0 18px;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+
+.report-footer .pagination {
+  margin: 10px 0 0;
+}
