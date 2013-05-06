@@ -3,7 +3,7 @@ var app = app || {};
 app.data = app.data || {};
 
 var console = console || {};
-console.log = function () {};
+console.log = console.log ||  function () {};
 
 define([
     'jquery',
@@ -20,7 +20,6 @@ define([
     // No need to wrap within ready()
     // $(function () {
     // });
-
 
     // disable cache (esp for IE)
     $.ajaxSetup({ cache: false });

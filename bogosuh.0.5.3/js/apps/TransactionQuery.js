@@ -13,6 +13,7 @@ define([
         initialize: function () {
             // initialize query object with callbacks
             this.query = new Query({}, {
+                limit: 12,
                 searchUrl: '/api/transactions/search',
                 success: this.querySuccess,
                 error: this.queryError

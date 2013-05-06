@@ -9,9 +9,9 @@ describe('Given AccountCriterion Model', function () {
             require([
                 'models/AccountCriterion',
                 'collections/Accounts'
-            ], function (accountCriterion, accounts) {
-                AccountCriterion = accountCriterion;
-                Accounts = accounts;
+            ], function (_AccountCriterion, _Accounts) {
+                AccountCriterion = _AccountCriterion;
+                Accounts = _Accounts;
                 done = true;
             });
 
@@ -31,10 +31,26 @@ describe('Given AccountCriterion Model', function () {
     });
 
     describe('when applying filter', function () {
-        it('sets filter state by input', function () {
+        it('should not set filter if no accounts selected', function () {
             var accountCriterion = new AccountCriterion();
             accountCriterion.setFilter(true);
+            expect(accountCriterion.accounts.hasSelection()).toBe(false);
+            expect(accountCriterion.accounts.length).toBe(0);
+            expect(accountCriterion.get('isApplied')).toBe(false);
+        });
+
+        it('sets filter if some accounts selected', function () {
+            var accountCriterion = new AccountCriterion(),
+                stub = sinon.stub(accountCriterion.accounts, 'hasSelection', function () { return true; });
+
+            accountCriterion.setFilter(true);
             expect(accountCriterion.get('isApplied')).toBe(true);
+            stub.restore();
+        });
+
+        it('sets filter state by input', function () {
+            var accountCriterion = new AccountCriterion(),
+                stub = sinon.stub(accountCriterion.accounts, 'hasSelection', function () { return true; });
 
             accountCriterion.setFilter(false);
             expect(accountCriterion.get('isApplied')).toBe(false);
@@ -47,6 +63,8 @@ describe('Given AccountCriterion Model', function () {
 
             accountCriterion.setFilter(1);
             expect(accountCriterion.get('isApplied')).toBe(false);
+
+            stub.restore();
         });
     });
 
@@ -68,7 +86,8 @@ describe('Given AccountCriterion Model', function () {
         it('should return current state', function () {
             var accountNumbers = [3,1,4,1,5,9],
                 accountCriterion = new AccountCriterion(),
-                stub = sinon.stub(accountCriterion.accounts, 'selectedAccountNumbers').returns(accountNumbers);
+                stub = sinon.stub(accountCriterion.accounts, 'selectedAccountNumbers').returns(accountNumbers),
+                hasSelection = sinon.stub(accountCriterion.accounts, 'hasSelection', function () { return true; });
 
             accountCriterion.setFilter(true);
 
