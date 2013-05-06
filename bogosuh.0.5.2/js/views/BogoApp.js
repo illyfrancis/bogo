@@ -28,7 +28,7 @@ define([
             // create views
             this.appMenu = ViewFactory.createAppMenu(searchCriteria);
             this.searchMenu = ViewFactory.createSearchMenu(searchCriteria);
-            this.reportSettings = ViewFactory.createReportSettings(reportSchema);
+            this.reportSettings = ViewFactory.createReportSettings(reportSchema, searchCriteria);
             this.searchFilters = ViewFactory.createSearchFilters(searchCriteria);
             this.searchContent = ViewFactory.createSearchContent(reportSchema, searchCriteria);
 

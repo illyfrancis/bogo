@@ -12,7 +12,7 @@ define(['backbone'], function (Backbone) {
             sort: ""
         },
 
-        limit: 10,
+        limit: 12,
         offset: 0,
         searchUrl: '/api/transactions/search',
 

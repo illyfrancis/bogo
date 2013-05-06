@@ -26,9 +26,10 @@ define([
             });
         },
 
-        createReportSettings: function (reportSchema) {
+        createReportSettings: function (reportSchema, searchCriteria) {
             return new ReportSettings({
-                collection: reportSchema
+                collection: reportSchema,
+                searchCriteria: searchCriteria
             });
         },
 

@@ -12,7 +12,7 @@ define([
         template: _.template(tpl),
 
         events: {
-            'click .search-report': 'searchReport',
+            'click .search-report:not(".disabled")': 'searchReport',
             'click .reset': 'resetReportSchema'
         },
 
@@ -21,6 +21,9 @@ define([
             this.reportColumnSelector = new ReportColumnSelector({
                 collection: this.collection
             });
+
+            // options.searchCriteria = SearchCriteria
+            this.listenTo(this.options.searchCriteria, 'change:isApplied', this.toggleSearchButton);
         },
 
         render: function () {
@@ -32,12 +35,18 @@ define([
             this.setElement(pane);
 
             this.renderReportColumnSelector();
+            this.toggleSearchButton();
             return this;
         },
 
         renderReportColumnSelector: function () {
             this.$('.modal-body div').append(
                 this.reportColumnSelector.render().el);
+        },
+
+        toggleSearchButton: function () {
+            this.$('.search-report').toggleClass('disabled',
+                !this.options.searchCriteria.isReadyForSearch());
         },
 
         show: function () {

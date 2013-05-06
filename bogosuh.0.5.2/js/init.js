@@ -2,6 +2,9 @@
 var app = app || {};
 app.data = app.data || {};
 
+var console = console || {};
+console.log = function () {};
+
 define([
     'jquery',
     'underscore',

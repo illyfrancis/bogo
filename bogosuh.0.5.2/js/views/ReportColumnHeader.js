@@ -54,7 +54,7 @@ define([
         },
 
         updateSortDirection: function () {
-            var $sortDirection = this.$('span.pull-right');
+            var $sortDirection = this.$('span.sort');
             $sortDirection.removeClass('caret caron');
 
             if (this.model.isSortAsc()) {
