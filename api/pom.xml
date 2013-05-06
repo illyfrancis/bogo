@@ -49,14 +49,6 @@
   </dependencies>
   <build>
     <finalName>api</finalName>
-    <!-- 
-    <resources>
-      <resource>
-        <directory>D:\Repository\git\francis-trial\home</directory>
-        <filtering>false</filtering>
-      </resource>
-    </resources>
-     -->
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -73,8 +65,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
         <version>2.6</version>
-        <!-- 
-         -->
         <executions>
           <execution>
             <id>copy-resources</id>
@@ -139,7 +129,7 @@
       	<artifactId>tomcat7-maven-plugin</artifactId>
       	<version>2.0</version>
       	<configuration>
-      	  <port>9090</port>
+      	  <port>${web-port}</port>
       	  <path>/</path>
       	  <warSourceDirectory>${warDirectory}</warSourceDirectory>
       	  <!-- 
@@ -154,5 +144,7 @@
   	<jersey-version>1.16</jersey-version>
   	<warDirectory>${basedir}/../bogosuh.v5</warDirectory>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <web-port>9090</web-port>
+    <db-port>27017</db-port>
   </properties>
 </project>

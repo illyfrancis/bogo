@@ -12,7 +12,8 @@ class MongoDB {
 
     static {
         try {
-            mongo = new MongoClient("127.0.0.1", 27017);
+            String port = System.getProperty("db-port", "27017");
+            mongo = new MongoClient("127.0.0.1", (new Integer(port)).intValue());
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
         } catch (MongoException e) {
