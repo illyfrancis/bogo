@@ -1,5 +1,7 @@
 package com.bbh.openbbh.api.resource;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 import java.util.Date;
 import java.util.List;
 
@@ -94,7 +96,38 @@ public class TransactionResource {
         }
 
 		public String getCriteria() {
-			return this.criteria;
+			String template = this.criteria;
+			if (this.criteria != null && !this.criteria.isEmpty()) {
+				template = this.criteria.replaceAll("\"\\#date(.+?)\"", "#");
+			}
+
+			return template;
+		}
+		
+		// convert criteria values into array of objects.
+		public Object[] getTemplateParams() {
+			
+			// work on dates.
+			String token = "#date";
+			int begin = 0,
+				end = 0,
+				index = 0,
+				datelength = 13;
+			List<Date> dates = newArrayList();
+
+			do {
+				index = this.criteria.indexOf(token, begin);
+
+				if (index >= 0) {
+					begin = index + token.length();
+					end = begin + datelength;
+					String date = this.criteria.substring(begin, end);
+					dates.add(new Date((new Long(date)).longValue()));
+					begin = end;
+				}
+			} while (index >= 0);
+			
+			return dates.toArray();
 		}
 		
 		public String getSort() {

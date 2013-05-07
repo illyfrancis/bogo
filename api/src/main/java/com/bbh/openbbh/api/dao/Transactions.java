@@ -25,7 +25,8 @@ public class Transactions {
 	}
 
 	public static long count(Query query) {
-		return transactions.count(query.getCriteria());
+		return transactions.count(query.getCriteria(),
+				query.getTemplateParams());
 	}
 	
 	public static List<Model> findBy(Query query) {
@@ -37,7 +38,8 @@ public class Transactions {
 		//	limit: 10
 		//	offset: 1
 		// }
-		return newArrayList(transactions.find(query.getCriteria())
+		return newArrayList(transactions.find(
+				query.getCriteria(), query.getTemplateParams())		
 				.projection(query.getFields())
 				.sort(query.getSort())
 				.skip(query.getSkipOffset())	// TODO - apparently skip() is very inefficient...

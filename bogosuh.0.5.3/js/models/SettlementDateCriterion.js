@@ -51,7 +51,13 @@ define([
         },
 
         queryCriteria: function () {
-            return 'SettlementDateCriterion:JSON';
+            console.log('SettlementDateCriterion:JSON');
+            return {
+                settlementDate: {
+                    $gte: '#date' + this.settlementDates.get('fromDate').getTime(),
+                    $lte: '#date' + this.settlementDates.get('toDate').getTime()
+                }
+            };
         },
 
         validate: function (attrs) {
