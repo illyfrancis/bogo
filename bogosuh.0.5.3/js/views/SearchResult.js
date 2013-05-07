@@ -8,40 +8,6 @@ define([
     'text!templates/SearchResult.html'
 ], function (_, Backbone, EventBus, ReportColumnHeader, ReportRow, tpl) {
 
-    /*
-    // for search result display
-    <div class='nav-bar'></div>
-    <div class='filter-bar'></div>
-    <div class='search-content content-fluid'>
-        <div class='modal hide'>spinner...</div>
-        <div class='search-result'>
-            <div class='report-header'></div>
-            <div class='report-body'></div>
-            <div class='report-footer'></div>
-        </div>
-    </div>
-
-        or
-
-    <div class='nav-bar'></div>
-    <div class='filter-bar'></div>
-    <div class='search-content content-fluid'>
-        <div class='modal hide'>spinner...</div>
-        <div class='search-result'>
-            <table>
-                <thead class='report-header'>
-                </thead>
-                <tbody class='report-body'>
-                </tbody>
-            </table>
-            <div class='report-footer'>
-            </div>
-        </div>
-    </div>
-
-    and no scrollbar
-    */
-
     var SearchResult = Backbone.View.extend({
 
         tagName: 'div',
@@ -64,8 +30,7 @@ define([
         },
 
         render: function () {
-
-            console.log("> pager: " + JSON.stringify(this.collection._pager));
+            console.log('> SearchResult: render');
 
             this.disposeSubViews();
             // if report is empty
@@ -131,19 +96,6 @@ define([
                 } else {
                     cell = '<td><%='+ reportColumn.get('name') +'%></td>';
                 }
-                template = template.concat(cell);
-            });
-
-            return template;
-        },
-
-        _reportRowTemplate: function () {
-            var cell, template = '';
-            _.each(this.reportSchema.selectedColumns(), function (reportColumn) {
-                // cell = '<td class="text-right"><%= ' + reportColumn.get('name') + ' %></td>';
-                // cell = '<td><%= ' + reportColumn.get('name') + ' %></td>';
-                // cell = '<td><p class="text-right"><%= ' + reportColumn.get('name') + ' %></p></td>';
-                cell = '<td><span class="pull-right"><%= ' + reportColumn.get('name') + ' %></span></td>';
                 template = template.concat(cell);
             });
 
