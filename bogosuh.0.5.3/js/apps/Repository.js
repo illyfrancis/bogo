@@ -16,7 +16,8 @@ define([
         loadAll: function (onLoaded, context) {
 
             // list out all load ops in array
-            var loaders = ['loadAccounts', 'loadSecurities', 'loadReportSchema', 'loadTransactionTypes', 'loadPreferences'],
+            // var loaders = ['loadAccounts', 'loadSecurities', 'loadReportSchema', 'loadTransactionTypes', 'loadPreferences'],
+            var loaders = ['loadAccounts', 'loadReportSchema', 'loadTransactionTypes', 'loadPreferences'],
                 options = {};
 
             if (_.isFunction(onLoaded)) {
