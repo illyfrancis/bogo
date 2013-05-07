@@ -23,7 +23,7 @@ import com.sun.jersey.api.NotFoundException;
 public class AccountResource {
     
     public static class Model {
-        ObjectId _id;
+        // ObjectId _id;
         String number;
         String name;
     }
