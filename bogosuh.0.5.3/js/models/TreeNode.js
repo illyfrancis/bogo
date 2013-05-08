@@ -23,7 +23,7 @@ define(['underscore', 'backbone', 'require'], function (_, Backbone, require) {
             this.listenTo(subTree, 'change:selected', this.childSelectionChanged);
         },
 
-        childSelectionChanged: function () {
+        childSelectionChanged: function (e) {
             var selected,
                 uniq = _.uniq(this.get('subTree').pluck('selected'));
 
@@ -34,8 +34,12 @@ define(['underscore', 'backbone', 'require'], function (_, Backbone, require) {
                 selected = uniq[0];
             }
 
-            if (this.get('selected') != selected) {
-                this.set('selected', selected);
+            // triggers 'change:selected' if changed
+            this.set('selected', selected);
+
+            // also force trigger 'change:selected' when changing from null to null
+            if (_.isNull(selected) && this.get('selected') === selected) {
+                this.trigger('change:selected', this);
             }
         },
 
