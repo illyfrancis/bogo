@@ -6,21 +6,16 @@ define([
     'apps/Repository',
     'views/ReportColumnHeader',
     'views/ReportRow',
-    'text!templates/SearchResult.html'
+    'text!templates/TransactionReport.html'
 ], function (_, Backbone, EventBus, Repository, ReportColumnHeader, ReportRow, tpl) {
 
-    var SearchResult = Backbone.View.extend({
+    var TransactionReport = Backbone.View.extend({
 
         tagName: 'div',
 
-        className: 'search-result',
+        className: 'transaction-report',
 
         template: _.template(tpl),
-
-        events: {
-            'click li:not(".disabled") .prev': 'searchPrevious',
-            'click li:not(".disabled") .next': 'searchNext'
-        },
 
         initialize: function (options) {
             // collection = TransactionReport
@@ -32,17 +27,13 @@ define([
         },
 
         render: function () {
-            console.log('> SearchResult: render');
+            console.log('> TransactionReport: render');
 
             this.disposeSubViews();
-            // if report is empty
-            //  this.renderNoReport();
-            // else do the following.
             var pager = this.collection.pager();
             this.$el.html(this.template(pager));
             this.renderColumnHeaders();
             this.renderReports();
-            this.decoratePaginator(pager);
 
             // add scrollbar - it's just too heavy!
 /*            this.$('.report').mCustomScrollbar({
@@ -102,28 +93,10 @@ define([
             });
 
             return template;
-        },
-
-        decoratePaginator: function (pager) {
-            if (pager.current === 1) {
-                this.$('.prev').parent('li').addClass('disabled');
-            }
-
-            if (pager.current === pager.total) {
-                this.$('.next').parent('li').addClass('disabled');
-            }
-        },
-
-        searchPrevious: function () {
-            EventBus.trigger('searchPrevious');
-        },
-
-        searchNext: function () {
-            EventBus.trigger('searchNext');
         }
 
     });
 
-    return SearchResult;
+    return TransactionReport;
 
 });

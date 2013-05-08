@@ -3,9 +3,9 @@ define([
     'backbone',
     'apps/EventBus',
     'apps/Repository',
-    'collections/TransactionReport',
-    'views/SearchResult'
-], function (_, Backbone, EventBus, Repository, TransactionReport, SearchResult) {
+    'views/TransactionReport',
+    'views/TransactionPaginator'
+], function (_, Backbone, EventBus, Repository, TransactionReport, TransactionPaginator) {
 
     var SearchContent = Backbone.View.extend({
 
@@ -26,12 +26,26 @@ define([
         render: function () {
             // this.hide();
             this.disposeSubViews();
-            var searchResult = this.createSubView(SearchResult, {
+            this.$el.empty();
+            this.appendTransactionReport();
+            this.appendPaginator();
+            return this;
+        },
+
+        appendTransactionReport: function () {
+            var transactionReport = this.createSubView(TransactionReport, {
                 reportSchema: this.reportSchema,
                 searchCriteria: this.searchCriteria
             });
-            this.$el.empty().append(searchResult.render().el);
-            return this;
+            this.$el.append(transactionReport.render().el);
+        },
+
+        appendPaginator: function () {
+            var pago = this.createSubView(TransactionPaginator, {
+                collection: Repository.transactionReport()  // TODO - sort this out
+            });
+
+            this.$el.append(pago.render().el);
         },
 
         show: function () {

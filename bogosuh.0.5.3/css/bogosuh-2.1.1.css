@@ -48,13 +48,13 @@ th .caret, th .caron {
 }
 
 /* for search result */
-.search-result table.table {
+.transaction-report table.table {
   font-size: 11px;
 }
-.search-result table.table th, table.table td {
+.transaction-report table.table th, table.table td {
   white-space: nowrap;
 }
-.search-result table.table thead {
+.transaction-report table.table thead {
   background-color: #eee;
 }
 
@@ -141,6 +141,6 @@ li.tree span {
           border-radius: 3px;
 }
 
-.report-footer .pagination {
+.transaction-pagination .pagination {
   margin: 10px 0 0;
 }
