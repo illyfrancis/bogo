@@ -59,8 +59,6 @@ define([
         },
 
         searchReport: function () {
-            // need to validate
-            // if (this.collection.isReadyForSearch()) {
             this.hide();
             EventBus.trigger('search');
         },

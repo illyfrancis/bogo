@@ -35,7 +35,7 @@ define([
             this.renderReports();
 
             // add scrollbar - it's just too heavy!
-/*
+            /*
             this.$('.report').mCustomScrollbar({
                 // set_width: '90%',
                 scrollInertia: 0,
@@ -46,7 +46,7 @@ define([
                     enable: true
                 }
             });
-*/
+            */
             return this;
         },
 

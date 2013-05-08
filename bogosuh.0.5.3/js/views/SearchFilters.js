@@ -9,6 +9,26 @@ define([
     'text!templates/Alert.html'
 ], function (_, Backbone, Bootstrap, EventBus, FilterSelector, FilterManager, tpl, tplAlert) {
 
+    var tooltip = {
+        show: function ($el, options) {
+            $el.tooltip(options);
+            $el.tooltip('show');
+            setTimeout(function () {
+                $el.tooltip('destroy');
+            }, 1000);
+        }
+    };
+
+    var popover = {
+        show: function ($el, options) {
+            $el.popover(options);
+            $el.popover('show');
+            setTimeout(function () {
+                $el.popover('destroy');
+            }, 1000);
+        }
+    };
+
     var SearchFilters = Backbone.View.extend({
 
         template: _.template(tpl),
@@ -42,9 +62,9 @@ define([
             this.listenTo(this.collection, 'invalid', this.onValidationError);
             this.listenTo(this.collection, 'change:isApplied', this.updateFilterButtonLabel);
 
+            this.listenTo(EventBus, 'showFilters', this.show);
             this.listenTo(EventBus, 'filter:change', this.alertFilterChange);
             this.listenTo(EventBus, 'filter:remove', this.alertFilterRemove);
-            this.listenTo(EventBus, 'showFilters', this.show);
         },
 
         render: function () {
@@ -145,19 +165,21 @@ define([
 
             // init - can be moved to init() method
             var $btn = this.$el.find('.toggle-filter');
-            $btn.tooltip({ // or popover
+
+            tooltip.show($btn, {
                 title: 'Filters removed',
-                content: 'You did this!',
                 trigger: 'manual',
                 placement: 'top'
             });
-            // then show popover!
-            $btn.tooltip('show'); // or popover
-            // $btn.addClass('btn-danger');
-            setTimeout(function () {
-                $btn.tooltip('destroy'); // or popover
-                // $btn.removeClass('btn-danger');
-            }, 1000);
+
+            /*
+            popover.show($btn, {
+                title: 'Filters removed',
+                content: 'detail',
+                trigger: 'manual',
+                placement: 'top'
+            });
+            */
         },
 
         onHidden: function (e) {
