@@ -24,6 +24,7 @@ define([
 
             // options.searchCriteria = SearchCriteria
             this.listenTo(this.options.searchCriteria, 'change:isApplied', this.toggleSearchButton);
+            this.listenTo(EventBus, 'showReportSettings', this.show);
         },
 
         render: function () {

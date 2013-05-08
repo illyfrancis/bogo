@@ -44,6 +44,7 @@ define([
 
             this.listenTo(EventBus, 'filter:change', this.alertFilterChange);
             this.listenTo(EventBus, 'filter:remove', this.alertFilterRemove);
+            this.listenTo(EventBus, 'showFilters', this.show);
         },
 
         render: function () {
