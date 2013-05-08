@@ -20,7 +20,7 @@ define([
         initialize: function () {
             // model = SettlementLocationCriterion
             this.locations = this.model.locations;
-            this.listenTo(this.locations, 'remove', this.filterChanged);
+            this.listenTo(this.locations, 'add remove', this.filterChanged);
 
             this.settlementLocations = this.createSubView(SettlementLocations, {
                 collection: this.locations
