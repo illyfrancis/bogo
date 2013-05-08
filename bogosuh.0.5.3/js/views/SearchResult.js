@@ -3,10 +3,11 @@ define([
     'backbone',
     // 'scrollbar',
     'apps/EventBus',
+    'apps/Repository',
     'views/ReportColumnHeader',
     'views/ReportRow',
     'text!templates/SearchResult.html'
-], function (_, Backbone, EventBus, ReportColumnHeader, ReportRow, tpl) {
+], function (_, Backbone, EventBus, Repository, ReportColumnHeader, ReportRow, tpl) {
 
     var SearchResult = Backbone.View.extend({
 
@@ -23,6 +24,7 @@ define([
 
         initialize: function (options) {
             // collection = TransactionReport
+            this.collection = Repository.transactionReport();
             this.reportSchema = options.reportSchema;
             this.searchCriteria = options.searchCriteria;
 

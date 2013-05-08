@@ -23,32 +23,23 @@ define([
             this.listenTo(this.searchCriteria, 'change remove', this.hide);
         },
 
+        render: function () {
+            // this.hide();
+            this.disposeSubViews();
+            var searchResult = this.createSubView(SearchResult, {
+                reportSchema: this.reportSchema,
+                searchCriteria: this.searchCriteria
+            });
+            this.$el.empty().append(searchResult.render().el);
+            return this;
+        },
+
         show: function () {
             this.$el.show();
         },
 
         hide: function () {
             this.$el.hide();
-        },
-
-        render: function () {
-            this.hide();
-            this.report = Repository.transactionReport();
-            this.renderReport();
-            return this;
-        },
-
-        renderReport: function () {
-            // temporary
-            this.disposeSubViews();
-            
-            console.log('> SearchContent: renderReport');
-            var searchResult = this.createSubView(SearchResult, {
-                collection: this.report,
-                reportSchema: this.reportSchema,
-                searchCriteria: this.searchCriteria
-            });
-            this.$el.empty().append(searchResult.render().el);
         }
 
     });

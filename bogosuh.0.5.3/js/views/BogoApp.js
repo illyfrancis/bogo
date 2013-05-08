@@ -30,13 +30,13 @@ define([
             this.searchMenu = ViewFactory.createSearchMenu(searchCriteria);
             this.reportSettings = ViewFactory.createReportSettings(reportSchema, searchCriteria);
             this.searchFilters = ViewFactory.createSearchFilters(searchCriteria);
-            this.searchContent = ViewFactory.createSearchContent(reportSchema, searchCriteria);
+            var searchContent = ViewFactory.createSearchContent(reportSchema, searchCriteria);
 
             this.$el.append(this.appMenu.render().el);
             this.$el.append(this.searchMenu.render().el);
             this.$el.append(this.reportSettings.render().el);
             this.$el.append(this.searchFilters.render().el);
-            this.$el.append(this.searchContent.render().el);
+            this.$el.append(searchContent.render().el);
 
             // TODO - move this to somewehre more approp.
             var preferencePopup = this.createSubView(PreferencePopup);
