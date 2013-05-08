@@ -1,10 +1,11 @@
 define([
     'underscore',
     'backbone',
+    'apps/EventBus',
     'apps/Repository',
     'collections/TransactionReport',
     'views/SearchResult'
-], function (_, Backbone, Repository, TransactionReport, SearchResult) {
+], function (_, Backbone, EventBus, Repository, TransactionReport, SearchResult) {
 
     var SearchContent = Backbone.View.extend({
 
@@ -16,9 +17,22 @@ define([
             // no model or collection
             this.reportSchema = options.reportSchema;
             this.searchCriteria = options.searchCriteria;
+
+            this.listenTo(EventBus, 'search', this.show);
+            this.listenTo(EventBus, 'filter:change', this.hide);
+            this.listenTo(this.searchCriteria, 'change remove', this.hide);
+        },
+
+        show: function () {
+            this.$el.show();
+        },
+
+        hide: function () {
+            this.$el.hide();
         },
 
         render: function () {
+            this.hide();
             this.report = Repository.transactionReport();
             this.renderReport();
             return this;
