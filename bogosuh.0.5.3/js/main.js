@@ -13,8 +13,8 @@ require.config({
         // 'backbone.paginator': '../lib/backbone.paginator',
         'moment': '../lib/moment',
         'text': '../lib/require/text',
-        // 'scrollbar': '../lib/jquery.mCustomScrollbar'
-        'scrollbar': '../lib/jquery.tinyscrollbar.min'
+        'scrollbar': '../lib/jquery.mCustomScrollbar'
+        // 'scrollbar': '../lib/jquery.tinyscrollbar.min'
     },
     shim: {
         'underscore': {

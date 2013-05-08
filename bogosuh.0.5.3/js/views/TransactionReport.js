@@ -1,7 +1,7 @@
 define([
     'underscore',
     'backbone',
-    // 'scrollbar',
+    /*'scrollbar',*/
     'apps/EventBus',
     'apps/Repository',
     'views/ReportColumnHeader',
@@ -35,7 +35,8 @@ define([
             this.renderReports();
 
             // add scrollbar - it's just too heavy!
-/*            this.$('.report').mCustomScrollbar({
+/*
+            this.$('.report').mCustomScrollbar({
                 // set_width: '90%',
                 scrollInertia: 0,
                 horizontalScroll: true,
