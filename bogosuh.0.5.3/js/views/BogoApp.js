@@ -4,9 +4,8 @@ define([
     'apps/EventBus',
     'apps/Repository',
     'collections/SearchCriteria',
-    'views/ViewFactory',
-    'views/PreferencePopup'
-], function (_, Backbone, EventBus, Repository, SearchCriteria, ViewFactory, PreferencePopup) {
+    'views/ViewFactory'
+], function (_, Backbone, EventBus, Repository, SearchCriteria, ViewFactory) {
 
     var BogoApp = Backbone.View.extend({
 
@@ -26,21 +25,17 @@ define([
                 searchCriteria = Repository.searchCriteria();
 
             // create views
-            this.appMenu = ViewFactory.createAppMenu(searchCriteria);
-            this.searchMenu = ViewFactory.createSearchMenu(searchCriteria);
+            var appMenu = ViewFactory.createAppMenu(searchCriteria);
+            var searchMenu = ViewFactory.createSearchMenu(searchCriteria);
             this.reportSettings = ViewFactory.createReportSettings(reportSchema, searchCriteria);
             this.searchFilters = ViewFactory.createSearchFilters(searchCriteria);
             var searchContent = ViewFactory.createSearchContent(reportSchema, searchCriteria);
 
-            this.$el.append(this.appMenu.render().el);
-            this.$el.append(this.searchMenu.render().el);
+            this.$el.append(appMenu.render().el);
+            this.$el.append(searchMenu.render().el);
             this.$el.append(this.reportSettings.render().el);
             this.$el.append(this.searchFilters.render().el);
             this.$el.append(searchContent.render().el);
-
-            // TODO - move this to somewehre more approp.
-            var preferencePopup = this.createSubView(PreferencePopup);
-            this.$el.append(preferencePopup.render().el);
 
             return this;
         },

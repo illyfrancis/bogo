@@ -4,8 +4,9 @@ define([
     'apps/EventBus',
     'views/FilterStatusBar',
     'views/PreferenceDropdown',
+    'views/PreferencePopup',
     'text!templates/SearchMenu.html'
-], function (_, Backbone, EventBus, FilterStatusBar, PreferenceDropdown, tpl) {
+], function (_, Backbone, EventBus, FilterStatusBar, PreferenceDropdown, PreferencePopup, tpl) {
 
     var SearchMenu = Backbone.View.extend({
 
@@ -42,6 +43,10 @@ define([
             });
             this.$('.filter-status').append(filterStatusBar.render().el);
 
+            // preference dropdown
+            var preferencePopup = this.createSubView(PreferencePopup);
+            this.$el.append(preferencePopup.render().el);
+
             return this;
         },
 
@@ -63,11 +68,7 @@ define([
 
         collapseFilterStatus: function () {
             this.$('.filter-status').toggle();
-            // this.$('.filter-status').toggle('hide'); // animation in IE is jumpy.
-            // this.$('.filter-collapse span').toggleClass('caret caron');
             this.$('.filter-collapse i').toggleClass('icon-chevron-up icon-chevron-down');
-            // this.$('.filter-collapse i').toggleClass('icon-circle-arrow-up icon-circle-arrow-down');
-            // this.$('.filter-collapse i').toggleClass('icon-resize-small icon-resize-full');
         },
 
         loadPreference: function () {
