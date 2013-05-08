@@ -17,6 +17,7 @@ define([
             // no model or collection
             this.reportSchema = options.reportSchema;
             this.searchCriteria = options.searchCriteria;
+            this.transactions = Repository.transactionReport();
 
             this.listenTo(EventBus, 'search', this.show);
             this.listenTo(EventBus, 'filter:change', this.hide);
@@ -34,6 +35,7 @@ define([
 
         appendTransactionReport: function () {
             var transactionReport = this.createSubView(TransactionReport, {
+                collection: this.transactions,
                 reportSchema: this.reportSchema,
                 searchCriteria: this.searchCriteria
             });
@@ -42,9 +44,8 @@ define([
 
         appendPaginator: function () {
             var pago = this.createSubView(TransactionPaginator, {
-                collection: Repository.transactionReport()  // TODO - sort this out
+                collection: this.transactions
             });
-
             this.$el.append(pago.render().el);
         },
 

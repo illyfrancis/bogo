@@ -19,7 +19,6 @@ define([
 
         initialize: function (options) {
             // collection = TransactionReport
-            this.collection = Repository.transactionReport();
             this.reportSchema = options.reportSchema;
             this.searchCriteria = options.searchCriteria;
 
