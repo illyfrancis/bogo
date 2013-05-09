@@ -142,7 +142,7 @@
   </build>
   <properties>
   	<jersey-version>1.16</jersey-version>
-  	<warDirectory>${basedir}/../bogosuh.0.5.3</warDirectory>
+  	<warDirectory>${basedir}/../bogosuh.0.5.4</warDirectory>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <web-port>9090</web-port>
     <db-port>27017</db-port>
