@@ -19,11 +19,13 @@ define(['backbone'], function (Backbone) {
         },
 
         disposeSubViews: function() {
-            var children = this.subviews;
-            for (var i = 0, l = children.length; i<l; i++) {
-                children[i].remove();
+            if (this.subviews) {
+                var children = this.subviews;
+                for (var i = 0, l = children.length; i<l; i++) {
+                    children[i].remove();
+                }
+                this.subviews = [];
             }
-            this.subviews = [];
             return this;
         },
 
