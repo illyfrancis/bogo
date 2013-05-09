@@ -10,7 +10,7 @@ define([
     'underscore',
     'backbone',
     'bootstrap',
-    'apps/Extension',
+    'apps/Extension2',
     'apps/EventBus',
     'apps/Repository',
     'apps/Mediator',

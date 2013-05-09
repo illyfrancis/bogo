@@ -30,9 +30,14 @@ define([
 
             this.disposeSubViews();
             var pager = this.collection.pager();
+
+            // hide it first, so that it doesn't trigger repaint too often
+            this.$el.hide();
+            
             this.$el.html(this.template(pager));
             this.renderColumnHeaders();
             this.renderReports();
+            this.$el.show();
 
             // add scrollbar - it's just too heavy!
             /*
