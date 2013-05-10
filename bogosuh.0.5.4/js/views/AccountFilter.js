@@ -16,8 +16,8 @@ define([
         events: {
             'click .select-all': 'selectAll',
             'click .select-none': 'selectNone',
-            'keyup input.account-number': 'throttledFilter',
-            'keyup input.account-name': 'throttledFilter',
+            'keyup input.account-number': 'filterUpdate',
+            'keyup input.account-name': 'filterUpdate',
             'click .selections-on': 'filterSelectedAccounts',
             'click .selections-off': 'filterNotSelected',
             'click .selections-both': 'filterOff'
@@ -39,7 +39,7 @@ define([
             });
 
             // throttled version of filterAccounts function
-            this.throttledFilter = _.throttle(this.filterAccounts, 800);
+            this.filterUpdate = _.throttle(this.filterAccounts, 800);
         },
 
         render: function () {
