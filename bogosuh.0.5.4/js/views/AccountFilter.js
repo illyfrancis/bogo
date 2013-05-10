@@ -16,12 +16,17 @@ define([
         events: {
             'click .select-all': 'selectAll',
             'click .select-none': 'selectNone',
-            'click .account-filter .filter': 'filterAccounts'
+            'keyup input.account-number': 'throttledFilter',
+            'keyup input.account-name': 'throttledFilter',
+            'click .selections-on': 'filterSelectedAccounts',
+            'click .selections-off': 'filterNotSelected',
+            'click .selections-both': 'filterOff'
         },
 
         initialize: function () {
             // model = AccountCriterion
             this.accounts = this.model.accounts;
+            this.accountFilterSelection = null; // filter selection state
 
             this.listenTo(this.accounts, 'change:selected', this.filterChanged);
 
@@ -32,6 +37,9 @@ define([
             this.paginator = this.createSubView(AccountPaginator, {
                 collection: this.accounts
             });
+
+            // throttled version of filterAccounts function
+            this.throttledFilter = _.throttle(this.filterAccounts, 800);
         },
 
         render: function () {
@@ -42,14 +50,11 @@ define([
         renderOnce: _.once(function () {
             this.$el.empty();
             this.$el.html(this.template());
-            // TODO - need to hold on to filter values for re-render.
-            // consider splitting out 'account search filter' into its own class?
 
             // account list
             this.accountList.setElement(this.$('.account-list table tbody')).render();
 
             // account paginator
-            // this.$('.account-pagination').append(this.paginator.render().el);
             this.paginator.setElement(this.$('.account-pagination')).render();
         }),
 
@@ -83,37 +88,47 @@ define([
             this.accounts.selectAll(checked);
         },
 
+        filterSelectedAccounts: function () {
+            this.filterBySelection(true);
+        },
+
+        filterNotSelected: function () {
+            this.filterBySelection(false);
+        },
+
+        filterOff: function () {
+            this.filterBySelection(null);
+        },
+
+        filterBySelection: function (filterValue) {
+            // only if filter value is changed
+            if (this.accountFilterSelection != filterValue) {
+                this.accountFilterSelection = filterValue;
+                this.filterAccounts();
+            }
+        },
+
         filterAccounts: function () {
-            var name = this.$('.account-filter .account-name').val();
-            var number = this.$('.account-filter .account-number').val();
-            var selected = this.$('.account-filter .account-selection').hasClass('active');
-
-            console.log('> ' + name + ':' + number + ':' + selected);
-
-            // build the filter fields based on selection
-            var fieldFilters = [];
+            var name = this.$('.account-name').val(),
+                number = this.$('.account-number').val(),
+                fieldFilters = []; // build the filter fields based on selection
 
             // filter by number
-            if(_.isEmpty(number)) {
-                fieldFilters.push({ field: 'number', type: 'pattern', value: new RegExp('.') });
-            } else {
+            if(!_.isEmpty(number)) {
                 fieldFilters.push({ field: 'number', type: 'pattern', value: new RegExp('^' + number, 'igm') });
             }
 
             // filter by name
-            if(_.isEmpty(name)) {
-                fieldFilters.push({ field: 'name', type: 'pattern', value: new RegExp('.') });
-            } else {
+            if(!_.isEmpty(name)) {
                 fieldFilters.push({ field: 'name', type: 'pattern', value: new RegExp('^' + name, 'igm') });
             }
 
             // filter by selection
-            fieldFilters.push({ field: 'selected', type: 'equalTo', value: selected });
+            if (!_.isNull(this.accountFilterSelection)) {
+                fieldFilters.push({ field: 'selected', type: 'equalTo', value: this.accountFilterSelection });
+            }
 
             this.accounts.setFieldFilter(fieldFilters);
-
-            // TODO - how to remove filter? the lib doesn't provide a function for this.
-            // one way is to replace .models with .originalModels before starting..
         }
 
     });

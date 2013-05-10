@@ -13,11 +13,7 @@ define(['jquery', 'underscore', 'backbone', 'text!templates/AccountPaginator.htm
             'click li:not(".disabled") .next': 'gotoNext',
             'click li:not(".disabled") .first': 'gotoFirst',
             'click li:not(".disabled") .last': 'gotoLast',
-            'click li .current': 'foo',
             'change .pageNumber': 'gotoPage'
-        },
-
-        foo: function (e) {
         },
 
         gotoPrevious: function () {

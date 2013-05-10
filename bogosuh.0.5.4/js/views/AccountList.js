@@ -1,8 +1,9 @@
 define([
     'underscore',
     'backbone',
-    'views/AccountRow'
-], function (_, Backbone, AccountRow) {
+    'views/AccountRow',
+    'text!templates/AccountRowEmpty.html'
+], function (_, Backbone, AccountRow, tpl) {
 
     var AccountList = Backbone.View.extend({
 
@@ -13,8 +14,11 @@ define([
 
         render: function () {
             this.disposeSubViews();
-            this.$el.empty();
-            this.collection.each(this.appendAccountRow, this);
+            if (this.collection.length === 0) {
+                this.appendAccountEmptyRow();
+            } else {
+                this.collection.each(this.appendAccountRow, this);
+            }
             return this;
         },
 
@@ -25,8 +29,16 @@ define([
 
             // register the accountRow for events.
             accountRow.listenTo(this, 'account-filter:update', accountRow.updateSelection);
-
             this.$el.append(accountRow.render().el);
+        },
+
+        appendAccountEmptyRow: function () {
+            var emptyRow = this.createSubView(Backbone.View, {
+                tagName: 'tr',
+                className: 'muted'
+            });
+            emptyRow.$el.html(tpl);
+            this.$el.append(emptyRow.el);
         },
 
         updateSelections: function (checked) {

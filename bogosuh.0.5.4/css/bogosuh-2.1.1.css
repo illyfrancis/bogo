@@ -144,3 +144,17 @@ li.tree span {
 .transaction-pagination .pagination {
   margin: 10px 0 0;
 }
+
+/*.filter-inline, input.filter-inline {
+  height: 14px;
+  margin-bottom: 0;
+}*/
+
+.filter-inline input {
+  height: 14px;
+  margin-bottom: 0;
+}
+
+.filter-inline td {
+  padding: 2px;
+}
