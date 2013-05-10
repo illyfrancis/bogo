@@ -11,7 +11,8 @@ define(['jquery', 'underscore', 'backbone'], function ($, _, Backbone) {
         initialize: function (options) {
             // model = Transaction
             // pass in template for efficiency
-            this.template = options.template;
+            this.template = options.template;   // if template is already a _.template
+            // this.template = _.template(options.template);    // if template is string
         },
 
         render: function () {

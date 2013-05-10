@@ -70,7 +70,8 @@ define([
 
         renderReports: function () {
             // prepare the row template
-            this.rowTemplate = _.template(this.reportRowTemplate());
+            // this.rowTemplate = this.reportRowTemplate();    // template string
+            this.rowTemplate = _.template(this.reportRowTemplate()); // _.template
 
             this.collection.each(this.appendReportRow, this);
         },
