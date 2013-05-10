@@ -16,11 +16,40 @@ define([
         events: {
             'click .select-all': 'selectAll',
             'click .select-none': 'selectNone',
+
+            // sort is very slow in IE, inefficient paginator logic
+            // 'click .sort-number': 'sortNumber',
+            // 'click .sort-name': 'sortName',
+
             'keyup input.account-number': 'filterUpdate',
             'keyup input.account-name': 'filterUpdate',
             'click .selections-on': 'filterSelectedAccounts',
             'click .selections-off': 'filterNotSelected',
             'click .selections-both': 'filterOff'
+        },
+
+        sortName: function () {
+            var direction = 'desc';
+            if (this.accounts.sortDirection === 'desc') {
+                direction = 'asc';
+            }
+            this.accounts.setSort('name', direction);
+
+            var foo = this.accounts.sortDirection === 'desc' ? 'caret' : 'caron';
+            this.$('.sort-number span').removeClass('caret caron');
+            this.$('.sort-name span').removeClass('caret caron').addClass(foo);
+        },
+
+        sortNumber: function () {
+            var direction = 'desc';
+            if (this.accounts.sortDirection === 'desc') {
+                direction = 'asc';
+            }
+            this.accounts.setSort('number', direction);
+
+            var foo = this.accounts.sortDirection === 'desc' ? 'caron' : 'caret';
+            this.$('.sort-name span').removeClass('caret caron');
+            this.$('.sort-number span').removeClass('caret caron').addClass(foo);
         },
 
         initialize: function () {
