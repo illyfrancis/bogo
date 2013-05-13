@@ -35,7 +35,7 @@ define([
             return this;
         },
 
-        renderOnce: _.once(function () {
+        _renderOnce: _.once(function () {
             this.$el.html(this.template());
             this.$el.append(this.settlementLocations.render().el);
             this.$('.lookup').typeahead({
@@ -46,6 +46,18 @@ define([
                 searcher: this.searcher
             });
         }),
+
+        renderOnce: function () {
+            this.$el.html(this.template());
+            this.$el.append(this.settlementLocations.render().el);
+            this.$('.lookup').typeahead({
+                source: this.lookupLocation,
+                minLength: 2,
+                matcher: this.matcher,
+                updater: this.updater,
+                searcher: this.searcher
+            });
+        },
 
         matcher: function (item) {
             // no further matching needed

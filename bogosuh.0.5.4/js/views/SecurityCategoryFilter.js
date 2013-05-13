@@ -26,10 +26,15 @@ define([
             return this;
         },
 
-        renderOnce: _.once(function () {
+        _renderOnce: _.once(function () {
             this.$el.html(this.template());
             this.securityCategories.each(this.appendCategory, this);
         }),
+
+        renderOnce: function () {
+            this.$el.html(this.template());
+            this.securityCategories.each(this.appendCategory, this);
+        },
 
         appendCategory: function (securityCategory) {
             var category = this.createSubView(SecurityCategory, {

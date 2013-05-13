@@ -102,6 +102,10 @@ define([
         onFilterSelect: function (e, criterionCid) {
             if (this.selectedCriterion.cid !== criterionCid) {
                 this.dismissAlerts();
+
+                // remove old filter
+                this.filterManager.disposeFilter(this.selectedCriterion);
+
                 this.selectedCriterion = this.collection.get(criterionCid);
                 this.renderFilterContent(this.selectedCriterion);
             }

@@ -23,9 +23,13 @@ define([
             return this;
         },
 
-        renderOnce: _.once(function () {
+        _renderOnce: _.once(function () {
             this.$el.empty().append(this.settlementDatesFilter.render().el);
         }),
+
+        renderOnce: function () {
+            this.$el.empty().append(this.settlementDatesFilter.render().el);
+        },
 
         filterChanged: function () {
             // decide if filter value change should be tracked by SearchFilter, if so trigger 'filter change' event.
