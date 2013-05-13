@@ -76,7 +76,7 @@ define([
             return this;
         },
 
-        _renderOnce: _.once(function () {
+        renderOnce: _.once(function () {
             this.$el.empty();
             this.$el.html(this.template());
 
@@ -87,7 +87,7 @@ define([
             this.paginator.setElement(this.$('.account-pagination')).render();
         }),
 
-        renderOnce: function () {
+        _renderOnce: function () {
             this.$el.empty();
             this.$el.html(this.template());
 

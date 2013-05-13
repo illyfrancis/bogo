@@ -36,11 +36,11 @@ define([
             return this;
         },
 
-        _renderOnce: _.once(function () {
+        renderOnce: _.once(function () {
             this.$el.append(this.transactionTypesTree.render().el);
         }),
 
-        renderOnce: function () {
+        _renderOnce: function () {
             this.$el.append(this.transactionTypesTree.render().el);
         }
     });

@@ -104,7 +104,7 @@ define([
                 this.dismissAlerts();
 
                 // remove old filter
-                this.filterManager.disposeFilter(this.selectedCriterion);
+                // this.filterManager.disposeFilter(this.selectedCriterion);
 
                 this.selectedCriterion = this.collection.get(criterionCid);
                 this.renderFilterContent(this.selectedCriterion);

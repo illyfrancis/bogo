@@ -35,7 +35,7 @@ define([
             return this;
         },
 
-        _renderOnce: _.once(function () {
+        renderOnce: _.once(function () {
             this.$el.html(this.template());
             this.$el.append(this.settlementLocations.render().el);
             this.$('.lookup').typeahead({
@@ -47,7 +47,7 @@ define([
             });
         }),
 
-        renderOnce: function () {
+        _renderOnce: function () {
             this.$el.html(this.template());
             this.$el.append(this.settlementLocations.render().el);
             this.$('.lookup').typeahead({

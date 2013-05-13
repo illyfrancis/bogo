@@ -26,12 +26,12 @@ define([
             return this;
         },
 
-        _renderOnce: _.once(function () {
+        renderOnce: _.once(function () {
             this.$el.html(this.template());
             this.securityCategories.each(this.appendCategory, this);
         }),
 
-        renderOnce: function () {
+        _renderOnce: function () {
             this.$el.html(this.template());
             this.securityCategories.each(this.appendCategory, this);
         },
