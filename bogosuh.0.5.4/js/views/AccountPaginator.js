@@ -1,4 +1,8 @@
-define(['jquery', 'underscore', 'backbone', 'text!templates/AccountPaginator.html'], function ($, _, Backbone, tpl) {
+define(['jquery',
+    'underscore',
+    'backbone',
+    'text!templates/AccountPaginator.html'
+], function ($, _, Backbone, tpl) {
 
     var AccountPaginator = Backbone.View.extend({
 
@@ -25,12 +29,10 @@ define(['jquery', 'underscore', 'backbone', 'text!templates/AccountPaginator.htm
         },
 
         gotoFirst: function () {
-            // TODO must check if there are any records to show at all!
             this.collection.goTo(1);
         },
 
         gotoLast: function () {
-            // TODO must check if there are any records to show at all!
             var info = this.collection.information;
             this.collection.goTo(info.lastPage);
         },
@@ -41,7 +43,7 @@ define(['jquery', 'underscore', 'backbone', 'text!templates/AccountPaginator.htm
         },
 
         render: function () {
-            var info = this.collection.information;
+            var info = this.collection.info();
             this.$el.empty();
             this.$el.html(this.template(info));
             this.decoratePaginator(info);

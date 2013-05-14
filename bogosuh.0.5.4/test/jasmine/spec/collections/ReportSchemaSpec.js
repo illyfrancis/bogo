@@ -18,7 +18,7 @@ describe('Given ReportSchema Collection', function () {
         }
     });
 
-    describe('when foo', function () {
+    xdescribe('when foo', function () {
         it('must bar', function () {
             var reportSchema = new ReportSchema();
 

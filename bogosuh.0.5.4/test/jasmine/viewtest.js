@@ -14,6 +14,7 @@ require.config({
         'jasmine-html': '../test/lib/jasmine-1.2.0/jasmine-html',
         'sinon': '../test/lib/sinon/sinon-1.6.0',
         'jasmine-sinon': '../test/lib/jasmine-sinon',   // sinon matcher https://github.com/froots/jasmine-sinon
+        'jasmine-jquery': '../test/lib/jasmine-jquery',
         'extension': '../js/apps/Extension2',
         'spec': '../test/jasmine/spec/'
     },
@@ -44,6 +45,9 @@ require.config({
         'jasmine-sinon': {
             deps: ['jasmine', 'sinon']
         },
+        'jasmine-jquery': {
+            deps: ['jasmine']
+        },
         'extension': {
             deps: ['backbone']
         }
@@ -53,7 +57,7 @@ require.config({
 });
 
 window.store = "TestStore"; // override local storage store name - for testing
-require(['underscore', 'jasmine-html', 'sinon', 'jasmine-sinon', 'moment', 'extension'], function (_, jasmine) {
+require(['underscore', 'jasmine-html', 'sinon', 'jasmine-sinon', 'jasmine-jquery', 'moment', 'extension'], function (_, jasmine) {
 
     var jasmineEnv = jasmine.getEnv();
     jasmineEnv.updateInterval = 1000;
@@ -67,6 +71,7 @@ require(['underscore', 'jasmine-html', 'sinon', 'jasmine-sinon', 'moment', 'exte
     };
 
     var specs = [];
+    specs.push('spec/views/AccountPaginatorSpec');
     specs.push('spec/views/AccountRowSpec');
     specs.push('spec/views/AccountListSpec');
 
