@@ -20,32 +20,6 @@ describe('Model :: Account', function () {
 
     });
 
-    afterEach(function () {
-        /*    var done = false,
-                isDone = function(){ return done; };
-
-        this.todos.fetch({
-            success: function(c) {
-                c.each(function(m){
-                    m.destroy();
-                });
-                done = true;
-            }
-        });
-
-        waitsFor(isDone);
-
-        done = false;
-        this.todo.destroy({
-            success: function(){
-                done = true;
-            }
-        });
-        
-        waitsFor(isDone);
-*/
-    });
-
     describe('initialize', function () {
         it('should be initialized with mock data and not selected', function () {
             expect(this.account.get('name')).toEqual('TestAccount');

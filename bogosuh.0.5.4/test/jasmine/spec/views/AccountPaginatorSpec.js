@@ -77,7 +77,6 @@ describe('Load AccountPaginator View', function () {
                 $('#sandbox').html(paginator.render().el);
 
                 expect($('#sandbox div')).toBeEmpty();
-                // == expect($('#sandbox div').is(':empty')).toBe(true);
             });
         });
 

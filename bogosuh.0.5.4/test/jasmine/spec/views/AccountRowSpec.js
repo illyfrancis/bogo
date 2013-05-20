@@ -54,7 +54,7 @@ describe('Load AccountRow View', function () {
             spyOnRender.restore();
         });
 
-        describe('when initialize and render', function () {
+        describe('when initialize and render with selected account', function () {
             it('has three cells with correct details', function () {
                 var $el = $('#sandbox tr td'),
                 numberCell = $el[0],
@@ -64,7 +64,7 @@ describe('Load AccountRow View', function () {
                 expect($el.length).toBe(3);
                 expect($(numberCell).text()).toEqual(account.get('number'));
                 expect($(nameCell).text()).toEqual(account.get('name'));
-                expect($(selectCell).find('i').hasClass('icon-ok')).toEqual(true);
+                expect($(selectCell).find('i')).toHaveClass('icon-ok');
             });
         });
 
@@ -72,7 +72,7 @@ describe('Load AccountRow View', function () {
             it('should show that account is not selected', function () {
                 accountRow.updateSelection(false);
                 var $icon = $('#sandbox tr td:nth-child(3) i');
-                expect($icon.hasClass('icon-ok')).toBe(false);
+                expect($icon).not.toHaveClass('icon-ok');
             });
         });
 
@@ -80,7 +80,7 @@ describe('Load AccountRow View', function () {
             it('should show that account is selected', function () {
                 accountRow.updateSelection(true);
                 var $icon = $('#sandbox tr td:nth-child(3) i');
-                expect($icon.hasClass('icon-ok')).toBe(true);
+                expect($icon).toHaveClass('icon-ok');
             });
         });
 
@@ -88,14 +88,14 @@ describe('Load AccountRow View', function () {
             it('should show that account is not selected', function () {
                 accountRow.toggleSelection();
                 var $icon = $('#sandbox tr td:nth-child(3) i');
-                expect($icon.hasClass('icon-ok')).toBe(false);
+                expect($icon).not.toHaveClass('icon-ok');
             });
 
             it('should show that account is selected if toggled again', function () {
                 accountRow.toggleSelection();
                 accountRow.toggleSelection();
                 var $icon = $('#sandbox tr td:nth-child(3) i');
-                expect($icon.hasClass('icon-ok')).toBe(true);
+                expect($icon).toHaveClass('icon-ok');
             });
         });
 
@@ -104,14 +104,14 @@ describe('Load AccountRow View', function () {
                 $('#sandbox tr').click();
 
                 var $icon = $('#sandbox tr td:nth-child(3) i');
-                expect($icon.hasClass('icon-ok')).toBe(false);
+                expect($icon).not.toHaveClass('icon-ok');
             });
 
             it('should show that account is selected if clicked again', function () {
                 $('#sandbox tr').click().click();
 
                 var $icon = $('#sandbox tr td:nth-child(3) i');
-                expect($icon.hasClass('icon-ok')).toBe(true);
+                expect($icon).toHaveClass('icon-ok');
             });
         });
 
