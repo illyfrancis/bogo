@@ -6,9 +6,9 @@ define(['backbone'], function (Backbone) {
 
         createSubView: function (viewClass, options) {
             var view = new viewClass(options);
-            if (!(view instanceof Backbone.View)) {
-                throw new Error("Subviews must be a Backbone.View");
-            }
+            // if (!(view instanceof Backbone.View)) {
+            //     throw new Error("Subviews must be a Backbone.View");
+            // }
 
             if (!this.subviews) {
                 this.subviews = [];
