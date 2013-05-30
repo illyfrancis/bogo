@@ -57,7 +57,7 @@ require.config({
 });
 
 window.store = "TestStore"; // override local storage store name - for testing
-require(['underscore', 'jasmine-html', 'sinon', 'jasmine-sinon', 'jasmine-jquery', 'moment', 'extension'], function (_, jasmine) {
+require(['underscore', 'jasmine-html', 'sinon', 'jasmine-sinon', 'jasmine-jquery', 'bootstrap', 'moment', 'extension'], function (_, jasmine) {
 
     var jasmineEnv = jasmine.getEnv();
     jasmineEnv.updateInterval = 1000;
@@ -71,6 +71,7 @@ require(['underscore', 'jasmine-html', 'sinon', 'jasmine-sinon', 'jasmine-jquery
     };
 
     var specs = [];
+    specs.push('spec/views/FilterStatusBadgeSpec');
     specs.push('spec/views/AccountPaginatorSpec');
     specs.push('spec/views/AccountRowSpec');
     specs.push('spec/views/AccountListSpec');
