@@ -3,6 +3,7 @@ define([
     'backbone'
 ], function (_, Backbone) {
 
+    // 'use strict';
     var ReportColumn = Backbone.Model.extend({
 
         defaults: {
