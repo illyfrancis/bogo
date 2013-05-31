@@ -1,4 +1,3 @@
-/*global define*/
 define(['backbone'], function (Backbone) {
 
     var SecurityCategory = Backbone.Model.extend({
