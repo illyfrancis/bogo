@@ -1,54 +1,36 @@
-describe('Given Transaction Model', function () {
+define(['apps/Formatter','models/Transaction', 'moment'], function (Formatter, Transaction, moment) {
 
-    var Transaction, Formatter;
+    describe('Given Transaction Model', function () {
 
-    beforeEach(function () {
-        if (_.isUndefined(Transaction)) {
-            var done = false;
+        describe('when invoke toFormattedJSON', function () {
+            it('returns empty settlement date', function () {
+                var data = {
+                        accountNumber: '12345',
+                        settlementDate: ''
+                    },
+                    transaction = new Transaction(data);
 
-            require(['apps/Formatter','models/Transaction'], function (formatter, model) {
-                Formatter = formatter;
-                Transaction = model;
-                done = true;
+                var formatted = transaction.toFormattedJSON();
+
+                expect(formatted.accountNumber).toBe(data.accountNumber);
+                expect(formatted.settlementDate).toBe('');
             });
 
-            waitsFor(function () {
-                return done;
-            }, "Get model class");
-        }
-    });
+            it('returns formatted settlement date', function () {
+                var time = new Date().getTime(),
+                    data = {
+                        accountNumber: '12345',
+                        settlementDate: time
+                    },
+                    transaction = new Transaction(data),
+                    expected = moment(time).format(Formatter.dateFormat);
 
-    afterEach(function () {
-    });
+                var formatted = transaction.toFormattedJSON();
 
-    describe('when invoke toFormattedJSON', function () {
-        it('returns empty settlement date', function () {
-            var data = {
-                    accountNumber: '12345',
-                    settlementDate: ''
-                },
-                transaction = new Transaction(data);
-
-            var formatted = transaction.toFormattedJSON();
-
-            expect(formatted.accountNumber).toBe(data.accountNumber);
-            expect(formatted.settlementDate).toBe('');
+                expect(formatted.accountNumber).toBe(data.accountNumber);
+                expect(formatted.settlementDate).toBe(expected);
+            });
         });
 
-        it('returns formatted settlement date', function () {
-            var time = new Date().getTime(),
-                data = {
-                    accountNumber: '12345',
-                    settlementDate: time
-                },
-                transaction = new Transaction(data),
-                expected = moment(time).format(Formatter.dateFormat);
-
-            var formatted = transaction.toFormattedJSON();
-
-            expect(formatted.accountNumber).toBe(data.accountNumber);
-            expect(formatted.settlementDate).toBe(expected);
-        });
     });
-
 });

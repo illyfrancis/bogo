@@ -1,91 +1,84 @@
-describe('Model :: Account', function () {
+define(['models/Account'], function (Account) {
 
-    var mockData = {
-        name: "TestAccount",
-        number: "A12345"
-    };
+    describe('Account Model', function () {
 
-    beforeEach(function () {
-        var self = this,
-            done = false;
+        var account,
+            mockData = {
+                name: "TestAccount",
+                number: "A12345"
+            };
 
-        require(['models/Account'], function (Account) {
-            self.account = new Account(mockData);
-            done = true;
+        beforeEach(function () {
+            account = new Account(mockData);
         });
 
-        waitsFor(function () {
-            return done;
-        }, "Create Models");
-
-    });
-
-    describe('initialize', function () {
-        it('should be initialized with mock data and not selected', function () {
-            expect(this.account.get('name')).toEqual('TestAccount');
-            expect(this.account.get('number')).toEqual('A12345');
-            expect(this.account.get('selected')).toEqual(false);
-        });
-    });
-
-    describe('.toggle()', function () {
-        it('should select when toggled once', function () {
-            this.account.toggle();
-            expect(this.account.get('selected')).toEqual(true);
+        describe('when initialize', function () {
+            it('should be initialized with mock data and not selected', function () {
+                expect(account.get('name')).toEqual('TestAccount');
+                expect(account.get('number')).toEqual('A12345');
+                expect(account.get('selected')).toEqual(false);
+            });
         });
 
-        it('should not select when toggled twice', function () {
-            this.account.toggle();
-            this.account.toggle();
-            expect(this.account.get('selected')).toEqual(false);
-        });
-
-        it('should trigger change event when toggled', function () {
-            var triggered = false;
-            this.account.on("change:selected", function () {
-                triggered = true;
+        describe('when toggle()', function () {
+            it('should select when toggled once', function () {
+                account.toggle();
+                expect(account.get('selected')).toEqual(true);
             });
 
-            this.account.toggle();
-            expect(triggered).toEqual(true);
-        });
-    });
-
-    describe('.select()', function () {
-        it('should select with true', function () {
-            this.account.select(true);
-            expect(this.account.get('selected')).toEqual(true);
-        });
-
-        it('should not select when called with false', function () {
-            this.account.select(false);
-            expect(this.account.get('selected')).toEqual(false);
-        });
-
-        it('should not select when called with non-boolean', function () {
-            this.account.select("true");
-            expect(this.account.get('selected')).toEqual(false);
-        });
-
-        it('should trigger change event', function () {
-            var triggered = false;
-            this.account.on("change:selected", function () {
-                triggered = true;
+            it('should not select when toggled twice', function () {
+                account.toggle();
+                account.toggle();
+                expect(account.get('selected')).toEqual(false);
             });
 
-            this.account.select(true);
-            expect(triggered).toEqual(true);
+            it('should trigger change event when toggled', function () {
+                var triggered = false;
+                account.on("change:selected", function () {
+                    triggered = true;
+                });
+
+                account.toggle();
+                expect(triggered).toEqual(true);
+            });
         });
 
-        it('should not trigger change event when state does not change', function () {
-            var triggered = false;
-            this.account.on("change:selected", function () {
-                triggered = true;
+        describe('when select()', function () {
+            it('should select with true', function () {
+                account.select(true);
+                expect(account.get('selected')).toEqual(true);
             });
 
-            this.account.select(false);
-            expect(triggered).toEqual(false);
-        });
-    });
+            it('should not select when called with false', function () {
+                account.select(false);
+                expect(account.get('selected')).toEqual(false);
+            });
 
+            it('should not select when called with non-boolean', function () {
+                account.select("true");
+                expect(account.get('selected')).toEqual(false);
+            });
+
+            it('should trigger change event', function () {
+                var triggered = false;
+                account.on("change:selected", function () {
+                    triggered = true;
+                });
+
+                account.select(true);
+                expect(triggered).toEqual(true);
+            });
+
+            it('should not trigger change event when state does not change', function () {
+                var triggered = false;
+                account.on("change:selected", function () {
+                    triggered = true;
+                });
+
+                account.select(false);
+                expect(triggered).toEqual(false);
+            });
+        });
+
+    });
 });

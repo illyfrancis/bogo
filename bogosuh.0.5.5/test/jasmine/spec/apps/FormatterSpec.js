@@ -1,53 +1,43 @@
-describe('Given a Formatter', function () {
+// define(['apps/Formatter', 'moment'], function (Formatter, moment) {
+define(['apps/Formatter'], function (Formatter) {
 
-    var formatter;
-
-    beforeEach(function () {
-        if (_.isUndefined(formatter)) {
-            var done = false;
-
-            require(['apps/Formatter'], function (util) {
-                formatter = util;
-                done = true;
+    describe('Formatter', function () {
+        describe('when format dates with no argument', function () {
+            it('should return empty string', function () {
+                var formatted = Formatter.formatDate();
+                expect(formatted).toBe('');
             });
-
-            waitsFor(function () {
-                return done;
-            }, "Get class");
-        }
-    });
-
-    afterEach(function () {
-    });
-
-    describe('when format dates', function () {
-
-        it('should return empty string for no arg', function () {
-            var formatted = formatter.formatDate();
-            expect(formatted).toBe('');
         });
 
-        it('should return empty string for an object', function () {
-            var formatted = formatter.formatDate({});
-            expect(formatted).toBe('');
+        describe('when format dates with an object', function () {
+            it('should return empty string', function () {
+                var formatted = Formatter.formatDate({});
+                expect(formatted).toBe('');
+            });
         });
 
-        it('should return empty string for NaN', function () {
-            var formatted = formatter.formatDate(NaN);
-            expect(formatted).toBe('');
+        describe('when format dates with NaN', function () {
+            it('should return empty string', function () {
+                var formatted = Formatter.formatDate(NaN);
+                expect(formatted).toBe('');
+            });
         });
 
-        it('should return empty string for a function', function () {
-            var formatted = formatter.formatDate(function () {});
-            expect(formatted).toBe('');
+        describe('when format dates with a function', function () {
+            it('should return empty string', function () {
+                var formatted = Formatter.formatDate(function () {});
+                expect(formatted).toBe('');
+            });
         });
 
-        it('should return formatted string', function () {
-            var time = new Date().getTime(),
-                expected = moment(time).format(formatter.dateFormat),
-                formatted = formatter.formatDate(time);
+        describe('when format dates with current date time', function () {
+            it('should return formatted string', function () {
+                var time = new Date().getTime(),
+                    expected = moment(time).format(Formatter.dateFormat),
+                    formatted = Formatter.formatDate(time);
 
-            expect(formatted).toBe(expected);
+                expect(formatted).toBe(expected);
+            });
         });
     });
 

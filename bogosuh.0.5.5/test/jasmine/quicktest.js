@@ -38,7 +38,7 @@ require.config({
         },
         'jasmine-html': {
             deps: ['jasmine'],
-            exports: 'jasmine'
+            exports: 'jasmine.html'
         },
         'jasmine-sinon': {
             deps: ['jasmine', 'sinon']
@@ -48,8 +48,7 @@ require.config({
     // blown away by jquery.ui.tooltip plugin if it's loaded after bootstrap loads.
 });
 
-window.store = "TestStore"; // override local storage store name - for testing
-require(['underscore', 'jasmine-html', 'sinon', 'jasmine-sinon', 'moment'], function (_, jasmine) {
+require(['underscore', 'jasmine', 'jasmine-html'], function (_, jasmine) {
 
     var jasmineEnv = jasmine.getEnv();
     jasmineEnv.updateInterval = 1000;
