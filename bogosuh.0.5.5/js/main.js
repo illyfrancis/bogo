@@ -32,9 +32,6 @@ require.config({
         },
         'bootstrap': {
             deps: ['jquery', 'jquery.ui']
-        },
-        'scrollbar': {
-            deps: ['jquery']
         }
     }
     // hack!! - forcing jquery.ui to be loaded before bootstrap, refactor, instead, to only use jquery.ui.datepicker plugin becasue bootstrap.tooltip is
@@ -43,6 +40,7 @@ require.config({
     // urlArgs: 'bust=' + (new Date()).getTime()
 });
 
-require(['scribble', 'init'], function (init) {
+require(['scribble'], function () {
+// require(['scribble', 'init'], function (init) {
     // init();
 });
