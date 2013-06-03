@@ -1,5 +1,4 @@
-// define(['apps/Formatter', 'moment'], function (Formatter, moment) {
-define(['apps/Formatter'], function (Formatter) {
+define(['apps/Formatter', 'moment'], function (Formatter, moment) {
 
     describe('Formatter', function () {
         describe('when format dates with no argument', function () {

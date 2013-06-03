@@ -1,4 +1,4 @@
-define(['models/AccountCriterion', 'collections/Accounts', 'sinon'], function (AccountCriterion, Accounts, sinon) {
+define(['models/AccountCriterion', 'collections/Accounts'], function (AccountCriterion, Accounts) {
 
     describe('Given AccountCriterion Model', function () {
         describe('when initialize', function () {

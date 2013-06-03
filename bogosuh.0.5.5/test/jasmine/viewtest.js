@@ -35,6 +35,9 @@ require.config({
         'bootstrap': {
             deps: ['jquery', 'jquery.ui']
         },
+        'sinon': {
+            exports: 'sinon'
+        },
         'jasmine': {
             exports: 'jasmine'
         },
@@ -43,7 +46,8 @@ require.config({
             exports: 'jasmine'
         },
         'jasmine-sinon': {
-            deps: ['jasmine', 'sinon']
+            deps: ['jasmine', 'sinon'],
+            exports: 'sinonJasmine'
         },
         'jasmine-jquery': {
             deps: ['jasmine']

@@ -1,4 +1,5 @@
-define(['collections/Tree', 'models/TreeNode', 'backbone'], function (Tree, TreeNode, Backbone) {
+define(['collections/Tree', 'models/TreeNode', 'backbone',
+    'jasmine-sinon', 'sinon'], function (Tree, TreeNode, Backbone, sinonJasmine, sinon) {
 
     describe('Given TreeNode Model', function () {
     

@@ -1,4 +1,4 @@
-define(['models/Query'], function (Query) {
+define(['models/Query', 'jasmine-sinon', 'sinon'], function (Query, sinonJasmine, sinon) {
 
     describe('Given Query Model', function () {
 

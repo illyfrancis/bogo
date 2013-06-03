@@ -33,6 +33,9 @@ require.config({
         'bootstrap': {
             deps: ['jquery', 'jquery.ui']
         },
+        'sinon': {
+            exports: 'sinon'
+        },
         'jasmine': {
             exports: 'jasmine'
         },
@@ -41,7 +44,8 @@ require.config({
             exports: 'jasmine.html'
         },
         'jasmine-sinon': {
-            deps: ['jasmine', 'sinon']
+            deps: ['jasmine', 'sinon'],
+            exports: 'sinonJasmine'
         }
     }
     // hack!! - forcing jquery.ui to be loaded before bootstrap, refactor, instead, to only use jquery.ui.datepicker plugin becasue bootstrap.tooltip is
