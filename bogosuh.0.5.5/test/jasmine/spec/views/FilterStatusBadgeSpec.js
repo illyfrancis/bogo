@@ -3,7 +3,8 @@ define([
     'models/Criterion',
     'views/FilterStatusBadge',
     'jasmine-sinon',
-    'sinon'], function (EventBus, Criterion, FilterStatusBadge, sinonJasmine, sinon) {
+    'sinon',
+    'bootstrap'], function (EventBus, Criterion, FilterStatusBadge, sinonJasmine, sinon, bootstrap) {
 
     describe('Set up FilterStatusBadge View', function () {
 

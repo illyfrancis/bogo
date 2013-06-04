@@ -6,10 +6,10 @@ define(['collections/Accounts', 'models/Account'], function (Accounts, Account) 
             it('must invoke init first', function () {
                 var accounts = new Accounts();
 
-                expect(accounts.firstPage).not.toBeDefined();
-                expect(accounts.currentPage).not.toBeDefined();
-                expect(accounts.perPage).not.toBeDefined();
-                expect(accounts.totalPages).not.toBeDefined();
+                expect(accounts.firstPage).toEqual(1);
+                expect(accounts.currentPage).toEqual(1);
+                expect(accounts.perPage).toBeDefined();
+                expect(accounts.totalPages).toBeDefined();
 
                 accounts.init();
 

@@ -1,7 +1,7 @@
 define(['models/Account',
     'views/AccountRow',
-    'backbone',
-    'sinon'], function (Account, AccountRow, Backbone, sinon) {
+    'sinon',
+    'jasmine-jquery'], function (Account, AccountRow, sinon) {
 
     describe('Load AccountRow View', function () {
 

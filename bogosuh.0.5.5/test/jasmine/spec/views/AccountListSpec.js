@@ -1,8 +1,9 @@
 define([
+    'backbone',
     'collections/Accounts',
     'views/AccountList',
     'jasmine-sinon',
-    'sinon'], function (Accounts, AccountList, sinonJasmine, sinon) {
+    'sinon'], function (Backbone, Accounts, AccountList, sinonJasmine, sinon) {
 
     describe('Load AccountList View', function () {
 
@@ -46,8 +47,13 @@ define([
                         collection: accounts
                     });
 
+                    console.log(Backbone);
+                    console.log('hello');
+
+                    // debugger;
                     // render view
                     $('#sandbox').html(accountList.render().el);
+
 
                     expect(spyAppendEmptyRow).toHaveBeenCalled();
                 });

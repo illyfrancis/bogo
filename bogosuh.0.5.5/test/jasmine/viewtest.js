@@ -2,14 +2,16 @@ require.config({
     baseUrl: "../../js/",
     urlArgs: 'cb=' + Math.random(),
     paths: {
+        // from main.js
         'jquery': '../lib/jquery-1.8.2',
         'jquery.ui': '../lib/jquery-ui-1.9.0.custom',
-        'bootstrap': '../lib/bootstrap',
-        'underscore': '../lib/underscore',
+        'bootstrap': '../lib/bootstrap',    // v2.2.1
+        'underscore': '../lib/underscore-1.4.4',
         'backbone': '../lib/backbone-1.0.0',
-        'backbone.paginator': '../lib/backbone.paginator',
-        'moment': "../lib/moment",
+        'backbone.paginator': '../lib/backbone.paginator-0.7.0',
+        'moment': '../lib/moment',
         'text': '../lib/require/text',
+        // for tests
         'jasmine': '../test/lib/jasmine-1.2.0/jasmine',
         'jasmine-html': '../test/lib/jasmine-1.2.0/jasmine-html',
         'sinon': '../test/lib/sinon/sinon-1.6.0',
@@ -60,8 +62,9 @@ require.config({
     // blown away by jquery.ui.tooltip plugin if it's loaded after bootstrap loads.
 });
 
-window.store = "TestStore"; // override local storage store name - for testing
-require(['underscore', 'jasmine-html', 'sinon', 'jasmine-sinon', 'jasmine-jquery', 'bootstrap', 'moment', 'extension'], function (_, jasmine) {
+// require(['underscore', 'jasmine-html', 'sinon', 'jasmine-sinon', 'jasmine-jquery', 'bootstrap', 'moment', 'extension'], function (_, jasmine) {
+// require(['jasmine', 'jasmine-html', 'sinon', 'jasmine-sinon', 'jasmine-jquery', 'bootstrap', 'moment', 'extension'], function () {
+require(['jasmine', 'jasmine-html', 'extension'], function (jasmine) {
 
     var jasmineEnv = jasmine.getEnv();
     jasmineEnv.updateInterval = 1000;

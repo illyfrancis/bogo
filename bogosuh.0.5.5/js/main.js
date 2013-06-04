@@ -2,19 +2,14 @@
 require.config({
     // baseUrl: '.',
     paths: {
-        // 'jquery': '../lib/jquery-1.9.1',
         'jquery': '../lib/jquery-1.8.2',
         'jquery.ui': '../lib/jquery-ui-1.9.0.custom',
         'bootstrap': '../lib/bootstrap',    // v2.2.1
-        // 'bootstrap': '../lib/bootstrap.min-2.3.1',
         'underscore': '../lib/underscore-1.4.4',
         'backbone': '../lib/backbone-1.0.0',
         'backbone.paginator': '../lib/backbone.paginator-0.7.0',
-        // 'backbone.paginator': '../lib/backbone.paginator',
         'moment': '../lib/moment',
-        'text': '../lib/require/text',
-        'scrollbar': '../lib/jquery.mCustomScrollbar'
-        // 'scrollbar': '../lib/jquery.tinyscrollbar.min'
+        'text': '../lib/require/text'
     },
     shim: {
         'underscore': {
@@ -40,7 +35,7 @@ require.config({
     // urlArgs: 'bust=' + (new Date()).getTime()
 });
 
-require(['scribble'], function () {
+require(['init'], function () {
 // require(['scribble', 'init'], function (init) {
     // init();
 });
