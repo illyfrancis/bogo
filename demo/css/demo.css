@@ -159,7 +159,7 @@ li.tree span {
   padding: 2px;
 }
 
-#loadingDiv {
+.loader {
     display: block;
     position: fixed;
     top: 50%;
