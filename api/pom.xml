@@ -7,8 +7,17 @@
   <artifactId>api</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>api Maven Webapp</name>
-  <url>http://maven.apache.org</url>
+  <name>api webapp</name>
+  <url>http://localhost</url>
+
+  <properties>
+    <jersey-version>1.16</jersey-version>
+    <warDirectory>${basedir}/../bogosuh.0.5.6</warDirectory>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <web-port>9090</web-port>
+    <db-port>27017</db-port>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -140,11 +149,4 @@
       </plugin>
     </plugins>
   </build>
-  <properties>
-  	<jersey-version>1.16</jersey-version>
-  	<warDirectory>${basedir}/../bogosuh.0.5.5</warDirectory>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <web-port>9090</web-port>
-    <db-port>27017</db-port>
-  </properties>
 </project>
