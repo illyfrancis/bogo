@@ -1,32 +1,38 @@
-require.config({
-    paths: {
-        'jquery': '../lib/jquery-1.8.2',
-        'jquery.ui': '../lib/jquery-ui-1.9.0.custom',
-        'bootstrap': '../lib/bootstrap',
-        'underscore': '../lib/underscore-1.4.4',
-        'backbone': '../lib/backbone-1.0.0',
-        'backbone.paginator': '../lib/backbone.paginator-0.7.0',
-        'moment': '../lib/moment',
-        'text': '../lib/require/text'
-    },
-    shim: {
-        'underscore': {
-            exports: '_'
-        },
-        'backbone': {
-            deps: ['underscore', 'jquery'],
-            exports: 'Backbone'
-        },
-        'backbone.paginator': {
-            deps: ['backbone']
-        },
-        'jquery.ui': {
-            deps: ['jquery']
-        },
-        'bootstrap': {
-            deps: ['jquery', 'jquery.ui']
-        }
-    }
-});
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'bootstrap',
+    'apps/Extension2',
+    'apps/EventBus',
+    'apps/Repository',
+    'apps/Mediator',
+    'views/DemoApp'
+], function ($, _, Backbone, Bootstrap, Extension, EventBus, Repository, Mediator, DemoApp) {
+    // disable cache (esp for IE)
+    $.ajaxSetup({ cache: false });
 
-require(['init'], function (init) {});
+    // enable tooltips
+    $('body').tooltip({
+        selector: '[rel=tooltip]'
+    });
+
+    // loader
+    var loader = $('#loader');
+    loader.hide();
+    $(document).ajaxStart(function () {
+        loader.show();
+    }).ajaxStop(function () {
+        loader.hide();
+    });
+
+    //-------------------------------------------------------------------------
+    // Mediator
+    //-------------------------------------------------------------------------
+    new Mediator(EventBus);
+
+    //-------------------------------------------------------------------------
+    // main app (app.views.bogo)
+    //-------------------------------------------------------------------------
+    new DemoApp().load();
+});

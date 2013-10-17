@@ -6,7 +6,7 @@ define([
     'views/ViewFactory'
 ], function (_, Backbone, EventBus, Repository, ViewFactory) {
 
-    var BogoApp = Backbone.View.extend({
+    var DemoApp = Backbone.View.extend({
 
         el: 'body',
 
@@ -36,6 +36,6 @@ define([
 
     });
 
-    return BogoApp;
+    return DemoApp;
 
 });
