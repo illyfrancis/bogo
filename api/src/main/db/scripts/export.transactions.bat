@@ -1,1 +1,0 @@
-mongoimport --db openbbh --collection transactions --jsonArray --out ../data/transactions.export

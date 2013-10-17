@@ -7,37 +7,33 @@
   <artifactId>api</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>api webapp</name>
+  <name>demo api</name>
   <url>http://localhost</url>
 
   <properties>
-    <jersey-version>1.16</jersey-version>
-    <warDirectory>${basedir}/../demo</warDirectory>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <jersey-version>1.17.1</jersey-version>
+    <warDirectory>${basedir}/../demo</warDirectory>
     <web-port>9090</web-port>
     <db-port>27017</db-port>
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>11.0.1</version>
-    </dependency>
-    <dependency>
       <groupId>com.sun.jersey</groupId>
       <artifactId>jersey-server</artifactId>
-      <version>1.16</version>
+      <version>${jersey-version}</version>
     </dependency>
     <dependency>
       <groupId>com.sun.jersey</groupId>
     	<artifactId>jersey-servlet</artifactId>
-      	<version>1.16</version>
+      	<version>${jersey-version}</version>
     </dependency>
     <dependency>
       <groupId>com.sun.jersey</groupId>
     	<artifactId>jersey-json</artifactId>
-      	<version>1.16</version>
+      	<version>${jersey-version}</version>
     </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -55,6 +51,11 @@
       <artifactId>jongo</artifactId>
       <version>0.4</version>
     </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>15.0</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>api</finalName>
@@ -64,10 +65,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.0</version>
         <configuration>
-          <compilerVersion>1.5</compilerVersion>
-          <verbose>false</verbose>
-          <source>1.6</source>
-          <target>1.6</target>
+          <source>1.7</source>
+          <target>1.7</target>
         </configuration>        
       </plugin>
       <plugin>

@@ -1,0 +1,23 @@
+{ "_id" : { "$oid" : "517192601d3a2f0a376443bd" }, "title" : "Account Number", "label" : "Acct No", "name" : "accountNumber", "selected" : true, "position" : 0, "criterion" : "Account" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443be" }, "title" : "Account Name", "label" : "Acct Name", "name" : "accountName", "selected" : true, "position" : 0, "criterion" : "Account" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443bf" }, "title" : "Client Reference Id", "label" : "Client Ref", "name" : "clientRefId", "selected" : true, "position" : 0, "criterion" : "" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443c0" }, "title" : "Transaction Reference Id", "label" : "Transaction Ref", "name" : "transactionRefId", "selected" : true, "position" : 0, "criterion" : "" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443c1" }, "title" : "Transaction Type", "label" : "Type", "name" : "transactionType", "selected" : true, "position" : 0, "criterion" : "TransactionType" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443c2" }, "title" : "Transaction Type Desc", "label" : "Desc", "name" : "transactionTypeDesc", "selected" : true, "position" : 0, "criterion" : "TransactionType" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443c3" }, "title" : "Security Id", "label" : "Security Id", "name" : "securityId", "selected" : true, "position" : 0, "criterion" : "SecurityId" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443c4" }, "title" : "Security Id Type", "label" : "Type", "name" : "securityIdType", "selected" : true, "position" : 0, "criterion" : "SecurityId" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443c5" }, "title" : "Security Desc", "label" : "Desc", "name" : "securityDesc", "selected" : true, "position" : 0, "criterion" : "" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443c6" }, "title" : "Location", "label" : "Loc", "name" : "location", "selected" : true, "position" : 5, "criterion" : "SettlementLocation" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443c7" }, "title" : "Settlement Date", "label" : "Settlement", "name" : "settlementDate", "selected" : false, "position" : 0, "criterion" : "SettlementDate" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443cc" }, "title" : "Instruction Date", "label" : "Instruction", "name" : "instructionDate", "selected" : false, "position" : 0, "criterion" : "" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443cd" }, "title" : "Trade Date", "label" : "Trade", "name" : "tradeDate", "selected" : false, "position" : 0, "criterion" : "" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443ce" }, "title" : "Units", "label" : "Units", "name" : "units", "selected" : true, "position" : 0, "criterion" : "", "align" : "right" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443cf" }, "title" : "Currency", "label" : "Currency", "name" : "currency", "selected" : false, "position" : 0, "criterion" : "" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443d0" }, "title" : "Transaction Amount", "label" : "Tx Amount", "name" : "transactionAmount", "selected" : true, "position" : 0, "criterion" : "", "align" : "right" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443d1" }, "title" : "Transaction Status", "label" : "Tx Status", "name" : "transactionStatus", "selected" : false, "position" : 0, "criterion" : "" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443d2" }, "title" : "Transaction Status Description", "label" : "Tx Desc", "name" : "transactionStatusDesc", "selected" : true, "position" : 0, "criterion" : "" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443d3" }, "title" : "Match Status", "label" : "Match", "name" : "matchStatus", "selected" : true, "position" : 0, "criterion" : "" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443d4" }, "title" : "Reason", "label" : "Reason", "name" : "reason", "selected" : true, "position" : 0, "criterion" : "" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443d5" }, "title" : "Trading Broker", "label" : "Trading Broker", "name" : "tradingBroker", "selected" : true, "position" : 0, "criterion" : "" }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443d6" }, "title" : "Clearing Broker", "label" : "Clearing Broker", "name" : "clearingBroker", "selected" : true, "position" : 0 }
+{ "_id" : { "$oid" : "517192601d3a2f0a376443d7" }, "title" : "Status Date", "label" : "Status Date", "name" : "statusDate", "selected" : true, "position" : 0, "criterion" : "" }

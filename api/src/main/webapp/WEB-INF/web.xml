@@ -4,12 +4,6 @@
       version="3.0"> 
        
   <servlet>
-    <display-name>Transaction Report</display-name>
-    <servlet-name>TransactionReport</servlet-name>
-    <servlet-class>com.bbh.reporting.TransactionReport</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet>
     <servlet-name>jersey-serlvet</servlet-name>
     <servlet-class>
       com.sun.jersey.spi.container.servlet.ServletContainer
@@ -24,10 +18,6 @@
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>TransactionReport</servlet-name>
-    <url-pattern>/tr/*</url-pattern>
-  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>jersey-serlvet</servlet-name>
     <url-pattern>/api/*</url-pattern>

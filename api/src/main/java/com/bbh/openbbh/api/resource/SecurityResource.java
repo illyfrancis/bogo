@@ -87,7 +87,6 @@ public class SecurityResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Model> findAll() {
-		// TODO - explain the difference between returning List<Model> vs Response
 		return Securities.findAll();
 	}
 

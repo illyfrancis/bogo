@@ -1,0 +1,250 @@
+{ "_id" : { "$oid" : "517801137765d7419e96d1c0" }, "code" : "AD", "desc" : "Andorra" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1c1" }, "code" : "AE", "desc" : "United Arab Emirates" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1c2" }, "code" : "AF", "desc" : "Afghanistan" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1c3" }, "code" : "AG", "desc" : "Antigua and Barbuda" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1c4" }, "code" : "AI", "desc" : "Anguilla" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1c5" }, "code" : "AL", "desc" : "Albania" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1c6" }, "code" : "AM", "desc" : "Armenia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1c7" }, "code" : "AO", "desc" : "Angola" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1c8" }, "code" : "AQ", "desc" : "Antarctica" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1c9" }, "code" : "AR", "desc" : "Argentina" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1ca" }, "code" : "AS", "desc" : "American Samoa" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1cb" }, "code" : "AT", "desc" : "Austria" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1cc" }, "code" : "AU", "desc" : "Australia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1cd" }, "code" : "AW", "desc" : "Aruba" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1ce" }, "code" : "AX", "desc" : "Åland Islands" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1cf" }, "code" : "AZ", "desc" : "Azerbaijan" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1d0" }, "code" : "BA", "desc" : "Bosnia and Herzegovina" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1d1" }, "code" : "BB", "desc" : "Barbados" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1d2" }, "code" : "BD", "desc" : "Bangladesh" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1d3" }, "code" : "BE", "desc" : "Belgium" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1d4" }, "code" : "BF", "desc" : "Burkina Faso" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1d5" }, "code" : "BG", "desc" : "Bulgaria" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1d6" }, "code" : "BH", "desc" : "Bahrain" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1d7" }, "code" : "BI", "desc" : "Burundi" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1d8" }, "code" : "BJ", "desc" : "Benin" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1d9" }, "code" : "BL", "desc" : "Saint Barthélemy" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1da" }, "code" : "BM", "desc" : "Bermuda" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1db" }, "code" : "BN", "desc" : "Brunei Darussalam" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1dc" }, "code" : "BO", "desc" : "Bolivia, Plurinational State of" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1dd" }, "code" : "BQ", "desc" : "Bonaire, Sint Eustatius and Saba" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1de" }, "code" : "BR", "desc" : "Brazil" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1df" }, "code" : "BS", "desc" : "Bahamas" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1e0" }, "code" : "BT", "desc" : "Bhutan" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1e1" }, "code" : "BV", "desc" : "Bouvet Island" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1e2" }, "code" : "BW", "desc" : "Botswana" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1e3" }, "code" : "BY", "desc" : "Belarus" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1e4" }, "code" : "BZ", "desc" : "Belize" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1e5" }, "code" : "CA", "desc" : "Canada" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1e6" }, "code" : "CC", "desc" : "Cocos (Keeling) Islands" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1e7" }, "code" : "CD", "desc" : "Congo, the Democratic Republic of the" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1e8" }, "code" : "CF", "desc" : "Central African Republic" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1e9" }, "code" : "CG", "desc" : "Congo" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1ea" }, "code" : "CH", "desc" : "Switzerland" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1eb" }, "code" : "CI", "desc" : "Côte d'Ivoire" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1ec" }, "code" : "CK", "desc" : "Cook Islands" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1ed" }, "code" : "CL", "desc" : "Chile" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1ee" }, "code" : "CM", "desc" : "Cameroon" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1ef" }, "code" : "CN", "desc" : "China" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1f0" }, "code" : "CO", "desc" : "Colombia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1f1" }, "code" : "CR", "desc" : "Costa Rica" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1f2" }, "code" : "CU", "desc" : "Cuba" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1f3" }, "code" : "CV", "desc" : "Cape Verde" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1f4" }, "code" : "CW", "desc" : "Curaçao" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1f5" }, "code" : "CX", "desc" : "Christmas Island" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1f6" }, "code" : "CY", "desc" : "Cyprus" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1f7" }, "code" : "CZ", "desc" : "Czech Republic" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1f8" }, "code" : "DE", "desc" : "Germany" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1f9" }, "code" : "DJ", "desc" : "Djibouti" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1fa" }, "code" : "DK", "desc" : "Denmark" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1fb" }, "code" : "DM", "desc" : "Dominica" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1fc" }, "code" : "DO", "desc" : "Dominican Republic" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1fd" }, "code" : "DZ", "desc" : "Algeria" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1fe" }, "code" : "EC", "desc" : "Ecuador" }
+{ "_id" : { "$oid" : "517801137765d7419e96d1ff" }, "code" : "EE", "desc" : "Estonia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d200" }, "code" : "EG", "desc" : "Egypt" }
+{ "_id" : { "$oid" : "517801137765d7419e96d201" }, "code" : "EH", "desc" : "Western Sahara" }
+{ "_id" : { "$oid" : "517801137765d7419e96d202" }, "code" : "ER", "desc" : "Eritrea" }
+{ "_id" : { "$oid" : "517801137765d7419e96d203" }, "code" : "ES", "desc" : "Spain" }
+{ "_id" : { "$oid" : "517801137765d7419e96d204" }, "code" : "ET", "desc" : "Ethiopia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d205" }, "code" : "FI", "desc" : "Finland" }
+{ "_id" : { "$oid" : "517801137765d7419e96d206" }, "code" : "FJ", "desc" : "Fiji" }
+{ "_id" : { "$oid" : "517801137765d7419e96d207" }, "code" : "FK", "desc" : "Falkland Islands (Malvinas)" }
+{ "_id" : { "$oid" : "517801137765d7419e96d208" }, "code" : "FM", "desc" : "Micronesia, Federated States of" }
+{ "_id" : { "$oid" : "517801137765d7419e96d209" }, "code" : "FO", "desc" : "Faroe Islands" }
+{ "_id" : { "$oid" : "517801137765d7419e96d20a" }, "code" : "FR", "desc" : "France" }
+{ "_id" : { "$oid" : "517801137765d7419e96d20b" }, "code" : "GA", "desc" : "Gabon" }
+{ "_id" : { "$oid" : "517801137765d7419e96d20c" }, "code" : "GB", "desc" : "United Kingdom" }
+{ "_id" : { "$oid" : "517801137765d7419e96d20d" }, "code" : "GD", "desc" : "Grenada" }
+{ "_id" : { "$oid" : "517801137765d7419e96d20e" }, "code" : "GE", "desc" : "Georgia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d20f" }, "code" : "GF", "desc" : "French Guiana" }
+{ "_id" : { "$oid" : "517801137765d7419e96d210" }, "code" : "GG", "desc" : "Guernsey" }
+{ "_id" : { "$oid" : "517801137765d7419e96d211" }, "code" : "GH", "desc" : "Ghana" }
+{ "_id" : { "$oid" : "517801137765d7419e96d212" }, "code" : "GI", "desc" : "Gibraltar" }
+{ "_id" : { "$oid" : "517801137765d7419e96d213" }, "code" : "GL", "desc" : "Greenland" }
+{ "_id" : { "$oid" : "517801137765d7419e96d214" }, "code" : "GM", "desc" : "Gambia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d215" }, "code" : "GN", "desc" : "Guinea" }
+{ "_id" : { "$oid" : "517801137765d7419e96d216" }, "code" : "GP", "desc" : "Guadeloupe" }
+{ "_id" : { "$oid" : "517801137765d7419e96d217" }, "code" : "GQ", "desc" : "Equatorial Guinea" }
+{ "_id" : { "$oid" : "517801137765d7419e96d218" }, "code" : "GR", "desc" : "Greece" }
+{ "_id" : { "$oid" : "517801137765d7419e96d219" }, "code" : "GS", "desc" : "South Georgia and the South Sandwich Islands" }
+{ "_id" : { "$oid" : "517801137765d7419e96d21a" }, "code" : "GT", "desc" : "Guatemala" }
+{ "_id" : { "$oid" : "517801137765d7419e96d21b" }, "code" : "GU", "desc" : "Guam" }
+{ "_id" : { "$oid" : "517801137765d7419e96d21c" }, "code" : "GW", "desc" : "Guinea-Bissau" }
+{ "_id" : { "$oid" : "517801137765d7419e96d21d" }, "code" : "GY", "desc" : "Guyana" }
+{ "_id" : { "$oid" : "517801137765d7419e96d21e" }, "code" : "HK", "desc" : "Hong Kong" }
+{ "_id" : { "$oid" : "517801137765d7419e96d21f" }, "code" : "HM", "desc" : "Heard Island and McDonald Islands" }
+{ "_id" : { "$oid" : "517801137765d7419e96d220" }, "code" : "HN", "desc" : "Honduras" }
+{ "_id" : { "$oid" : "517801137765d7419e96d221" }, "code" : "HR", "desc" : "Croatia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d222" }, "code" : "HT", "desc" : "Haiti" }
+{ "_id" : { "$oid" : "517801137765d7419e96d223" }, "code" : "HU", "desc" : "Hungary" }
+{ "_id" : { "$oid" : "517801137765d7419e96d224" }, "code" : "ID", "desc" : "Indonesia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d225" }, "code" : "IE", "desc" : "Ireland" }
+{ "_id" : { "$oid" : "517801137765d7419e96d226" }, "code" : "IL", "desc" : "Israel" }
+{ "_id" : { "$oid" : "517801137765d7419e96d227" }, "code" : "IM", "desc" : "Isle of Man" }
+{ "_id" : { "$oid" : "517801137765d7419e96d228" }, "code" : "IN", "desc" : "India" }
+{ "_id" : { "$oid" : "517801137765d7419e96d229" }, "code" : "IO", "desc" : "British Indian Ocean Territory" }
+{ "_id" : { "$oid" : "517801137765d7419e96d22a" }, "code" : "IQ", "desc" : "Iraq" }
+{ "_id" : { "$oid" : "517801137765d7419e96d22b" }, "code" : "IR", "desc" : "Iran, Islamic Republic of" }
+{ "_id" : { "$oid" : "517801137765d7419e96d22c" }, "code" : "IS", "desc" : "Iceland" }
+{ "_id" : { "$oid" : "517801137765d7419e96d22d" }, "code" : "IT", "desc" : "Italy" }
+{ "_id" : { "$oid" : "517801137765d7419e96d22e" }, "code" : "JE", "desc" : "Jersey" }
+{ "_id" : { "$oid" : "517801137765d7419e96d22f" }, "code" : "JM", "desc" : "Jamaica" }
+{ "_id" : { "$oid" : "517801137765d7419e96d230" }, "code" : "JO", "desc" : "Jordan" }
+{ "_id" : { "$oid" : "517801137765d7419e96d231" }, "code" : "JP", "desc" : "Japan" }
+{ "_id" : { "$oid" : "517801137765d7419e96d232" }, "code" : "KE", "desc" : "Kenya" }
+{ "_id" : { "$oid" : "517801137765d7419e96d233" }, "code" : "KG", "desc" : "Kyrgyzstan" }
+{ "_id" : { "$oid" : "517801137765d7419e96d234" }, "code" : "KH", "desc" : "Cambodia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d235" }, "code" : "KI", "desc" : "Kiribati" }
+{ "_id" : { "$oid" : "517801137765d7419e96d236" }, "code" : "KM", "desc" : "Comoros" }
+{ "_id" : { "$oid" : "517801137765d7419e96d237" }, "code" : "KN", "desc" : "Saint Kitts and Nevis" }
+{ "_id" : { "$oid" : "517801137765d7419e96d238" }, "code" : "KP", "desc" : "Korea, Democratic People's Republic of" }
+{ "_id" : { "$oid" : "517801137765d7419e96d239" }, "code" : "KR", "desc" : "Korea, Republic of" }
+{ "_id" : { "$oid" : "517801137765d7419e96d23a" }, "code" : "KW", "desc" : "Kuwait" }
+{ "_id" : { "$oid" : "517801137765d7419e96d23b" }, "code" : "KY", "desc" : "Cayman Islands" }
+{ "_id" : { "$oid" : "517801137765d7419e96d23c" }, "code" : "KZ", "desc" : "Kazakhstan" }
+{ "_id" : { "$oid" : "517801137765d7419e96d23d" }, "code" : "LA", "desc" : "Lao People's Democratic Republic" }
+{ "_id" : { "$oid" : "517801137765d7419e96d23e" }, "code" : "LB", "desc" : "Lebanon" }
+{ "_id" : { "$oid" : "517801137765d7419e96d23f" }, "code" : "LC", "desc" : "Saint Lucia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d240" }, "code" : "LI", "desc" : "Liechtenstein" }
+{ "_id" : { "$oid" : "517801137765d7419e96d241" }, "code" : "LK", "desc" : "Sri Lanka" }
+{ "_id" : { "$oid" : "517801137765d7419e96d242" }, "code" : "LR", "desc" : "Liberia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d243" }, "code" : "LS", "desc" : "Lesotho" }
+{ "_id" : { "$oid" : "517801137765d7419e96d244" }, "code" : "LT", "desc" : "Lithuania" }
+{ "_id" : { "$oid" : "517801137765d7419e96d245" }, "code" : "LU", "desc" : "Luxembourg" }
+{ "_id" : { "$oid" : "517801137765d7419e96d246" }, "code" : "LV", "desc" : "Latvia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d247" }, "code" : "LY", "desc" : "Libya" }
+{ "_id" : { "$oid" : "517801137765d7419e96d248" }, "code" : "MA", "desc" : "Morocco" }
+{ "_id" : { "$oid" : "517801137765d7419e96d249" }, "code" : "MC", "desc" : "Monaco" }
+{ "_id" : { "$oid" : "517801137765d7419e96d24a" }, "code" : "MD", "desc" : "Moldova, Republic of" }
+{ "_id" : { "$oid" : "517801137765d7419e96d24b" }, "code" : "ME", "desc" : "Montenegro" }
+{ "_id" : { "$oid" : "517801137765d7419e96d24c" }, "code" : "MF", "desc" : "Saint Martin (French part)" }
+{ "_id" : { "$oid" : "517801137765d7419e96d24d" }, "code" : "MG", "desc" : "Madagascar" }
+{ "_id" : { "$oid" : "517801137765d7419e96d24e" }, "code" : "MH", "desc" : "Marshall Islands" }
+{ "_id" : { "$oid" : "517801137765d7419e96d24f" }, "code" : "MK", "desc" : "Macedonia, the former Yugoslav Republic of" }
+{ "_id" : { "$oid" : "517801137765d7419e96d250" }, "code" : "ML", "desc" : "Mali" }
+{ "_id" : { "$oid" : "517801137765d7419e96d251" }, "code" : "MM", "desc" : "Myanmar" }
+{ "_id" : { "$oid" : "517801137765d7419e96d252" }, "code" : "MN", "desc" : "Mongolia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d253" }, "code" : "MO", "desc" : "Macao" }
+{ "_id" : { "$oid" : "517801137765d7419e96d254" }, "code" : "MP", "desc" : "Northern Mariana Islands" }
+{ "_id" : { "$oid" : "517801137765d7419e96d255" }, "code" : "MQ", "desc" : "Martinique" }
+{ "_id" : { "$oid" : "517801137765d7419e96d256" }, "code" : "MR", "desc" : "Mauritania" }
+{ "_id" : { "$oid" : "517801137765d7419e96d257" }, "code" : "MS", "desc" : "Montserrat" }
+{ "_id" : { "$oid" : "517801137765d7419e96d258" }, "code" : "MT", "desc" : "Malta" }
+{ "_id" : { "$oid" : "517801137765d7419e96d259" }, "code" : "MU", "desc" : "Mauritius" }
+{ "_id" : { "$oid" : "517801137765d7419e96d25a" }, "code" : "MV", "desc" : "Maldives" }
+{ "_id" : { "$oid" : "517801137765d7419e96d25b" }, "code" : "MW", "desc" : "Malawi" }
+{ "_id" : { "$oid" : "517801137765d7419e96d25c" }, "code" : "MX", "desc" : "Mexico" }
+{ "_id" : { "$oid" : "517801137765d7419e96d25d" }, "code" : "MY", "desc" : "Malaysia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d25e" }, "code" : "MZ", "desc" : "Mozambique" }
+{ "_id" : { "$oid" : "517801137765d7419e96d25f" }, "code" : "NA", "desc" : "Namibia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d260" }, "code" : "NC", "desc" : "New Caledonia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d261" }, "code" : "NE", "desc" : "Niger" }
+{ "_id" : { "$oid" : "517801137765d7419e96d262" }, "code" : "NF", "desc" : "Norfolk Island" }
+{ "_id" : { "$oid" : "517801137765d7419e96d263" }, "code" : "NG", "desc" : "Nigeria" }
+{ "_id" : { "$oid" : "517801137765d7419e96d264" }, "code" : "NI", "desc" : "Nicaragua" }
+{ "_id" : { "$oid" : "517801137765d7419e96d265" }, "code" : "NL", "desc" : "Netherlands" }
+{ "_id" : { "$oid" : "517801137765d7419e96d266" }, "code" : "NO", "desc" : "Norway" }
+{ "_id" : { "$oid" : "517801137765d7419e96d267" }, "code" : "NP", "desc" : "Nepal" }
+{ "_id" : { "$oid" : "517801137765d7419e96d268" }, "code" : "NR", "desc" : "Nauru" }
+{ "_id" : { "$oid" : "517801137765d7419e96d269" }, "code" : "NU", "desc" : "Niue" }
+{ "_id" : { "$oid" : "517801137765d7419e96d26a" }, "code" : "NZ", "desc" : "New Zealand" }
+{ "_id" : { "$oid" : "517801137765d7419e96d26b" }, "code" : "OM", "desc" : "Oman" }
+{ "_id" : { "$oid" : "517801137765d7419e96d26c" }, "code" : "PA", "desc" : "Panama" }
+{ "_id" : { "$oid" : "517801137765d7419e96d26d" }, "code" : "PE", "desc" : "Peru" }
+{ "_id" : { "$oid" : "517801137765d7419e96d26e" }, "code" : "PF", "desc" : "French Polynesia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d26f" }, "code" : "PG", "desc" : "Papua New Guinea" }
+{ "_id" : { "$oid" : "517801137765d7419e96d270" }, "code" : "PH", "desc" : "Philippines" }
+{ "_id" : { "$oid" : "517801137765d7419e96d271" }, "code" : "PK", "desc" : "Pakistan" }
+{ "_id" : { "$oid" : "517801137765d7419e96d272" }, "code" : "PL", "desc" : "Poland" }
+{ "_id" : { "$oid" : "517801137765d7419e96d273" }, "code" : "PM", "desc" : "Saint Pierre and Miquelon" }
+{ "_id" : { "$oid" : "517801137765d7419e96d274" }, "code" : "PN", "desc" : "Pitcairn" }
+{ "_id" : { "$oid" : "517801137765d7419e96d275" }, "code" : "PR", "desc" : "Puerto Rico" }
+{ "_id" : { "$oid" : "517801137765d7419e96d276" }, "code" : "PS", "desc" : "Palestine, State of" }
+{ "_id" : { "$oid" : "517801137765d7419e96d277" }, "code" : "PT", "desc" : "Portugal" }
+{ "_id" : { "$oid" : "517801137765d7419e96d278" }, "code" : "PW", "desc" : "Palau" }
+{ "_id" : { "$oid" : "517801137765d7419e96d279" }, "code" : "PY", "desc" : "Paraguay" }
+{ "_id" : { "$oid" : "517801137765d7419e96d27a" }, "code" : "QA", "desc" : "Qatar" }
+{ "_id" : { "$oid" : "517801137765d7419e96d27b" }, "code" : "RE", "desc" : "Réunion" }
+{ "_id" : { "$oid" : "517801137765d7419e96d27c" }, "code" : "RO", "desc" : "Romania" }
+{ "_id" : { "$oid" : "517801137765d7419e96d27d" }, "code" : "RS", "desc" : "Serbia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d27e" }, "code" : "RU", "desc" : "Russian Federation" }
+{ "_id" : { "$oid" : "517801137765d7419e96d27f" }, "code" : "RW", "desc" : "Rwanda" }
+{ "_id" : { "$oid" : "517801137765d7419e96d280" }, "code" : "SA", "desc" : "Saudi Arabia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d281" }, "code" : "SB", "desc" : "Solomon Islands" }
+{ "_id" : { "$oid" : "517801137765d7419e96d282" }, "code" : "SC", "desc" : "Seychelles" }
+{ "_id" : { "$oid" : "517801137765d7419e96d283" }, "code" : "SD", "desc" : "Sudan" }
+{ "_id" : { "$oid" : "517801137765d7419e96d284" }, "code" : "SE", "desc" : "Sweden" }
+{ "_id" : { "$oid" : "517801137765d7419e96d285" }, "code" : "SG", "desc" : "Singapore" }
+{ "_id" : { "$oid" : "517801137765d7419e96d286" }, "code" : "SH", "desc" : "Saint Helena, Ascension and Tristan da Cunha" }
+{ "_id" : { "$oid" : "517801137765d7419e96d287" }, "code" : "SI", "desc" : "Slovenia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d288" }, "code" : "SJ", "desc" : "Svalbard and Jan Mayen" }
+{ "_id" : { "$oid" : "517801137765d7419e96d289" }, "code" : "SK", "desc" : "Slovakia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d28a" }, "code" : "SL", "desc" : "Sierra Leone" }
+{ "_id" : { "$oid" : "517801137765d7419e96d28b" }, "code" : "SM", "desc" : "San Marino" }
+{ "_id" : { "$oid" : "517801137765d7419e96d28c" }, "code" : "SN", "desc" : "Senegal" }
+{ "_id" : { "$oid" : "517801137765d7419e96d28d" }, "code" : "SO", "desc" : "Somalia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d28e" }, "code" : "SR", "desc" : "Suriname" }
+{ "_id" : { "$oid" : "517801137765d7419e96d28f" }, "code" : "SS", "desc" : "South Sudan" }
+{ "_id" : { "$oid" : "517801137765d7419e96d290" }, "code" : "ST", "desc" : "Sao Tome and Principe" }
+{ "_id" : { "$oid" : "517801137765d7419e96d291" }, "code" : "SV", "desc" : "El Salvador" }
+{ "_id" : { "$oid" : "517801137765d7419e96d292" }, "code" : "SX", "desc" : "Sint Maarten (Dutch part)" }
+{ "_id" : { "$oid" : "517801137765d7419e96d293" }, "code" : "SY", "desc" : "Syrian Arab Republic" }
+{ "_id" : { "$oid" : "517801137765d7419e96d294" }, "code" : "SZ", "desc" : "Swaziland" }
+{ "_id" : { "$oid" : "517801137765d7419e96d295" }, "code" : "TC", "desc" : "Turks and Caicos Islands" }
+{ "_id" : { "$oid" : "517801137765d7419e96d296" }, "code" : "TD", "desc" : "Chad" }
+{ "_id" : { "$oid" : "517801137765d7419e96d297" }, "code" : "TF", "desc" : "French Southern Territories" }
+{ "_id" : { "$oid" : "517801137765d7419e96d298" }, "code" : "TG", "desc" : "Togo" }
+{ "_id" : { "$oid" : "517801137765d7419e96d299" }, "code" : "TH", "desc" : "Thailand" }
+{ "_id" : { "$oid" : "517801137765d7419e96d29a" }, "code" : "TJ", "desc" : "Tajikistan" }
+{ "_id" : { "$oid" : "517801137765d7419e96d29b" }, "code" : "TK", "desc" : "Tokelau" }
+{ "_id" : { "$oid" : "517801137765d7419e96d29c" }, "code" : "TL", "desc" : "Timor-Leste" }
+{ "_id" : { "$oid" : "517801137765d7419e96d29d" }, "code" : "TM", "desc" : "Turkmenistan" }
+{ "_id" : { "$oid" : "517801137765d7419e96d29e" }, "code" : "TN", "desc" : "Tunisia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d29f" }, "code" : "TO", "desc" : "Tonga" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2a0" }, "code" : "TR", "desc" : "Turkey" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2a1" }, "code" : "TT", "desc" : "Trinidad and Tobago" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2a2" }, "code" : "TV", "desc" : "Tuvalu" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2a3" }, "code" : "TW", "desc" : "Taiwan, Province of China" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2a4" }, "code" : "TZ", "desc" : "Tanzania, United Republic of" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2a5" }, "code" : "UA", "desc" : "Ukraine" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2a6" }, "code" : "UG", "desc" : "Uganda" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2a7" }, "code" : "UM", "desc" : "United States Minor Outlying Islands" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2a8" }, "code" : "US", "desc" : "United States" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2a9" }, "code" : "UY", "desc" : "Uruguay" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2aa" }, "code" : "UZ", "desc" : "Uzbekistan" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2ab" }, "code" : "VA", "desc" : "Holy See (Vatican City State)" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2ac" }, "code" : "VC", "desc" : "Saint Vincent and the Grenadines" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2ad" }, "code" : "VE", "desc" : "Venezuela, Bolivarian Republic of" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2ae" }, "code" : "VG", "desc" : "Virgin Islands, British" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2af" }, "code" : "VI", "desc" : "Virgin Islands, U.S." }
+{ "_id" : { "$oid" : "517801137765d7419e96d2b0" }, "code" : "VN", "desc" : "Viet Nam" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2b1" }, "code" : "VU", "desc" : "Vanuatu" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2b2" }, "code" : "WF", "desc" : "Wallis and Futuna" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2b3" }, "code" : "WS", "desc" : "Samoa" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2b4" }, "code" : "YE", "desc" : "Yemen" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2b5" }, "code" : "YT", "desc" : "Mayotte" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2b6" }, "code" : "ZA", "desc" : "South Africa" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2b7" }, "code" : "ZM", "desc" : "Zambia" }
+{ "_id" : { "$oid" : "517801137765d7419e96d2b8" }, "code" : "ZW", "desc" : "Zimbabwe" }
+{ "_id" : { "$oid" : "51794a434738c155086d3d8a" }, "code" : "EU", "desc" : "Euroclear" }

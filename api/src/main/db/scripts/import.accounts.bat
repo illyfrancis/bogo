@@ -1,1 +1,0 @@
-mongoimport --db openbbh --collection accounts --jsonArray --type json --file ../data/accounts.json

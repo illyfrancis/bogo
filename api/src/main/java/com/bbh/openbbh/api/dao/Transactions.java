@@ -13,7 +13,7 @@ import com.bbh.openbbh.api.resource.TransactionResource.Query;
 
 public class Transactions {
 
-	private static MongoCollection transactions;
+	private static final MongoCollection transactions;
 
 	static {
 		Jongo jongo = new Jongo(MongoDB.getDB());

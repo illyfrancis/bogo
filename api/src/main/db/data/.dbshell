@@ -1,1 +1,3 @@
+db.transactions.count()
+db.transactions.find()
 db.reportschema.drop()

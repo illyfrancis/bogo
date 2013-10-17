@@ -14,62 +14,62 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.bson.types.ObjectId;
-
 import com.bbh.openbbh.api.dao.Accounts;
 import com.sun.jersey.api.NotFoundException;
 
 @Path("accounts")
 public class AccountResource {
-    
-    public static class Model {
-        // ObjectId _id;
-        String number;
-        String name;
-    }
 
-    @GET
-    @Path("{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response get(@PathParam("id") String id) {
-        Model account = Accounts.get(id);
+	public static class Model {
+		// ObjectId _id;
+		String number;
+		String name;
+	}
 
-        if (account == null)
-            throw new NotFoundException();
+	@GET
+	@Path("{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response get(@PathParam("id") String id) {
+		Model account = Accounts.get(id);
 
-        return Response.ok(account).build();
-    }
+		if (account == null)
+			throw new NotFoundException();
 
-    @PUT
-    @Path("{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response put(Model account) {
-        return post(account);
-    }
+		return Response.ok(account).build();
+	}
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response post(Model account) {
-        Accounts.put(account);
-        return Response.ok(account).build();
-    }
+	@PUT
+	@Path("{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response put(Model account) {
+		return post(account);
+	}
 
-    @DELETE
-    @Path("{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public void delete(@PathParam("id") String id) {
-        Accounts.delete(id);
-    }
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response post(Model account) {
+		Accounts.put(account);
+		return Response.ok(account).build();
+	}
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response get() {
-    	
-        List<Model> accounts = Accounts.get();
+	@DELETE
+	@Path("{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void delete(@PathParam("id") String id) {
+		Accounts.delete(id);
+	}
 
-        GenericEntity<List<Model>> entity = new GenericEntity<List<Model>>(accounts) {};
-        return Response.ok(entity).build();
-    }
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response get() {
+
+		List<Model> accounts = Accounts.get();
+
+		GenericEntity<List<Model>> entity = new GenericEntity<List<Model>>(
+				accounts) {
+		};
+		return Response.ok(entity).build();
+	}
 }

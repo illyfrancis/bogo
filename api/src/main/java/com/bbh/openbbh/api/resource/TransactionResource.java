@@ -80,11 +80,11 @@ public class TransactionResource {
     }
 
     public static class Query {
-        String criteria;
-        String fields;
-        String sort;
-        int offset = 0;
-        int limit = 10;
+        private String criteria;
+        private String fields;
+        private String sort;
+        private int offset = 0;
+        private int limit = 10;
         
         public String getFields() {
         	String projection = "";
@@ -96,7 +96,7 @@ public class TransactionResource {
         }
 
 		public String getCriteria() {
-			String template = this.criteria;
+			String template = "";
 			if (this.criteria != null && !this.criteria.isEmpty()) {
 				template = this.criteria.replaceAll("\"\\#date(.+?)\"", "#");
 			}

@@ -1,1 +1,0 @@
-mongoimport --db openbbh --collection country --type json --file ../data/country.json
