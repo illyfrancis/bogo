@@ -29,7 +29,7 @@ files = [
 
 // list of files to exclude
 exclude = [
-  'js/main.js',
+  'js/init.js',
   'js/app.js'
 ];
 

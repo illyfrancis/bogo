@@ -5,9 +5,9 @@ require.config({
         'jquery': '../lib/jquery-1.8.2',
         'jquery.ui': '../lib/jquery-ui-1.9.0.custom',
         'bootstrap': '../lib/bootstrap',
-        'underscore': '../lib/underscore',
+        'underscore': '../lib/underscore-1.4.4',
         'backbone': '../lib/backbone-1.0.0',
-        'backbone.paginator': '../lib/backbone.paginator',
+        'backbone.paginator': '../lib/backbone.paginator-0.7.0',
         'moment': "../lib/moment",
         'text': '../lib/require/text',
         'jasmine': '../test/lib/jasmine-1.2.0/jasmine',
@@ -48,8 +48,7 @@ require.config({
             exports: 'sinonJasmine'
         }
     }
-    // hack!! - forcing jquery.ui to be loaded before bootstrap, refactor, instead, to only use jquery.ui.datepicker plugin becasue bootstrap.tooltip is
-    // blown away by jquery.ui.tooltip plugin if it's loaded after bootstrap loads.
+    // FIXME - forcing jquery.ui to be loaded before bootstrap. Instead refactor to only use jquery.ui.datepicker plugin
 });
 
 require(['underscore', 'jasmine', 'jasmine-html'], function (_, jasmine) {

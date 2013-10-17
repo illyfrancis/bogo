@@ -26,8 +26,6 @@ define([
         },
 
         render: function () {
-            // console.log('> TransactionReport: render');
-
             this.disposeSubViews();
             var pager = this.collection.pager();
 
@@ -39,19 +37,6 @@ define([
             this.renderReports();
             this.$el.show();
 
-            // add scrollbar - it's just too heavy!
-            /*
-            this.$('.report').mCustomScrollbar({
-                // set_width: '90%',
-                scrollInertia: 0,
-                horizontalScroll: true,
-                // theme: 'dark-thick'
-                theme: 'dark-2',
-                scrollButtons:{
-                    enable: true
-                }
-            });
-            */
             return this;
         },
 
@@ -90,6 +75,7 @@ define([
             _.each(this.reportSchema.selectedColumns(), function (reportColumn) {
 
                 var align = reportColumn.get('align');
+                // TODO - templatize it
                 if (align.indexOf('right') >= 0) {
                     cell = '<td><span class="pull-right"><%='+ reportColumn.get('name') +'%></span></td>';
                 } else {

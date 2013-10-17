@@ -1,7 +1,4 @@
-define([
-    'backbone',
-    'underscore'
-], function (Backbone, _) {
+define(['underscore'], function (_) {
 
     // can init with locale when needed
     var Formatter = function () {

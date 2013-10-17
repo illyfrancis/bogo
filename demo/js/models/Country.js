@@ -13,8 +13,7 @@ define(['backbone'], function (Backbone) {
         label: function () {
             return this.get('code') + ' - ' + this.get('desc');
         }
-
-        
+       
     });
 
     return Country;

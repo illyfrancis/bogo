@@ -3,31 +3,26 @@ define(['collections/Accounts', 'models/Account'], function (Accounts, Account) 
     describe('Given Accounts Collection', function () {
 
         describe('when initialize', function () {
-            it('must invoke init first', function () {
-                var accounts = new Accounts();
-
-                expect(accounts.firstPage).not.toBeDefined();
-                expect(accounts.currentPage).not.toBeDefined();
-                expect(accounts.perPage).not.toBeDefined();
-                expect(accounts.totalPages).not.toBeDefined();
-
-                accounts.init();
-
-                expect(accounts.firstPage).toBeDefined();
-                expect(accounts.currentPage).toBeDefined();
-                expect(accounts.perPage).toBeDefined();
-                expect(accounts.totalPages).toBeDefined();
-            });
-
             it('should default to predefined configuration', function () {
                 var accounts = new Accounts(),
                     config = accounts.paginator_ui;
 
-                accounts.init();
                 expect(accounts.firstPage).toEqual(config.firstPage);
                 expect(accounts.currentPage).toEqual(config.currentPage);
                 expect(accounts.perPage).toEqual(config.perPage);
                 expect(accounts.totalPages).toEqual(config.totalPages);
+            });
+
+            it('invoking init should not change to default config', function () {
+                var accounts = new Accounts(),
+                    config = accounts.paginator_ui;
+
+                var newTotalPages = 456;
+                accounts.totalPages = newTotalPages;
+
+                accounts.init();
+                expect(accounts.totalPages).not.toEqual(config.totalPages);
+                expect(accounts.totalPages).toEqual(newTotalPages);
             });
         });
 
@@ -42,7 +37,6 @@ define(['collections/Accounts', 'models/Account'], function (Accounts, Account) 
                 accountThree = new Account();
                 accountFour = new Account();
 
-                // accounts.init(); <--- no longer needed after upgrade to 0.7.0
                 accounts.reset([accountOne, accountTwo, accountThree, accountFour]);
                 accounts.pager();
             });
@@ -119,7 +113,6 @@ define(['collections/Accounts', 'models/Account'], function (Accounts, Account) 
                 accountThree = new Account();
                 accountFour = new Account();
 
-                accounts.init(); //<--- no longer needed after upgrade to 0.7.0
                 accounts.reset([accountOne, accountTwo, accountThree, accountFour]);
                 accounts.pager();
             });
@@ -201,7 +194,6 @@ define(['collections/Accounts', 'models/Account'], function (Accounts, Account) 
                 accountThree = new Account({name: "Three", number: "333"});
                 accountFour = new Account({name: "Four", number: "444"});
 
-                // accounts.init(); <--- no longer needed after upgrade to 0.7.0
                 accounts.reset([accountOne, accountTwo, accountThree, accountFour]);
                 accounts.pager();
             });
@@ -246,7 +238,6 @@ define(['collections/Accounts', 'models/Account'], function (Accounts, Account) 
                 accountThree = new Account({name: "Three", number: "333"});
                 accountFour = new Account({name: "Four", number: "444"});
 
-                // accounts.init(); <--- no longer needed after upgrade to 0.7.0
                 accounts.reset([accountOne, accountTwo, accountThree, accountFour]);
                 accounts.pager();
             });

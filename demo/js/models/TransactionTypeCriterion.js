@@ -51,7 +51,7 @@ define([
 
         validate: function (attrs) {
             // console.log('> TransactionTypeCriterion: validate');
-            // when the criterion is applied, confirm if the criterion are set
+            // when the criterion is applied, confirm if the criterion is set
             if (attrs.isApplied) {
                 if (!this.transactionTypes.hasSelection()) {
                     return 'Cannot apply filter, nothing selected';
