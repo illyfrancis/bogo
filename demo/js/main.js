@@ -18,12 +18,11 @@ define([
     });
 
     // loader
-    var loader = $('#loader');
-    loader.hide();
+    $('#loader').hide();
     $(document).ajaxStart(function () {
-        loader.show();
+        $('#loader').show();
     }).ajaxStop(function () {
-        loader.hide();
+        $('#loader').hide();
     });
 
     //-------------------------------------------------------------------------
