@@ -161,18 +161,10 @@ li.tree span {
 
 #loadingDiv {
     display: block;
-    /*width:100px;
-    height: 100px;*/
     position: fixed;
-    /*
-    */
     top: 50%;
     left: 50%;
-    /*
-    background: url(img/loader.gif) no-repeat center #fff; 
-    */
     text-align: center;
-    /*padding:10px;*/
     margin-left: -50px;
     margin-top: -50px;
     z-index: 2;
